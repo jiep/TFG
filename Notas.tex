@@ -1,0 +1,46 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{makeidx}
+\usepackage{graphicx}
+\usepackage[width=15.00cm, height=22.00cm]{geometry}
+\usepackage[spanish]{babel}
+\author{José Ignacio Escribano}
+\title{Notas}
+\begin{document}
+\maketitle
+
+\section{Notas}
+
+\begin{enumerate}
+\item A new method for comparing rankings through complex networks: Model and analysis of competitiveness of major European soccer leagues.
+	\begin{itemize}
+		\item Dos equipos compiten cuando intercambian sus posiciones relativas en rankings consecutivos.
+		\item Permite definir un grafo uniendo los equipos que compiten.
+		\item Algunas propiedades estructurales del grafo de competitividad (GC o CG): ``grado medio'', ``la fuerza media'' y ``coeficiente de clustering''.
+		\item Generalización del coeficiente de correlación de Kendall para más de dos rankings.
+		\item Para estudiar el ranking de una liga deportiva podemos usar las medidas estadísticas ordinarias como media o desviación típica. Normalmente ésto se hace.
+		\item Nos interesa el comportamiento dinámico de una liga deportiva, por lo que necesitamos comparar $r \geq 2$ rankings. 
+		\item Estudios de comparación de $r$ rankings pueden ser ``rastreados'' hasta el artículo de Kendall, donde se define el coeficiente de ``concordancia'' de Kendall. 
+		\item Trabajos previos pusieron el foco en la correlación de sólo dos rankings. Ver Ref. 3, donde el coeficiente de correlación $\tau$ de Kendall se define. 
+		\item Podemos distinguir tres formas de comparar dos rankings:
+		
+			\begin{enumerate}
+				\item \label{correlacion} Usar un coeficiente de correlación, como por ejemplo, la $\rho$ de Spearman o la $\tau$ de Kendall.
+				\item \label{distancia} Usar una distancia entre los rankings como la ``footrule'' $D$ de Spearman (ver Ref. 5) u otras métricas (ver Ref. 6).
+				\item Usar el coeficiente de ``concordancia'' de Kendall (ver Ref. 7).
+			\end{enumerate}
+		\item \ref{correlacion} y \ref{distancia} son equivalentes (ver Ref. 8).
+		\item Clasificación de los rankings atendiendo a su dinámica y diferentes tipos de rankings aplicados a varios deportes (ver Ref. 9--14). 
+		\item La definición teórica de GC y su relación con otros objetos conocidos de la teoría de grafos se puede encontrar en Ref. 15.
+		\item El interés por la competitividad viene del concepto ``grupo competitivo'' (Ref. 20), que está relacionado con rankings de usuarios en redes sociales basadas en PageRank Personalizado (PPR).
+		
+	\end{itemize}
+\item Comparing rankings by means of competitivity graphs: structural properties and computation.
+\end{enumerate}
+
+\section{Bibliografía}
+
+\end{document}
