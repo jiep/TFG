@@ -24,4 +24,8 @@ Escribiremos $i \prec_c j$ cuando el nodo $i$ aparezca antes que el nodo $j$ en 
 \begin{defi}
 Dada una familia finita $\mathcal{R} = \{c_1,c_2,\dots, c_r\}$ de rankings, decimos que el par de nodos $(i,j) \in \mathcal{N}$ ``compiten'' si existe $t \in \{1,2,\dots, r-1\}$ tal que $i$ y $j$ intercambian sus posiciones relativas entre dos rankings consecutivos $c_t$ y $c_{t+1}$.
 \end{defi}
+
+\begin{defi}
+Definimos el grafo de competitividad de la familia de rankings $R$, denotado como $G_c(\mathcal{R}) = (\mathcal{N}, E_\mathcal{R})$, donde $E_\mathcal{R}$ denota el conjunto de arcos, como el grafo no dirigido con nodos $\mathcal{N}$ y arcos dados por la siguiente regla: hay un enlace entre $i$ y $j$ si $(i,j)$ ``compiten''.
+\end{defi}
 \end{document}
