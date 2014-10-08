@@ -28,4 +28,12 @@ Dada una familia finita $\mathcal{R} = \{c_1,c_2,\dots, c_r\}$ de rankings, deci
 \begin{defi}
 Definimos el grafo de competitividad de la familia de rankings $R$, denotado como $G_c(\mathcal{R}) = (\mathcal{N}, E_\mathcal{R})$, donde $E_\mathcal{R}$ denota el conjunto de arcos, como el grafo no dirigido con nodos $\mathcal{N}$ y arcos dados por la siguiente regla: hay un enlace entre $i$ y $j$ si $(i,j)$ ``compiten''.
 \end{defi}
+
+\begin{defi}
+Decimos que dos nodos $i$, $j$ ``compiten'' $k$ veces, si $k$ es el número máximo de rankings donde $i$ y $j$ ``compiten''.
+\end{defi}
+
+\begin{defi}
+Definimos el grafo de competitividad evolutivo de $\mathcal{R}$, denotado como $G_c^e(\mathcal{R}) = (\mathcal{N}, E_\mathcal{R}^e)$, como el grafo no dirigido ponderado con nodos $\mathcal{N}$ y arcos dados por la siguiente regla: hay un arco entre $i$ y $j$ etiquetado con peso $k$ si $(i,j)$ compiten $k$ veces.  
+\end{defi}
 \end{document}
