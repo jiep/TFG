@@ -1,0 +1,27 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{makeidx}
+\usepackage{graphicx}
+\usepackage[width=15.00cm, height=22.00cm]{geometry}
+\author{José Ignacio Escribano}
+\title{Algunas definiciones}
+
+\input{comandos}
+
+\begin{document}
+\section{Grafos}
+
+\section{Rankings}
+
+\begin{defi}
+Dado un conjunto $\mathcal{N} = \{1,\dots,n\}$ que llamaremos nodos, definimos un ranking $c$ de $\mathcal{N}$ como cualquier biyección $c: \mathcal{N} \to \mathcal{N}$.\\
+Escribiremos $i \prec_c j$ cuando el nodo $i$ aparezca antes que el nodo $j$ en el ranking $c$. 
+\end{defi}
+
+\begin{defi}
+Dada una familia finita $\mathcal{R} = \{c_1,c_2,\dots, c_r\}$ de rankings, decimos que el par de nodos $(i,j) \in \mathcal{N}$ ``compiten'' si existe $t \in \{1,2,\dots, r-1\}$ tal que $i$ y $j$ intercambian sus posiciones relativas entre dos rankings consecutivos $c_t$ y $c_{t+1}$.
+\end{defi}
+\end{document}
