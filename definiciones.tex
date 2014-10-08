@@ -62,6 +62,22 @@ Notar que el orden de los rankings es fundamental en el cálculo de los pesos de
 \end{nota}
 
 \begin{defi}
-Definimos el grado medio normalizado (normalized mean degree) de una familia de rankings $\mathcal{R}$ como la suma de todos los grados del grafo competitivo $G_c(\mathcal{R})$, dividido por la suma 
+Definimos el grado medio normalizado (normalized mean degree) de una familia de rankings $\mathcal{R}$ como la suma de todos los grados del grafo competitivo $G_c(\mathcal{R})$, dividido por la suma de todos los nodos de su mayor grado
+
+\[ND(\mathcal{R}) = \dfrac{1}{n(n-1)} \sum_{i \in \mathcal{N}} k_i\]
+
+donde $k_i$ es el número de nodos adyacentes al nodo $i$. 
+\end{defi}
+
+\begin{ob}
+Este parámetro nos da una idea global del número relativo de veces entre dos posibles competidores han intercambiado sus posiciones relativas a lo largo de la correspondiente familia de rankings.
+\end{ob}
+
+\begin{defi}
+Decimos que el ranking $\mathcal{R}$ es más competitivo que el ranking $\mathcal{S}$ con respecto al grado medio normalizado si $ND(\mathcal{R}) > ND(\mathcal{S})$.
+\end{defi}
+
+\begin{defi}
+\textcolor{red}{Normalized mean strength}
 \end{defi}
 \end{document}
