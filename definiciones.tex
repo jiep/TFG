@@ -16,6 +16,10 @@
 La fuerza de un nodo en un grafo ponderado es la suma de los pesos de los arcos incidentes.
 \end{defi}
 
+\begin{defi}
+Una camarilla\footnote{Traducción de clique} es un conjunto de nodos mutuamente conectados entre ellos.
+\end{defi}
+
 \section{Rankings}
 
 \begin{defi}
@@ -64,6 +68,87 @@ Decimos que el ranking $\mathcal{R}$ es más competitivo que el ranking $\mathca
 \end{defi}
 
 \begin{defi}
-\textcolor{red}{Normalized mean strength}
+Definimos la fuerza media generalizada de una familia de rankings $\mathcal{R}$ como la suma de todos los pesos de los arcos del grafo de competitividad evolutivo $G_c^e(\mathcal{R})$ dividido entre la suma de todos los posibles arcos con sus mayores pesos
+
+\[ NS(\mathcal{R}) = \dfrac{w(E_\mathcal{R}^e)}{\dbinom{n}{2}(r-1)} \]
+
+donde  $w(E_\mathcal{R}^e)$ denota la suma de todos los pesos de los arcos del grafo de competitividad evolutivo.
 \end{defi}
+
+\begin{defi}
+Decimos que $\mathcal{R}$ es más competitivo que $\mathcal{S}$ con respecto a la fuerza media normalizada si $NS(\mathcal{R}) > NS(\mathcal{S})$.
+\end{defi}
+
+\begin{nota}
+El coeficiente de ``clustering'' mide cuántos nodos tienden a agruparse\footnote{Traducción de cluster.}
+\end{nota}
+
+\begin{defi}
+El coeficiente de ``clustering'' $C_i$ de un nodo $i$ se define como 
+
+\[ C_i = \dfrac{e_i}{\dbinom{k_i}{2}} \]
+
+donde $k_i$ es el número de vecinos del nodo $i$, $e_i$ es el número de pares conectados entre los vecinos de $i$, y $\binom{k_i}{2}$ representa todos los posibles entre los vecinos de $i$.
+\end{defi}
+
+\begin{defi}
+Dada una familia de rankings $\mathcal{R}$, el coeficiente de ``clustering'' de $\mathcal{R}$ de $\mathcal{R}$ es la media de los coeficientes de ``clustering'' de los nodos del grafo de competitividad evolutivo $G_e(\mathcal{R})$, es decir,
+
+\[ C(\mathcal{R}) = \dfrac{1}{n} \sum_{i \in \mathcal{N}} C_i \]
+\end{defi}
+
+\begin{defi}
+Decimos que $\mathcal{R}$ es más competitivo que $\mathcal{S}$ con respecto al coeficiente de ``clustering'' si $C(\mathcal{R}) > C(\mathcal{S})$.
+\end{defi}
+
+\begin{defi}
+Dados dos rankings $c_1$ y $c_2$ de un conjunto $\mathcal{N}$ de nodos de $n$ elementos, el coeficiente $\tau$ de Kendall se define como
+
+\[ \tau(c_1, c_2) = \dfrac{\tilde{K}(c_1, c_2) - K(c_1, c_2)}{\dbinom{n}{2}} \]
+
+donde $\tilde{K}(c_1, c_2)$ denota el número de pares $(i,j)$ que no ``compiten'' con respecto a $\mathcal{R} = \{c_1, c_2\}$, y $K(c_1, c_2)$ denota el número de pares $(i,j)$ que ``compiten''. 
+\end{defi}
+
+\begin{nota}
+Notar que $\binom{n}{2}$ es el número de todos los posibles pares de nodos $(i,j)$. Si consideramos el grafo de competitividad $G_c(\mathcal{R})$ con respecto a $\mathcal{R} = \{c_1, c_2\}$, entonces $K(c_1, c_2) = |E_\mathcal{R}|$,el número de arcos de $G_c(\mathcal{R})$, y $\tilde{K}(c_1, c_2) = \binom{n}{2} - |E_\mathcal{R}|$, entonces
+
+\[ \tau(c_1,c_2) = 1 - \dfrac{2 |E_\mathcal{R}|}{\dbinom{n}{2}} = 1- \dfrac{4 |E_\mathcal{R}|}{n(n-1)} \]
+
+El número de arcos $E_\mathcal{R}$ del grafo de competitividad $G_c(\mathcal{R})$ de una familia $\mathcal{R}$ está relacionado con el coeficiente de correlación de Kendall de dos rankings: si denotamos por $E(c_1, c_2)$ los arcos del grafo de competitividad de la familia $\{c_1, c_2\}$, tenemos que
+
+\[ |E_\mathcal{R}| \geq \max_{c_1, c_2 \in \mathcal{R}} |E(c_1, c_2)| \geq \dfrac{n(n-1)}{4}(1 - \min \tau(c_1, c_2)) \]
+
+y esta desigualdad es, en efecto, una igualdad cuando $r=2$. De forma similar, si $E_\mathcal{R} = \cup_{c_1, c_2 \in \mathcal{R}} E(c_1, c_2)$, entonces
+
+\[ |E_\mathcal{R}| \leq \sum_{c_1, c_2 \in \mathcal{R}} |E(c_1, c_2)| = \dfrac{n(n-1)}{4} \left( \dbinom{r}{2} - \sum_{c_1, c_2 \in \mathcal{R}} \tau(c_1, c_2) \right) \]
+
+Esta desigualdad se hace igualdad cuando $r=2$.
+\end{nota}
+
+\begin{defi}
+Podemos definir un coeficiente $\tau(\mathcal{R})$ de correlación de Kendall de una familia $\mathcal{R}$ de $r \geq 2$ rankings: siguiendo la idea original definición (número de pares $\tilde{K}(\mathcal{R})$ que no compiten, menos pares que compiten $K(\mathcal{R})$), dividido entre entre el número de todos los posibles pares $\binom{n}{2}$, tenemos
+
+\[ \tau(\mathcal{R}) = \dfrac{\tilde{K}(c_1,c_2) - K(c_1, c_2)}{\dbinom{n}{2}} = 1 - \dfrac{2 |E_\mathcal{R}|}{\dbinom{n}{2}} = 1 - \dfrac{4 |E_\mathcal{R}|}{n(n-1)} \]
+
+También podemos construir un coeficiente de correlación evolutivo de Kendall $\tau_e(\mathcal{R})$ teniendo en cuenta el número de veces que cada par de nodos compiten. Definimos
+
+\[ \tau_e(\mathcal{R}) = 1 - \dfrac{2w(E_\mathcal{R}^e)}{\dbinom{n}{2}(r-1)} \] 
+
+donde $w(E_\mathcal{R}^e)$ denota la suma de todos los pesos de los arcos del grafo de competitividad evolutivo. El denominador  $\binom{n}{2}(r-1)$ representa la suma de todos los posibles arcos de sus mayores pesos.
+\end{defi}
+
+\begin{nota}
+El coeficiente evolutivo de Kendall de una familia de rankings $\mathcal{R}$ se relaciona directamente con la fuerza media normalizada 
+
+\[\tau_e(\mathcal{R}) = 1 - 2NS(\mathcal{R}) \]
+\end{nota}
+
+\begin{defi}
+Decimos que $\mathcal{R}$ es más competitivo que $\mathcal{S}$ con respecto al coeficiente de Kendall si $\tau_e(\mathcal{R}) < \tau_e(\mathcal{S})$.
+\end{defi}
+
+\begin{nota}
+Notar que un coeficiente más pequeño de Kendall $\tau_e(\mathcal{R})$ hace que $\mathcal{R}$ sea más competitivo.
+\end{nota}
+
 \end{document}
