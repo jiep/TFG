@@ -151,4 +151,71 @@ Decimos que $\mathcal{R}$ es más competitivo que $\mathcal{S}$ con respecto al 
 Notar que un coeficiente más pequeño de Kendall $\tau_e(\mathcal{R})$ hace que $\mathcal{R}$ sea más competitivo.
 \end{nota}
 
+\begin{defi}
+La desviación típica de victorias $w_i$ que cada equipo ha logrado a lo largo en una temporada puede ser definida así:
+
+\[ \sigma = \sqrt{\dfrac{1}{n} \sum_{i=1}^{n}\left(w_i - \dfrac{1}{2}\right)^2 } \]
+
+donde $n$ es el número de equipos.
+\end{defi}
+
+\begin{nota}
+En general, cuanto mayor es $\sigma$, menor es el equilibrio competitivo (y mayor es la desigualdad competitiva).\\
+
+En una liga donde cada equipo tiene la misma probabilidad de ganar un partido, $\sigma = 0$, y por tanto, un incremento de $\sigma$ significa un decremento en el equilibrio competitivo.
+\end{nota}
+
+\begin{defi}
+Se dice que $r$ rankings han aumentado su competitividad cuando ha disminuido su $\sigma$.
+\end{defi}
+
+\begin{defi}
+Definimos NAMSI como 
+\[ NAMSI =  \sqrt{\dfrac{\sum\limits_{i=1}^{n} \left( w_i - \dfrac{1}{2} \right)^2}{\sum\limits_{i=1}^{n} \left(w_{i, \max} -\dfrac{1}{2}\right)^2}} \]
+
+donde $w_{i, \max}$ es el ratio de victorias del equipo $i$ cuando hay predictibilidad completa: equipo $1$ gana todos sus partidos, equipo $2$ gana todos sus partidos menos $2$ (como local y visitante),..., equipo $n$ pierde todos sus partidos. 
+
+\end{defi}
+
+\begin{defi}
+El índice HICB se define como
+
+\[ HICB = 100n \sum_{i=1}^{n} s_i^2 \]
+
+donde $s_i$ es el ratio de puntos conseguidos en una temporada por el equipo $i$.
+\end{defi}
+
+\begin{nota}
+Un incremento del coeficiente HICB significa una disminución del equilibrio competitivo.
+\end{nota}
+
+\begin{defi}
+Se define el Churn como
+
+\[ C_t = \dfrac{1}{n} \sum_{i=1}^{n} |c_{i,t} - c_{i,t-1}| \]
+
+donde $c_{i,t}$ es el ranking del equipo $i$ in la temporada $t$.
+\end{defi}
+
+\begin{defi}
+Se difine el Churn Ajustado como
+
+\[ C_{ad} = \dfrac{C_t}{C_{t, \max}} \]
+
+donde $C_{t, \max}$ es el máximo valor de $C_t$ dada una liga de $n$ equipos.
+\end{defi}
+
+\begin{nota}
+Este indice indica equilibrio competitivo entre temporadas.\\
+
+Si dos rankings son iguales, $C_t = 0$.\\
+
+Se considera que valores grandes de $C_t$ implican altos valores en el equilibrio competitivo. 
+\end{nota}
+
+
+\begin{nota}
+Notar que el Churn Ajustado es una ``footrule'' de Spearman generalizada $D(c_t, c_{t+1})$. De hecho, $D(c_t, c_{t+1}) = nC_t$ 
+\end{nota}
+
 \end{document}
