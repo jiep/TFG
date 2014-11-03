@@ -24,7 +24,7 @@ Una camarilla\footnote{Traducción de clique} es un conjunto de nodos mutuamente
 
 \begin{defi}
 Dado un conjunto $\mathcal{N} = \{1,\dots,n\}$ que llamaremos nodos, definimos un ranking $c$ de $\mathcal{N}$ como cualquier biyección $c: \mathcal{N} \to \mathcal{N}$.\\
-Escribiremos $i \prec_c j$ cuando el nodo $i$ aparezca antes que el nodo $j$ en el ranking $c$. 
+Escribiremos $i \prec_c j$ cuando el nodo $i$ aparezca antes que el nodo $j$ en el ranking $c$.
 \end{defi}
 
 \begin{defi}
@@ -40,7 +40,7 @@ Decimos que dos nodos $i$, $j$ ``compiten'' $k$ veces, si $k$ es el número máx
 \end{defi}
 
 \begin{defi}
-Definimos el grafo de competitividad evolutivo de $\mathcal{R}$, denotado como $G_c^e(\mathcal{R}) = (\mathcal{N}, E_\mathcal{R}^e)$, como el grafo no dirigido ponderado con nodos $\mathcal{N}$ y arcos dados por la siguiente regla: hay un arco entre $i$ y $j$ etiquetado con peso $k$ si $(i,j)$ compiten $k$ veces.  
+Definimos el grafo de competitividad evolutivo de $\mathcal{R}$, denotado como $G_c^e(\mathcal{R}) = (\mathcal{N}, E_\mathcal{R}^e)$, como el grafo no dirigido ponderado con nodos $\mathcal{N}$ y arcos dados por la siguiente regla: hay un arco entre $i$ y $j$ etiquetado con peso $k$ si $(i,j)$ compiten $k$ veces.
 \end{defi}
 
 \begin{nota}
@@ -48,7 +48,7 @@ Notar que la red no ponderada detrás del grafo ponderado $G_c^e(\mathcal{R})$ e
 \end{nota}
 
 \begin{nota}
-Notar que el orden de los rankings es fundamental en el cálculo de los pesos del grafo de competitividad evolutivo, aunque no tiene influencia en el grafo de competitividad (no ponderado). 
+Notar que el orden de los rankings es fundamental en el cálculo de los pesos del grafo de competitividad evolutivo, aunque no tiene influencia en el grafo de competitividad (no ponderado).
 \end{nota}
 
 \begin{defi}
@@ -56,7 +56,7 @@ Definimos el grado medio normalizado (normalized mean degree) de una familia de 
 
 \[ND(\mathcal{R}) = \dfrac{1}{n(n-1)} \sum_{i \in \mathcal{N}} k_i\]
 
-donde $k_i$ es el número de nodos adyacentes al nodo $i$. 
+donde $k_i$ es el número de nodos adyacentes al nodo $i$.
 \end{defi}
 
 \begin{ob}
@@ -84,7 +84,7 @@ El coeficiente de ``clustering'' mide cuántos nodos tienden a agruparse\footnot
 \end{nota}
 
 \begin{defi}
-El coeficiente de ``clustering'' $C_i$ de un nodo $i$ se define como 
+El coeficiente de ``clustering'' $C_i$ de un nodo $i$ se define como
 
 \[ C_i = \dfrac{e_i}{\dbinom{k_i}{2}} \]
 
@@ -106,7 +106,7 @@ Dados dos rankings $c_1$ y $c_2$ de un conjunto $\mathcal{N}$ de nodos de $n$ el
 
 \[ \tau(c_1, c_2) = \dfrac{\tilde{K}(c_1, c_2) - K(c_1, c_2)}{\dbinom{n}{2}} \]
 
-donde $\tilde{K}(c_1, c_2)$ denota el número de pares $(i,j)$ que no ``compiten'' con respecto a $\mathcal{R} = \{c_1, c_2\}$, y $K(c_1, c_2)$ denota el número de pares $(i,j)$ que ``compiten''. 
+donde $\tilde{K}(c_1, c_2)$ denota el número de pares $(i,j)$ que no ``compiten'' con respecto a $\mathcal{R} = \{c_1, c_2\}$, y $K(c_1, c_2)$ denota el número de pares $(i,j)$ que ``compiten''.
 \end{defi}
 
 \begin{nota}
@@ -132,13 +132,13 @@ Podemos definir un coeficiente $\tau(\mathcal{R})$ de correlación de Kendall de
 
 También podemos construir un coeficiente de correlación evolutivo de Kendall $\tau_e(\mathcal{R})$ teniendo en cuenta el número de veces que cada par de nodos compiten. Definimos
 
-\[ \tau_e(\mathcal{R}) = 1 - \dfrac{2w(E_\mathcal{R}^e)}{\dbinom{n}{2}(r-1)} \] 
+\[ \tau_e(\mathcal{R}) = 1 - \dfrac{2w(E_\mathcal{R}^e)}{\dbinom{n}{2}(r-1)} \]
 
 donde $w(E_\mathcal{R}^e)$ denota la suma de todos los pesos de los arcos del grafo de competitividad evolutivo. El denominador  $\binom{n}{2}(r-1)$ representa la suma de todos los posibles arcos de sus mayores pesos.
 \end{defi}
 
 \begin{nota}
-El coeficiente evolutivo de Kendall de una familia de rankings $\mathcal{R}$ se relaciona directamente con la fuerza media normalizada 
+El coeficiente evolutivo de Kendall de una familia de rankings $\mathcal{R}$ se relaciona directamente con la fuerza media normalizada
 
 \[\tau_e(\mathcal{R}) = 1 - 2NS(\mathcal{R}) \]
 \end{nota}
@@ -170,10 +170,10 @@ Se dice que $r$ rankings han aumentado su competitividad cuando ha disminuido su
 \end{defi}
 
 \begin{defi}
-Definimos NAMSI como 
+Definimos NAMSI como
 \[ NAMSI =  \sqrt{\dfrac{\sum\limits_{i=1}^{n} \left( w_i - \dfrac{1}{2} \right)^2}{\sum\limits_{i=1}^{n} \left(w_{i, \max} -\dfrac{1}{2}\right)^2}} \]
 
-donde $w_{i, \max}$ es el ratio de victorias del equipo $i$ cuando hay predictibilidad completa: equipo $1$ gana todos sus partidos, equipo $2$ gana todos sus partidos menos $2$ (como local y visitante),..., equipo $n$ pierde todos sus partidos. 
+donde $w_{i, \max}$ es el ratio de victorias del equipo $i$ cuando hay predictibilidad completa: equipo $1$ gana todos sus partidos, equipo $2$ gana todos sus partidos menos $2$ (como local y visitante),..., equipo $n$ pierde todos sus partidos.
 
 \end{defi}
 
@@ -210,12 +210,13 @@ Este indice indica equilibrio competitivo entre temporadas.\\
 
 Si dos rankings son iguales, $C_t = 0$.\\
 
-Se considera que valores grandes de $C_t$ implican altos valores en el equilibrio competitivo. 
+Se considera que valores grandes de $C_t$ implican altos valores en el equilibrio competitivo.
 \end{nota}
 
 
+
 \begin{nota}
-Notar que el Churn Ajustado es una ``footrule'' de Spearman generalizada $D(c_t, c_{t+1})$. De hecho, $D(c_t, c_{t+1}) = nC_t$ 
+Notar que el Churn Ajustado es una ``footrule'' de Spearman generalizada $D(c_t, c_{t+1})$. De hecho, $D(c_t, c_{t+1}) = nC_t$
 \end{nota}
 
 \end{document}
