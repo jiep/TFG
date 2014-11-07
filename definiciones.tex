@@ -213,10 +213,70 @@ Si dos rankings son iguales, $C_t = 0$.\\
 Se considera que valores grandes de $C_t$ implican altos valores en el equilibrio competitivo.
 \end{nota}
 
-
-
 \begin{nota}
 Notar que el Churn Ajustado es una ``footrule'' de Spearman generalizada $D(c_t, c_{t+1})$. De hecho, $D(c_t, c_{t+1}) = nC_t$
 \end{nota}
+
+\begin{defi}
+Dado un conjunto finito $\mathcal{R} = \{c_1,c_2,\dots, c_r\}$ de rankings, decimos que el par de nodos $(i,j) \in \mathcal{N}$ ``compiten'' si existe $c_s, c_t \in \{1,2,\dots, r\}$ tal que $i \prec_{c_s} j$, pero $j \prec_{c_t} i$, es decir, $i$ y $j$ intercambian sus posiciones relativas entre los rankings $c_s$ y $c_t$. 
+\end{defi}
+
+\begin{nota}
+La competitividad entre dos nodos $i, j \in \mathcal{N}$ está fuertemente relacionada con el hecho de que $(i,j)$ es una inversión de un ranking de la familia.\\
+
+Recuerda que una inversión en un ranking $c$ es un par de dos nodos $(i,j)$ tal que
+\[(i-j)(c^{-1}(i) - c^{-1}(j)) < 0\]
+\end{nota}
+
+\begin{lema}\label{lema:rankings}
+Dada un conjunto finito $\mathcal{R} = \{c_1, c_2, \dots, c_r\}$ of rankings, las siguientes condiciones son equivalentes:
+
+\begin{itemize}
+\item El par de nodos $(i,j)$ compiten.
+\item Existe $c_s \in \{c_1,\dots,c_{r-1}\}$ tal que $i$ y $j$ intercambian sus posiciones relativas entre los rankings $c_s$ y $c_{s+1}$.
+\item Existe un renombramiento de los nodos tal que $c_1 = id \equiv (1,2,\dots, n)$ y algún $c_s \in \{c_2,\dots,c_r\}$ con una inversión de la forma $(i,j)$.
+\end{itemize} 
+\end{lema}
+
+\begin{nota}
+El coste computacional de construir el grafo de competitividad $G_c(\mathcal{R}) = (\mathcal{N}, E_\mathcal{R})$ de la familia de rankings $\mathcal{R} = \{c_1,\dots,c_r\}$, donde $\mathcal{N} = \{1,\dots,n\}$ es de orden $rn^2$, ya que por el lema $\ref{lema:rankings}$, después de renombrar los nodos tal $c_1 = id$ (que tiene un coste de $rn$ en el peor caso), sólo tenemos que que encontrar las inversiones entre $c_1$ y cada una los $c_s$, que tiene un coste computacional del orden de $(r-1)\dfrac{n}{2} \approx rn^2$
+\end{nota}
+
+\begin{defi}
+Si tenemos una familia de rankings $\mathcal{R} = \{c_1,\dots,c_r\}$ de nodos $\mathcal{N} = \{1,\dots,n\}$ and fijamos $i \in \mathcal{N}$, el conjunto de competitividad $C(i)$ de un nodo $i$ es el conjunto de elementos de $\mathcal{N}$ que ``compiten'' con $i$, junto con $i$, es decir,
+\[C(i) = \{j \in \mathcal{N} \mid (i,j) \text{ compiten} \} \cup \{i\} \] 
+\end{defi}
+
+\begin{nota}
+La información local del grafo de competitividad da propiedades del conjunto de competitividad del nodo, ya que es directo comprobar que $C(i)$ corresponde a $i$ junto con todos sus vecinos en el grafo de competitividad $G_c(\mathcal{R})$. 
+\end{nota}
+
+\begin{defi}
+Si tomamos una familia de rankings $\mathcal{c_1,\dots, c_r}$ de nodos $\mathcal{N}$, un conjunto $C \subseteq \mathcal{N}$ se llama conjunto de comprtidores si hay un conjunto maximal con respecto a la propiedad de competición entre sus elementos, es decir, dados dos elementos $i,j \in C$, $(i,j)$ compiten y $C$ es maximal con respecto a esta propiedad.
+\end{defi}
+
+\begin{nota}
+Los conjuntos de competidores son exactamente los subgrafos completos maximales (maximal camarillas) de $\mathcal{G_c(\mathcal{R})}$. Notar que dos nodos compiten sii pertenecen al mismo conjunto de competidores. Más aún, se puede comprobar que un conjunto de nodos $C \subseteq \mathcal{N}$ es un conjunto de competidores sii 
+
+\[C = \bigcap_{i \in C} C(i)\]
+\end{nota}
+
+La nota anterior remarca el hecho de que las camarillas máximas de $G_c(\mathcal{R})$ corresponden a los conjuntos de competidores. Si consideramos otros conjuntos estructurales de nodos de $G_c(\mathcal{R})$, tales como las componentes conexas de $G_c(\mathcal{R})$, obtenemos otro conjunto de competidores más débil, como sigue:
+
+\begin{defi}
+Si tenemos una familia de rankings $\mathcal{R} = \{c_1,\dots,c_r\}$ de nodos $\mathcal{N} = \{1,\dots,n\}$, decimos que un par de nodos $(i,j) \in \mathcal{N}$ eventualmente compiten si existe $k \in \N$ y nodos $i_i,\dots,i_k \in \mathcal{N}$ tal que $(i,i_1)$ compiten, $(i_1,i_2)$ compiten,\dots, y $(i_k,j)$ compiten. 
+\end{defi}
+
+\begin{defi}
+Un conjunto de nodos $D \subseteq \mathcal{N}$ se llama un conjunto de competidores habitual si es un conjunto maximal con respecto a la propiedad de la competición eventual entre sus elementos.
+\end{defi}
+
+
+\begin{nota}
+Es directo comprobar que un par de nodos $(i,j)$ compiten, entonces eventualmente compiten. Más aún, $(i,j)$ eventualmente compiten sii $i$ y $j$ están conectados por un camino en el grafo de competitividad $G_c(\mathcal{R})$.\\
+
+Notar que los conjuntos de competidores eventuales de $\mathcal{N}$ son las componentes conexas de $G_c(\mathcal{R})$ y dos nodos compiten eventualmente sii pertenecen al mismo conjunto de competidores eventuales. Claramente, si dos nodos pertenecen a diferentes conjuntos de competidores eventuales, no pueden competir. 
+\end{nota}
+
 
 \end{document}
