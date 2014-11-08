@@ -56,11 +56,53 @@ Se ha probado que un grafo $G = (\mathcal{N},E)$ es un grafo de comparabilidad s
 Un grafo $G = (\mathcal{N}, E)$ es un grafo de permutación\footnote{Traducción de permutation} si sus vértices representan los elementos de una permutación y cada uno de sus arcos corresponden a un par de elementos que están invertidos por la permutación.  
 \end{defi}
 
-\begin{nota}
+\begin{nota} \label{nota}
 Una caracterización de los grafos de permutaciones es el hecho de que el grafo $G$ y su complemento $\bar{G}$ (el grafo con el mismo conjunto de nodos y enlaces entre nodos que no están enlazados en $G$) son grafos de comparabilidad, es decir, que admiten una orientación transitiva de sus arcos.
 \end{nota}
 
+\begin{nota}
+Notar que los grafos de permutaciones son grafos de comparabilidad y grafos de competitividad (simplemente considerando dos rankings: $c_1 = id$ y $c_2$ como una permutación que constituye el grafo de permutaciones).
+\end{nota}
 
+\begin{defi} \label{cohesivo}
+Si $G=(\mathcal{N}, E)$ es un grafo, decimos que $G$ tiene un orden cohesivo del conjunto de vértices\footnote{Traducción cohesive vertex-set order} (o simplemente orden cohesivo) si existe un renombramiento de los nodos tal que:
+\begin{enumerate}
+\item hay un enlace entre los nodos $a$ y $b$ y $a < b$, then for cada $x$, $a < x < b$, debe existir un enlace entre $a$ y $b$ o un enlace entre $x$ y $b$.
+\item (transitividad) si existe un enlace entre los nodos $a$ y $x$, otro entre $x$ y $b$, y $a < x < b$, entonces $a$ y $b$ también están enlazados.
+\end{enumerate}
+\end{defi}
+
+\begin{teo}
+$G = (\mathcal{N}, E)$ es un grafo de permutación sii tiene orden cohesivo del conjunto de vértices. 
+\end{teo}
+
+\begin{nota}
+Notar que, por la nota \ref{nota}, para cada grafo de comparabilidad hay siempre un renombramiento de los nodos tal que satisface la condición 2 de la definición \ref{cohesivo} (transitividad) ya que admite una orientación transitiva de sus vértices (de hecho, esa condición caracteriza los los grafos de comparabilidad).
+\end{nota}
+
+\begin{defi}
+Si $G=(\mathcal{N}, E)$ es un grafo, decimos que $G$ tiene un orden semicohesivo del conjunto de vértices (o simplemente orden semicohesivo) si existe un renombramiento de los nodos tal que verifica la condición 1 de la definición \ref{cohesivo}, es decir, si existe un enlace entre los nodos $a$ y $b$ y $a < b$, entonces para cada $x$, $a < x < b$, debe existir un enlace entre $a$ y $x$ o un enlace entre $x$ y $b$. Decimos que un grafo $G$ es semicohesivo si tiene un orden semicohesivo del conjunto de vértices. 
+\end{defi}
+
+\begin{lema}
+Todo grafo de competitividad es semicohesivo.
+\end{lema}
+
+\begin{defi}
+Si $G=(\mathcal{N},E)$ es un grafo, definimos los vecinos comunes de un par de nodos $i,j \in \mathcal{N}$ como el conjunto de nodos que están unidos a $i$ o $j$ (o a ambos).
+\end{defi}
+
+\begin{lema}
+Si un grafo $G=(\mathcal{N},E)$ es semicohesivo con respecto a algún nombramiento de sus nodos y hemos renombrado $\mathcal{N}$ de acuerdo a este nombramiento, entonces si $i,j \in \mathcal{N}$ están unidos, entonces el número de los vecinos comunes de $i$ y $j$ es al menos $|i-j|-1$.
+\end{lema}
+
+\begin{lema}
+Cada ciclo de $n$ vértices $C_n$ con $n \geq 5$ no es semicohesivo, y por tanto, no es un grafo de competitividad.
+\end{lema}
+
+\begin{lema}
+
+\end{lema}
 
 \section{Rankings}
 
