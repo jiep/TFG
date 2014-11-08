@@ -101,8 +101,29 @@ Cada ciclo de $n$ vértices $C_n$ con $n \geq 5$ no es semicohesivo, y por tanto
 \end{lema}
 
 \begin{lema}
-
+Cada ciclo con un número impar de vértices $C_{2n+1}$, $n \geq 2$, no es ni un grafo de competitividad ni un grafo de comparabilidad, ni un grafo de competitividad ni un grafo cordal.
 \end{lema}
+
+\begin{teo}
+Si $\mathcal{G}$ es el conjunto de todos los grafos finitos, $CH\mathcal{G}$, $P\mathcal{G}$, $C\mathcal{G}$ y $CP\mathcal{G}$ son los conjuntos de los grafos cordales, de permutaciones, de comparabilidad y de competitividad respectivamente, entonces
+\begin{enumerate}
+\item Hay grafos de comparabilidad que no son ni grafos de competitividad ni grafos cordales, es decir, $C\mathcal{G} \setminus (CP\mathcal{G} \cup CH\mathcal{G}) \neq \emptyset$.
+
+\item Hay grafos de competitividad que no son grafos de comparabilidad ni grafos cordales, es decir, $CP\mathcal{G} \setminus (C\mathcal{G}\cup CH\mathcal{G}) \neq \emptyset$.
+
+\item Hay grafos que no son ni de comparabilidad, ni competitivivos ni cordales, es decir, $\mathcal{G} \setminus (C\mathcal{G} \cup CP\mathcal{G} \cup C\mathcal{G}) \neq \emptyset$.
+
+\item Los grafos de permutaciones coinciden con la intersección de los grafos de competitividad y de comparabilidad, pero no cada grafo de permutación es cordal, es decir, $P\mathcal{G} = C\mathcal{G}\cap CP\mathcal{G}$ y $P\mathcal{G} \not \subseteq CH\mathcal{G}$.
+
+\item Hay grafos cordales que no son grafos de comparabilidad ni de competitividad, es decir, $CH\mathcal{G} \setminus (C\mathcal{G} \cup CP\mathcal{G}) \neq \emptyset$.
+
+\item Hay grafos que son de competitividad y de cordales, pero no son de comparabilidad, es decir, $CP\mathcal{G} \cap CH\mathcal{G} \cap (\mathcal{G} \setminus C\mathcal{G}) \neq \emptyset$.
+
+\item Hay grafos que son de competitividad y cordales, pero no de competitividad, es decir, $C\mathcal{G} \cap CH\mathcal{G} \cap (\mathcal{G} \ C\mathcal{G}) \neq \emptyset$.
+
+\item Hay grafos que son cordales, de competitividad y de comparabilidad, es decir, $CH\mathcal{G} \cap CP\mathcal{G} C\mathcal{G} \neq \emptyset$.
+\end{enumerate}
+\end{teo}
 
 \section{Rankings}
 
@@ -361,6 +382,10 @@ Es directo comprobar que un par de nodos $(i,j)$ compiten, entonces eventualment
 
 Notar que los conjuntos de competidores eventuales de $\mathcal{N}$ son las componentes conexas de $G_c(\mathcal{R})$ y dos nodos compiten eventualmente sii pertenecen al mismo conjunto de competidores eventuales. Claramente, si dos nodos pertenecen a diferentes conjuntos de competidores eventuales, no pueden competir. 
 \end{nota}
+
+\begin{lema}
+
+\end{lema}
 
 
 \end{document}
