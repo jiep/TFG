@@ -384,8 +384,70 @@ Notar que los conjuntos de competidores eventuales de $\mathcal{N}$ son las comp
 \end{nota}
 
 \begin{lema}
+Dado un conjunto finito $\mathcal{R} = \{c_1,c_2,\dots,c_r\}$ de rankings de nodos $\mathcal{1,\dots,n}$, si $D \subseteq \mathcal{N}$ es un conjunto de competidores eventuales y $a,b \in D$, entonces para cada $x \in \mathcal{N}$ y cada ranking $c_m \in \mathcal{R}$ tal que
 
+\[ a \prec_{c_m} x \prec_{c_m} b \implies x \in D \] 
 \end{lema}
+
+\begin{lema}
+Dado un conjunto finito $\mathcal{R} = \{c_1,\dots,c_r\}$ de rankings de nodos $\mathcal{N} = \{1,\dots,n\}$, si $D \subseteq \mathcal{N}$ es un conjunto eventual de competidores y existe $a \in D$ y $c_m \in \mathcal{R}$ tal que $c_m^{-1}(a) = 1$ (elemento $a$ aparece en la primera posición de $c_m$) entonces
+
+\[ \{x \in \mathcal{N} \mid c_s^{-1}(x) = 1 \text{ para algún } c_s \in \mathcal{R} \} \subseteq D \]
+
+es decir, todos los elementos en la primera posición del ranking pertenecen a $D$.
+\end{lema}
+
+\begin{teo}
+Dada un conjunto finito $\mathcal{R} = \{c_1,\dots,c_r\}$ de rankings de nodos $\mathcal{N} = \{1,\dots, n\}$, los conjuntos de competitores eventuales se pueden identificar con intervalos cerrados de números naturales $[p,q]$ en el siguiente sentido:
+
+\[ D_{[p,q]} = \{ x \in \mathcal{N} \mid c_s^{-1}(x) \in [p,q] \text{ para algún } c_s \in \mathcal{R} \} \]
+
+Más aún, $p$ y $q$ son la primera posición a la izquierda y la última posición a la derecha de los elementos de $D_{[p,q]}$ con respecto a todos los rankings.
+\end{teo}
+
+\begin{algorithm}\label{algoritmo}
+\SetKwInOut{Input}{Entrada}\SetKwInOut{Output}{Salida}
+ \Input{}
+ \begin{itemize}
+ 	\item Un conjunto finito de nodos $\mathcal{N} = \{1,\dots, n\} (n \in \N)$
+ 	\item Un conjunto finito de rankings $\mathcal{R} = \{c_1,\dots,c_r\}$ de $\mathcal{N}$ $(r \in \N)$
+ \end{itemize}
+ 
+ \Begin{
+ 	$j := 1$\;
+ 	$q_0 := 0$\;
+ 	$q_j := 1$\;
+ 	\While{$|\mathcal{N}| > 0$}{
+ 		$D_j := \emptyset$\;
+ 		$p_0 := q_{j-1}$\;
+ 		$p_1 := q_j$\;
+ 		$i := 0$\;
+ 		\While{$p_i \neq p_{i+1}$}{
+ 			$i := i + 1$\;
+ 			Construir $D_j := D_{[q_j,p_i]}$\;
+ 			$p_{i+1} := \max_{x \in D, c \in \mathcal{R}} c^{-1}(x)$\;
+ 		}
+ 		$\mathcal{N} := \mathcal{N} \setminus D_j$\;
+ 		$j := j + 1$\;
+ 		$q_j := p_i$\;
+ 	}
+ 
+ }
+ 
+ \Output{Conjuntos de competidores eventuales $D_1, \dots, D_k$} 
+ \caption{Cálculo de los conjuntos de competidores eventuales}
+\end{algorithm}
+
+Es fácil comprobar que el coste computacional del algoritmo \ref{algoritmo} es del orden de $kn^2$. Notar que como los conjuntos de competidores eventuales coinciden con las componentes conexas del grafo de competitividad, pueden ser calculadas con los algoritmos usuales de componentes conexas, que tienen una complejidad de $kn^2$ también.
+
+\begin{defi}
+Dado un conjunto finito $\mathcal{R} = \{c_1,\dots,c_r\}$ de rankings $r\geq 2$ de nodos $\mathcal{N} = \{1,\dots,n\}$, definimos el grafo dirigido $G_d(\mathcal{R})$ de la siguiente manera:
+\begin{enumerate}
+\item El conjunto de vértices de $G_d(\mathcal{R})$ es $\mathcal{N}$.
+\item Si $i \neq j \in \mathcal{N}$ hay un `òutlink'' desde $i$ a $j$ en $G_d(\mathcal{R})$ si existe un ranking $c_m \in \mathcal{R}$ tal que $i\prec_{c_m} j$.
+\end{enumerate} 
+\end{defi}
+
 
 
 \end{document}
