@@ -448,6 +448,44 @@ Dado un conjunto finito $\mathcal{R} = \{c_1,\dots,c_r\}$ de rankings $r\geq 2$ 
 \end{enumerate} 
 \end{defi}
 
+\begin{nota}
+Notar que este grafo dirigido $G_d(\mathcal{R})$ coincide con el grafo dirigido $G_\preceq$ definido por la relación reflexiva y antisimétrica $\preceq$ dada por:
+\begin{enumerate}
+\item $i \preceq i$ para todo $i \in \mathcal{N}$,
+\item $i \preceq j$ $(i\neq j \in \mathcal{N})$ si existe $c_m \in \mathcal{R}$ tal que $i \preceq_{c_m} j$. 
+\end{enumerate}
+El grafo de competitividad coincide con el grafo no dirigido con el mismo conjunto de nodos de $G_d(\mathcal{R})$ y los enlaces entre los pares de nodos $(i,j)$ when hay un `òutlink'' desde $i$ hasta $j$ y un `òutlink'' desde $j$ hasta $i$ en $G_d(\mathcal{R})$. 
+\end{nota}
 
+\begin{prop} \label{prop}
+Si $D_1$ y $D_2$ son dos conjuntos diferentes de competidores, las siguientes condiciones sobre el grafo dirigido $G_d(\mathcal{R})$ son equivalentes:
+\begin{enumerate}
+\item Hay un ``outlink'' desde un nodo $a \in D_1$ a un nodo $b \in D_2$.
+\item Para cada nodo en $D_1$ hay un ``outline'' para cada nodo de $D_2$.
+\end{enumerate}
+Análogo si cambiamos ``outlink'' por ``inlink''. 
+\end{prop}
+
+\begin{defi} \label{binaria}
+Dado un conjunto $\mathcal{R} = \{c_1,\dots, c_r\}$ de $r$ rankings $(r \geq 2)$ de nodos $\mathcal{N} = \{1,\dots,n\}$ cuyos conjuntos de competidores eventuales son $D_1,\dots, D_k$, definimos una relación binaria $\cdot \to \cdot $ entre conjuntos de competidores eventuales como sigue:
+\begin{enumerate}
+\item $D_i \to D_i$ para cada conjunto de competidores eventuales $D_i$ de $\mathcal{N}$.
+\item Para cada dos conjuntos diferentes de competidores $D_i, D_j$,
+
+\[ D_i \to D_j \iff \text{cualquiera de las condiciones de la Proposición \ref{prop} se cumple} \]
+\end{enumerate} 
+\end{defi}
+
+\begin{lema}
+La relación binaria dada en la definición anterior es transitiva, es decir, si $D_1, D_2, D_3$ son tres conjuntos diferentes de competidores y $D_1 \to D_2$ y $D_2 \to D_3$, entonces $D_1 \to D_3$.
+\end{lema}
+
+\begin{cor}
+La relación binaria dada por la definición \ref{binaria} es una relación de orden total entre los conjuntos de competidores eventuales.
+\end{cor}
+
+\begin{nota}
+Con respecto a este orden total, podemos definir un grafo dirigido cuyos nodos son los conjuntos de competidores eventuales y arcos dados por la siguiente regla: hay un enlace desde el nodo $D_i$ hasta el nodo $D_j$ si $D_i \to D_j$. El nodo $D_i$ con ``outlinks'' hasta otro nodo se llamará el ``líder entre los conjuntos de competidores eventuales'', y el nodo con ``inlinks'' se llamará ``el perdedor entre los competidores de competidores eventuales''. En efecto, obtenemos un ranking de los conjuntos de competidores eventuales: el primero, el segundo, etc.  
+\end{nota}
 
 \end{document}
