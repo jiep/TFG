@@ -17,8 +17,14 @@ No existe un sistema de votación que cumpla las siguientes cuatro propiedades s
 
 Métodos de agregación de rankings:
 \begin{itemize}
-\item Borda Count
+\item Método de Borda
 \item Ranking promedio
 \item Datos de juego simulado (Simulated Game Data)
 \item Teoría de grafos para la agregación de rankings
 \end{itemize}
+
+\subsection{Método de Borda}
+
+Este método fue creado por Jean-Charles de Borna y data de 1770. Borda intentaba agregar rankings de listas de candidatos de unas elecciones políticas. Para cada lista de candidatos, cada candidato recibía a puntuación igual al número de candidatos que le superan. La puntuación de cada lista es sumada para cada candidato para crear un solo ranking, que se llama la ``cuenta de Borda\footnote{Traducción de Borda Count}''. Los candidatos son ordenados en orden descendiente según este método. Este método puede ser adaptado para  manejar empates. Notar que los empates rompen las puntuaciones de Borda de las posiciones fijadas del ranking. Este método puede manejar rankings de entrada con empates. Además, también puede producir un ranking de salida que contenga empates. Aunque este método es muy sencillo, tiene un gran problema: que es fácil manipulable. Ejemplos que demuestran esta fragilidad se pueden ver en la Ref. 16 de~\cite{langville2012s}.
+
+\subsection{Ranking promedio}  
