@@ -34,3 +34,19 @@ Otro método muy sencillo de agregación de rankings es el ranking promedio. En 
 Hay varias estrategias para romper los empates. Expondremos dos. La primera estrategia hace uso de los datos pasados para romper los empates. La segunda, es asignar una lista ordenada como ``lista tie-break``, que funciona bien para parejas de empates.\\
 
 Notar que este método sólo puede usarse cuando todos los rankings contienen todos los mismos elementos. Otra observación es que este método puede producir una agregación de rankings que no contenga un ranking. 
+
+\subsection{Simulated Game Data}
+
+Este método tiene como regla una interpretación una interpretación simple de un ranking: ``si el equipo A aparece por encima del equipo B en un ranking, entonces en un partido entre los dos equipos, A debería ganar a B''. Además, si el equipo A aparece en la cima del ranking y juega contra el equipo B, que aparece al final del ranking, entonces esperaríamos que el equipo A ganara al equipo B por un gran margen.\\
+
+Para asignar este margen entre distintos equipos, podemos asignar como margen de victoria un punto por cada diferencia de posiciones en el ranking. Estas puntuaciones son útiles cuando en la agregación del ranking. Podemos observar que los rankings no necesitan ser completos, como la mayoría de los métodos de agregación.\\
+
+Algunas de las propiedades de los datos simulados son:
+
+\begin{itemize}
+\item El ranking agregado es tan bueno (o malo) como lo sean los rankings de entrada.
+\item El método de combinación actúa como ``alisante'' que minimiza el efecto de los outliers, que son rankings que contienen  anomalías que hace que sean inconsistentes con los rankings en otros rankings. 
+\item El ranking agregado cumple el principio de Pareto si los rankings de entrada lo cumplen.
+\item El método de combinación puede tener efectos en el ranking agregado. Además, si el método de combinación es uno de los métodos de entrada, entonces el método puede ser llamado un dictador parcial, en el lenguaje de Arrow.    
+\end{itemize}
+ 
