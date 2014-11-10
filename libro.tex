@@ -49,4 +49,14 @@ Algunas de las propiedades de los datos simulados son:
 \item El ranking agregado cumple el principio de Pareto si los rankings de entrada lo cumplen.
 \item El método de combinación puede tener efectos en el ranking agregado. Además, si el método de combinación es uno de los métodos de entrada, entonces el método puede ser llamado un dictador parcial, en el lenguaje de Arrow.    
 \end{itemize}
+
+\subsection{Teoría de grafos para la agregación de rankings}
+ 
+ Este método utiliza la teoría de grafos. Cada uno del grafo es un equipo y cada arco puede ser información que venga de los rankings que queremos agregar. Por ejemplo, podemos considerar, un peso $w_{ij}$ desde $i$ a $j$ como sigue:
+ 
+ \[ w_{ij} = \text{ número de rankings que tienen a } i \text{ por debajo de } j \]
+ o 
+ \[ w_{ij} = \text{ suma de diferencia de rankings que tienen a } i \text{ por debajo de } j \]
+ 
+ Cualquier algoritmo famoso como el PageRank, HITS, SALSA, etc. puede servir para dar peso a los arcos del grafo.
  
