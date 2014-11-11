@@ -1,3 +1,8 @@
+\usepackage{luacode}
+
+\directlua{dofile("matrix.lua")}
+\directlua{dofile("matrix2.lua")}
+
 \def\readmatrix#1{%
     \directlua{
     	matrix = require 'matrix';
