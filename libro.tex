@@ -1,4 +1,4 @@
-\section{Rank Aggregation-Part 1 \cite{langville2012s}}
+\section{Rank Aggregation -- Part 1 \cite{langville2012s}}
 
 El objetivo de la agregación de rankings es mezclar varios rankings para construir uno nuevo ranking. La necesidad rankings agregados tiene muchas aplicaciones como, por ejemplo, los meta buscadores como Excite, Hotbot, Clusty que combinan los rankings de distintos buscadores en uno solo.\\
 
@@ -75,3 +75,45 @@ Algunas de las propiedades de los datos simulados son:
  \paragraph{Método 2} El segundo método usa el método de las cadenas de Markov aplicado a una versión normalizada de las filas $\bar{R}^{T}$. Esto funciona porque las las entrada de $\bar{R}$ son las distancias entre los equipos.
  
  \paragraph{Método 3} El tercer método usa el autovector dominante de $\bar{R}$. Este vector se denomina vector de Perron de $\bar{R}$. Este vector recibe su nombre del teorema de Perron de una matriz irreducible no negativa que asegura que es no negativo. En vez de comprobar que $\bar{R}$ es irreducible, en la práctica uno puede forzar la irreducibilidad añadiendo $\epsilon e e^T$ a $\bar{R}$, donde $\epsilon$ es un número pequeño y positivo.
+ 
+ \section{Rank Aggregation -- Part 2} 
+ 
+ Los métodos de agregación de rankings estudiados hasta ahora, son métodos heurísticos, es decir, que no tenemos garantías de que sean óptimos. Por otra parte, estos métodos son muy rápidos.\\
+ 
+ A continuación describimos un método de agregación de rankings, que fue creado por el Dr. Yoshitsugu Yamamoto de la Universidad de Tsukuba en Japón. Este método produce un ranking agregado que optimiza la conformidad entre los rankings de entrada. Hay varias maneras de definir la conformidad entre los rankings, por ejemplo, podemos considerar la siguiente:
+ 
+ \[ c_{i,j} = (\text{ número de rankings con } i \text{ por encima de } j ) - (\text{ número de rankings con } i \text{ por debajo de } j ) \]
+ 
+ Si hay $n$ elementos en total entre los $k$ rankings, entonces $C$ es una matriz antisimétrica de tamaño $n \times n$.\\
+ 
+ Armado con una matriz $C$ de constantes que mide la conformidad, nuestro objetivo es crear un ranking de los $n$ elementos que maximice la conformidad. Para lograr este objetivo, definimos variables de decisión $x_{i,j}$ si el elemento $i$ debería estar por encima del elemento $j$ en el ranking, es decir, 
+ 
+ \[ x_{i,j} = \begin{cases}
+ 1 \quad si \quad \text{si el elemento } $i$ \text{ debería estar por encima del elemento }  $j$ \text{ en el ranking}\\
+ 0 \quad \text{en caso contrario}
+ \end{cases} \]
+ 
+ Queremos maximizar la conformidad entre entre los rankings de entrada, que en términos de nuestras constantes $c_{i,j}$ y las variables $x_{i,j}$ se convierte en:
+ 
+ \[ \max \sum\limits_{i=1}^{n} \sum\limits_{j=1}^{n} c_{i,j} x_{i,j} \quad \text{con } x_{i,j} \in \{0,1\} \] 
+ 
+ Sin embargo, también necesitamos algunas restricciones que son las siguientes:
+ 
+ \[ x_{i,j} + x_{j,i} = 1 \quad \text{para todas las parejas distintas } (i,j)  \quad \text{Tipo 1 (antisimetría)}\]
+ \[x_{i,j} + x_{jk} + x_{ki} \leq 2 \quad \text{para todas las tripletas distintas } (i,j,k)  \quad \text{Tipo 2 (transitividad)}
+ \]
+ 
+ La matriz $X$ puede ser representada mediante un grafo de dominancia.\\
+ 
+ En resumen, el problema de optimización lineal entera queda así:
+ 
+ \begin{align*}
+ \max \sum\limits_{i=1}^{n} \sum\limits_{i=1}^{n} c_{ij} x_{ij} \\
+ x_{ij} + x_{ji} = 1 \quad \forall (i,j) \quad i \neq j \\
+ x_{ij} + x_{jk} + x_{ki} \leq 2 \quad \forall (i,j,k) \quad i \neq j \neq k\\
+ x_{ij} \in \{0,1\}
+ \end{align*}
+ 
+ Este problema tiene $n(n-1)$ variables de decisión, $n(n-1)$ restricciones de Tipo 1 y $n(n-1)(n-2)$ restricciones de Tipo 2. Las restricciones de Tipo 2 tienen un orden de $\mathcal{O}(n^3)$, lo que limita enormemente el tamaño de los rankings que pueden ser resueltos con este método de agregación óptimo. Se puede solventar este problema aplicando técnicas como la relajación de constantes y ramifica y poda.\\
+ 
+ Este problema puede no tener solución única.
