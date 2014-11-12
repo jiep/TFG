@@ -60,3 +60,7 @@ Algunas de las propiedades de los datos simulados son:
  
  Cualquier algoritmo famoso como el PageRank, HITS, SALSA, etc. puede servir para dar peso a los arcos del grafo.
  
+ \subsection{Un refinamiento después de la agregación de rankings}
+ 
+ Cuando varios rankings se han agregado en uno solo usando algún método de la sección anterior, un refinamiento llamado Kemenización y puede ser implementado para mejorar el ranking agregado. Un ranking agregado se dice localmente Kemeny óptimo si no existe un intercambio de posiciones de un ranking de entrada y el ranking agregado que reduzca la suma de la tau de Kendall entre cada ranking de entrada y el ranking agregado. La kemenización local considera cada par del ranking agregado y pregunta lo siguiente: ¿un intercambio de posiciones la tau de Kendall? Para un ranking agregado con $n$ elementos, la kemenización local requiere $n-1$ comprobaciones, una por cada par de vecinos.
+ 
