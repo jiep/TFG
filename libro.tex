@@ -64,3 +64,14 @@ Algunas de las propiedades de los datos simulados son:
  
  Cuando varios rankings se han agregado en uno solo usando algún método de la sección anterior, un refinamiento llamado Kemenización y puede ser implementado para mejorar el ranking agregado. Un ranking agregado se dice localmente Kemeny óptimo si no existe un intercambio de posiciones de un ranking de entrada y el ranking agregado que reduzca la suma de la tau de Kendall entre cada ranking de entrada y el ranking agregado. La kemenización local considera cada par del ranking agregado y pregunta lo siguiente: ¿un intercambio de posiciones la tau de Kendall? Para un ranking agregado con $n$ elementos, la kemenización local requiere $n-1$ comprobaciones, una por cada par de vecinos.
  
+ \subsection{Agregación de ratings}
+ 
+ Los ratings también pueden agregarse como los rankings, pero tenemos que solventar varios problemas: uno de ellos son las escalas de los diferentes ratings. Por ejemplo, el método de Colley produce ratings rondando 0.5, mientras que las cadenas de Markov produce ratings entre 0 y 1. Para poner todos los ratings en la misma escala usaremos las distancias y los porcentajes. Un rating de $n$ elementos contiene $\binom{n}{2} = n(n-1)/2$ de parejas que comparar entre los $n$ elementos. Podemos tomar las diferencias positivas para crear una matriz simétrica no negativa de diferencias para cada rating. Para poner todas las distancias en la misma escala normalizamos la matriz como sigue: cada elemento de la matriz, la dividimos por la suma de todas las distancias en la matriz. Un método sencillo de agregación de ratings consiste en hacer la media ponderada de cada matriz.
+ 
+ \subsubsection{Rankings a partir de las matrices de rating agregadas}
+ 
+ \paragraph{Método 1} El primer método usa la suma de las columnas y las filas. La suma de las filas da una medida de cómo es el equipo de ofensivo, mientras que la suma de las columnas da una medida de cómo de defensivo es un equipo. Si el rating ofensivo es $o = \bar{R}e$ y el vector defensivo es $d e^{T} \bar{R}$, donde $\bar{R}$ es la matriz de los rating y $e$ es un vector de unos. El rating total se puede calcular como $r=o/d$. 
+ 
+ \paragraph{Método 2} El segundo método usa el método de las cadenas de Markov aplicado a una versión normalizada de las filas $\bar{R}^{T}$. Esto funciona porque las las entrada de $\bar{R}$ son las distancias entre los equipos.
+ 
+ \paragraph{Método 3} El tercer método usa el autovector dominante de $\bar{R}$. Este vector se denomina vector de Perron de $\bar{R}$. Este vector recibe su nombre del teorema de Perron de una matriz irreducible no negativa que asegura que es no negativo. En vez de comprobar que $\bar{R}$ es irreducible, en la práctica uno puede forzar la irreducibilidad añadiendo $\epsilon e e^T$ a $\bar{R}$, donde $\epsilon$ es un número pequeño y positivo.
