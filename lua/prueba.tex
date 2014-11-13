@@ -1,0 +1,20 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage{fontspec}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{makeidx}
+\usepackage{graphicx}
+\usepackage{luacode}
+\usepackage{xparse}
+\usepackage[spanish]{babel}
+\usepackage[width=15.00cm, height=22.00cm]{geometry}
+\author{José Ignacio Escribano}
+
+\input{leermatriz}
+
+\begin{document}
+\begin{center}
+$\mathbf{A} = $ \readmatrix{"matriz.txt"}
+\end{center}
+\end{document}
