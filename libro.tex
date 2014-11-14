@@ -116,4 +116,24 @@ Algunas de las propiedades de los datos simulados son:
  
  Este problema tiene $n(n-1)$ variables de decisión, $n(n-1)$ restricciones de Tipo 1 y $n(n-1)(n-2)$ restricciones de Tipo 2. Las restricciones de Tipo 2 tienen un orden de $\mathcal{O}(n^3)$, lo que limita enormemente el tamaño de los rankings que pueden ser resueltos con este método de agregación óptimo. Se puede solventar este problema aplicando técnicas como la relajación de constantes y ramifica y poda.\\
  
- Este problema puede no tener solución única.
+ Este problema puede no tener solución única.\\
+ 
+ \subsection{Rating diferencial vs. Agregación de rankings}
+ 
+ El método del rating diferencial consiste en encontrar un reordenamiento de los elementos que aplicados a cada uno de los elementos formando una matriz de que está tan cerca de la llamada ``forma de ladera''\footnote{Traducción de hillside form} como sea posible.\\
+ 
+ Este método puede ser resuelto de forma óptima y eficientemente con las técnicas vistas en esta sección. La forma de resolver el método la llamaremos MVR (Minimum Violation Ranking) que minimiza las violaciones de la ladera.\\
+ 
+ El método encaja perfectamente como problema de programación lineal entera y lineal visto anteriormente. Pondremos atención en la matriz $D$ de diferencias de puntos, donde $d_{ij}$ es el número de puntos ganando el equipo $i$ al equipo perdedor $j$ en sus partidos, $0$ en caso contrario. El truco está en pensar cada fila y columna de $D$ como el ranking del equipo de sus oponentes.\\
+ 
+ Sólo nos queda ver la definición de conformidad para este método:
+ 
+ \begin{defi}
+ Sea $C = (c_{ij}) \quad \forall i,j = 1,2,\dots,n$ se puede definir como
+ 
+ \[ c_{ij} = #\{ k \mid d_{ik} < d_{jk} + #\{ k \mid d_{ki} > d_{kj} \} \]
+ 
+ donde $#$ denota el cardinal del conjunto correspondiente.
+ \end{defi}
+ 
+ \section{Métodos de comparación}
