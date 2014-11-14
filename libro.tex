@@ -147,3 +147,13 @@ Algunas de las propiedades de los datos simulados son:
  \subsection{Tau de Kendall} 
  
  Kendall originalmente definió su medida para rankings completos, y necesita algunos ajustes para ser aplicada a rankings parciales.
+ 
+ \paragraph{Tau de Kendall para rankings completos}
+ 
+ En 1938 Maurice Kendall desarrolló una medida conocida como la tau de correlación de Kendall para rankings que determina la correlación entre dos rankings completos de igual tamaño. La tau de Kendall nos da el grado en que una un ranking coincide (o no) con otro. Una forma de calcular parte de esta medida es contar el número de intercambios de posición por el algoritmo de la burbuja para permutar un ranking en el otro. Sin embargo, la definición común de tau de Kendall es:
+ 
+ \[ \tau = \dfrac{n_c - n_d}{n(n-1)/2} \]
+ 
+ donde $n_c$ es el número de pares que concuerdan y $n_d$ es el número de pares discordantes. El denominador es el número total de pares de $n$ elementos en los rankings. Para cada par de elementos en el ranking, determinamos si entre dos rankings relativos entre los dos rankings coinciden. Es decir, para el par $(i,j)$ si el equipo $i$ se encuentra por encima (o debajo) del equipo $j$ en ambos rankings, entonces el par concuerda. En otro caso, se dice que es discordante. La representación fraccional de $\tau$ revela su medida de concordancia entre dos rankings.  Claramente, $-1 \leq \tau \leq 1$. Si $\tau = 1$, los dos rankings coinciden plenamente, y si $\tau = -1$, un ranking es el inverso del otro.\\
+ 
+ Esta medida tiene algunas desventajas. Es computacionalmente caro de computar cuando los rankings son grandes. Los rankings tienes que ser completos, que limita la aplicabilidad del método. Debilidad entre errores en la parte inferior de los rankings.
