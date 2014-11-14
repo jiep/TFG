@@ -131,9 +131,19 @@ Algunas de las propiedades de los datos simulados son:
  \begin{defi}
  Sea $C = (c_{ij}) \quad \forall i,j = 1,2,\dots,n$ se puede definir como
  
- \[ c_{ij} = #\{ k \mid d_{ik} < d_{jk} + #\{ k \mid d_{ki} > d_{kj} \} \]
+ \[ c_{ij} = \#\{ k \mid d_{ik} < d_{jk} + \#\{ k \mid d_{ki} > d_{kj} \} \]
  
- donde $#$ denota el cardinal del conjunto correspondiente.
+ donde $\#$ denota el cardinal del conjunto correspondiente.
  \end{defi}
  
  \section{Métodos de comparación}
+ 
+ Hasta ahora, sólo hemos cómo crear nuevos rankings y cómo agregarlos para crear otros nuevos. Ahora nos preguntamos ¿qué método para crear rankings es mejor? O en otra palabras, ¿cómo comparamos estos métodos?\\
+ 
+ Determinar entre dos rankings cuál es mejor es un problema complicado, pero otra cuestión relacionada en más fácil de resolver: cómo de apartados están están dos rankings. Dos medidas que miden esto son la tau de Kendall y la ``footrule'' de Spearman, que veremos más adelante.\\
+ 
+ Mientras que las desviaciones numéricas nos dan una medida para comparar dos rankings, una medida imprecisa también se puede usar a veces. Una medida imprecisa es la representación gráfica, que consiste en unir mediante líneas los nodos de cada uno de los rankings. En caso de tener rankings parciales, podemos añadir nodos ficticios para tener un ranking completo y proceder como hemos visto. Este método también puede ser usado para ratings.
+ 
+ \subsection{Tau de Kendall} 
+ 
+ Kendall originalmente definió su medida para rankings completos, y necesita algunos ajustes para ser aplicada a rankings parciales.
