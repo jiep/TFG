@@ -190,3 +190,29 @@ Algunas de las propiedades de los datos simulados son:
 
 \subsection{``Footrule'' ponderada de Spearman en rankings parciales}
 
+\begin{defi}
+La ``footrule'' ponderada $\phi$ de Spearman entre dos rankings parciales de longitud $k$, $l$ y $\tilde{l}$ se construye a partir de los valores individuales $\phi_i$ y normalizada para que $0 \leq \phi \leq 1$.
+
+\[ \phi = \dfrac{\sum\limits_{i=1}^{n} \phi_i }{\phi(l, l^c)} \]
+
+donde 
+
+\[ \phi(l,l^c) = -2k + 2x\sum\limits_{i=1}^{k} \dfrac{1}{i} \]
+
+Cada elemento $i$ pertenece a uno de los siguientes dos casos:
+
+\begin{itemize}
+\item Para cada elemento $i \in l \cap \tilde{l}$
+
+\[ \phi_i = \dfrac{|l_i - \tilde{l}(i)|}{\min\{ l(i), \tilde{l}(i) \}} \]
+
+\item Para cada elemento $i \in (l \cup \tilde{l})/(l \cap \tilde{l})$
+
+\[ \phi_i = \dfrac{|l(i) - x|}{\min\{ l(i),x \}} \]
+
+donde $x$ se define como
+
+\[ x = \dfrac{k - 4\lfloor k/2 \rfloor + 2(k+1)\sum\limits_{i=1}^{\lfloor k/2\rfloor} 1/i}{\sum\limits_{i=1}^{k} 1/i } \]
+\end{itemize}
+ 
+\end{defi}
