@@ -159,3 +159,13 @@ Algunas de las propiedades de los datos simulados son:
  Esta medida tiene algunas desventajas. Es computacionalmente caro de computar cuando los rankings son grandes. Los rankings tienes que ser completos, que limita la aplicabilidad del método. Debilidad entre errores en la parte inferior de los rankings.
  
  \paragraph{Tau de Kendall para rankings parciales}
+ 
+ La tau de Kendall necesita algunos ajustes para ser aplicada a rankings parciales de tamaño variable. Modificamos la tau de Kendall para rankings completos para cubrir los rankings parciales, incluyendo los rankings parciales de tamaño variable y rankings que contienen empates.
+ 
+ \[ \tau_{\text{parcial}} = \dfrac{n_c - n_d - n_u}{\binom{n}{2} - n_u} \]
+ 
+ donde $n_c, n_d$ designan lo mismo que en la sección anterior, $n$ es el número de elementos únicos en los rankings, y $n_u$ es el número de pares no nombrados en los rankings. Se tiene que 
+ 
+ \[ -\dfrac{\binom{n}{2}}{\binom{n}{2} - n_u} \leq \tau_{\text{parcial}} \leq \dfrac{\binom{n}{2}}{\binom{n}{2} - n_u} \]
+ 
+ Una ventaja de $\tau_{\text{parcial}}$ es que da una mayor penalización a los rankings parciales disjuntos que a los rankings que invierten su orden.
