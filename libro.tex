@@ -174,4 +174,19 @@ Algunas de las propiedades de los datos simulados son:
  
  \subsection{``Footrule'' ponderada de Spearman en rankings completos}
  
+ La nueva medida que definimos en esta sección es una extensión natural de la medida antigua, llamada medida ``footrule'' de Spearman para comparar dos rankings. Esta medida es simplemente la distancia $L_1$ entre dos listas completas ordenadas $l$ y $\tilde{l}$ de longitud $k$. Esto es,
  
+ \[ \rho = \norm{l - \tilde{l}}_1 = \sum\limits_{i=1}^{k} | l(i) - \tilde{l}(i) | \]
+ 
+ donde $l(i)$ es el ranking del equipo $i$ en el ranking $l$ y $\tilde{l}(i)$ es el ranking del equipo $i$ en el ranking $\tilde{l}$. Nuestra modificación es ponderar la penalización asociada a cada discrepancia a nuestra nueva medida, que llamamos ``footrule'' ponderada de Spearman que definimos a continuación:
+ 
+ \begin{defi}
+ La ``footrule'' ponderada $\phi$ de Spearman entre dos rankings completos $l$ y $\tilde{l}$ de tamaño de $k$ es
+ 
+ \[ \phi = \dfrac{\sum\limits_{i=1}^{k} |l(i) - \tilde{l}(i) | }{\min\{l(i),\tilde{l}(i)\}} \] 
+ \end{defi}
+ 
+ Claramente, $1 \leq \min\{l(i),\tilde{l}(i)\} \leq k$ para todos los equipos $i$ que aparecen en ambos rankings. Notar que $\phi \geq 0$, así que cuanto más pequeño es$\phi$, más cerca están los dos rankings comparados.
+
+\subsection{``Footrule'' ponderada de Spearman en rankings parciales}
+
