@@ -1,0 +1,124 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{tfg}[2014/1/15 Paquete Trabajo Fin de Grado (TFG)]
+
+\RequirePackage{tikz}
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+\RequirePackage{amsthm}
+\RequirePackage[explicit]{titlesec}
+\RequirePackage{emptypage}
+\RequirePackage{fancyhdr}
+\RequirePackage{nameref}
+\RequirePackage{etoolbox}
+\RequirePackage[titles]{tocloft}
+\RequirePackage[font={sf}]{caption}
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{3}
+
+
+\newcommand*\chapterlabel{}
+\titleformat{\chapter}
+  {\gdef\chapterlabel{}
+   \normalfont\sffamily\Huge\bfseries\scshape}
+  {\gdef\chapterlabel{\thechapter\ }}{0pt}
+  {\begin{tikzpicture}[remember picture,overlay]
+    \node[yshift=-3cm] at (current page.north west)
+      {\begin{tikzpicture}[remember picture, overlay]
+        \draw[fill=LightSkyBlue] (0,0) rectangle
+          (\paperwidth,3cm);
+        \node[anchor=east,xshift=.9\paperwidth,rectangle,
+              rounded corners=20pt,inner sep=11pt,
+              fill=MidnightBlue]
+              {\color{white}\chapterlabel#1};
+       \end{tikzpicture}
+      };
+   \end{tikzpicture}
+  }
+\titlespacing*{\chapter}{0pt}{50pt}{-60pt}
+
+\titleformat{\section}
+  {\gdef\setionlabel{}
+   \normalfont\sffamily\Large}
+  {\gdef\sectionlabel{\thesection\ }}{0pt}
+  {\sectionlabel #1}
+
+\titleformat{\subsection}
+  {\gdef\subsectionlabel{}
+   \normalfont\sffamily\large}
+  {\gdef\subsectionlabel{\thesubsection\ }}{0pt}
+  {\subsectionlabel #1}
+  
+\titleformat{\subsubsection}
+  {\gdef\subsubsectionlabel{}
+   \normalfont\sffamily\normalsize}
+  {\gdef\subsubsectionlabel{\thesubsubsection\ }}{0pt}
+  {\subsubsectionlabel #1}
+
+\titleformat{\paragraph}
+  {\gdef\paragraphlabel{}
+   \normalfont\sffamily\normalsize}
+  {\gdef\paragraphlabel{\theparagraph\ }}{0pt}
+  {\paragraphlabel #1}
+  
+\titleformat{\subparagraph}
+  {\gdef\subparagraphlabel{}
+   \normalfont\sffamily\normalsize}
+  {\gdef\subparagraphlabel{\thesubparagraph\ }}{0pt}
+  {\subparagraphlabel #1}
+
+\makeatletter
+\newcommand*{\currentname}{\@currentlabelname}
+\makeatother
+
+\makeatletter
+\apptocmd{\@chapter}{\gdef\currentchapter{#2}}{}{}
+\def\currentchapter{?}
+\makeatother
+
+\fancyhead[LO]{}
+\fancyhead[RO]{\sffamily\large{\currentname}  \ \ \ \ \normalfont\sffamily\large\Large\bfseries\scshape{\thepage}}
+\fancyhead[RE]{}
+\fancyhead[LE]{{\normalfont\sffamily\Large\bfseries\scshape{\thepage}} \ \ \ \ \sffamily\large{\chaptername\ \thechapter \ \ \currentchapter}}
+\fancyfoot[CO,CE]{}
+
+\fancypagestyle{plain}{
+\fancyhead[L]{}
+\fancyhead[C]{}
+\fancyhead[R]{}
+\fancyfoot[L]{}
+\fancyfoot[C]{\normalfont\sffamily\Large\bfseries\scshape{\thepage}}
+\fancyfoot[R]{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+}
+
+\renewcommand{\labelitemi}{\textcolor{blue}{$\blacktriangleright$}}
+\renewcommand{\labelitemii}{\textcolor{blue}{$\bullet$}}
+\renewcommand{\labelitemiii}{\textcolor{blue}{$\bullet$}}
+
+
+\theoremstyle{definition}
+
+\renewcommand{\cftchapfont} % chapter titles
+             {\normalfont\sffamily\normalsize}
+\renewcommand{\cftsecfont} % section titles
+             {\normalfont\sffamily\normalsize}
+\renewcommand{\cftsubsecfont} % subsection titles
+             {\normalfont\sffamily\normalsize} 
+\renewcommand{\cftsubsubsecfont} % chapter page numbers
+             {\normalfont\sffamily\normalsize}
+\renewcommand{\cftsecfont} % section page numbers
+             {\normalfont\sffamily\normalsize} 
+\renewcommand{\cftsubsecfont} % subsection page numbers
+             {\normalfont\sffamily\normalsize}
+\renewcommand{\cftsubsubsecpagefont} % subsubsection page numbers
+             {\normalfont\sffamily\normalsize}
+\renewcommand{\cftparafont} % paragraph page numbers
+             {\normalfont\sffamily\normalsize}
+\renewcommand{\cftsubparafont} % subparagraph page numbers
+             {\normalfont\sffamily\normalsize}
+\renewcommand{\cftfigfont} % subparagraph page numbers
+             {\normalfont\sffamily\normalsize}
+\renewcommand{\cfttabfont} % subparagraph page numbers
+             {\normalfont\sffamily\normalsize}
