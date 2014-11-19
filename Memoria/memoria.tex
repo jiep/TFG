@@ -1,4 +1,4 @@
-\documentclass[10pt,a4paper,twoside,openright,titlepage]{book}
+\documentclass[10pt,a4paper,twoside,openright,titlepage,draft]{book}
 \usepackage{fontspec}
 \usepackage{amsmath}
 \usepackage{amsfonts}
@@ -11,6 +11,9 @@
 \usepackage{natbib}
 \usepackage{microtype}
 \usepackage{extras/tfg}
+\usepackage{ifdraft}
+\ifdraft{
+	\usepackage{todonotes}}{\usepackage[disable]{todonotes}}
 \setsansfont{texgyreadventor}
 \setmainfont{texgyrepagella}
 
