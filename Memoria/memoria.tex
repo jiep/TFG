@@ -12,12 +12,13 @@
 \usepackage{microtype}
 \usepackage{extras/tfg}
 \usepackage{ifdraft}
+\usepackage[obeyDraft]{todonotes}
 \ifdraft{
-	\usepackage{todonotes}}{\usepackage[disable]{todonotes}}
 	\usepackage{draftwatermark}
 	\SetWatermarkText{BORRADOR}
-	\SetWatermarkScale{5}
+	\SetWatermarkScale{0.7}
 	\SetWatermarkColor{red}
+}{}
 \setsansfont{texgyreadventor}
 \setmainfont{texgyrepagella}
 

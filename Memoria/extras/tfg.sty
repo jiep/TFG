@@ -51,35 +51,35 @@
 % Sección
 \titleformat{\section}
 	{\gdef\setionlabel{}
-	\normalfont\sffamily\Large}
+	\normalfont\sffamily\bfseries\Large}
 	{\gdef\sectionlabel{\thesection\ }}{0pt}
 	{\sectionlabel #1}
 
 % Subsección
 \titleformat{\subsection}
 	{\gdef\subsectionlabel{}
-	\normalfont\sffamily\large}
+	\normalfont\sffamily\bfseries\large}
 	{\gdef\subsectionlabel{\thesubsection\ }}{0pt}
 	{\subsectionlabel #1}
 
 % Subsubsección
 \titleformat{\subsubsection}
 	{\gdef\subsubsectionlabel{}
-	\normalfont\sffamily\normalsize}
+	\normalfont\sffamily\bfseries\normalsize}
 	{\gdef\subsubsectionlabel{\thesubsubsection\ }}{0pt}
 	{\subsubsectionlabel #1}
 
 % Parágrafo
 \titleformat{\paragraph}
 	{\gdef\paragraphlabel{}
-	\normalfont\sffamily\normalsize}
+	\normalfont\sffamily\bfseries\normalsize}
 	{\gdef\paragraphlabel{\theparagraph\ }}{0pt}
 	{\paragraphlabel #1}
 
 % Subparágrafo
 \titleformat{\subparagraph}
 	{\gdef\subparagraphlabel{}
-	\normalfont\sffamily\normalsize}
+	\normalfont\sffamily\bfseries\normalsize}
 	{\gdef\subparagraphlabel{\thesubparagraph\ }}{0pt}
 	{\subparagraphlabel #1}
 
@@ -113,7 +113,7 @@
 \fancyhead[C]{}
 \fancyhead[R]{}
 \fancyfoot[L]{}
-\fancyfoot[C]{\normalfont\sffamily\Large\bfseries\scshape{\thepage}}
+\fancyfoot[C]{\normalfont\sffamily\Large\bfseries{\thepage}}
 \fancyfoot[R]{}
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
