@@ -1,4 +1,4 @@
-\documentclass[10pt,a4paper,twoside,openright,titlepage,draft]{book}
+\documentclass[11pt,a4paper,twoside,openright,titlepage,draft]{book}
 \usepackage{fontspec}
 \usepackage{amsmath}
 \usepackage{amsfonts}
@@ -14,6 +14,10 @@
 \usepackage{ifdraft}
 \ifdraft{
 	\usepackage{todonotes}}{\usepackage[disable]{todonotes}}
+	\usepackage{dfraftwatermark}
+	\SetWatermarkText{BORRADOR}
+	\SetWatermarkScale{5}
+	\SetWatermarkColor{red}
 \setsansfont{texgyreadventor}
 \setmainfont{texgyrepagella}
 
@@ -28,6 +32,7 @@
 \tableofcontents
 \listoffigures
 \listoftables
+\listoftodos
 
 \mainmatter
 \input{capitulos/introduccion}
