@@ -1,14 +1,13 @@
 \chapter{Conceptos básicos}
 
 \todo[inline]{Definición de rating}
-\todo[inline]{Añadir más ejemplos de rankings}
 
 En este capítulo veremos dos conceptos centrales de esta memoria: ranking y rating, y veremos varios métodos para crear rankings.\\
 
 Para entender estos conceptos intuitivamente veamos un ejemplo:
 
 \begin{ejemplo}
-Si consideramos los siguientes jugadores de la NBA: Kareem Abdul-Jabbar, Karl Malone, Michael Jordan, Kobe Bryant y Wilt Chamberlain, y consideramos los puntos y rebotes anotados por cada uno de estos jugadores a lo largo de su carrera en temporada regular, obtenemos la siguiente tabla:
+Si consideramos los siguientes jugadores de la NBA: Kareem Abdul-Jabbar, Karl Malone, Michael Jordan, Kobe Bryant y Wilt Chamberlain, y consideramos los puntos y rebotes\footnote{Datos extraídos de \url{http://stats.nba.com/leaders/alltime}} anotados por cada uno de estos jugadores a lo largo de su carrera en temporada regular, obtenemos la siguiente tabla:
 
 \begin{table}[h]
 \centering
@@ -29,7 +28,7 @@ Wilt Chamberlaint (WC)    & 31419              & 23924               \\ \bottomr
 Estas dos ordenaciones de los jugadores es lo que recibe el nombre de rating. De cada uno de estos ratings, se puede obtener un ranking que son las posiciones de cada jugador en cada rating. En el ejemplo,
 
 \[
-\begin{array}{lcc}
+\begin{array}{ccc}
 \text{Posición} & \text{Puntos} & \text{Rebotes}\\ 
 \begin{array}{c}
 \text{1}\\
@@ -53,7 +52,7 @@ Estas dos ordenaciones de los jugadores es lo que recibe el nombre de rating. De
 \end{array}
 \]
 
-En general, los ratings producen distintos rankings. En el ejemplo, se puede ver como en el ranking de rebotes Wilt Chamberlain se encuentra en 1ª posición, mientras que en el de rebotes se encuentra en 5ª posición. Otros rankings para el ejemplo podrían ser
+En general, los ratings producen distintos rankings. En el ejemplo, se puede ver como en el ranking de rebotes Wilt Chamberlain se encuentra en 1ª posición, mientras que en el de rebotes se encuentra en 5ª posición. Otros rankings ficticios para el ejemplo podrían ser
 
 \[
 \begin{array}{ccc}
@@ -83,7 +82,24 @@ En general, los ratings producen distintos rankings. En el ejemplo, se puede ver
 
 De forma intuitiva, podríamos decir que un rating es un criterio para ordenar una serie de elementos, y un ranking son todas los posibles ordenamientos de un un conjunto de elementos. De forma rigurosa, las definiciones anteriores quedan así:
 
-\begin{defi}
+\begin{defi} \label{def:ranking}
 Dado un conjunto $\mathcal{N} = \{1,\dots,n\}$ que llamamos nodos, definimos el ranking $c$ como cualquier biyección $c : \mathcal{N} \to \mathcal{N}$.\\
 Escribiremos $i \prec_c j$ cuando el nodo $i \in \mathcal{N}$ aparezca antes que el nodo $j \in \mathcal{N}$ en el ranking $c$.
+\end{defi}
+
+De acuerdo a esta definición, en el ejemplo, $\mathcal{N} = \{1,2,3,4,5\}$, donde $\text{KAJ}\equiv 1$, $\text{KM}\equiv 2$, $\text{MJ}\equiv 3$, $\text{KB}\equiv 4$, $\text{WC}\equiv 5$. Así, si consideramos el ranking de rebotes, entonces
+
+\[ \begin{array}{rlll}
+c: & \mathcal{N} & \to & \mathcal{N}\\
+& 1 & \mapsto & 5\\
+& 2 & \mapsto & 1\\
+& 3 & \mapsto & 2\\
+& 4 & \mapsto & 4\\
+& 5 & \mapsto & 3\\
+\end{array} \] 
+
+que es claramente una biyección, por lo que $c$ es un ranking de acuerdo a la definición \ref{def:ranking}. De la misma forma se obtienen que los demás rankings también cumplen la definición. Además el nodo $5 \prec_c 3$ ya que el nodo $5$, WC aparece más alto que el nodo $3$, MJ.
+
+\begin{defi}
+
 \end{defi}
