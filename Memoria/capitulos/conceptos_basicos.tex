@@ -83,8 +83,7 @@ En general, los ratings producen distintos rankings. En el ejemplo, se puede ver
 De forma intuitiva, podríamos decir que un rating es un criterio para ordenar una serie de elementos, y un ranking son todas los posibles ordenamientos de un un conjunto de elementos. De forma rigurosa, las definiciones anteriores quedan así:
 
 \begin{defi} \label{def:ranking}
-Dado un conjunto $\mathcal{N} = \{1,\dots,n\}$ que llamamos nodos, definimos el ranking $c$ como cualquier biyección $c : \mathcal{N} \to \mathcal{N}$.\\
-Escribiremos $i \prec_c j$ cuando el nodo $i \in \mathcal{N}$ aparezca antes que el nodo $j \in \mathcal{N}$ en el ranking $c$.
+Dado un conjunto $\mathcal{N} = \{1,\dots,n\}$ que llamamos nodos, definimos el ranking $c$ como cualquier biyección $c : \mathcal{N} \to \mathcal{N}$.
 \end{defi}
 
 De acuerdo a esta definición, en el ejemplo, $\mathcal{N} = \{1,2,3,4,5\}$, donde $\text{KAJ}\equiv 1$, $\text{KM}\equiv 2$, $\text{MJ}\equiv 3$, $\text{KB}\equiv 4$, $\text{WC}\equiv 5$. Así, si consideramos el ranking de rebotes, entonces
@@ -98,7 +97,11 @@ c: & \mathcal{N} & \to & \mathcal{N}\\
 & 5 & \mapsto & 3\\
 \end{array} \] 
 
-que es claramente una biyección, por lo que $c$ es un ranking de acuerdo a la definición \ref{def:ranking}. De la misma forma se obtienen que los demás rankings también cumplen la definición. Además el nodo $5 \prec_c 3$ ya que el nodo $5$, WC aparece más alto que el nodo $3$, MJ.
+que es claramente una biyección, por lo que $c$ es un ranking de acuerdo a la definición \ref{def:ranking}. De la misma forma se obtienen que los demás rankings también cumplen la definición.\\
+
+Además, escribiremos $i \prec_c j$ cuando el nodo $i \in \mathcal{N}$ aparezca antes que el nodo $j \in \mathcal{N}$ en el ranking $c$.
+
+En el ejemplo, el nodo $5 \prec_c 3$ ya que el nodo $5$, WC aparece más alto que el nodo $3$, MJ.
 
 \begin{defi}
 
