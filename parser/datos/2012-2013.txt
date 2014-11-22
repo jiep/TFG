@@ -1,0 +1,380 @@
+Athletic Bilbao,3,0,Atlético Madrid
+Athletic Bilbao,2,2,FC Barcelona
+Athletic Bilbao,3,5,Real Betis
+Athletic Bilbao,1,0,Celta de Vigo
+Athletic Bilbao,1,1,Deportivo de La Coruña
+Athletic Bilbao,0,4,RCD Espanyol
+Athletic Bilbao,1,2,Getafe CF
+Athletic Bilbao,1,0,Granada CF
+Athletic Bilbao,0,1,Levante UD
+Athletic Bilbao,0,0,Málaga CF
+Athletic Bilbao,2,1,RCD Mallorca
+Athletic Bilbao,1,0,CA Osasuna
+Athletic Bilbao,1,2,Rayo Vallecano
+Athletic Bilbao,0,3,Real Madrid C.F.
+Athletic Bilbao,1,3,Real Sociedad
+Athletic Bilbao,2,1,Sevilla FC
+Athletic Bilbao,1,0,Valencia CF
+Athletic Bilbao,2,0,Real Valladolid
+Athletic Bilbao,0,2,Real Zaragoza
+Atlético Madrid,4,0,Athletic Bilbao
+Atlético Madrid,1,2,FC Barcelona
+Atlético Madrid,1,0,Real Betis
+Atlético Madrid,1,0,Celta de Vigo
+Atlético Madrid,6,0,Deportivo de La Coruña
+Atlético Madrid,1,0,RCD Espanyol
+Atlético Madrid,2,0,Getafe CF
+Atlético Madrid,5,0,Granada CF
+Atlético Madrid,2,0,Levante UD
+Atlético Madrid,2,1,Málaga CF
+Atlético Madrid,0,0,RCD Mallorca
+Atlético Madrid,3,1,CA Osasuna
+Atlético Madrid,4,3,Rayo Vallecano
+Atlético Madrid,1,2,Real Madrid C.F.
+Atlético Madrid,0,1,Real Sociedad
+Atlético Madrid,4,0,Sevilla FC
+Atlético Madrid,1,1,Valencia CF
+Atlético Madrid,2,1,Real Valladolid
+Atlético Madrid,2,0,Real Zaragoza
+FC Barcelona,5,1,Athletic Bilbao
+FC Barcelona,4,1,Atlético Madrid
+FC Barcelona,4,2,Real Betis
+FC Barcelona,3,1,Celta de Vigo
+FC Barcelona,2,0,Deportivo de La Coruña
+FC Barcelona,4,0,RCD Espanyol
+FC Barcelona,6,1,Getafe CF
+FC Barcelona,2,0,Granada CF
+FC Barcelona,1,0,Levante UD
+FC Barcelona,4,1,Málaga CF
+FC Barcelona,5,0,RCD Mallorca
+FC Barcelona,5,1,CA Osasuna
+FC Barcelona,3,1,Rayo Vallecano
+FC Barcelona,2,2,Real Madrid C.F.
+FC Barcelona,5,1,Real Sociedad
+FC Barcelona,2,1,Sevilla FC
+FC Barcelona,1,0,Valencia CF
+FC Barcelona,2,1,Real Valladolid
+FC Barcelona,3,1,Real Zaragoza
+Real Betis,1,1,Athletic Bilbao
+Real Betis,2,4,Atlético Madrid
+Real Betis,1,2,FC Barcelona
+Real Betis,1,0,Celta de Vigo
+Real Betis,1,1,Deportivo de La Coruña
+Real Betis,1,0,RCD Espanyol
+Real Betis,0,0,Getafe CF
+Real Betis,1,2,Granada CF
+Real Betis,2,0,Levante UD
+Real Betis,3,0,Málaga CF
+Real Betis,1,2,RCD Mallorca
+Real Betis,2,1,CA Osasuna
+Real Betis,1,2,Rayo Vallecano
+Real Betis,1,0,Real Madrid C.F.
+Real Betis,2,0,Real Sociedad
+Real Betis,3,3,Sevilla FC
+Real Betis,1,0,Valencia CF
+Real Betis,0,0,Real Valladolid
+Real Betis,4,0,Real Zaragoza
+Celta de Vigo,1,1,Athletic Bilbao
+Celta de Vigo,1,3,Atlético Madrid
+Celta de Vigo,2,2,FC Barcelona
+Celta de Vigo,0,1,Real Betis
+Celta de Vigo,1,1,Deportivo de La Coruña
+Celta de Vigo,1,0,RCD Espanyol
+Celta de Vigo,2,1,Getafe CF
+Celta de Vigo,2,1,Granada CF
+Celta de Vigo,1,1,Levante UD
+Celta de Vigo,0,1,Málaga CF
+Celta de Vigo,1,1,RCD Mallorca
+Celta de Vigo,2,0,CA Osasuna
+Celta de Vigo,0,2,Rayo Vallecano
+Celta de Vigo,1,2,Real Madrid C.F.
+Celta de Vigo,1,1,Real Sociedad
+Celta de Vigo,2,0,Sevilla FC
+Celta de Vigo,0,1,Valencia CF
+Celta de Vigo,3,1,Real Valladolid
+Celta de Vigo,2,1,Real Zaragoza
+Deportivo de La Coruña,1,1,Athletic Bilbao
+Deportivo de La Coruña,0,0,Atlético Madrid
+Deportivo de La Coruña,4,5,FC Barcelona
+Deportivo de La Coruña,2,3,Real Betis
+Deportivo de La Coruña,3,1,Celta de Vigo
+Deportivo de La Coruña,2,0,RCD Espanyol
+Deportivo de La Coruña,1,1,Getafe CF
+Deportivo de La Coruña,0,3,Granada CF
+Deportivo de La Coruña,0,2,Levante UD
+Deportivo de La Coruña,1,0,Málaga CF
+Deportivo de La Coruña,1,0,RCD Mallorca
+Deportivo de La Coruña,2,0,CA Osasuna
+Deportivo de La Coruña,0,0,Rayo Vallecano
+Deportivo de La Coruña,1,2,Real Madrid C.F.
+Deportivo de La Coruña,0,1,Real Sociedad
+Deportivo de La Coruña,0,2,Sevilla FC
+Deportivo de La Coruña,2,3,Valencia CF
+Deportivo de La Coruña,0,0,Real Valladolid
+Deportivo de La Coruña,3,2,Real Zaragoza
+RCD Espanyol,3,3,Athletic Bilbao
+RCD Espanyol,0,1,Atlético Madrid
+RCD Espanyol,0,2,FC Barcelona
+RCD Espanyol,1,0,Real Betis
+RCD Espanyol,1,0,Celta de Vigo
+RCD Espanyol,2,0,Deportivo de La Coruña
+RCD Espanyol,0,2,Getafe CF
+RCD Espanyol,0,1,Granada CF
+RCD Espanyol,3,2,Levante UD
+RCD Espanyol,0,0,Málaga CF
+RCD Espanyol,3,2,RCD Mallorca
+RCD Espanyol,0,3,CA Osasuna
+RCD Espanyol,3,2,Rayo Vallecano
+RCD Espanyol,1,1,Real Madrid C.F.
+RCD Espanyol,2,2,Real Sociedad
+RCD Espanyol,2,2,Sevilla FC
+RCD Espanyol,3,3,Valencia CF
+RCD Espanyol,0,0,Real Valladolid
+RCD Espanyol,1,2,Real Zaragoza
+Getafe CF,1,0,Athletic Bilbao
+Getafe CF,0,0,Atlético Madrid
+Getafe CF,1,4,FC Barcelona
+Getafe CF,2,4,Real Betis
+Getafe CF,3,1,Celta de Vigo
+Getafe CF,3,1,Deportivo de La Coruña
+Getafe CF,0,2,RCD Espanyol
+Getafe CF,2,2,Granada CF
+Getafe CF,0,1,Levante UD
+Getafe CF,1,0,Málaga CF
+Getafe CF,1,0,RCD Mallorca
+Getafe CF,1,1,CA Osasuna
+Getafe CF,1,2,Rayo Vallecano
+Getafe CF,2,1,Real Madrid C.F.
+Getafe CF,2,1,Real Sociedad
+Getafe CF,1,1,Sevilla FC
+Getafe CF,0,1,Valencia CF
+Getafe CF,2,1,Real Valladolid
+Getafe CF,2,0,Real Zaragoza
+Granada CF,1,2,Athletic Bilbao
+Granada CF,0,1,Atlético Madrid
+Granada CF,1,2,FC Barcelona
+Granada CF,1,5,Real Betis
+Granada CF,2,1,Celta de Vigo
+Granada CF,1,1,Deportivo de La Coruña
+Granada CF,0,0,RCD Espanyol
+Granada CF,2,0,Getafe CF
+Granada CF,1,1,Levante UD
+Granada CF,1,0,Málaga CF
+Granada CF,1,2,RCD Mallorca
+Granada CF,3,0,CA Osasuna
+Granada CF,2,0,Rayo Vallecano
+Granada CF,1,0,Real Madrid C.F.
+Granada CF,0,0,Real Sociedad
+Granada CF,1,1,Sevilla FC
+Granada CF,1,2,Valencia CF
+Granada CF,1,1,Real Valladolid
+Granada CF,1,2,Real Zaragoza
+Levante UD,3,1,Athletic Bilbao
+Levante UD,1,1,Atlético Madrid
+Levante UD,0,4,FC Barcelona
+Levante UD,1,1,Real Betis
+Levante UD,0,1,Celta de Vigo
+Levante UD,0,4,Deportivo de La Coruña
+Levante UD,3,2,RCD Espanyol
+Levante UD,0,0,Getafe CF
+Levante UD,3,1,Granada CF
+Levante UD,1,2,Málaga CF
+Levante UD,4,0,RCD Mallorca
+Levante UD,0,2,CA Osasuna
+Levante UD,2,3,Rayo Vallecano
+Levante UD,1,2,Real Madrid C.F.
+Levante UD,2,1,Real Sociedad
+Levante UD,1,0,Sevilla FC
+Levante UD,1,0,Valencia CF
+Levante UD,2,1,Real Valladolid
+Levante UD,0,0,Real Zaragoza
+Málaga CF,1,0,Athletic Bilbao
+Málaga CF,0,0,Atlético Madrid
+Málaga CF,1,3,FC Barcelona
+Málaga CF,4,0,Real Betis
+Málaga CF,1,1,Celta de Vigo
+Málaga CF,3,1,Deportivo de La Coruña
+Málaga CF,0,2,RCD Espanyol
+Málaga CF,2,1,Getafe CF
+Málaga CF,4,0,Granada CF
+Málaga CF,3,1,Levante UD
+Málaga CF,1,1,RCD Mallorca
+Málaga CF,1,0,CA Osasuna
+Málaga CF,1,2,Rayo Vallecano
+Málaga CF,3,2,Real Madrid C.F.
+Málaga CF,1,2,Real Sociedad
+Málaga CF,0,0,Sevilla FC
+Málaga CF,4,0,Valencia CF
+Málaga CF,2,1,Real Valladolid
+Málaga CF,1,1,Real Zaragoza
+RCD Mallorca,0,1,Athletic Bilbao
+RCD Mallorca,1,1,Atlético Madrid
+RCD Mallorca,2,4,FC Barcelona
+RCD Mallorca,1,0,Real Betis
+RCD Mallorca,1,0,Celta de Vigo
+RCD Mallorca,2,3,Deportivo de La Coruña
+RCD Mallorca,2,1,RCD Espanyol
+RCD Mallorca,1,3,Getafe CF
+RCD Mallorca,1,2,Granada CF
+RCD Mallorca,1,1,Levante UD
+RCD Mallorca,2,3,Málaga CF
+RCD Mallorca,1,1,CA Osasuna
+RCD Mallorca,1,1,Rayo Vallecano
+RCD Mallorca,0,5,Real Madrid C.F.
+RCD Mallorca,1,0,Real Sociedad
+RCD Mallorca,2,1,Sevilla FC
+RCD Mallorca,2,0,Valencia CF
+RCD Mallorca,4,2,Real Valladolid
+RCD Mallorca,1,1,Real Zaragoza
+CA Osasuna,0,1,Athletic Bilbao
+CA Osasuna,0,2,Atlético Madrid
+CA Osasuna,1,2,FC Barcelona
+CA Osasuna,0,0,Real Betis
+CA Osasuna,1,0,Celta de Vigo
+CA Osasuna,2,1,Deportivo de La Coruña
+CA Osasuna,0,2,RCD Espanyol
+CA Osasuna,1,0,Getafe CF
+CA Osasuna,1,2,Granada CF
+CA Osasuna,4,0,Levante UD
+CA Osasuna,0,0,Málaga CF
+CA Osasuna,1,1,RCD Mallorca
+CA Osasuna,1,0,Rayo Vallecano
+CA Osasuna,0,0,Real Madrid C.F.
+CA Osasuna,0,0,Real Sociedad
+CA Osasuna,2,1,Sevilla FC
+CA Osasuna,0,1,Valencia CF
+CA Osasuna,0,1,Real Valladolid
+CA Osasuna,1,0,Real Zaragoza
+Rayo Vallecano,2,2,Athletic Bilbao
+Rayo Vallecano,2,1,Atlético Madrid
+Rayo Vallecano,0,5,FC Barcelona
+Rayo Vallecano,3,0,Real Betis
+Rayo Vallecano,3,2,Celta de Vigo
+Rayo Vallecano,2,1,Deportivo de La Coruña
+Rayo Vallecano,2,0,RCD Espanyol
+Rayo Vallecano,3,1,Getafe CF
+Rayo Vallecano,1,0,Granada CF
+Rayo Vallecano,3,0,Levante UD
+Rayo Vallecano,1,3,Málaga CF
+Rayo Vallecano,2,0,RCD Mallorca
+Rayo Vallecano,2,2,CA Osasuna
+Rayo Vallecano,0,2,Real Madrid C.F.
+Rayo Vallecano,0,2,Real Sociedad
+Rayo Vallecano,0,0,Sevilla FC
+Rayo Vallecano,0,4,Valencia CF
+Rayo Vallecano,1,2,Real Valladolid
+Rayo Vallecano,0,2,Real Zaragoza
+Real Madrid C.F.,5,1,Athletic Bilbao
+Real Madrid C.F.,2,0,Atlético Madrid
+Real Madrid C.F.,2,1,FC Barcelona
+Real Madrid C.F.,3,1,Real Betis
+Real Madrid C.F.,2,0,Celta de Vigo
+Real Madrid C.F.,5,1,Deportivo de La Coruña
+Real Madrid C.F.,2,2,RCD Espanyol
+Real Madrid C.F.,4,0,Getafe CF
+Real Madrid C.F.,3,0,Granada CF
+Real Madrid C.F.,5,1,Levante UD
+Real Madrid C.F.,6,2,Málaga CF
+Real Madrid C.F.,5,2,RCD Mallorca
+Real Madrid C.F.,4,2,CA Osasuna
+Real Madrid C.F.,2,0,Rayo Vallecano
+Real Madrid C.F.,4,3,Real Sociedad
+Real Madrid C.F.,4,1,Sevilla FC
+Real Madrid C.F.,1,1,Valencia CF
+Real Madrid C.F.,4,3,Real Valladolid
+Real Madrid C.F.,4,0,Real Zaragoza
+Real Sociedad,2,0,Athletic Bilbao
+Real Sociedad,0,1,Atlético Madrid
+Real Sociedad,3,2,FC Barcelona
+Real Sociedad,3,3,Real Betis
+Real Sociedad,2,1,Celta de Vigo
+Real Sociedad,1,1,Deportivo de La Coruña
+Real Sociedad,0,1,RCD Espanyol
+Real Sociedad,1,1,Getafe CF
+Real Sociedad,2,2,Granada CF
+Real Sociedad,1,1,Levante UD
+Real Sociedad,4,2,Málaga CF
+Real Sociedad,3,0,RCD Mallorca
+Real Sociedad,0,0,CA Osasuna
+Real Sociedad,4,0,Rayo Vallecano
+Real Sociedad,3,3,Real Madrid C.F.
+Real Sociedad,2,1,Sevilla FC
+Real Sociedad,4,2,Valencia CF
+Real Sociedad,4,1,Real Valladolid
+Real Sociedad,2,0,Real Zaragoza
+Sevilla FC,2,1,Athletic Bilbao
+Sevilla FC,0,1,Atlético Madrid
+Sevilla FC,2,3,FC Barcelona
+Sevilla FC,5,1,Real Betis
+Sevilla FC,4,1,Celta de Vigo
+Sevilla FC,3,1,Deportivo de La Coruña
+Sevilla FC,3,0,RCD Espanyol
+Sevilla FC,2,1,Getafe CF
+Sevilla FC,3,0,Granada CF
+Sevilla FC,0,0,Levante UD
+Sevilla FC,0,2,Málaga CF
+Sevilla FC,3,2,RCD Mallorca
+Sevilla FC,1,0,CA Osasuna
+Sevilla FC,2,1,Rayo Vallecano
+Sevilla FC,1,0,Real Madrid C.F.
+Sevilla FC,1,2,Real Sociedad
+Sevilla FC,4,3,Valencia CF
+Sevilla FC,1,2,Real Valladolid
+Sevilla FC,4,0,Real Zaragoza
+Valencia CF,3,2,Athletic Bilbao
+Valencia CF,2,0,Atlético Madrid
+Valencia CF,1,1,FC Barcelona
+Valencia CF,3,0,Real Betis
+Valencia CF,2,1,Celta de Vigo
+Valencia CF,3,3,Deportivo de La Coruña
+Valencia CF,2,1,RCD Espanyol
+Valencia CF,4,2,Getafe CF
+Valencia CF,1,0,Granada CF
+Valencia CF,2,2,Levante UD
+Valencia CF,5,1,Málaga CF
+Valencia CF,2,0,RCD Mallorca
+Valencia CF,4,0,CA Osasuna
+Valencia CF,0,1,Rayo Vallecano
+Valencia CF,0,5,Real Madrid C.F.
+Valencia CF,2,5,Real Sociedad
+Valencia CF,2,0,Sevilla FC
+Valencia CF,2,1,Real Valladolid
+Valencia CF,2,0,Real Zaragoza
+Real Valladolid,2,2,Athletic Bilbao
+Real Valladolid,0,3,Atlético Madrid
+Real Valladolid,1,3,FC Barcelona
+Real Valladolid,0,1,Real Betis
+Real Valladolid,0,2,Celta de Vigo
+Real Valladolid,1,0,Deportivo de La Coruña
+Real Valladolid,1,1,RCD Espanyol
+Real Valladolid,2,1,Getafe CF
+Real Valladolid,1,0,Granada CF
+Real Valladolid,2,0,Levante UD
+Real Valladolid,1,1,Málaga CF
+Real Valladolid,3,1,RCD Mallorca
+Real Valladolid,1,3,CA Osasuna
+Real Valladolid,6,1,Rayo Vallecano
+Real Valladolid,2,3,Real Madrid C.F.
+Real Valladolid,2,2,Real Sociedad
+Real Valladolid,1,1,Sevilla FC
+Real Valladolid,1,1,Valencia CF
+Real Valladolid,2,0,Real Zaragoza
+Real Zaragoza,1,2,Athletic Bilbao
+Real Zaragoza,1,3,Atlético Madrid
+Real Zaragoza,0,3,FC Barcelona
+Real Zaragoza,1,2,Real Betis
+Real Zaragoza,0,1,Celta de Vigo
+Real Zaragoza,5,3,Deportivo de La Coruña
+Real Zaragoza,0,0,RCD Espanyol
+Real Zaragoza,0,1,Getafe CF
+Real Zaragoza,0,0,Granada CF
+Real Zaragoza,0,1,Levante UD
+Real Zaragoza,0,1,Málaga CF
+Real Zaragoza,3,2,RCD Mallorca
+Real Zaragoza,3,1,CA Osasuna
+Real Zaragoza,3,0,Rayo Vallecano
+Real Zaragoza,1,1,Real Madrid C.F.
+Real Zaragoza,1,2,Real Sociedad
+Real Zaragoza,2,1,Sevilla FC
+Real Zaragoza,2,2,Valencia CF
+Real Zaragoza,0,1,Real Valladolid
