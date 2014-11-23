@@ -136,17 +136,51 @@ Usando estas notaciones el sistema se transforma en el siguiente sistema:
 \begin{enumerate}
 \item La matriz $\mathbf{M}$ es una matriz cuadrada de orden $n$.
 \item $\mathbf{M}$ es una matriz diagonalmente dominante.
-\item Sus filas suman $0$. Como consecuencia, sus columnas son linealmente dependientes. Esto hace que el sistema  $\mathbf{M r} = \mathbf{p}$ no tenga solución única cuando el $\rang(\mathbf{M}) < n$. El problema se puede solventar añadiendo una fila entera de $1$ y en la posición correspondiente de $\mathbf{p}$ añadir un $0$. Con la nueva fila, el sistema queda $\overline{\mathbf{M}} \mathbf{r} = \overline{\mathbf{p}}$.
+\item Sus filas suman $0$. Como consecuencia, sus columnas son linealmente dependientes. Esto hace que el sistema  $\mathbf{M r} = \mathbf{p}$ no tenga solución única cuando el $\rang(\mathbf{M}) < n$. El problema se puede solventar añadiendo una fila entera de $1$ y en la posición correspondiente de $\mathbf{p}$ añadir un $0$. Con la nueva fila, el sistema queda 
+\begin{equation}
+\overline{\mathbf{M}} \mathbf{r} = \overline{\mathbf{p}} \label{eq:massey_general}
+\end{equation}
 \end{enumerate}
 
 \todo[backgroundcolor=red, inline]{Añadir ejemplo}
 
 \subsubsection{Método de Massey avanzado}
 
-\todo[backgroundcolor=red, inline]{Añadir descripción del método}
+El método de Massey avanzado crea dos nuevos vectores respecto al método anterior: el rating ofensivo $\mathbf{o}$ y el rating defensivo $\mathbf{d}$, con $\mathbf{r} = \mathbf{o} + \mathbf{d}$. Este método descompone $\mathbf{p}$ en otros dos vectores: $ \mathbf{p} = \mathbf{f} - \mathbf{a}$, donde $\mathbf{f}$ es el número total de puntos marcados por cada equipo, y $\mathbf{a}$ es el número total de puntos marcados contra cada equipo durante la temporada. También se descompone la matriz $\mathbf{M}$ como $\mathbf{M} = \mathbf{T} - \mathbf{P}$, donde $\mathbf{T}$ es una matriz diagonal que contiene el número total de partidos disputados por cada equipo, y $\mathbf{P}$ una matriz sin elementos en la diagonal que contiene el número de parejas de partidos entre los equipos a lo largo de la temporada. Haciendo las sustituciones al sistema $\mathbf{M r } = \mathbf{p}$, el sistema se convierte en
+
+\begin{equation}
+\mathbf{T o} - \mathbf{P o} + \mathbf{T d} - \mathbf{P d} = \mathbf{f} - \mathbf{a}
+\end{equation}
+
+que puede ser descompuesta en dos ecuaciones
+
+\begin{eqnarray}
+\mathbf{T o} - \mathbf{P d} = \mathbf{f}\\ \label{eq:massey_f}
+\mathbf{P o} - \mathbf{T d} = \mathbf{a} \label{eq:massey}
+\end{eqnarray} 
+
+Sabiendo que $\mathbf{r} = \mathbf{o} + \mathbf{d}$, despejando $\mathbf{o}$ y sustituyendo en la ecuación \ref{eq:massey_f} obtenemos
+
+\begin{equation}
+(\mathbf{T} + \mathbf{P})\mathbf{d} = \mathbf{T r} - \mathbf{f} \label{eq:massey_d}
+\end{equation}
+
+Esta última ecuación nos permite calcular el vector $\mathbf{d}$ resolviendo el sistema. Notar que $\mathbf{r}$ ya ha sido calculado de la ecuación \ref{eq:massey_general}.
+
 \todo[backgroundcolor=red, inline]{Añadir ejemplo}
 
+\paragraph*{Resumen y algoritmo de cómputo}
 
-\paragraph*{Algoritmo de cómputo del método}
+\todo[backgroundcolor=red, inline]{Añadir tabla del resumen}
 
-\todo[backgroundcolor=red, inline]{Añadir algoritmo del método}
+El algoritmo que permite calcular este método es el siguiente:
+
+\begin{enumerate}
+\item Resolver el sistema \ref{eq:massey_general}.
+\item Resolver el sistema \ref{eq:massey_d}.
+\item Calcular el vector $\mathbf{o} = \mathbf{r} - \mathbf{d}$.
+\end{enumerate}
+
+\section{Método de Colley}
+
+\todo[backgroundcolor=red, inline]{Añadir información}
