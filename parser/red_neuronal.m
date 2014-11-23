@@ -8,9 +8,9 @@ salidas = importdata('salidas.txt');
 entradas = entradas';
 salidas = salidas';
 
-% Creación de la red neuronal con 10 entradas, 10 neuronas en la capa
+% Creación de la red neuronal con 10 entradas, 100 neuronas en la capa
 % oculta y 8 salidas
-goles = newff([0 1; 0 1; 0 1; 0 1; 0 1; 0 1; 0 1; 0 1; 0 1; 0 1],[10 8],{'logsig','logsig'});
+goles = newff([0 1; 0 1; 0 1; 0 1; 0 1; 0 1; 0 1; 0 1; 0 1; 0 1],[100 8],{'poslin','logsig'});
 
 % Entrenamos a la red neuronal con las entradas y las salidas
 goles = train(goles,entradas,salidas);
