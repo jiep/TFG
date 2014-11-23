@@ -1,7 +1,5 @@
 \chapter{Conceptos básicos}
 
-\todo[inline]{Definición de rating}
-
 En este capítulo veremos dos conceptos centrales de esta memoria: ranking y rating, y veremos varios métodos para crear rankings.\\
 
 Para entender estos conceptos intuitivamente veamos un ejemplo:
@@ -104,5 +102,51 @@ Además, escribiremos $i \prec_c j$ cuando el nodo $i \in \mathcal{N}$ aparezca 
 En el ejemplo, el nodo $5 \prec_c 3$ ya que el nodo $5$, WC aparece más alto que el nodo $3$, MJ.
 
 \begin{defi}
-
+Dado un conjunto $\mathcal{N} = \{1,\dots, n\}$ de nodos, decimos que es un rating si a cada $i \in \mathcal{N}$ se le asigna un valor real. 
 \end{defi}
+
+Notar que un rating cuando se ordena (ascendente o descendentemente), crea un ranking.\\
+
+En el ejemplo anterior, la cantidad de puntos y rebotes a lo largo de la carrera en temporada regular en la NBA son ratings, y dados éstos obtenemos un ranking. En estos dos casos, hemos ordenado descendentemente el rating, pero también podría ordenarse de forma ascendente como en el caso de número de pérdidas de balón por partido a lo largo de la temporada regular. 
+
+\section{Métodos para obtener ratings (y rankings)}
+\todo[backgroundcolor=red, inline]{Añadir pequeña introducción}
+\subsection{Método de Massey}
+El método de Massey fue creado por Kenneth Massey en 1997 con la intención de obtener rankings de los equipos universitarios de EEUU. Este método usa la teoría de mínimos cuadrados. La idea fundamental de este método se basa en la siguiente ecuación idealizada:
+
+\begin{equation}
+r_i - r_j = y_k
+\end{equation} 
+
+donde $y_k$ es el margen de victoria para el partido $k$, y $r_i$ y $r_j$ son los ratings de los equipos $i$ y $j$, respectivamente. En otras palabras, la diferencia de los ratings $r_i$ y $r_j$ de dos equipos predice idealmente el margen de victoria en un enfrentamiento entre estos dos equipos. \\
+
+El objetivo es asociar un rating a cada equipo en una liga con $n$ equipos, donde $m$ es el total de partidos disputados hasta la fecha. No conocemos los ratings $r_i$, pero sí conocemos quién jugó con quién y el margen de victoria. De esta manera, podemos formar para cada partido $k$ un sistema lineal con $m$ ecuaciones y $n$ incógnitas:
+
+\[\mathbf{X r } = \mathbf{y}\]
+
+Los coeficientes de cada fila de la matriz $\mathbf{X}$ son casi todos nulos, excepto en la posición $i$ que tiene un $1$, y en la posición $j$ con un $-1$, para indicar que el equipo $i$ gana al equipo $j$ en un partido. Normalmente, $m \gg n$ que hace que el sistema sea incompatible y no tenga solución. Se puede obtener una solución aplicando las ecuaciones normales de los mínimos cuadrados, quedando el sistema $\mathbf{X^T X r} = \mathbf{X^T y}$. \\
+
+Massey descubrió que debido a la estructura de $\mathbf{X}$ era ventajoso la utilización de la matriz $\mathbf{M} = \mathbf{X^T X}$. De hecho, esta matriz no necesita ser calculada. Se puede obtener fácilmente usando el hecho de que los elementos de la diagonal $\mathbf{M}_{ii}$ es el total de partidos jugados por el $i$ contra el equipo $j$, y los elementos $\mathbf{M}_{ij}$ con $(i \neq j)$ es la negación del número de partidos jugados por el equipo $i$ contra el equipo $j$. El elemento i-ésimo de parte derecha de la ecuación se puede calcular es la suma de las diferencias de puntos para cada partidos disputado por el equipo $i$, y así definimos $\mathbf{p} = \mathbf{X^T y}$.\\
+Usando estas notaciones el sistema se transforma en el siguiente sistema:
+
+\[ \mathbf{M r} = \mathbf{p} \]
+
+\paragraph*{Propiedades de la matriz $\mathbf{M}$}
+
+\begin{enumerate}
+\item La matriz $\mathbf{M}$ es una matriz cuadrada de orden $n$.
+\item $\mathbf{M}$ es una matriz diagonalmente dominante.
+\item Sus filas suman $0$. Como consecuencia, sus columnas son linealmente dependientes. Esto hace que el sistema  $\mathbf{M r} = \mathbf{p}$ no tenga solución única cuando el $\rang(\mathbf{M}) < n$. El problema se puede solventar añadiendo una fila entera de $1$ y en la posición correspondiente de $\mathbf{p}$ añadir un $0$. Con la nueva fila, el sistema queda $\overline{\mathbf{M}} \mathbf{r} = \overline{\mathbf{p}}$.
+\end{enumerate}
+
+\todo[backgroundcolor=red, inline]{Añadir ejemplo}
+
+\subsubsection{Método de Massey avanzado}
+
+\todo[backgroundcolor=red, inline]{Añadir descripción del método}
+\todo[backgroundcolor=red, inline]{Añadir ejemplo}
+
+
+\paragraph*{Algoritmo de cómputo del método}
+
+\todo[backgroundcolor=red, inline]{Añadir algoritmo del método}
