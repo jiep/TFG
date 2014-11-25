@@ -1,6 +1,6 @@
 <?php
 
-	$archivo = fopen("./datos/sa2011-2012.txt","r") or die();
+	$archivo = fopen("./datos/entradas.txt","r") or die();
 	
 	while(!feof($archivo)){
 		$caracter = fgetc($archivo);

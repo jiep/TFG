@@ -2,7 +2,7 @@
 
 	include("datos_equipos.php");
 
-	$archivo = fopen("./datos/2011-2012.txt","r") or die();
+	$archivo = fopen("./datos/jornadas.txt","r") or die();
 	
 	while(!feof($archivo)){
 		$linea = fgets($archivo);
