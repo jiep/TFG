@@ -178,7 +178,7 @@ La siguiente tabla muestra todos los elementos y su descripción dentro del mét
 \caption{Resumen del método de Massey}\\
 %\renewcommand{\arraystretch}{1.5}
 \toprule
-Nombre & Tipo & Descripción & Elemento i-ésimo\\
+Variable & Tipo & Descripción & Elemento i-ésimo\\
 \hline
 $n$ & $\N$ & Número de equipos en la liga. Orden de las matrices $\mathbf{T}$,$\mathbf{T}$ y $\mathbf{P}$. & ---\\
 \hline
@@ -226,5 +226,82 @@ El algoritmo que permite calcular este método es el siguiente:
 \end{enumerate}
 
 \section{Método de Colley}
+
+El método de Colley fue creado por el Dr. Wesley Colley en 2001. Su método está basado una idea muy sencilla: el rating del equipo $i$ será el número total de victorias $w_i$ dividido entre el número total de partidos disputados $t_i$, es decir, 
+
+\begin{equation}
+r_i = \dfrac{w_i}{t_i}
+\end{equation}
+
+La ecuación anterior tiene algunos problemas como que al inicio de la temporada se obtiene un rating de $0/0$, no se tiene en cuenta el adversario al que se enfrenta un equipo, es decir, no se tiene en cuenta si un equipo ``fuerte'' se enfrenta a uno ``débil'' o viceversa. \\
+Para solucionar estos problemas, Colley modifica la ecuación de tal forma que se soluciones los problemas anteriores. La ecuación queda de la siguiente manera:
+
+\begin{equation}
+r_i = \dfrac{1 + w_i}{2 + t_i} \label{eq:colley}
+\end{equation}
+
+De esta forma, al inicio de la temporada el rating del equipo $i$ es $r_i = 1/2$, que evita el $0/0$ de la primera ecuación. También tiene en cuenta la fuerza de los otros equipos, es decir, si un equipo se enfrenta a un equipo ``fuerte'' obtendrá mayor recompensa que otro que se haya enfrentado a un equipo ``débil''. Esto se consigue suponiendo que lo que gana un equipo lo pierde otro. De esta forma, y teniendo que cuenta que al inicio de la temporada el rating de todos los equipos es $1/2$, se obtiene que
+
+\begin{align}
+w_i & = \dfrac{w_i - l_i}{2} + \dfrac{w_i + l_i}{2} \\
+&= \dfrac{w_i - l_i}{2} + \dfrac{t_i}{2} \\
+&= \dfrac{w_i - l_i}{2} + \sum_{j=1}^{t_i} \dfrac{1}{2}
+\end{align}  
+
+donde $l_i$ son los partidos perdidos por el equipo $i$. La suma $\sum_{j=1}^{t_i} 1/2 $ es inicialmente igual a $\sum_{j \in O_i} r_j$ donde $O_i$ es el conjunto de oponentes del equipo $i$. A lo largo de la temporada el valor $\sum_{j=1}^{t_i} 1/2 $ no es igual a $\sum_{j \in O_i}$, pero puede ser aproximada por los rating acumulados de los oponentes de un equipo. Se obtiene que
+
+\begin{equation}
+w_i = \dfrac{w_i - l_i}{2} + \sum_{j \in O_i} r_j
+\end{equation}  
+
+Suponiendo igualdad y añadiendo la fórmula anterior en \ref{eq:colley} se obtiene
+
+\begin{equation}
+r_i = \dfrac{1+ (w_i - l_i)/2 + \sum_{j \in O_i} r_j }{2 + t_i}
+\end{equation}
+
+La ecuación anterior puede ser convertida en un sistema lineal $\mathbf{C r} = \mathbf{b}$, donde $\mathbf{r}$ es el vector incógnita de ratings, $\mathbf{b}$ es el vector definido como $b_i = 1 + \dfrac{1}{2}(w_i - l_i)$ y $\mathbf{C}$ es la matriz de Colley definida como
+
+\begin{equation}
+\mathbf{C}_{ij} = \begin{cases}
+2 + t_i & \text{si } i = j\\
+-n_{ij} & \text{si } i \neq j
+\end{cases}
+\end{equation}
+
+donde $n_{ij}$ es el número de veces que han jugado los equipos $i$ y $j$.
+
+\todo[backgroundcolor=red, inline]{Añadir ejemplo}
+
+\paragraph*{Resumen y algoritmo de cómputo}
+
+Las variables y su descripción se pueden encontrar en la siguiente tabla:
+
+\begin{longtable}{c c p{5cm} p{6cm}}
+\caption{Resumen del método de Colley}\\
+%\renewcommand{\arraystretch}{1.5}
+\toprule
+Variable & Tipo & Descripción & Elemento i-ésimo\\
+\hline
+$\mathbf{C}$ & $M_{n \times n}$ & Matriz de Colley. Matriz simétrica y definida positiva & $ \mathbf{C}_{ij} = \begin{cases}
+2 + t_i & \text{si } i = j\\
+-n_{ij} & \text{si } i \neq j
+\end{cases}$\\
+\hline
+$t_i$ & $\N$ & Número total de partidos jugados por el equipo $i$ & ---\\
+\hline 
+$n_{ij}$ & $\N$ & Número de veces que $i$ y $j$ se han enfrentado & ---\\
+\hline
+$\mathbf{b}$ & $M_{n \times 1}$ & Vector del lado derecho del sistema & $b_i = 1+ \dfrac{1}{2}(w_i - l_i)$ \\
+\hline 
+$w_i$ & $\N$ & Número de victorias del equipo $i$ & --- \\
+\hline
+$l_i$ & $\N$ & Número de derrotas del equipo $i$ & ---\\
+\hline 
+$\mathbf{r}$ & $M_{n\times 1}$ & Vector de ratings producido por el método de Colley & ---\\
+\hline
+$n$ & $\N$ & Número de equipos en la liga. Orden de $\mathbf{C}$ & ---\\
+\bottomrule
+\end{longtable}
 
 \todo[backgroundcolor=red, inline]{Añadir información}
