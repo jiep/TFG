@@ -184,7 +184,7 @@ $n$ & $\N$ & Número de equipos en la liga. Orden de las matrices $\mathbf{T}$,$
 \hline
 $m$ & $\N$ & Número de partidos jugados & ---\\
 \hline
-$\mathbf{X}$ & $M_{m\times n}$ & Matriz de partidos por equipo & $\mathbf{X}_{ki} = \begin{cases}
+$\mathbf{X}$ & $M_{m\times n}$\footnote{Matrices de tamaño $m \times n$} & Matriz de partidos por equipo & $\mathbf{X}_{ki} = \begin{cases}
 1 & \text{si } i \text{ ganó en el partido } k \\
  -1 & \text{si } i \text{ perdió} \\ 
 0 & \text{en otro caso}
@@ -225,7 +225,7 @@ El algoritmo que permite calcular este método es el siguiente:
 \item Calcular el vector $\mathbf{o} = \mathbf{r} - \mathbf{d}$.
 \end{enumerate}
 
-\section{Método de Colley}
+\subsection{Método de Colley}
 
 El método de Colley fue creado por el Dr. Wesley Colley en 2001. Su método está basado una idea muy sencilla: el rating del equipo $i$ será el número total de victorias $w_i$ dividido entre el número total de partidos disputados $t_i$, es decir, 
 
@@ -303,5 +303,7 @@ $\mathbf{r}$ & $M_{n\times 1}$ & Vector de ratings producido por el método de C
 $n$ & $\N$ & Número de equipos en la liga. Orden de $\mathbf{C}$ & ---\\
 \bottomrule
 \end{longtable}
+
+\subsection{Método de Markov}
 
 \todo[backgroundcolor=red, inline]{Añadir información}
