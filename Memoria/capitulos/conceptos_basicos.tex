@@ -180,6 +180,8 @@ La siguiente tabla muestra todos los elementos y su descripción dentro del mét
 \toprule
 Variable & Tipo & Descripción & Elemento i-ésimo\\
 \hline
+\endfirsthead
+
 $n$ & $\N$ & Número de equipos en la liga. Orden de las matrices $\mathbf{T}$,$\mathbf{T}$ y $\mathbf{P}$. & ---\\
 \hline
 $m$ & $\N$ & Número de partidos jugados & ---\\
@@ -283,6 +285,15 @@ Las variables y su descripción se pueden encontrar en la siguiente tabla:
 \toprule
 Variable & Tipo & Descripción & Elemento i-ésimo\\
 \hline
+\endfirsthead
+
+\multicolumn{4}{c}%
+{{\cftfigfont \tablename\ \thetable{} -- Continúa de la página anterior}} \\
+\toprule
+Variable & Tipo & Descripción & Elemento i-ésimo\\
+\hline
+\endhead
+
 $\mathbf{C}$ & $M_{n \times n}$ & Matriz de Colley. Matriz simétrica y definida positiva & $ \mathbf{C}_{ij} = \begin{cases}
 2 + t_i & \text{si } i = j\\
 -n_{ij} & \text{si } i \neq j
