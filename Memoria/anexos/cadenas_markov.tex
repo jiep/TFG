@@ -1,0 +1,95 @@
+\chapter{Cadenas de Markov}
+
+\begin{defi}
+Un vector fila $\mathbf{p} = (p_1,p_2\dots,p_n)$ es un vector de probabilidad si todas sus componentes son no negativas y su suma es $1$, es decir,
+
+\[ \sum\limits_{i=1}^{n} p_i = 1 \]
+\end{defi}
+
+\begin{ejemplo}
+El vector $\mathbf{p} = (1/2, 1/4, 1/5, 19/30)$ es un vector de probabilidad porque $\frac{1}{2} + \frac{1}{4} + \frac{1}{5} + \frac{19}{30} = 1$, y todas sus componentes son mayores o iguales que $1$. \\
+Sin embargo, el vector $\mathbf{q} = (1, 1/2, -2, 1/2)$ no es un vector de probabilidad porque tiene una componente negativa, $-2$.
+\end{ejemplo}
+
+\begin{defi}
+Una matriz cuadrada $\mathbf{A} = (a_{ij})$ de tamaño $n \times n$ se dice estocástica si cada una de sus filas es un vector de probabilidad, es decir, si cada cada entrada de $\mathbf{A}$ es no negativa y la suma de las entradas de cada fila es $1$.
+\end{defi}
+
+\begin{ejemplo}
+La siguiente matriz es una matriz estocástica 
+
+\[\mathbf{A} = \left(\begin{array}{ccc}
+1/2 & 1/2 & 0\\
+0   & 2/3 & 1/3\\
+1   &  0  & 0
+\end{array}\right) \]
+
+porque todas sus filas son vectores de probabilidad.
+\end{ejemplo}
+
+\begin{defi}
+Una matriz estocástica $\mathbf{A}$ se dice regular si todas las entradas de $\mathbf{A}^n$ son positivas, para algún $n \in \N$.
+\end{defi}
+
+\begin{ejemplo}
+La matriz estocástica
+
+\[ \mathbf{A} = \left(\begin{array}{cc}
+0 & 1\\
+1/2 & 1/2
+\end{array}\right) \]
+
+es regular porque 
+
+\[ \mathbf{A}^2 = \left(\begin{array}{cc}
+1/2 & 1/2\\
+1/4 & 3/4
+\end{array}\right) \]
+
+tiene cada entrada positiva.\\
+Sin embargo, la matriz estocástica
+
+\[ \mathbf{B} = \left(\begin{array}{cc}
+1 & 0\\
+1/2 & 1/2
+\end{array}\right) \]
+
+no es regular porque
+
+\[ \mathbf{B} = \left(\begin{array}{cc}
+1 & 0\\
+3/4 & 1/4
+\end{array}\right) \]
+
+tiene una entrada que no es positiva.
+\end{ejemplo}
+
+\begin{defi}
+Un punto fijo $\mathbf{p}^*$ de una matriz estocástica $\mathbf{A}$ se define como la solución de la ecuación
+
+\[ \mathbf{p}^* \mathbf{A} = \mathbf{p}^* \]
+\end{defi}
+
+\begin{ejemplo}
+Si consideramos las matriz estocástica regular
+
+\[ \mathbf{A} = \left(\begin{array}{ccc}
+0 & 1 & 0\\
+0 & 0 & 1\\
+1/2 & 1/2 & 0
+\end{array}\right) \]
+
+El punto fijo $\mathbf{p}^* = (x,y,z)$ tiene que cumplir que $x+y+z = 1$, y $x,y,z \in [0,1]$. Resolviendo el sistema $\mathbf{p}^* \mathbf{A} = \mathbf{p}^*$, resulta que el punto fijo $p^* = (1/5, 2/5, 2/5)$.
+\end{ejemplo}
+
+\begin{teo}
+Sea $\mathbf{A}$ una matriz estocástica regular. Entonces
+
+\begin{enumerate}
+\item $\mathbf{A}$ tiene un único vector de probabilidad $\mathbf{p}$, y todas las componentes de $\mathbf{p}$ son positivas.
+\item La secuencias de matrices de potencias de $\mathbf{A}$, $\mathbf{A},\mathbf{A}^2,\mathbf{A}^3,\dots$ aproxima la matriz $\mathbf{B}$ cuyas filas están compuestas por el punto fijo $\mathbf{p}^*$.
+\item Si $\mathbf{p}$ es un vector de probabilidad, entonces la secuencia $\mathbf{p A}, \mathbf{p} \mathbf{A}^2,\mathbf{p} \mathbf{A}^3,\dots$ aproxima el punto fijo $\mathbf{p}^*$.
+\end{enumerate}
+\end{teo}
+
+\todo[backgroundcolor=red, inline]{Añadir cadenas de Markov}
