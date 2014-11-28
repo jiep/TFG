@@ -1,6 +1,18 @@
 \chapter{Cadenas de Markov}
 
 \begin{defi}
+Un proceso estocástico se define como una colección indexada de variables aleatorias $\{X_t\}$, donde el índice $t$ toma valores en un conjunto $T$ dado.  
+\end{defi}
+
+\begin{defi}
+Las condiciones en las que puede estar un proceso estocástico se denominan estados. La variable aleatoria $X_t$ representa el estado del sistema en el tiempo $t$.
+\end{defi}
+
+\begin{defi}
+Si $T$ es un conjunto conjunto discreto y el conjunto de estados es finito, entonces un proceso estocástico se dice que es de tiempo discreto con espacio de estados finito. 
+\end{defi}
+
+\begin{defi}
 Un vector fila $\mathbf{p} = (p_1,p_2\dots,p_n)$ es un vector de probabilidad si todas sus componentes son no negativas y su suma es $1$, es decir,
 
 \[ \sum\limits_{i=1}^{n} p_i = 1 \]
@@ -92,4 +104,91 @@ Sea $\mathbf{A}$ una matriz estocástica regular. Entonces
 \end{enumerate}
 \end{teo}
 
-\todo[backgroundcolor=red, inline]{Añadir cadenas de Markov}
+\begin{defi}
+Se dice que un proceso estocástico $\{X_t\}$ tiene la propiedad de Markov si 
+
+\[ P(X_{t+1} = j | X_0 = k_0, X_1 = k_1,\dots, X_{t-1} = k_{t-1}, X_t = i) = P(X_{t+1} = j | X_t = j)\]
+
+para todo $t$, y toda sucesión $i, k_0, k1, \dots, k_{t-1}$. Es decir, la probabilidad de un suceso futuro, sólo depende del evento actual. 
+\end{defi}
+
+\begin{defi}
+Un proceso estocástico $\{X_t\}$ es una cadena de Markov si presenta la propiedad de Markov.
+\end{defi}
+
+\begin{defi}
+Las probabilidades condicionales $P(X_{t+1 = j} | X_t = i)$ de una cadena de Markov se llaman probabilidades de transición.
+\end{defi}
+
+\begin{defi}
+Si dada una cadena de Markov, y para cada $i, j$ se cumple que 
+
+\[ P(X_{t+1} | X_t = i) = P(X_1 = j | X_0 = i) \quad \text{para todo $t=1,2,...$} \]
+
+se dice que las probabilidades son estacionarias.
+\end{defi}
+
+Las probabilidades estacionarias se denotan de la siguiente manera:
+
+\begin{eqnarray}
+p_{ij} = P(X_{t+1} = j | X_t = i)\\
+p_{ij}^{(n)} = P(X_{t+n} = j | X_t = i)
+\end{eqnarray}
+
+Las probabilidades estacionarias se pueden representan mediante una matriz estocástica de la siguiente manera:
+
+\[ \mathbf{P}^{(n)} = \left(\begin{array}{c c c c}
+p_{11}^{(n)} & p_{12}^{(n)} & \dots & p_{1M}^{(n)}\\
+p_{21}^{(n)} & p_{22}^{(n)} & \dots & p_{2M}^{(n)}\\
+\dots        & \dots        & \dots & \dots\\
+p_{M1}^{(n)} & p_{M2}^{(n)} & \dots & p_{MM}^{(n)}  
+\end{array}\right) \]
+
+donde $M$ es el número de estados de la cadena de Markov. Esta matriz se denomina matriz de transición.\\
+
+Otra posible representación es mediante un grafo ponderado, cuyo peso es la probabilidad de ir del estado $i$ al estado $j$. Este grafo se denomina diagrama de  de transición de estados.
+
+\begin{ejemplo} \label{ej:markov}
+Si tenemos la cadena de Markov con el conjunto de estados $S = \{A,B,C\}$, y la matriz de transición $\mathbf{P}$ definida como
+
+\[ \mathbf{P} = \left(\begin{array}{cccc}
+  &   A  &   B  &  C \\
+A & 0.65 & 0.3  & 0.05\\
+B & 0.1  & 0.75 & 0.15\\
+C & 0.01 & 0.19 & 0.8
+\end{array}\right) \] 
+
+El diagrama de transiciones de estados se puede ver en la Figura \ref{fig:markov}.
+
+\begin{figure}[htb]
+\centering
+\ejemplomarkov
+\caption{Diagrama de transición de estados del Ejemplo \ref{ej:markov}}
+\label{fig:markov}
+\end{figure}
+\end{ejemplo}
+
+Las ecuaciones de Chapman-Kolmogorov proporcionan un método para calcular las probabilidades de transición de $n$ pasos $p_{ij}^{(n)}$:
+
+\begin{equation}
+p_{ij}^{(n)} = \sum\limits_{k=1}^{M-1} p_{ik}^{(m)}p_{kj}^{(n-m)} \quad \forall i,j = 1,\dots M
+\end{equation}
+
+donde $M$ es el número de estados de la cadena de Markov. \\
+
+En los casos especiales $m=1$ y $m = n-1$ se obtienen las siguientes expresiones:
+
+\begin{eqnarray}
+p_{ij}^{(n)} = \sum\limits_{k=1}^{M-1} p_{ik}p_{kj}^{(n-1)}\\
+p_{ij}^{(n)} = \sum\limits_{k=1}^{M-1} p_{ik}^{n-1}p_{kj}\\
+\end{eqnarray}
+
+Estas dos ecuaciones permiten calcular la matriz $\mathbf{P}^n$ de transiciones ya que 
+
+\begin{align*}
+\mathbf{P}^{(n)} & = \mathbf{P} \mathbf{P}^{(n-1)} = \mathbf{P}^{(n-1)} \mathbf{P}\\
+				 & = \mathbf{P} \mathbf{P}^{n-1} = \mathbf{P}^{n-1} \mathbf{P} \\
+				 & = \mathbf{P}^n 
+\end{align*} 
+
+\todo[backgroundcolor=red, inline]{Añadir clasifiación de las cadenas de Markov}
