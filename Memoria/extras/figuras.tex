@@ -1,0 +1,25 @@
+\usepackage{pgf}
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata}
+
+\newcommand{\ejemplomarkov}{
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=5cm,semithick]
+  \tikzstyle{every state}=[draw=black,text=black]
+
+  \node[state]         (A)                    {$A$};
+  \node[state]         (B) [below left of=A]  {$B$};
+  \node[state]         (C) [below right of=A] {$C$};
+  
+  \path (A) edge  [loop above] node {$0.65$} (A)
+            edge  [bend left]  node {$0.3$}  (B)
+            edge  [bend left]  node {$0.05$} (C)
+        (B) edge  [loop below] node {$0.75$} (B)
+            edge  [bend left]  node {$0.1$}  (A)
+            edge               node {$0.15$} (C)
+        (C) edge  [loop below] node {$0.8$}  (C)
+            edge  [bend left]  node {$0.01$} (A)
+            edge  [bend left]  node {$0.19$} (B);
+          
+
+
+\end{tikzpicture}}
