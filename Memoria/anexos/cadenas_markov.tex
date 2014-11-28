@@ -180,7 +180,7 @@ En los casos especiales $m=1$ y $m = n-1$ se obtienen las siguientes expresiones
 
 \begin{eqnarray}
 p_{ij}^{(n)} = \sum\limits_{k=1}^{M-1} p_{ik}p_{kj}^{(n-1)}\\
-p_{ij}^{(n)} = \sum\limits_{k=1}^{M-1} p_{ik}^{n-1}p_{kj}\\
+p_{ij}^{(n)} = \sum\limits_{k=1}^{M-1} p_{ik}^{n-1}p_{kj}
 \end{eqnarray}
 
 Estas dos ecuaciones permiten calcular la matriz $\mathbf{P}^n$ de transiciones ya que 
@@ -191,6 +191,6 @@ Estas dos ecuaciones permiten calcular la matriz $\mathbf{P}^n$ de transiciones 
 				 & = \mathbf{P}^n 
 \end{align*} 
 
-Esto permite descomponer la matriz $\mathbf{P}^n$, como $\mathbf{P}^n = \mathbf{H} \mathbf{J}^n \mathbf{H}^{-1}$, donde $J$ es la matriz de Jordan, diagonal por cajas formada por los autovalores de $\mathbf{P}$ y $\mathbf{H}$ es una matriz invertible cuyas columnas son los autovectores de $\mathbf{P}$ asociados a los autovalores.
+Esto permite descomponer la matriz $\mathbf{P}^n$, como $\mathbf{P}^n = \mathbf{H} \mathbf{J}^n \mathbf{H}^{-1}$, donde $\mathbf{J}$ es la matriz de Jordan, diagonal por cajas formada por los autovalores de $\mathbf{P}$ y $\mathbf{H}$ es una matriz invertible cuyas columnas son los autovectores de $\mathbf{P}$ asociados a los autovalores.
 
-\todo[backgroundcolor=red, inline]{Añadir clasifiación de las cadenas de Markov}
+\todo[backgroundcolor=red, inline]{Añadir clasificación de las cadenas de Markov}
