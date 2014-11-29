@@ -5,7 +5,7 @@ Un proceso estocástico se define como una colección indexada de variables alea
 \end{defi}
 
 \begin{defi}
-Las condiciones en las que puede estar un proceso estocástico se denominan estados. La variable aleatoria $X_t$ representa el estado del sistema en el tiempo $t$.
+Las condiciones en las que puede estar un proceso estocástico se denominan estados. La variable aleatoria $X_t$ representa el estado del sistema en el tiempo $t$. El conjunto de todos los estados de un proceso estocástico se denota con la letra $S$.
 \end{defi}
 
 \begin{defi}
@@ -151,12 +151,20 @@ Otra posible representación es mediante un grafo ponderado, cuyo peso es la pro
 \begin{ejemplo} \label{ej:markov}
 Si tenemos la cadena de Markov con el conjunto de estados $S = \{A,B,C\}$, y la matriz de transición $\mathbf{P}$ definida como
 
-\[ \mathbf{P} = \left(\begin{array}{cccc}
-  &   A  &   B  &  C \\
-A & 0.65 & 0.3  & 0.05\\
-B & 0.1  & 0.75 & 0.15\\
-C & 0.01 & 0.19 & 0.8
-\end{array}\right) \] 
+\[ \mathbf{P} = \begin{array}{cc}
+& \begin{array}{ccc}
+A \ \ \ & B & \ \ \ C
+\end{array} \\
+\begin{array}{c}
+A\\
+B\\
+C
+\end{array} & \left(\begin{array}{ccc}
+0.65 & 0.3  & 0.05\\
+0.1  & 0.75 & 0.15\\
+0.01 & 0.19 & 0.8
+\end{array}\right)
+\end{array} \] 
 
 El diagrama de transiciones de estados se puede ver en la Figura \ref{fig:markov}.
 
@@ -192,5 +200,97 @@ Estas dos ecuaciones permiten calcular la matriz $\mathbf{P}^n$ de transiciones 
 \end{align*} 
 
 Esto permite descomponer la matriz $\mathbf{P}^n$, como $\mathbf{P}^n = \mathbf{H} \mathbf{J}^n \mathbf{H}^{-1}$, donde $\mathbf{J}$ es la matriz de Jordan, diagonal por cajas formada por los autovalores de $\mathbf{P}$ y $\mathbf{H}$ es una matriz invertible cuyas columnas son los autovectores de $\mathbf{P}$ asociados a los autovalores.
+
+\begin{ejemplo} \label{ej:markov_completo}
+
+En una determinada región se observa que los días secos y húmedos se suceden de acuerdo a la siguiente frecuencia: si un día es seco, el día siguiente será seco con una probabilidad $\frac{1}{2}$, y si un día es húmedo, el día también lo será con probabilidad $\frac{3}{4}$.\\
+
+Sabiendo que hoy está húmedo, calcular la probabilidad asociada al clima que hará dentro de dos días, y la probabilidad de que dentro de $n$ días el clima sea seco. \\
+
+La variable que describe la cadena de Markov es $X_t:$ clima de la región en el día $t$, con $t \in \N$. El conjunto de estados es $S = \{S, H\}$, donde $S$ denota un día seco, $H$ denota un día húmedo.\\
+
+La matriz de transiciones viene dada por:
+
+\[ \mathbf{P} = \left( \begin{array}{cc}
+0.5 & 0.5\\
+0.25 & 0.75
+\end{array} \right) \]
+
+y el diagrama de transición de estados en la Figura \ref{fig:markov_completo}.
+
+\begin{figure}[htb]
+\centering
+\ejemplomarkovcompleto
+\caption{Diagrama de transición de estados del Ejemplo \ref{ej:markov_completo}}
+\label{fig:markov_completo}
+\end{figure} 
+
+La distribución inicial es $\mathbf{q} = (0, 1)$.\\
+
+Calculamos la $\mathbf{P}^2$:
+
+\[ \mathbf{P}^2 = \left( \begin{array}{cc}
+0.375 & 0.625\\
+0.3125 & 0.6875
+\end{array} \right) \]
+
+Entonces
+
+\[ p^{(2)} = \mathbf{q P}^2 = (0,1) \left( \begin{array}{cc}
+0.375 & 0.625\\
+0.3125 & 0.6875
+\end{array} \right) = (0.3125 0.6875) \]
+
+La probabilidad de que el clima sea seco a los dos días es de $0.3125$, y de que sea el clima es de $0.6875$.\\
+
+Para determinar la probabilidad de que dentro de $n$ días el clima sea húmedo. Se busca una descomposición del tipo $\mathbf{P}^n = \mathbf{H} \mathbf{J}^n \mathbf{H}^{-1}$. Lo primero es calcular los autovalores de $P$ que son $\lambda_1 = 1$ y $\lambda_2 = \frac{1}{4}$.\\
+
+Los autovectores asociados a $\lambda_1$ y $\lambda_2$ son respectivamente son $(1,1)$ y $(-2,1)$.\\
+
+Por tanto, las matrices $\mathbf{J}$, $\mathbf{J}^n$ y $\mathbf{H}$ son 
+
+\begin{align*}
+\mathbf{J} = \left( \begin{array}{cc}
+1 & 0\\
+0 & 1/4
+\end{array} \right), 
+\quad 
+\mathbf{J}^n = \left( \begin{array}{cc}
+1 & 0\\
+0 & 1/4^n
+\end{array} \right),
+\quad
+\mathbf{H} = \left( \begin{array}{cc}
+1 & -2\\
+1 & 1
+\end{array} \right)
+\end{align*}
+
+Por tanto
+
+\begin{align*}
+\mathbf{P}^n & = \mathbf{H} \mathbf{J}^n \mathbf{H}^{-1} = \left( \begin{array}{cc}
+1 & -2\\
+1 & 1
+\end{array} \right) 
+\left( \begin{array}{cc}
+1 & 0\\
+0 & 1/4^n
+\end{array} \right)
+\left( \begin{array}{cc}
+1/3 & 2/3\\
+-1/3 & 1/3
+\end{array}
+\right)\\
+
+\left(\begin{array}{cc}
+\dfrac{1}{3} + \dfrac{2}{3 \cdot 4^n} & \dfrac{2}{3} - \dfrac{2}{3 \cdot 4^n} \\
+\dfrac{1}{3} - \dfrac{1}{3 \cdot 4^n} & \dfrac{2}{3} + \dfrac{1}{3 \cdot 4^n}
+\end{array}\right)
+\end{align*}
+
+La probabilidad pedida es $p_{HS}^{(n)} = \frac{1}{3} - \frac{1}{3 \cdot 4^n}$.
+
+\end{ejemplo}
 
 \todo[backgroundcolor=red, inline]{Añadir clasificación de las cadenas de Markov}

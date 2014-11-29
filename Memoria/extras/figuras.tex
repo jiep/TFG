@@ -20,3 +20,18 @@
             edge  [bend left]  node {$0.01$} (A)
             edge  [bend left]  node {$0.19$} (B);
 \end{tikzpicture}}
+
+\newcommand{\ejemplomarkovcompleto}{
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=5cm,semithick]
+  \tikzstyle{every state}=[draw=black,text=black]
+
+  \node[state]         (S)                    {$S$};
+  \node[state]         (H)      [right of=A]  {$H$};
+  
+  \path (S) edge  [loop above] node {$0.5$}  (S)
+            edge  [bend left]  node {$0.5$}  (H)
+        (H) edge  [loop below] node {$0.75$} (H)
+            edge  [bend left]  node {$0.25$} (S);
+
+\end{tikzpicture}}
+
