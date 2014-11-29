@@ -239,7 +239,7 @@ Entonces
 \[ p^{(2)} = \mathbf{q P}^2 = (0,1) \left( \begin{array}{cc}
 0.375 & 0.625\\
 0.3125 & 0.6875
-\end{array} \right) = (0.3125 0.6875) \]
+\end{array} \right) = (0.3125, 0.6875) \]
 
 La probabilidad de que el clima sea seco a los dos días es de $0.3125$, y de que sea el clima es de $0.6875$.\\
 
@@ -292,4 +292,20 @@ La probabilidad pedida es $p_{HS}^{(n)} = \frac{1}{3} - \frac{1}{3 \cdot 4^n}$.
 
 \end{ejemplo}
 
-\todo[backgroundcolor=red, inline]{Añadir clasificación de las cadenas de Markov}
+\section{Clasificación de los estados}
+
+\begin{defi}
+Se dice que el estado $j$ es accesible desde el estado $i$ si $p_{ij}^{(n)}$ para algún $n \geq 0$.
+\end{defi}
+
+\begin{defi}
+Un estado es transitorio si existe un estado $j$ que es accesible desde el estado $i$, pero no viceversa, es decir, el estado $i$ no es accesible desde el estado $j$ con $i \neq j$.
+\end{defi}
+
+\begin{defi}
+Un estado es recurrente si no es transitorio.
+\end{defi}
+
+\begin{defi}
+Un estado es absorbente si $p_{ii} = 1$.
+\end{defi}
