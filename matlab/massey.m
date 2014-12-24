@@ -1,11 +1,11 @@
 function r = massey(n,filename)
 % ENTRADA
-%   n número de equipos totales
+%   n nÃºmero de equipos totales
 %   filename nombre del archivo csv con la siguiente estructura:
 %        equipo local, marcador local, equipo visitante, marcador visitante
 %
 % SALIDA
-%   r vector rating producido por el método de Massey
+%   r vector rating producido por el mÃ©todo de Massey
 
 M = -ones(n,n);
 
