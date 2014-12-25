@@ -190,7 +190,7 @@ Así el sistema $\mathbf{M r} = \mathbf{p}$ queda
 \end{array}\right)
 \end{equation*}
 
-Resolviendo este sistema obtenemos los siguientes resultados:
+Resolviendo este sistema obtenemos los siguientes resultados (Tabla \ref{tbl:massey_resultados})
 
 \begin{table}[h]
 \centering
@@ -206,8 +206,7 @@ CHI & -10.6        & 4       \\ \midrule
 NYK & -6.6         & 2       \\ \bottomrule
 \end{tabular}
 \end{table}
-
-
+\end{ejemplo}
 \subsubsection{Método de Massey avanzado}
 
 El método de Massey avanzado crea dos nuevos vectores respecto al método anterior: el rating ofensivo $\mathbf{o}$ y el rating defensivo $\mathbf{d}$, con $\mathbf{r} = \mathbf{o} + \mathbf{d}$. Este método descompone $\mathbf{p}$ en otros dos vectores: $ \mathbf{p} = \mathbf{f} - \mathbf{a}$, donde $\mathbf{f}$ es el número total de puntos marcados por cada equipo, y $\mathbf{a}$ es el número total de puntos marcados contra cada equipo durante la temporada. También se descompone la matriz $\mathbf{M}$ como $\mathbf{M} = \mathbf{T} - \mathbf{P}$, donde $\mathbf{T}$ es una matriz diagonal que contiene el número total de partidos disputados por cada equipo, y $\mathbf{P}$ una matriz sin elementos en la diagonal que contiene el número de parejas de partidos entre los equipos a lo largo de la temporada. Haciendo las sustituciones al sistema $\mathbf{M r } = \mathbf{p}$, el sistema se convierte en
