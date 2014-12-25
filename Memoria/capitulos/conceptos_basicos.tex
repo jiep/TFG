@@ -142,7 +142,71 @@ Usando estas notaciones el sistema se transforma en el siguiente sistema:
 \end{equation}
 \end{enumerate}
 
-\todo[backgroundcolor=red, inline]{Añadir ejemplo}
+\begin{ejemplo}\label{ej:massey}
+Si consideramos una liga formada por los siguientes equipos de la NBA: Denver Nuggets (DEN), Los Ángeles Lakers (LAL), San Antonio Spurs (SAS), Chicago Bulls (CHI) y New York Knicks (NYK), y los partidos disputados entre estos equipos (Tabla \ref*{tbl:massey})
+
+\begin{table}[h]
+\centering
+\caption{Partidos disputados por los equipos del Ejemplo \ref{ej:massey}}
+\label{tbl:massey}
+\begin{tabular}{@{}c|ccccc|c@{}}
+\cmidrule(l){2-7}
+    & DEN     & LAL     & SAS     & CHI     & NYK     & \begin{tabular}[c]{@{}c@{}}Diferencia\\ de puntos\end{tabular} \\ \midrule
+DEN & ---     & 137-115 & 103-108 & 89-117  & 90-117  & \textcolor{red}{-82}                                                            \\ \midrule
+LAL & 115-137 & ---     & 113-100 & 100-102 & 103-110 & \textcolor{red}{-4}                                                             \\ \midrule
+SAS & 108-103 & 100-113 & ---     & 104-96  & 110-89  & \textcolor{green}{76}                                                           \\ \midrule
+CHI & 117-89  & 102-100 & 96-104  & ---     & 89-100  & \textcolor{red}{-5}                                                            \\ \midrule
+NYK & 117-90  & 110-103 & 89-110  & 100-89  & ---     & \textcolor{red}{-48}                                                            \\ \bottomrule
+\end{tabular}
+\end{table}
+
+Necesitamos la matriz $\mathbf{M}$ de Massey y el vector $\mathbf{p}$ de diferencia de puntos para formar el sistema $\mathbf{M r} = \mathbf{p}$.\\
+
+Formamos la matriz $\mathbf{M}$, poniendo en la diagonal el número de partidos jugados por cada equipo, en este caso $4$. En todos los demás elementos ponemos $-1$, excepto en la última fila que está formada por $1$ para conseguir que este sistema tenga una única solución. El vector $\mathbf{p}$ lo obtenemos directamente de la Tabla \ref{tbl:massey}.\\
+Así el sistema $\mathbf{M r} = \mathbf{p}$ queda
+
+\begin{equation*}
+\left(\begin{array}{c c c c c}
+4  & -1 & -1 & -1 & -1\\
+-1 &  4 & -1 & -1 & -1\\
+-1 & -1 &  4 & -1 & -1\\
+-1 & -1 & -1 &  4 & -1\\
+ 1 &  1 &  1 &  1 &  1 
+\end{array}\right)
+\left(\begin{array}{c}
+\mathbf{r}_{\text{DEN}}\\
+\mathbf{r}_{\text{LAL}}\\
+\mathbf{r}_{\text{SAS}}\\
+\mathbf{r}_{\text{CHI}}\\
+\mathbf{r}_{\text{NYK}}
+\end{array}\right)
+=
+\left(\begin{array}{c}
+-82\\
+-4\\
+76\\
+-5\\
+-48
+\end{array}\right)
+\end{equation*}
+
+Resolviendo este sistema obtenemos los siguientes resultados:
+
+\begin{table}[h]
+\centering
+\caption{Resultados del Ejemplo \ref{ej:massey}}
+\label{tbl:massey_resultados}
+\begin{tabular}{@{}ccc@{}}
+\cmidrule(l){2-3}
+    & $\mathbf{r}$ & Ranking \\ \cmidrule(l){2-3} 
+DEN & -26          & 5       \\ \midrule
+LAL & -10.4        & 3       \\ \midrule
+SAS & 5.6          & 1       \\ \midrule
+CHI & -10.6        & 4       \\ \midrule
+NYK & -6.6         & 2       \\ \bottomrule
+\end{tabular}
+\end{table}
+
 
 \subsubsection{Método de Massey avanzado}
 
