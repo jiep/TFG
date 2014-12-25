@@ -160,10 +160,10 @@ NYK & 117-90  & 110-103 & 89-110  & 100-89  & ---     & \textcolor{red}{-48}    
 \end{tabular}
 \end{table}
 
-Necesitamos la matriz $\mathbf{M}$ de Massey y el vector $\mathbf{p}$ de diferencia de puntos para formar el sistema $\mathbf{M r} = \mathbf{p}$.\\
+Necesitamos la matriz $\mathbf{\overline{M}}$ de Massey y el vector $\mathbf{p}$ de diferencia de puntos para formar el sistema $\mathbf{\overline{M} r} = \mathbf{p}$.\\
 
-Formamos la matriz $\mathbf{M}$, poniendo en la diagonal el número de partidos jugados por cada equipo, en este caso $4$. En todos los demás elementos ponemos $-1$, excepto en la última fila que está formada por $1$ para conseguir que este sistema tenga una única solución. El vector $\mathbf{p}$ lo obtenemos directamente de la Tabla \ref{tbl:massey}.\\
-Así el sistema $\mathbf{M r} = \mathbf{p}$ queda
+Formamos la matriz $\mathbf{\overline{M}}$, poniendo en la diagonal el número de partidos jugados por cada equipo, en este caso $4$. En todos los demás elementos ponemos $-1$, excepto en la última fila que está formada por $1$ para conseguir que este sistema tenga una única solución. El vector $\mathbf{p}$ lo obtenemos directamente de la Tabla \ref{tbl:massey}, pero cambiando el último término por un $0$.\\
+Así el sistema $\mathbf{\overline{M} r} = \mathbf{p}$ queda
 
 \begin{equation*}
 \left(\begin{array}{c c c c c}
@@ -186,7 +186,7 @@ Así el sistema $\mathbf{M r} = \mathbf{p}$ queda
 -4\\
 76\\
 -5\\
--48
+0
 \end{array}\right)
 \end{equation*}
 
@@ -199,11 +199,11 @@ Resolviendo este sistema obtenemos los siguientes resultados (Tabla \ref{tbl:mas
 \begin{tabular}{@{}ccc@{}}
 \cmidrule(l){2-3}
     & $\mathbf{r}$ & Ranking \\ \cmidrule(l){2-3} 
-DEN & -26          & 5       \\ \midrule
-LAL & -10.4        & 3       \\ \midrule
-SAS & 5.6          & 1       \\ \midrule
-CHI & -10.6        & 4       \\ \midrule
-NYK & -6.6         & 2       \\ \bottomrule
+DEN & -16.4          & 5       \\ \midrule
+LAL & -0.8       & 4       \\ \midrule
+SAS & 15.2         & 1       \\ \midrule
+CHI & -1        & 3       \\ \midrule
+NYK & 3         & 2       \\ \bottomrule
 \end{tabular}
 \end{table}
 \end{ejemplo}
