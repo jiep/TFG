@@ -230,7 +230,49 @@ Sabiendo que $\mathbf{r} = \mathbf{o} + \mathbf{d}$, despejando $\mathbf{o}$ y s
 
 Esta última ecuación nos permite calcular el vector $\mathbf{d}$ resolviendo el sistema. Notar que $\mathbf{r}$ ya ha sido calculado de la ecuación \ref{eq:massey_general}.
 
-\todo[backgroundcolor=red, inline]{Añadir ejemplo}
+\begin{ejemplo}\label{ej:massey_avanzado}
+Volvemos a considerar los datos del Ejemplo \ref{ej:massey}. En este caso necesitamos la suma de los puntos a favor y en contra para cada equipo (Tabla \ref{tbl:massey_avanzado})
+
+\begin{table}[h]
+\centering
+\caption{Datos del Ejemplo \ref{ej:massey_avanzado}}
+\label{tbl:massey_avanzado}
+\begin{tabular}{@{}ccc@{}}
+\cmidrule(l){2-3}
+    & \begin{tabular}[c]{@{}c@{}}Puntos\\ a favor\end{tabular} & \begin{tabular}[c]{@{}c@{}}Puntos\\ en contra\end{tabular} \\ \midrule
+DEN & 419                                                      & 459                                                        \\
+LAL & 431                                                      & 449                                                        \\
+SAS & 422                                                      & 401                                                        \\
+CHI & 404                                                      & 393                                                        \\
+NYK & 416                                                      & 392                                                        \\ \bottomrule
+\end{tabular}
+\end{table}
+
+Para obtener los vectores $\mathbf{d}$ y $\mathbf{o}$ necesitamos resolver el sistema 
+
+\begin{equation}
+(\mathbf{T} + \mathbf{P}) \mathbf{d} = \mathbf{T} \mathbf{r} - \mathbf{f}
+\end{equation}
+
+La matriz diagonal $\mathbf{T}$ la formamos con el número de partidos jugados por el equipo, en este caso, $4$. La matriz $\mathbf{P}$ la formamos con el número de partidos jugados entre el equipo $i$ y $j$, en este caso, $1$. Los elementos de la diagonal principal todos son $0$. Los vectores $\mathbf{f}$ y $\mathbf{a}$ son directamente la columna ``Puntos a favor'' y ``Puntos en contra'' de la Tabla \ref{tbl:massey_avanzado}. El vector $\mathbf{r}$ ya ha sido calculado en el Ejemplo \ref{ej:massey}. Resolviendo el sistema lineal obtenemos $d$, y usando la relación $\mathbf{r} = \mathbf{o} + \mathbf{d}$, podemos calcular el vector $o$. La Tabla \ref{tbl:massey_avanzado_resultados} muestra los resultados del cálculo.
+
+\begin{table}[h]
+\centering
+\caption{Resultados del Ejemplo \ref{ej:massey_avanzado}}
+\label{tbl:massey_avanzado_resultados}
+\begin{tabular}{@{}ccccccc@{}}
+\cmidrule(l){2-7}
+    & $\mathbf{o}$ & Ranking & $\mathbf{d}$ & Ranking & $\mathbf{r}$ & Ranking \\ \midrule
+DEN & 55.03        & 2       & -62.63       & 5       & -7.6         & 5       \\
+LAL & 57.03        & 1       & -61.30       & 4       & -3.6         & 4       \\
+SAS & 52.10        & 3       & -47.90       & 3       & 4.2          & 2       \\
+CHI & 46.76        & 4       & -44.56       & 1       & 2.2          & 3       \\
+NYK & 49.90        & 5       & 45.1         & 2       & 4.8          & 1       \\ \bottomrule
+\end{tabular}
+\end{table}
+
+
+\end{ejemplo}
 
 \paragraph*{Resumen y algoritmo de cómputo}
 
