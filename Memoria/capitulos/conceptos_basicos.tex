@@ -250,9 +250,9 @@ NYK & 416                                                      & 392            
 
 Para obtener los vectores $\mathbf{d}$ y $\mathbf{o}$ necesitamos resolver el sistema 
 
-\begin{equation}
+\begin{equation*}
 (\mathbf{T} + \mathbf{P}) \mathbf{d} = \mathbf{T} \mathbf{r} - \mathbf{f}
-\end{equation}
+\end{equation*}
 
 La matriz diagonal $\mathbf{T}$ la formamos con el número de partidos jugados por el equipo, en este caso, $4$. La matriz $\mathbf{P}$ la formamos con el número de partidos jugados entre el equipo $i$ y $j$, en este caso, $1$. Los elementos de la diagonal principal todos son $0$. Los vectores $\mathbf{f}$ y $\mathbf{a}$ son directamente la columna ``Puntos a favor'' y ``Puntos en contra'' de la Tabla \ref{tbl:massey_avanzado}. El vector $\mathbf{r}$ ya ha sido calculado en el Ejemplo \ref{ej:massey}. Resolviendo el sistema lineal obtenemos $d$, y usando la relación $\mathbf{r} = \mathbf{o} + \mathbf{d}$, podemos calcular el vector $o$. La Tabla \ref{tbl:massey_avanzado_resultados} muestra los resultados del cálculo.
 
@@ -369,7 +369,7 @@ r_i = \dfrac{1+ (w_i - l_i)/2 + \sum_{j \in O_i} r_j }{2 + t_i}
 
 La ecuación anterior puede ser convertida en un sistema lineal $\mathbf{C r} = \mathbf{b}$, donde $\mathbf{r}$ es el vector incógnita de ratings, $\mathbf{b}$ es el vector definido como $b_i = 1 + \dfrac{1}{2}(w_i - l_i)$ y $\mathbf{C}$ es la matriz de Colley definida como
 
-\begin{equation}
+\begin{equation}\label{eq:colley_matriz}
 \mathbf{C}_{ij} = \begin{cases}
 2 + t_i & \text{si } i = j\\
 -n_{ij} & \text{si } i \neq j
@@ -378,7 +378,95 @@ La ecuación anterior puede ser convertida en un sistema lineal $\mathbf{C r} = 
 
 donde $n_{ij}$ es el número de veces que han jugado los equipos $i$ y $j$.
 
-\todo[backgroundcolor=red, inline]{Añadir ejemplo}
+\begin{ejemplo} \label{ej:colley}
+Volvemos a considerar los datos del Ejemplo \ref{ej:massey}. Para poder aplicar este método necesitamos el número de victorias y derrotas de cada equipo (Tabla \ref{tbl:colley})
+
+\begin{table}[h]
+\centering
+\caption{Datos del Ejemplo \ref{ej:colley}}
+\label{tbl:colley}
+\begin{tabular}{@{}ccc@{}}
+\cmidrule(l){2-3}
+    & Victorias & Derrotas \\ \midrule
+DEN & 1         & 3        \\
+LAL & 1         & 3        \\
+SAS & 3         & 1        \\
+CHI & 2         & 2        \\
+NYK & 3         & 1        \\ \bottomrule
+\end{tabular}
+\end{table}
+
+Necesitamos calcular la matriz $\mathbf{C}$ que viene dada por la ecuación \ref{eq:colley_matriz} y el vector $\mathbf{b}$ que viene dado por
+
+\begin{equation*}
+b_i = 1 + \dfrac{1}{2}\left(w_i - l_i\right)
+\end{equation*}
+
+Así, el sistema $\mathbf{C r} = \mathbf{b}$ queda
+
+\begin{equation*}
+\left(\begin{array}{r r r r r}
+ 6 & -1 & -1 & -1 & -1\\
+-1 &  6 & -1 & -1 & -1\\
+-1 & -1 &  6 & -1 & -1\\
+-1 & -1 & -1 &  6 & -1\\
+-1 & -1 & -1 & -1 &  6
+\end{array}\right)
+\left(\begin{array}{c}
+\mathbf{r}_{\text{DEN}}\\
+\mathbf{r}_{\text{LAL}}\\
+\mathbf{r}_{\text{SAS}}\\
+\mathbf{r}_{\text{CHI}}\\
+\mathbf{r}_{\text{NYK}}
+\end{array}\right)
+=
+\left(\begin{array}{c}
+0\\
+0\\
+2\\
+1\\
+2
+\end{array}\right)
+\end{equation*}
+La Tabla \ref{tbl:colley_con_empates} muestra los cálculos tras resolver el sistema.
+
+\begin{table}[h]
+\centering
+\caption{Resultados del Ejemplo \ref{ej:colley} con empates}
+\label{tbl:colley_con_empates}
+\begin{tabular}{@{}ccc@{}}
+\cmidrule(l){2-3}
+    & $\mathbf{r}$ & Ranking \\ \midrule
+DEN & 0.3571       & 4       \\
+LAL & 0.3571       & 4       \\
+SAS & 0.6429       & 1       \\
+CHI & 0.5          & 3       \\
+NYK & 0.6429       & 1       \\ \bottomrule
+\end{tabular}
+\end{table}
+
+Notar que en este caso se producen empates. Para romperlos se pueden seguir varias estrategias:
+
+\todo[backgroundcolor=red, inline]{Añadir estrategias para romper empates}
+
+
+\begin{table}[h]
+\centering
+\caption{Resultados del Ejemplo \ref{ej:colley} tras romper los empates}
+\label{tbl:colley_resultados_sin_empates}
+\begin{tabular}{@{}cccc@{}}
+\multicolumn{1}{l}{} & \multicolumn{1}{l}{$\mathbf{r}$} & \multicolumn{1}{l}{Ranking} & \begin{tabular}[c]{@{}c@{}}Diferencia \\ de puntos\end{tabular} \\ \cmidrule(r){1-3}
+DEN                  & 0.3571                           & 5                           & -38                                                             \\
+LAL                  & 0.3571                           & 4                           & -18                                                             \\
+SAS                  & 0.6429                           & 2                           & 21                                                              \\
+CHI                  & 0.5                              & 3                           & 11                                                              \\
+NYK                  & 0.6429                           & 1                           & 24                                                              \\ \cmidrule(r){1-3}
+\end{tabular}
+\end{table}
+
+\end{ejemplo}
+
+
 
 \paragraph*{Resumen y algoritmo de cómputo}
 
