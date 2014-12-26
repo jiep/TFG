@@ -428,7 +428,7 @@ Así, el sistema $\mathbf{C r} = \mathbf{b}$ queda
 2
 \end{array}\right)
 \end{equation*}
-La Tabla \ref{tbl:colley_con_empates} muestra los cálculos tras resolver el sistema.
+La Tabla \ref{tbl:colley_con_empates} muestra los cálculos tras resolver el sistema.\\
 
 \begin{table}[h]
 \centering
@@ -445,10 +445,9 @@ NYK & 0.6429       & 1       \\ \bottomrule
 \end{tabular}
 \end{table}
 
-Notar que en este caso se producen empates. Para romperlos se pueden seguir varias estrategias:
+Notar que en este caso se producen empates. Para romperlos se pueden seguir varias estrategias: una de ellas es hacer uso de los datos pasados, es decir, si los equipos $i$ y $j$ están empatados y se enfrentaron entre ellos, el equipo ganador estará por encima del equipo perdedor. Otra opción es aplicar una un ``rating de desempate'' que consiste en tener otro rating, y desempatar a partir de éste, es decir, si dos equipos están empatados aparecerá primero en el ranking el primero que aparezca en el rating de desempate. La elección de este rating no tiene que ser arbitraria, sino que puede ser elegida de acuerdo a algún criterio específico.\\
 
-\todo[backgroundcolor=red, inline]{Añadir estrategias para romper empates}
-
+En nuestro caso, aplicamos el rating de desempate, el de los puntos de diferencia (Tabla \ref{tbl:massey}). Al aplicar este criterio para desempatar, NYK se coloca por encima de SAS por tener mayor diferencia de puntos (24 contra 21). De la misma forma, se rompe el empate entre LAL y DEN. La Tabla \ref{tbl:colley_resultados_sin_empates} muestra el resultado tras romper los empates.
 
 \begin{table}[h]
 \centering
