@@ -6,14 +6,12 @@ Un grafo es un par $G = (V,E)$ de conjuntos que satisfacen que $E \subseteq V^2$
 
 La forma usual de representar un grafo es dibujar un punto (o círculo) por cada vértice y unir dos de estos dos puntos (o círculos) con una línea para formar un arco. Cómo estén dibujados los vértices y los arcos es irrelevante. sólo importa qué pares de nodos forman una arista y cuáles no.
 
-\begin{ejemplo}
 \begin{figure}[htb]
 \centering
-%\ejemplografo
+\ejemplografo
 \caption{Ejemplo de grafo}
 \label{fig:grafo}
 \end{figure}
-\end{ejemplo}
 
 \begin{defi}
 Se llama orden de un grafo $G$ al número de vértices de dicho grafo. Se denota como $|G|$.\\
@@ -28,7 +26,12 @@ Dos vértices $x,y \in V$ del grafo $G = (V,E)$ se dicen adyacentes si existe un
 Un grafo se dice completo si todos su vértices son adyacentes.
 \end{defi}
 
-\todo[backgroundcolor=red, inline]{Añadir ejemplo de grafo completo}
+\begin{figure}[htb]
+\centering
+\ejemplografocompleto
+\caption{Ejemplo de grafo completo}
+\label{fig:grafo_completo}
+\end{figure}
 
 \begin{defi}
 Sean $G = (V,E)$ y $G' = (V',E')$ dos grafos. Decimos que $G$ y $G'$ son isomorfos, y escribimos $G \simeq G'$, si existe una biyección $\phi : V \to V'$ tal que $xy \in E \iff \phi(x)\phi(y) \in E' \ \ \forall x,y \in V$. La aplicación $\phi$ recibe el nombre de isomorfismo. Si $G = G'$, $\phi$ se dice que es un automorfismo. 
@@ -44,11 +47,23 @@ G \cup G' := (V \cup V', E \cup E')\\
 G \cap G' := (V \cap V', E \cap E')
 \end{equation*}
 
+\begin{figure}[htb]
+\centering
+\ejemplounionintersecciongrafo
+\caption{Ejemplo de unión de unión e intersección de grafos}
+\label{fig:union_interseccion_grafo}
+\end{figure}
+
 Si $G \cap G' = \emptyset$, entonces $G$ y $G'$ son disjuntos.
 \end{defi}
 Sean $G = (V,E)$ y $G' = (V',E')$ dos grafos. Si $V' \subseteq V$ y $E' \subseteq E$, se dice que $G'$ es un subgrafo de $G$ (y $G$ es un supergrafo de $G'$).
 
-\todo[backgroundcolor=red, inline]{Añadir ejemplo de subgrafos}
+\begin{figure}[htb]
+\centering
+\ejemplosubgrafo
+\caption[Ejemplo de subgrafos de un grafo]{Ejemplo de subgrafos de un grafo $G$}
+\label{fig:subgrafo}
+\end{figure}
 
 \begin{defi}
 Sea $G = (V,E)$ un grafo (no vacío). El grado de un vértice $v \in V$, denotado por $d_G(v) = d(v)$, se define como el número de vértices adyacentes a $v$.\\
@@ -94,7 +109,12 @@ La arista $e$ se dice dirigida desde $\mathrm{init}(e)$ hasta $\mathrm{ter}(e)$.
 Si $\mathrm{init}(e) = \mathrm{ter}(e)$, la arista $e$ se dice que es un bucle.
 \end{defi}
 
-\todo[backgroundcolor=red, inline]{Añadir ejemplo de grafo dirigido}
+\begin{figure}[h]
+\centering
+\ejemplografodirigido
+\caption{Ejemplo de grafo dirigido con bucle}
+\label{fig:grafo_dirigido}
+\end{figure}
 
 \begin{defi}
 Un grafo dirigido $D = (V', E')$ es una orientación de un grafo (no dirgido) $G = (V,E)$ si $V = V'$ y $E = E'$ y $\{\mathrm{init}(e), \mathrm{ter}(e) \} = \{x,y\} \ \forall e = xy \in E$.
