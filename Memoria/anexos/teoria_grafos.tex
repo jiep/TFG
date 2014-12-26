@@ -1,1 +1,101 @@
 \chapter{Teoría de grafos}
+
+\begin{defi}
+Un grafo es un par $G = (V,E)$ de conjuntos que satisfacen que $E \subseteq V^2$ y $V \cap E = \emptyset$. Los elementos de $V$ se denominan vértices (o nodos) del grafo $G$ y los elementos de $E$ se denominan arcos (o aristas). Una arista entre los véctices $x, y \in V$ se denota como $xy$ o $yx$.
+\end{defi}
+
+La forma usual de representar un grafo es dibujar un punto (o círculo) por cada vértice y unir dos de estos dos puntos (o círculos) con una línea para formar un arco. Cómo estén dibujados los vértices y los arcos es irrelevante. sólo importa qué pares de nodos forman una arista y cuáles no.
+
+\begin{ejemplo}
+\begin{figure}[htb]
+\centering
+%\ejemplografo
+\caption{Ejemplo de grafo}
+\label{fig:grafo}
+\end{figure}
+\end{ejemplo}
+
+\begin{defi}
+Se llama orden de un grafo $G$ al número de vértices de dicho grafo. Se denota como $|G|$.\\
+Un grafo $G$ se dice que es finito si $|G| < \infty$. Si $|G| = \infty$ se dice que el grafo $G$ es infinito.
+\end{defi}
+
+\begin{defi}
+Dos vértices $x,y \in V$ del grafo $G = (V,E)$ se dicen adyacentes si existe una arista entre $x$ e $y$ (o $xy \in E$).
+\end{defi}
+
+\begin{defi}
+Un grafo se dice completo si todos su vértices son adyacentes.
+\end{defi}
+
+\todo[backgroundcolor=red, inline]{Añadir ejemplo de grafo completo}
+
+\begin{defi}
+Sean $G = (V,E)$ y $G' = (V',E')$ dos grafos. Decimos que $G$ y $G'$ son isomorfos, y escribimos $G \simeq G'$, si existe una biyección $\phi : V \to V'$ tal que $xy \in E \iff \phi(x)\phi(y) \in E' \ \ \forall x,y \in V$. La aplicación $\phi$ recibe el nombre de isomorfismo. Si $G = G'$, $\phi$ se dice que es un automorfismo. 
+\end{defi}
+
+Podemos definir operaciones sobre grafos, como la unión o la intersección.
+
+\begin{defi}
+Sean $G = (V,E)$ y $G' = (V',E')$ dos grafos, se definen la unión y la intersección de grafos como
+
+\begin{equation*}
+G \cup G' := (V \cup V', E \cup E')\\
+G \cap G' := (V \cap V', E \cap E')
+\end{equation*}
+
+Si $G \cap G' = \emptyset$, entonces $G$ y $G'$ son disjuntos.
+\end{defi}
+Sean $G = (V,E)$ y $G' = (V',E')$ dos grafos. Si $V' \subseteq V$ y $E' \subseteq E$, se dice que $G'$ es un subgrafo de $G$ (y $G$ es un supergrafo de $G'$).
+
+\todo[backgroundcolor=red, inline]{Añadir ejemplo de subgrafos}
+
+\begin{defi}
+Sea $G = (V,E)$ un grafo (no vacío). El grado de un vértice $v \in V$, denotado por $d_G(v) = d(v)$, se define como el número de vértices adyacentes a $v$.\\
+
+Si todos los vértices de $G$ tienen el mismo grado $k$, el grafo $G$ es regular.
+\end{defi}
+
+\begin{defi}
+Se define el grado medio de un grafo $G = (V,E)$ como el número
+
+\begin{equation}
+d(G) = \dfrac{1}{|V|} \sum_{v \in V} d(v)
+\end{equation}
+\end{defi}
+
+\begin{defi}
+Un camino es un grafo no vacío $P = (V, E)$ de la forma
+
+\begin{equation*}
+V = \{ x_0,x_1,\dots,x_k\} \quad \quad E = \{ x_0 x_1, x_1 x_2, \dots, x_{k-1}x_k \}
+\end{equation*}
+
+donde $x_i \neq x_j \ \forall i \neq j$.\\
+
+Los vértices $x_0$ y $x_k$ se denominan final del camino $P$. Los vértices $x_1, \dots, x_k$ se denominan vértices interiores del camino $P$.\\
+
+El número de aristas del camino se denomina longitud del camino.
+\end{defi}
+
+\begin{defi}
+Un grafo no vacío $G$ se dice conexo si cualquier par de vértices están unidos por un camino de $G$.
+\end{defi}
+
+\begin{defi}
+Sea $G = (V,E)$ un grafo. Un subgrafo conexo maximal de $G$ se llama componente conexa de $G$.
+\end{defi}
+
+\begin{defi}
+Un grafo dirigido (o digrafo) es un par $(V,E)$ de conjuntos disjuntos (de vértices y de aristas) junto con dos funciones $\mathrm{init} : E \to V$ y $\mathrm{ter} : E \to V$ que asigna a cada arista $e$ un vértice inicial $\mathrm{init}(e)$ y un vértice terminal $\mathrm{ter}(e)$.\\
+
+La arista $e$ se dice dirigida desde $\mathrm{init}(e)$ hasta $\mathrm{ter}(e)$.\\
+
+Si $\mathrm{init}(e) = \mathrm{ter}(e)$, la arista $e$ se dice que es un bucle.
+\end{defi}
+
+\todo[backgroundcolor=red, inline]{Añadir ejemplo de grafo dirigido}
+
+\begin{defi}
+Un grafo dirigido $D = (V', E')$ es una orientación de un grafo (no dirgido) $G = (V,E)$ si $V = V'$ y $E = E'$ y $\{\mathrm{init}(e), \mathrm{ter}(e) \} = \{x,y\} \ \forall e = xy \in E$.
+\end{defi}

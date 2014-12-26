@@ -2,6 +2,23 @@
 \usepackage{tikz}
 \usetikzlibrary{arrows,automata}
 
+\newcommand{\ejemplografo}{
+\begin{tikzpicture}[--,>=stealth',shorten >=1pt,auto,node distance=3cm,semithick]
+  \tikzstyle{every state}=[draw=black,text=black]
+
+  \node[state]         (A)                    {$A$};
+  \node[state]         (B)      [right of=A]  {$B$};
+  \node[state]         (C)      [below of=A]  {$C$};
+  \node[state]         (D)      [right of=C]  {$D$};
+  
+  \path (B) edge  [bend left]  node   (D);
+%            edge               node   (B)
+ %           edge               node   (C)
+%        (B) edge               node   (C);
+
+\end{tikzpicture}}
+
+
 \newcommand{\ejemplomarkov}{
 \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=5cm,semithick]
   \tikzstyle{every state}=[draw=black,text=black]
