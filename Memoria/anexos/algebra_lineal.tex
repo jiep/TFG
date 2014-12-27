@@ -1,1 +1,282 @@
-\chapter{Álgebra lineal}
+\chapter{Álgebra}
+
+\section{Sistemas lineales}
+
+\begin{defi}
+Llamamos sistema $m$ de ecuaciones lineales con $n$ incógnitas al siguiente conjunto de ecuaciones:
+
+\begin{align*}
+a_{11}x_1 + a_{12}x_2 + \dots + a_{1n}x_n & = b_1\\
+a_{21}x_1 + a_{22}x_2 + \dots + a_{2n}x_n & = b_2\\
+ &\vdots\\
+a_{m1}x_1 + a_{m2}x_2 + \dots + a_{mn}x_n & = b_m\\
+\end{align*} 
+
+donde $x_i$ son las incógnitas y $a_{ij}$, $b_i$ son constantes conocidas.\\
+
+Las constantes $a_{ij}$ reciben el nombre de coeficientes del sistema y las constantes $b_i$ reciben el nombre de lado derecho del sistema.
+\end{defi}
+
+Para cualquier sistema existen tres posibilidades respecto al conjunto de soluciones:
+
+\begin{itemize}
+\item Solución única: existe uno  sólo un conjunto de valores para $x_i$ que satisface todas las ecuaiones simultáneamente.
+\item Sin solución: no existe un conjunto de valores para $x_i$ que satisfaga todas las ecuaciones simultaneámente.
+\item Infinitas soluciones: hay infinitos conjuntos de valores que satisfagan todas las soluciones simultáneamente.
+\end{itemize}
+
+\begin{defi}
+Dados dos sistemas de ecuaciones lineales, se dicen que son equivalentes si tienen el mismo conjunto de soluciones.
+\end{defi}
+
+\begin{defi}
+Un sistema lineal es consistente si al menos tiene una solución.
+\end{defi}
+
+\begin{defi}
+Un sistema lineal es homogéneo si el lado derecho del sistema está compuesto exclusivamente por ceros. En caso contrario, se dice que el sistema es no homogéneo.
+\end{defi}
+
+\section{Álgebra matricial}
+
+\begin{defi}
+Una matriz es una colección de escalares ordenados en filas y columnas. Si la matriz $\mathbf{A}$ tiene $m$ filas y $n$ columnas, entonces
+
+\[ \mathbf{A} = \left(\begin{array}{cccc}
+a_{11} & a_{21} & \dots & a_{1n}\\
+\vdots &        &       &       \\
+a_{m1} & a_{m2} & \dots & a_{mn} 
+\end{array}\right) \]
+
+Si $n = m$, se dice que $\mathbf{A}$ es una matriz cuadrada.\\
+
+Las matrices con una sola columna o con una sola fila se denominan vector columna y vector fila, respectivamente.\\
+
+El conjunto de todas las matrices de tamaño $m \times n$ con coeficientes reales de denotan con $\R^{m\times n}$.
+\end{defi}
+
+\subsection*{Operaciones con matrices}
+
+\begin{defi}
+Si $\mathbf{A}, \mathbf{B} \in \R^{m \times n}$, la suma de $\mathbf{A}$ y $\mathbf{B}$ se define como la matriz $\mathbf{A} + \mathbf{B}$ que se obtiene de sumar sus respectivas entradas. Esto es, $[\mathbf{A}]_{ij} = \mathbf{A+ B}_{ij} + \mathbf{B}_{ij}$.
+\end{defi}
+
+\begin{prop}
+Sean $\mathbf{A}, \mathbf{B}, \mathbf{C} \in \R^{m\times n}$. Las siguientes propiedades se cumplen:
+
+\begin{itemize}
+\item $\mathbf{A} + \mathbf{B} \in \R^{m \times n}$.
+\item $(\mathbf{A} + \mathbf{B}) + \mathbf{C} = \mathbf{A} + (\mathbf{B} + \mathbf{C})$.
+\item $\mathbf{A} + \mathbf{B} = \mathbf{B} + \mathbf{A}$.
+\item La matriz $\mathbf{0}$ cuyas entradas son todos ceros cumple que $\mathbf{A} + \mathbf{0} = \mathbf{A}$.
+\item La matriz $-\mathbf{A}$ cuyas entradas son las de $\mathbf{A}$ cambiadas de signo cumple que $\mathbf{A} + (-\mathbf{A}) = \mathbf{0}$.
+\end{itemize}
+\end{prop}
+
+\begin{defi}
+El producto de un escalar $\alpha$ por una matriz $\mathbf{A}$, denotado como $\alpha \mathbf{A}$, se define como la matriz obtenida de multiplicar cada entrada de $\mathbf{A}$ por $\alpha$. Esto es $[\alpha\mathbf{A}]_{ij} = \alpha \mathbf{A}_{ij}$.
+\end{defi}
+
+\begin{prop}
+Sean $\mathbf{A}, \mathbf{B} \in \R^{m \times n}$ y $\alpha, \beta \in \R$. Las siguientes propiedades se cumplen:
+
+\begin{itemize}
+\item $\alpha \mathbf{A} \in \R^{m \times n}$.
+\item $(\alpha \beta) \mathbf{A} = \alpha (\beta \mathbf{A})$.
+\item $\alpha(\mathbf{A} + \mathbf{B}) = \alpha \mathbf{A} + \beta \mathbf{B}$.
+\item $(\alpha + \beta)\mathbf{A} = \alpha \mathbf{A} + \beta \mathbf{A}$.
+\item $1 \mathbf{A} = \mathbf{A}$.
+\end{itemize}
+\end{prop}
+
+\begin{defi}
+La matriz transpuesta de $A \in \R^{m \times n}$ se define como la matriz $\mathbf{A}^T$ obtenida de intercambiar filas por columnas en $\mathbf{A}$. Esto es, $\mathbf{A}^T_{ij} = \mathbf{A}_{ji}$.
+\end{defi}
+
+\begin{prop}
+Sean $\mathbf{A}, \mathbf{B} \in \R^{m \times n}$ y $\alpha \in \R$. Las siguientes propiedades se cumplen:
+
+\begin{itemize}
+\item $(\mathbf{A} + \mathbf{B})^T = \mathbf{A}^T + \mathbf{B}^T$.
+\item $(\alpha \mathbf{A})^T = \alpha \mathbf{A}^T$.
+\end{itemize}
+\end{prop}
+
+\begin{defi}
+Sea $\mathbf{A} \in \R^{n\times n}$.
+
+\begin{itemize}
+\item Se dice que $\mathbf{A}$ es una matriz simétrica si $\mathbf{A} = \mathbf{A}^T$.
+\item Se dice que $\mathbf{A}$ es una matriz antisimétrica si $\mathbf{A} = -\mathbf{A}^T$.
+\end{itemize}
+\end{defi}
+
+\begin{defi}
+Sean $\mathbf{A} \in \R^{m \times p}$ y $\mathbf{B} \in \R^{p \times n}$. El producto matricial $\mathbf{A}\mathbf{B}$ se define como la matriz de tamaño $m \times n$ tal que
+
+\[ [\mathbf{A}\mathbf{B}]_{ij} = \sum_{k=1}^{p} \mathbf{A}_{ik}\mathbf{B}_{kj} \] 
+\end{defi}
+
+\begin{defi}
+Sean $\mathbf{A} \in \R^{m \times p}$ y $\mathbf{B}, \mathbf{C} \in \R^{p \times n}$. Las siguientes propiedades se cumplen:
+
+\begin{itemize}
+\item $\mathbf{A}(\mathbf{B} + \mathbf{C}) = \mathbf{A}\mathbf{B} + \mathbf{A}\mathbf{C}$.
+\item $\mathbf{A}(\mathbf{B} \mathbf{C}) = (\mathbf{A}\mathbf{B})\mathbf{C}$.
+\end{itemize}
+\end{defi}
+
+\begin{defi}
+La matriz $\mathbf{I} \in \R^{n \times n}$ definida como 
+
+\[ \mathbf{I}_{ij} = \delta_{ij} = \begin{cases}
+1 \text{ si } i = j\\
+0 \text{ si } i \neq j
+\end{cases} \]
+
+recibe el nombre de matriz identidad de orden $n$. Además cumple que 
+
+\[\mathbf{A} \mathbf{I} = \mathbf{A}\quad \text{y} \quad \mathbf{I} \mathbf{A} = \mathbf{A}\]
+
+si $\mathbf{A} \in \R^{n \times n}$.
+\end{defi}
+
+\begin{defi}
+Dadas $\mathbf{A}, \mathbf{B} \in \R^{n \times n}$ que satisfacen 
+
+\[ \mathbf{A} \mathbf{B} = \mathbf{I} \quad \text{y} \quad \mathbf{B} \mathbf{A} = \mathbf{I} \]
+
+se llama matriz inversa de $\mathbf{A}$ y se denota como $\mathbf{B} = \mathbf{A}^{-1}$.\\
+
+Una matriz que no tiene matriz inversa recibe el nombre de matriz singular. En caso contrario, se dice matriz no singular. 
+\end{defi}
+
+\begin{defi}
+Sean $\mathbf{A}$, $\mathbf{B}$ matrices no singulares. Las siguientes propiedades se cumplen:
+
+\begin{itemize}
+\item $(\mathbf{A}^{-1})^{-1} = \mathbf{A}$.
+\item $\mathbf{A} \mathbf{B}$ es no singular.
+\item $(\mathbf{A} \mathbf{B})^{-1} = \mathbf{B}^{-1} \mathbf{A}^{-1}$.
+\item $(\mathbf{A}^{-1})^T = (\mathbf{A}^T)^{-1}$.
+\end{itemize}
+\end{defi}
+
+\begin{defi}
+Una matriz $\mathbf{A} \in \R^{n \times n}$ se dice diagonalmente dominante si 
+
+\[ |\mathbf{A}_{ii}| > \sum_{j=1 \\ j \neq i}^{n} |\mathbf{A}_{ij}| \quad \forall i = 1,\dots, n \]
+\end{defi}
+
+
+
+\section{Autovalores y autovectores}
+\begin{defi}
+Dada una matriz $\mathbf{A} \in \R^{n \times n}$, unos escalares $\lambda \in \R$ y un vector $\mathbf{0} \neq \mathbf{x} \in \R^{n \times 1}$ que satisfacen $\mathbf{A} \lambda = \lambda \mathbf{x}$ reciben el nombre de autovalores y autivectores de $\mathbf{A}$, respectivamente.
+\end{defi}
+
+\begin{defi}
+El conjunto de todos los autovalores de $A \in \R^{n \times n}$, denotado por $\sigma(\mathbf{A})$, se llama espectro de $\mathbf{A}$.
+\end{defi}
+
+\begin{prop}
+Sea $\mathbf{A} \in \R^{n \times n}$. Entonces,
+
+\[ \lambda \in \sigma(\mathbf{A}) \iff \mathbf{A} - \lambda \mathbf{I} \text{ es singular } \iff \det(A - \lambda I) = 0 \] 
+\end{prop}
+
+\begin{defi}
+El polinomio característico de $\mathbf{A} \in \R^{n \times n}$ es $p(\lambda) = \det(\mathbf{A} - \lambda \mathbf{I})$.\\
+
+La ecuación característica de $\mathbf{A}$ es $p(\lambda) = 0$.
+\end{defi}
+
+\begin{defi}
+Los autovalores son las soluciones de la ecuación característica.
+\end{defi}
+
+\begin{defi}
+Dos matrices $\mathbf{A}, \mathbf{B} \in \R^{n \times n}$ se dicen semejantes si existe una matriz no singular $\mathbf{P}$ tal que $\mathbf{P}^{-1}\mathbf{A} \mathbf{P} = \mathbf{B}$.
+\end{defi}
+
+\begin{defi}
+Sean $\lambda \in \sigma(\mathbf{A}) = \{\lambda_1, \lambda_2, \dots, \lambda_s\}$.\\
+
+La multiplicidad algebraica de $\lambda$ es el número de veces que se repite como raíz del polinomio característico. En otras palabras, $\mathrm{ma}_\mathbf{A}(\lambda_i) = a_i \iff (x-\lambda_1)^{\alpha_1} \cdots (x - \lambda_s)^{a_s}  = 0$ es la ecuación característica de $\mathbf{A}$.\\
+
+La multiplicidad geométrica de $\lambda$, $\mathrm{mg}_\mathbf{A}(\lambda)$ es el número máximo de autovectores linealmente independientes asociados a $\lambda$.
+\end{defi}
+
+\begin{defi}
+Para toda $\mathbf{A} \in \C^{n \times n}$ y todo $\lambda \in \sigma(\mathbf{A})$ se cumple que
+
+\[ \mathrm{mg}_\mathbf{A}(\lambda) \leq \mathrm{ma}_\mathbf{A}(\lambda) \]
+\end{defi}
+
+\begin{teo}
+Una matriz $A \in \C^{n \times n}$ es diagonalizable si y sólo si $\mathrm{mg}_\mathbf{A}(\lambda) = \mathrm{ma}_\mathbf{A}(\lambda)$ para todo $\lambda \in \sigma(\mathbf{A})$.
+\end{teo}
+
+\subsection{M-matrices}
+
+\begin{defi}
+Una M-matriz $\mathbf{A}$ es una matriz tal que $\mathbf{A}_{ij} \leq 0 \ \ \forall i \neq j$ y $\mathbf{A}^{-1} \geq \mathbf{0}$.
+\end{defi}
+
+\begin{defi}
+Si $\mathbf{A} \in \R^{n\times n}$, el número 
+
+\[\rho(\mathbf{A}) = \max_{\lambda \in \sigma(\mathbf{A})} |\lambda|\]
+\end{defi}
+
+\begin{prop}
+Las siguiente condiciones se cumplen si $\mathbf{A}$ es una M-matriz:
+
+\begin{itemize}
+\item $\mathbf{A}$ es una M-matriz si y sólo si existe una matriz $\mathbf{A} \geq \mathbf{0}$ y un número $r > \rho(\mathbf{B})$ tal que $\mathbf{A} = r\mathbf{I} - \mathbf{B}$.
+\item Si $\mathbf{A}$ es una M-matriz, entonces $\Re(\lambda) \ \forall \lambda \in \sigma(\mathbf{A})$.
+\item Si $\mathbf{A}$ es una M-matriz, entonces todos los menores principales de $\mathbf{A}$ son positivos.
+\end{itemize}
+\end{prop}
+
+\subsection{Forma canónica de Jordan}
+
+\begin{defi}
+El índice de un autovalor $\lambda$ de una matriz $\mathbf{A} \in \C^{n \times n}$ se define como el entero más pequeño que cumple que
+
+\[ \rang((\mathbf{A} - \lambda \mathbf{I})^k) = \rang((\mathbf{A} - \lambda \mathbf{I})^{k+1}) \] 
+
+Se denota como $\mathrm{indice}(\lambda)$.\\
+
+Se entiende que $\mathrm{indice}(\mu) = 0 \iff \mu \not \in \sigma(\mathbf{A})$.
+\end{defi}
+
+\begin{teo}
+Para cada $\mathbf{A} \in \C^{n \times n}$ con distintos autovalores $\sigma(\mathbf{A}) = \{\lambda_1, \lambda_2,\dots, \lambda_s \}$, existe una matriz no singular $\mathbf{P}$ tal que
+
+\[ \mathbf{P}^{-1} \mathbf{A} \mathbf{P} = \mathbf{J} = \left(\begin{array}{cccc}
+\mathbf{J}(\lambda_1) & \mathbf{0}            & \dots  & \mathbf{0}\\
+\mathbf{0}            & \mathbf{J}(\lambda_2) & \dots  & \mathbf{0}\\
+\vdots                & \vdots                & \ddots & \vdots\\
+\mathbf{0}            & \mathbf{0}            & \dots  & \mathbf{J}(\lambda_s)
+\end{array}\right) \]
+
+donde 
+
+\[ \mathbf{J}(\lambda_j) = \left(\begin{array}{cccc}
+\mathbf{J}_1(\lambda_j) & \mathbf{0}              & \dots  & \mathbf{0}\\
+\mathbf{0}              & \mathbf{J}_2(\lambda_j) & \dots  & \mathbf{0}\\
+\vdots                  & \vdots                  & \ddots & \vdots\\
+\mathbf{0}              & \mathbf{0}              & \dots  & \mathbf{J}_{t_j}(\lambda_j)
+\end{array}\right) \quad \text{ con } \mathbf{J}_\cdot(\lambda_j) = 
+\left(\begin{array}{cccc} 
+\lambda_j & 1      &         & \\
+          & \ddots & \ddots     & \\
+          &        & \ddots     & 1\\
+          &        &            & \lambda_j
+\end{array}\right) \]
+
+y $t_i = \dim(\mathbf{A} - \lambda \mathbf{I})$.\\
+
+El mayor bloque de Jordan de $\mathbf{J}_{\lambda_j} = \mathrm{indice}(\lambda_j) \times \mathrm{indice}(\lambda_j)$.
+\end{teo}
