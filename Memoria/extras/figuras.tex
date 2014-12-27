@@ -140,18 +140,21 @@
   \node[state]         (L) [below of= K]            {$C$};
   \node[state]         (M) [right of=K]             {$D$};
   \node[state]         (N) [right of=L]             {$E$};
+  \node[state]         (R) [above right of=N]       {$F$};
 
   \path (J) edge                node {}  (K)
         (K) edge                node {}  (L)
         (K) edge                node {}  (M)      
         (L) edge                node {}  (N)
         (L) edge                node {}  (M)
+        (N) edge                node {}  (R)
+        (R) edge                node {}  (M)
         (M) edge                node {}  (N);
         
   \node[align=center, below right of=L] {$G \cup G'$};
   
 % Grafo G \cup G'
-  \node[state]         (O) [right of=N]        {$C$};
+  \node[state]         (O) [right of=R]        {$C$};
   \node[state]         (P) [right of=O]              {$E$};
 
 
