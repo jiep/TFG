@@ -6,6 +6,13 @@ Un grafo es un par $G = (V,E)$ de conjuntos que satisfacen que $E \subseteq V^2$
 
 La forma usual de representar un grafo es dibujar un punto (o círculo) por cada vértice y unir dos de estos dos puntos (o círculos) con una línea para formar un arco. Cómo estén dibujados los vértices y los arcos es irrelevante. sólo importa qué pares de nodos forman una arista y cuáles no.
 
+\begin{ejemplo}
+
+La Figura \ref{fig:grafo} muestra la representación gráfica de un grafo. Matemáticamente, el grafo es el par $(V, E)$ donde
+
+\[ V = \{A, B, C, D\} \]
+\[ E = \{\{A,B\},\{A,C\},\{B,C\},\{C,D\} \} \]
+
 \begin{figure}[htb]
 \centering
 \ejemplografo
@@ -13,18 +20,27 @@ La forma usual de representar un grafo es dibujar un punto (o círculo) por cada
 \label{fig:grafo}
 \end{figure}
 
+\end{ejemplo}
+
 \begin{defi}
 Se llama orden de un grafo $G$ al número de vértices de dicho grafo. Se denota como $|G|$.\\
 Un grafo $G$ se dice que es finito si $|G| < \infty$. Si $|G| = \infty$ se dice que el grafo $G$ es infinito.
 \end{defi}
+
+\begin{ejemplo}
+El grafo de la Figura \ref{fig:grafo} es un grafo finito, puesto que el número de vértices del grafo es $4$.
+\end{ejemplo}
 
 \begin{defi}
 Dos vértices $x,y \in V$ del grafo $G = (V,E)$ se dicen adyacentes si existe una arista entre $x$ e $y$ (o $xy \in E$).
 \end{defi}
 
 \begin{defi}
-Un grafo se dice completo si todos su vértices son adyacentes.
+Un grafo se dice completo si todos sus vértices son adyacentes.
 \end{defi}
+
+\begin{ejemplo}
+El grafo de la Figura \ref{fig:grafo_completo} es completo ya que todos sus vértices son adyacentes. En efecto, el vértice $A$ tiene una arista que lo une con los nodos $B$, $C$ y $D$. De la misma forma, se comprueba para los vértices $B$, $C$ y $D$.
 
 \begin{figure}[htb]
 \centering
@@ -32,6 +48,8 @@ Un grafo se dice completo si todos su vértices son adyacentes.
 \caption{Ejemplo de grafo completo}
 \label{fig:grafo_completo}
 \end{figure}
+
+\end{ejemplo}
 
 \begin{defi}
 Sean $G = (V,E)$ y $G' = (V',E')$ dos grafos. Decimos que $G$ y $G'$ son isomorfos, y escribimos $G \simeq G'$, si existe una biyección $\phi : V \to V'$ tal que $xy \in E \iff \phi(x)\phi(y) \in E' \ \ \forall x,y \in V$. La aplicación $\phi$ recibe el nombre de isomorfismo. Si $G = G'$, $\phi$ se dice que es un automorfismo. 
@@ -42,10 +60,30 @@ Podemos definir operaciones sobre grafos, como la unión o la intersección.
 \begin{defi}
 Sean $G = (V,E)$ y $G' = (V',E')$ dos grafos, se definen la unión y la intersección de grafos como
 
-\begin{equation*}
+\begin{eqnarray*}
 G \cup G' := (V \cup V', E \cup E')\\
 G \cap G' := (V \cap V', E \cap E')
-\end{equation*}
+\end{eqnarray*}
+
+Si $G \cap G' = \emptyset$, entonces $G$ y $G'$ son disjuntos.
+\end{defi}
+
+\begin{ejemplo}
+La Figura \ref{fig:union_interseccion_grafo} muestra la unión e intersección de grafos. Si $G$ y $G'$ son respectivamente 
+
+\begin{eqnarray*}
+G = (\{A, B, C, D, E\}, \{ \{A,B\}, \{B,C\}, \{B,D\}, \{C,E\}, \{D, E\} \})\\
+G' = (\{C, D, E, F\}, \{ \{C,D\}, \{C,E\}, \{D,F\}, \{E,F\} \})
+\end{eqnarray*}
+
+Por definición,
+
+\begin{multline*}
+G \cup G' = (\{A, B, C, D, E, F\}, \{ \{A,B\}, \{B,C\}, \{B,D\}, \{C,E\}, \{D, E\}, \\
+\{C,D\}, \{D,F\},\{E,F\} \})
+\end{multline*}
+\[G \cap G' = (\{C, E\}, \{\{C,E\}\})\]
+
 
 \begin{figure}[htb]
 \centering
@@ -54,9 +92,30 @@ G \cap G' := (V \cap V', E \cap E')
 \label{fig:union_interseccion_grafo}
 \end{figure}
 
-Si $G \cap G' = \emptyset$, entonces $G$ y $G'$ son disjuntos.
-\end{defi}
+\end{ejemplo}
+
+\begin{defi}
+
 Sean $G = (V,E)$ y $G' = (V',E')$ dos grafos. Si $V' \subseteq V$ y $E' \subseteq E$, se dice que $G'$ es un subgrafo de $G$ (y $G$ es un supergrafo de $G'$).
+
+\end{defi}
+
+\begin{ejemplo}
+La figura \ref*{fig:subgrafo} muestra algunos de los subgrafos de $G= (V,E)$ donde
+
+\[ V  = \{A, B, C, D, E\}\]
+\[E = \{ \{A,B\}, \{A,C\}, \{A,E\}, \{B,D\}, \{B, E\},\{C,D\}, \{D,E\},\{C,E\} \} \]
+
+Del mismo modo, $G' = (V', E')$ y $G'' = (V'', E'')$ donde
+
+\[ V'  = \{A, B, C, D\}\]
+\[E' = \{ \{A,B\}, \{A,C\}, \{B,D\},\{C,D\} \} \]
+
+\[ V''  = \{A, B, C, D, E\}\]
+\[E'' = \{ \{A,B\}, \{A,C\}, \{B,D\},\{C,D\},\{B,E\} \} \]
+
+Se ve claramente que $V' \subseteq V$ y $E' \subseteq E$, por lo que $G'$ es un subgrafo de $G$ (o $G$ es un supergrafo de $G'$). Análogo para $G''$.
+
 
 \begin{figure}[htb]
 \centering
@@ -64,6 +123,8 @@ Sean $G = (V,E)$ y $G' = (V',E')$ dos grafos. Si $V' \subseteq V$ y $E' \subsete
 \caption[Ejemplo de subgrafos de un grafo]{Ejemplo de subgrafos de un grafo $G$}
 \label{fig:subgrafo}
 \end{figure}
+
+\end{ejemplo}
 
 \begin{defi}
 Sea $G = (V,E)$ un grafo (no vacío). El grado de un vértice $v \in V$, denotado por $d_G(v) = d(v)$, se define como el número de vértices adyacentes a $v$.\\
@@ -109,12 +170,47 @@ La arista $e$ se dice dirigida desde $\mathrm{init}(e)$ hasta $\mathrm{ter}(e)$.
 Si $\mathrm{init}(e) = \mathrm{ter}(e)$, la arista $e$ se dice que es un bucle.
 \end{defi}
 
+\begin{ejemplo}
+La Figura \ref*{fig:grafo_dirigido} muestra la representación gráfica un grafo dirigido. Matemáticamente, es el par $(V,E)$ donde
+
+\[V  = \{A, B, C, D\}\]
+\[E = \{ \{A,B\}, \{A,C\}, \{C,C\},\{B,C\}, \{C,D\} \} \]
+
+junto con las funciones $\mathrm{init} : E \to V $ y $\mathrm{ter} : E \to V$ definidas de la siguiente manera:
+
+\begin{center}
+\begin{tabular}{l|r}
+\begin{tabular}{r c c c}
+$\mathrm{init}:$ & $E$ & $\to$ & $V$\\
+			     & $\{A,B\}$ & $\mapsto$ & $A$\\
+			     & $\{A,C\}$ & $\mapsto$ & $A$\\
+			     & $\{C,C\}$ & $\mapsto$ & $C$\\
+			     & $\{B,C\}$ & $\mapsto$ & $B$\\
+			     & $\{C,D\}$ & $\mapsto$ & $C$\\
+			      
+\end{tabular} &
+\begin{tabular}{r c c c}
+$\mathrm{ter}:$ & $E$ & $\to$ & $V$\\
+			     & $\{A,B\}$ & $\mapsto$ & $B$\\
+			     & $\{A,C\}$ & $\mapsto$ & $C$\\
+			     & $\{C,C\}$ & $\mapsto$ & $C$\\
+			     & $\{B,C\}$ & $\mapsto$ & $C$\\
+			     & $\{C,D\}$ & $\mapsto$ & $D$\\
+			      
+\end{tabular} 
+\end{tabular}
+\end{center}
+
+Además la arista $\{C,C\}$ es un bucle porque $\mathrm{init}(\{C,C\}) = \mathrm{ter}(\{C,C\}) = C$.
+
 \begin{figure}[h]
 \centering
 \ejemplografodirigido
 \caption{Ejemplo de grafo dirigido con bucle}
 \label{fig:grafo_dirigido}
 \end{figure}
+
+\end{ejemplo}
 
 \begin{defi}
 Un grafo dirigido $D = (V', E')$ es una orientación de un grafo (no dirgido) $G = (V,E)$ si $V = V'$ y $E = E'$ y $\{\mathrm{init}(e), \mathrm{ter}(e) \} = \{x,y\} \ \forall e = xy \in E$.
