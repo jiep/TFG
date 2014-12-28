@@ -190,7 +190,7 @@
   \tikzstyle{every state}=[draw=black,text=black]
 
   \node[state]         (S)                    {$S$};
-  \node[state]         (H)      [right of=A]  {$H$};
+  \node[state]         (H)      [right of=S]  {$H$};
   
   \path (S) edge  [loop above] node {$0.5$}  (S)
             edge  [bend left]  node {$0.5$}  (H)
@@ -199,3 +199,48 @@
 
 \end{tikzpicture}}
 
+\newcommand{\ejemplografomarkov}{
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=5cm,semithick]
+  \tikzstyle{every state}=[draw=black,text=black]
+
+  \node[state]         (A)                         {DEN};
+  \node[state]         (B)      [below left of=A]  {LAL};
+  \node[state]         (C)      [below of=B]       {SAS};
+  \node[state]         (D)      [below right of=A] {CHI};
+  \node[state]         (E)      [below of=D]       {NYK};
+  
+  \path (A) edge                node {$5$}   (C)
+            edge                node {$28$}  (D)
+            edge                node {$28$}  (E)
+        (B) edge                node {$22$}  (A)
+	        edge [bend right]   node {$7$}   (E)
+            edge [bend left]    node {$2$}   (D)
+        (C) edge                node {$13$}  (B)
+	    (D) edge [bend left]    node {$8$}   (C)
+            edge                node {$11$}  (E)
+        (E) edge                node {$11$}  (C);
+        	
+\end{tikzpicture}}
+
+\newcommand{\ejemplografomassey}{
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=5cm,semithick]
+  \tikzstyle{every state}=[draw=black,text=black]
+
+  \node[state]         (A)                         {DEN};
+  \node[state]         (B)      [below left of=A]  {LAL};
+  \node[state]         (C)      [below of=B]       {SAS};
+  \node[state]         (D)      [below right of=A] {CHI};
+  \node[state]         (E)      [below of=D]       {NYK};
+  
+  \path (C) edge   node {$5$}   (A)
+        (D) edge   node {$28$}  (A)
+        (E) edge   node {$28$}  (A)
+        (A) edge   node {$22$}  (B)
+	    (E) edge [bend left]  node {$7$}   (B)
+        (D) edge [bend right]  node {$2$}   (B)
+        (B) edge   node {$13$}  (C)
+	    (C) edge [bend right]  node {$8$}   (D)
+        (E) edge   node {$11$}  (D)
+        (C) edge   node {$11$}  (E);
+        	
+\end{tikzpicture}}
