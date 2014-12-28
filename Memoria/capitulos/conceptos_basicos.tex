@@ -802,7 +802,15 @@ Aunque a primera vista ambos métodos parecen no tener poco o nada en común. Co
 que indica que el equipo $i$ gana al equipo $j$ por $y_k$ puntos de diferencia. Si representamos la información del método de Massey mediante un grafo ponderado donde los pesos son la diferencia de puntos y comparamos con el grafo que proviene de la matriz $\mathbf{V}$ de diferencia de puntos, veremos que son el mismo grafo, pero con distinta orientación. En el grafo de Massey, la orientación implica dominancia, mientras que en el grafo de Markov implica debilidad.
 
 \begin{ejemplo}
-Si consideramos la diferencia de puntos de la Tabla \ref{tbl:massey}, y dibujamos 
+Si consideramos la diferencia de puntos de la Tabla \ref{tbl:massey}, y dibujamos los grafos de Massey y de Markov, vemos que son el mismo grafo, pero con orientación opuesta.
+
+\begin{figure}[htb]
+\centering
+\subfigure[Ejemplo de grafo de Markov]{\ejemplografomarkov}
+\subfigure[Ejemplo de grafo de Massey]{\ejemplografomassey}
+\caption[Ejemplo de grafo de Markov y de Massey]{Ejemplo de grafo de Markov y de Massey. Se puede observar como los grafos son iguales, pero con orientación opuesta}
+\label{fig:grafo_massey_markov}
+\end{figure}
 \end{ejemplo}
 
 
