@@ -516,4 +516,71 @@ El algoritmo para calcular este método es:
 
 \subsection{Método de Markov}
 
-\todo[backgroundcolor=red, inline]{Añadir información}
+El método de Markov hace uso de las cadenas de Markov, que inventó en 1906, para describir procesos estocásticos. Aquí las aplicaremos para crear rankings deportivos.\\
+
+Este método se basa en utilizar varios parámetros stadísticos como victorias y derrotas, diferencias de puntos entre dos equipos, etc para crear un rating. El objetivo es crear una matriz estocastica de todos los parámetros y calcular el punto fijo de la cadena de Markov, que será nuestro rating $\mathbf{r}$. Para cada uno de los parámetros, se crea una matriz $\mathbf{V}_i$. Necesitamos una matriz estocástica $\mathbf{S}_i$. Normalmente, esta matriz $\mathbf{V}_i$ no será estocástica, por lo que debemos normalizar cada fila, diviendo entre la suma de cada fila. Es posible que haciendo esto no se consiga una matriz estocástica, puesto que puede haber filas completamente llenas de ceros. Para tratar con ésto, se pueden seguir varias estrategias: una forma sencilla es sustituir la fila de ceros por una columna de unos y normalizar la fila como hemos comentado anteriormente. Esta forma resuelve el problema y crea una matriz estocástica, pero hay otras formas de resolver el problema que tienen más sentido en rankings deportivos.  Otra forma es sustituir el i-ésimo cero por un uno en la fila. Esto crea un nuevo problema, y es que la cadena no es necesarimente irreducible (lo que asegura la existencia y unicidad del punto fijo). Para conseguir esto creamos una matriz $\overline{\mathbf{S}}$, definida de la siguiente manera:
+
+\begin{equation}
+\overline{\mathbf{S}} = \beta \mathbf{S} + \dfrac{(1 - \beta)}{n} \mathbf{E}
+\end{equation}
+
+donde $\mathbf{E}$ es una matriz de unos, $n$ es el número de equipos y $\beta \in [0, 1]$. De esta manera $\overline{\mathbf{S}}$, el punto fijo existe y es único. El vector rating $\mathbf{r}$ depende de la elección del parámetro $\beta$. Generalmente, cuanto mayor es $\beta$, el modelo se aproxima más a los datos originales.  
+De esta forma se consigue que cada fila sea un vector de probabilidad. Para obtener la matriz estocástica que agrupe todos las estadísticas $\mathbf{S}_i$, creamos una nueva matriz estocástica $\mathbf{S}$ de la siguiente manera: 
+\begin{equation}
+\mathbf{S} = \sum_{i=1}^{k} \alpha_i \mathbf{S}_i
+\end{equation}
+
+donde $a_i \geq 0$ y $\sum_{i=1}^{k} \alpha_i = 1$. 
+
+\todo[backgroundcolor=red, inline]{Añadir ejemplo del método de Markov}
+
+\paragraph*{Resumen y algoritmo de cómputo}
+
+Las variables y su descripción se pueden encontrar en la siguiente tabla:
+
+\begin{longtable}{c c p{5cm} p{6cm}}
+\caption{Resumen del método de Markov}\\
+%\renewcommand{\arraystretch}{1.5}
+\toprule
+Variable & Tipo & Descripción & Elemento i-ésimo\\
+\hline
+\endfirsthead
+
+\multicolumn{4}{c}%
+{{\cftfigfont \tablename\ \thetable{} -- Continúa de la página anterior}} \\
+\toprule
+Variable & Tipo & Descripción & Elemento i-ésimo\\
+\hline
+\endhead
+
+$k$ & $\N$ & Número de estadísticas para incorporar al método de Markov & ---\\
+\hline
+$\mathbf{V}_k$ & $\R^{n \times n}$ & Matriz k-ésima con los resultados de la estadística $k$  & $[\mathbf{V}_k]_{ij}$ estadística k-ésima que se le asigna al equipo $i$ contra el equipo $j$. \\
+\hline 
+$\mathbf{S}_k$ & $\R^{n \times n}$ & Matrices estocásticas construidas a partir de $\mathbf{V}_k$ & ---\\
+\hline
+$\alpha_i$ & $\R$ & Peso asociado con la estadística $i$; $a_i \geq 0$ y $\sum_{i=1}^{k} \alpha_i = 1$  & --- \\
+\hline 
+$\overline{\mathbf{S}}$ & $\R^{n \times n}$ & Matriz estocástica que se asegura ser irreducible; $\overline{\mathbf{S}} = \beta \mathbf{S} + \frac{(1 - \beta)}{n} \mathbf{E}$, $\beta \in [0,1]$ & --- \\
+\hline
+$\mathbf{r}$ & $\R^{n \times 1}$ & Vector rating del método calculado a partir del punto fijo de la cadena & ---\\
+\hline 
+$\mathbf{r}$ & $M_{n\times 1}$ & Vector de ratings producido por el método de Markov & ---\\
+\hline
+$n$ & $\N$ & Número de equipos en la liga. Orden de $\overline{\mathbf{S}}$ & ---\\
+\bottomrule
+\end{longtable}
+
+El algoritmo para calcular este método es:
+
+\begin{enumerate}
+\item Formar $\mathbf{S}$ usando las matrices $\mathbf{V}_i$ para cada una de las $k$ estadísticas.
+
+\[ \mathbf{S} = \sum_{i=1}^{k} \alpha_i \mathbf{S}_i \]
+
+donde $a_i \geq 0$ y $\sum_{i=1}^{k} \alpha_i = 1$.
+
+\item Calcular $\mathbf{r}$, el punto fijo de la matriz de transición $\mathbf{S}$. Si $\mathbf{S}$ es reducible, usar la matriz irreducible $\overline{\mathbf{S}}$
+
+\[\overline{\mathbf{S}} = \beta \mathbf{S} + \dfrac{(1 - \beta)}{n} \mathbf{E}\]
+\end{enumerate}
