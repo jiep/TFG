@@ -664,3 +664,145 @@ donde $a_i \geq 0$ y $\sum_{i=1}^{k} \alpha_i = 1$.
 \[\overline{\mathbf{S}} = \beta \mathbf{S} + \dfrac{(1 - \beta)}{n} \mathbf{E}\]
 \end{enumerate}
 
+\subsection{Relación entre los métodos}
+
+\subsubsection{Relación entre el método de Massey y de Colley}
+
+Estos dos métodos esán relacionados por la fórmula $\mathbf{C} = 2\mathbf{I} + \mathbf{M}$. El método de Massey $\mathbf{M r} = \mathbf{p}$ puede ser convertido puede ser Colleyzado como
+
+\[ (2\mathbf{I} + \mathbf{M})\mathbf{r} = \mathbf{p} \]
+
+Este nuevo método tiene en el lado derecho del sistema el vector $\mathbf{p}$ en vez de $\mathbf{b}$, que sólo usa información de victorias y derrotas. Además añadir $2\mathbf{I}$ al sistema hace que el sistema sea no singular, por lo que no hace falta eliminar una ecuación del sistema.
+
+\begin{ejemplo}\label{ej:massey_colleyizado}
+Si consideramos los Ejemplos \ref{ej:massey} y \ref{ej:colley}, y aplicamos este método el sistema resultante queda de la siguiente manera:
+
+\begin{equation*}
+\left(\begin{array}{r r r r r}
+ 6 & -1 & -1 & -1 & -1\\
+-1 &  6 & -1 & -1 & -1\\
+-1 & -1 &  6 & -1 & -1\\
+-1 & -1 & -1 &  6 & -1\\
+-1 & -1 & -1 & -1 &  6
+\end{array}\right)
+\left(\begin{array}{c}
+\mathbf{r}_{\text{DEN}}\\
+\mathbf{r}_{\text{LAL}}\\
+\mathbf{r}_{\text{SAS}}\\
+\mathbf{r}_{\text{CHI}}\\
+\mathbf{r}_{\text{NYK}}
+\end{array}\right)
+=
+\left(\begin{array}{c}
+-38\\
+-18\\
+21\\
+11\\
+24
+\end{array}\right)
+\end{equation*}
+
+Los resultados se muestran en la Tabla \ref{tbl:massey_colleyizado}
+
+\begin{table}[h]
+\centering
+\caption{Resultados del Ejemplo \ref{ej:massey_colleyizado}}
+\label{tbl:massey_colleyizado}
+\begin{tabular}{@{}ccc@{}}
+\cmidrule(l){2-3}
+    & $\mathbf{r}$ & Ranking \\ \midrule
+DEN & -5.4286      & 5       \\
+LAL & -2.5714      & 4       \\
+SAS &  3.0000      & 2       \\
+CHI &  1.5714      & 3       \\
+NYK &  3.4286      & 1       \\ \bottomrule
+\end{tabular}
+\end{table}
+
+\end{ejemplo}
+
+
+
+De la misma forma, el método de Colley $\mathbf{C r} = \mathbf{b}$ puede ser Masseyizado con la relación anterior. De esta forma, se trata de resolver el sistema
+
+\[ \mathbf{M r} = \mathbf{b} \]
+
+\begin{ejemplo}\label{ej:colley_masseyizado}
+Si consideramos los Ejemplos \ref{ej:massey} y \ref{ej:colley}, y aplicamos este método el sistema resultante queda de la siguiente manera:
+
+\begin{equation*}
+\left(\begin{array}{r r r r r}
+ 4 & -1 & -1 & -1 & -1\\
+-1 &  4 & -1 & -1 & -1\\
+-1 & -1 &  4 & -1 & -1\\
+-1 & -1 & -1 &  4 & -1\\
+ 1 &  1 &  1 &  1 &  4
+\end{array}\right)
+\left(\begin{array}{c}
+\mathbf{r}_{\text{DEN}}\\
+\mathbf{r}_{\text{LAL}}\\
+\mathbf{r}_{\text{SAS}}\\
+\mathbf{r}_{\text{CHI}}\\
+\mathbf{r}_{\text{NYK}}
+\end{array}\right)
+=
+\left(\begin{array}{c}
+0\\
+0\\
+2\\
+1\\
+2
+\end{array}\right)
+\end{equation*}
+
+Los resultados se muestran en la Tabla \ref{tbl:colley_masseyizado}\\
+
+\begin{table}[h]
+\centering
+\caption{Resultados del Ejemplo \ref{ej:colley_masseyizado} con empates}
+\label{tbl:colley_masseyizado}
+\begin{tabular}{@{}ccc@{}}
+\cmidrule(l){2-3}
+    & $\mathbf{r}$ & Ranking \\ \midrule
+DEN &  0.4      & 3       \\
+LAL &  0.4      & 3       \\
+SAS &  0.8      & 2       \\
+CHI &  0.6      & 1       \\
+NYK & -0.2      & 5       \\ \bottomrule
+\end{tabular}
+\end{table}
+
+Se produce un empate entre DEN y LAL. Para desempatar, empleamos de nuevo los puntos de diferencia entre estos dos equipos. Puesto que LAL tiene una menor diferencia de puntos frente a DEN (-18 contra -38), por lo que se rompe el empate y LAL se posiciona en la cuarta posición del ranking.\\
+
+Los resultados tras romper el empate se muestra en la Tabla \ref{tbl:colley_masseyizado_sin_empates}.
+
+
+\begin{table}[h]
+\centering
+\caption{Resultados del Ejemplo \ref{ej:colley_masseyizado} sin empates}
+\label{tbl:colley_masseyizado_sin_empates}
+\begin{tabular}{@{}ccc@{}}
+\cmidrule(l){2-3}
+    & $\mathbf{r}$ & Ranking \\ \midrule
+DEN &  0.4      & 4       \\
+LAL &  0.4      & 3       \\
+SAS &  0.8      & 2       \\
+CHI &  0.6      & 1       \\
+NYK & -0.2      & 5       \\ \bottomrule
+\end{tabular}
+\end{table}
+\end{ejemplo}
+
+\subsubsection{Relación entre el método de Markov y el de Massey}
+
+Aunque a primera vista ambos métodos parecen no tener poco o nada en común. Como apuntábamos anteriormente, el método de Markov permite tratar distintas estadísticas entre las que se encuentra la diferencia de puntos, en lo que está basado el método de Massey. Recordemos que que la ecuación fundamental del método de Massey es
+
+\[ r_i - r_j = y_k \]
+
+que indica que el equipo $i$ gana al equipo $j$ por $y_k$ puntos de diferencia. Si representamos la información del método de Massey mediante un grafo ponderado donde los pesos son la diferencia de puntos y comparamos con el grafo que proviene de la matriz $\mathbf{V}$ de diferencia de puntos, veremos que son el mismo grafo, pero con distinta orientación. En el grafo de Massey, la orientación implica dominancia, mientras que en el grafo de Markov implica debilidad.
+
+\begin{ejemplo}
+Si consideramos la diferencia de puntos de la Tabla \ref{tbl:massey}, y dibujamos 
+\end{ejemplo}
+
+
