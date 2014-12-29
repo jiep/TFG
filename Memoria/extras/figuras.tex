@@ -244,3 +244,39 @@
         (C) edge   node {$11$}  (E);
         	
 \end{tikzpicture}}
+
+\newcommand{\agregacionrankings}{
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=1.5cm,semithick]
+  \tikzstyle{every state}=[draw opacity=0,draw=white,text=black]
+
+  \node[state]         (A)                         {$\left(\begin{array}{c}
+\ \\
+\mathbf{r}_1 \\
+\ \\
+  \end{array}\right)$};
+  \node[state]         (B)      [right of=A]  {$\left(\begin{array}{c}
+\ \\
+\mathbf{r}_2 \\
+\ \\
+  \end{array}\right)$};
+  \node[state]         (C)      [right of=B]       {$\dots$};
+  \node[state]         (D)      [right of=C] {$\left(\begin{array}{c}
+  \ \\
+  \mathbf{r}_k \\
+  \ \\
+    \end{array}\right)$};
+\node[state]         (E)      [below right of=B] {};
+\node[state]         (G)      [below       of=E] {};
+\node                (F)      [below of=G]       {$\left(\begin{array}{c}
+  \ \\
+  \text{Ranking} \\
+  \text{agregado} \\
+  \ \\
+    \end{array}\right)$};
+    
+  
+  \path (A) edge   node {}   (F)
+        (B) edge   node {}   (F)
+        (D) edge   node {}   (F);
+        	
+\end{tikzpicture}}
