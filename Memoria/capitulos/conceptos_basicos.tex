@@ -642,10 +642,8 @@ $\alpha_i$ & $\R$ & Peso asociado con la estadística $i$; $a_i \geq 0$ y $\sum_
 \hline 
 $\overline{\mathbf{S}}$ & $\R^{n \times n}$ & Matriz estocástica que se asegura ser irreducible; $\overline{\mathbf{S}} = \beta \mathbf{S} + \frac{(1 - \beta)}{n} \mathbf{E}$, $\beta \in [0,1]$ & --- \\
 \hline
-$\mathbf{r}$ & $\R^{n \times 1}$ & Vector rating del método calculado a partir del punto fijo de la cadena & ---\\
+$\mathbf{r}$ & $\R^{n \times 1}$ & Vector rating del método calculado a partir del punto fijo de la cadena. Vector de ratings producido por el método de Markov & ---\\
 \hline 
-$\mathbf{r}$ & $M_{n\times 1}$ & Vector de ratings producido por el método de Markov & ---\\
-\hline
 $n$ & $\N$ & Número de equipos en la liga. Orden de $\overline{\mathbf{S}}$ & ---\\
 \bottomrule
 \end{longtable}
@@ -736,7 +734,7 @@ Si consideramos los Ejemplos \ref{ej:massey} y \ref{ej:colley}, y aplicamos este
 -1 &  4 & -1 & -1 & -1\\
 -1 & -1 &  4 & -1 & -1\\
 -1 & -1 & -1 &  4 & -1\\
- 1 &  1 &  1 &  1 &  4
+ 1 &  1 &  1 &  1 &  1
 \end{array}\right)
 \left(\begin{array}{c}
 \mathbf{r}_{\text{DEN}}\\
