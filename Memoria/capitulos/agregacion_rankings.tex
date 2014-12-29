@@ -1,16 +1,71 @@
 \chapter{Agregación de rankings}
 
+En el capítulo anterior hemos visto distintos métodos para crear ratings, y por tanto, rankings. Estos ratings crean distintos rankings para un mismo conjunto de datos, según el método que apliquemos. Estamos interesados en alguna forma de combinar estos rankings para crear uno sólo a partir de los rankings iniciales. Esto es lo que se conoce como agregación de rankings. \\
+
+La idea es de la agregación de rankings es que dados $k$ rankings obtenidos por distintos métodos, obtener un sólo ranking a partir de los rankings iniciales (Figura \ref{fig:agregacion_rankings}). Naturalmente, la calidad del ranking agregado dependerá de la calidad de los rankings iniciales. Es decir, si partimos de unos rankings con buena calidad tendremos un buen ranking agregado. De la misma forma, con malos rankings iniciales, obtendremos malos rankings agregados. 
+
 \begin{figure}[htb]
 \centering
 \agregacionrankings
 \caption{Agregación de rankings}
-\label{fig:agregación_rankings}
+\label{fig:agregacion_rankings}
 \end{figure}
 
 \section{Métodos de agregación de rankings}
 \todo[backgroundcolor=red, inline]{Añadir pequeña introducción}
 \subsection{Método de Borda}
-\todo[backgroundcolor=red, inline]{Añadir información}
+El método de Borda fue creado por Jean-Charles de Borda y data de 1770. Borda intentaba agregar rankings de listas de candidatos de unas elecciones políticas. Para cada lista de candidatos, cada candidato recibía una puntuación igual al número de candidatos que le superaban. La puntuación de cada lista es sumada para cada candidato para crear un solo ranking, que se llama recuento de Borda. Los candidatos son ordenados en orden descendente según este método. Este método puede manejar rankings de entrada con empates. Además, también puede producir un ranking de salida que contenga empates.  Aunque este método es muy sencillo, tiene un gran problema: que es fácil manipulable.
+
+\begin{ejemplo}
+Consideramos los rankings producidos por el método de Massey (Tabla \ref{tbl:massey_resultados}), de Colley (Tabla \ref{tbl:colley_resultados_sin_empates}) y de Markov (Tabla \ref{tbl:markov_resultados}).\\
+
+Aplicamos a estos tres rankings el método de Borda. Para DEN, en los tres rankings se encuentra en 5ª y última posición, por lo que ha sido superado por cuatro equipos. Por lo que su recuento de borda será $4 + 4 + 4 = 12$. Para LAL, tanto el ranking de Massey como de Colley está 4º posición, por lo que ha sido superado por $3$ equipos, y en el ranking de Markov está en 2ª posición, por lo que ha sido superado por $1$ equipo. Así, su recuento de Borda será de $3 + 3 + 1 = 7$. Análogo para el resto de equipos. El resultado y el ranking agregado por el método de Borda se muestra en la Tabla \ref{tbl:borda_resultados}.\\
+
+
+\begin{table}[h]
+\centering
+\caption{Resultados del método de Borda}
+\label{tbl:borda_resultados}
+\begin{tabular}{@{}ccc@{}}
+\cmidrule(l){2-3}
+    & Recuento de Borda & Ranking agregado \\ \midrule
+DEN & $4 + 4 + 4 = 12$       & 5       \\
+LAL & $3 + 3 + 1 =  7$       & 3       \\
+SAS & $1 + 1 + 0 =  2$       & 1       \\
+CHI & $2 + 2 + 3 =  7$       & 3       \\
+NYK & $0 + 0 + 2 =  2$       & 1       \\ \bottomrule
+\end{tabular}
+\end{table}
+
+Se producen dos empates que rompemos teniendo en cuenta su enfrentamiento directo. Así, CHI ganó en su enfrentamiento a LAL, por lo que gana el tercer puesto y LAL queda en cuarta posición. De la misma forma, SAS gana la primera posición y NYK se queda con la segunda posición del ranking. 
+
+\end{ejemplo}
+
+
+\begin{ejemplo}[Ejemplo de manipulación que puede sufrir el método. Adaptado de \cite{burger2005heart}]\label{ej:borda_elecciones} 
+
+En un país de $76.2$ millones de habitantes, se convocan elecciones para Presidente, Ministro y Alcalde, ordenados de mayor a menor responsabilidad. Se presentan a estos cargos tres candicatos A, B y C. Todo votante elige a cada candicato según sus preferencias, pero elegiendo a cada candidato en algún cargo. En la elecciones se aplica el método de Borda. Los resultados de las elecciones se muestran en la Tabla \ref{tbl:borda_elecciones}.
+ 
+\begin{savenotes}
+\begin{table}[h]
+\centering
+\caption{Votaciones del Ejemplo \ref{ej:borda_elecciones}}
+\label{tbl:borda_elecciones}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Elección \textbackslash Nº de votos\footnote{En millones de votos} & $37.2$ & $10.7$ & $28.3$ \\ \midrule
+Presidente           & A    & C    & C    \\
+Ministro             & B    & A    & B    \\
+Alcalde              & C    & B    & A    \\ \bottomrule
+\end{tabular}
+\end{table}
+\end{savenotes}
+
+Aplicando el recuento de Borda, el candidato A tendría $67.3$ millones de ``votos'', el candidato B, $74.4$ millones y, el candicato C, $86.9$ millones. Por tanto, A sería elegido como Presidente, B como Ministro y C como alcalde. Una decisión polémica, ya que A sólo ha sido votado por $37.2$ millones como Presidente y a C lo han votado $39$ millones. Esto demuestra la facilidad con la que puede ser manipulado este método.  
+
+\end{ejemplo}
+
+
 \subsection{Ranking promedio}
 \todo[backgroundcolor=red, inline]{Añadir información}
 
