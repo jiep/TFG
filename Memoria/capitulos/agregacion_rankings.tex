@@ -16,11 +16,10 @@ La idea es de la agregación de rankings es que dados $k$ rankings obtenidos por
 \subsection{Método de Borda}
 El método de Borda fue creado por Jean-Charles de Borda y data de 1770. Borda intentaba agregar rankings de listas de candidatos de unas elecciones políticas. Para cada lista de candidatos, cada candidato recibía una puntuación igual al número de candidatos que le superaban. La puntuación de cada lista es sumada para cada candidato para crear un solo ranking, que se llama recuento de Borda. Los candidatos son ordenados en orden descendente según este método. Este método puede manejar rankings de entrada con empates. Además, también puede producir un ranking de salida que contenga empates.  Aunque este método es muy sencillo, tiene un gran problema: que es fácil manipulable.
 
-\begin{ejemplo}
+\begin{ejemplo}\label{ej:borda}
 Consideramos los rankings producidos por el método de Massey (Tabla \ref{tbl:massey_resultados}), de Colley (Tabla \ref{tbl:colley_resultados_sin_empates}) y de Markov (Tabla \ref{tbl:markov_resultados}).\\
 
-Aplicamos a estos tres rankings el método de Borda. Para DEN, en los tres rankings se encuentra en 5ª y última posición, por lo que ha sido superado por cuatro equipos. Por lo que su recuento de borda será $4 + 4 + 4 = 12$. Para LAL, tanto el ranking de Massey como de Colley está 4º posición, por lo que ha sido superado por $3$ equipos, y en el ranking de Markov está en 2ª posición, por lo que ha sido superado por $1$ equipo. Así, su recuento de Borda será de $3 + 3 + 1 = 7$. Análogo para el resto de equipos. El resultado y el ranking agregado por el método de Borda se muestra en la Tabla \ref{tbl:borda_resultados}.\\
-
+Aplicamos a estos tres rankings el método de Borda. Para DEN, en los tres rankings se encuentra en 5ª y última posición, por lo que ha sido superado por cuatro equipos. Por lo que su recuento de borda será $4 + 4 + 4 = 12$. Para LAL, tanto el ranking de Massey como de Colley está 4º posición, por lo que ha sido superado por $3$ equipos, y en el ranking de Markov está en 2ª posición, por lo que ha sido superado por $1$ equipo. Así, su recuento de Borda será de $3 + 3 + 1 = 7$. Análogo para el resto de equipos. El resultado y el ranking agregado por el método de Borda se muestra en la Tabla \ref{tbl:borda_resultados}.
 
 \begin{table}[h]
 \centering
@@ -44,7 +43,7 @@ Se producen dos empates que rompemos teniendo en cuenta su enfrentamiento direct
 
 \begin{ejemplo}[Ejemplo de manipulación que puede sufrir el método. Adaptado de \cite{burger2005heart}]\label{ej:borda_elecciones} 
 
-En un país de $76.2$ millones de habitantes, se convocan elecciones para Presidente, Ministro y Alcalde, ordenados de mayor a menor responsabilidad. Se presentan a estos cargos tres candicatos A, B y C. Todo votante elige a cada candicato según sus preferencias, pero elegiendo a cada candidato en algún cargo. En la elecciones se aplica el método de Borda. Los resultados de las elecciones se muestran en la Tabla \ref{tbl:borda_elecciones}.
+En un país de $76.2$ millones de habitantes, se convocan elecciones para Presidente, Ministro y Alcalde, ordenados de mayor a menor responsabilidad. Se presentan a estos cargos tres candicatos A, B y C. Todo votante elige a cada candicato según sus preferencias, pero elegiendo a cada candidato en algún cargo. En la elecciones se aplica el método de Borda. Los resultados de las elecciones se muestran en la Tabla \ref{tbl:borda_elecciones}.\\
  
 \begin{savenotes}
 \begin{table}[h]
@@ -65,7 +64,27 @@ Aplicando el recuento de Borda, el candidato A tendría $67.3$ millones de ``vot
 
 \end{ejemplo}
 
-
 \subsection{Ranking promedio}
-\todo[backgroundcolor=red, inline]{Añadir información}
+Otro método muy sencillo de agregación de rankings es el ranking promedio. En este caso, a los enteros que representan el orden en el ranking en los múltiples rankings, se hace la media con éstos para crear el ranking agregado. Una desventaja de este método es la frecuente aparición de empates en el rating. Este método sólo puede usarse cuando todos los rankings contienen los mismos elementos. 
 
+\begin{ejemplo}
+Consideramos los mismos rankings que en el Ejemplo \ref{ej:borda}. DEN aparece en 5ª posición en los tres rankings por lo que la media es $5$. Para LAL, que aparece en dos cuartas posiciones y un segundo lugar, la media es $3.33$. Análogo para el resto de equipos. Los resultados se pueden ver en la Tabla \ref{tbl:promedio_resultados}. Se producen los mismos empates que en el Ejemplo \ref{ej:borda}, por lo que rompemos los empates de la misma forma.
+
+\begin{table}[h]
+\centering
+\caption{Resultados del método del ranking promedio}
+\label{tbl:promedio_resultados}
+\begin{tabular}{@{}cccccc@{}}
+\cmidrule(l){2-6}
+    & Massey & Colley & Markov & Ranking promedio & Ranking agregado \\ \midrule
+DEN & $5$    & $5$    & $5$    & $5$              & $5$              \\
+LAL & $4$    & $4$    & $2$    & $3.33$           & $4$              \\
+SAS & $2$    & $2$    & $1$    & $1.67$           & $1$              \\
+CHI & $3$    & $3$    & $4$    & $3.33$           & $3$              \\
+NYK & $1$    & $1$    & $3$    & $1.67$           & $2$              \\ \bottomrule
+\end{tabular}
+\end{table}
+
+
+
+\end{ejemplo}
