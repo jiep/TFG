@@ -123,8 +123,80 @@ NYK & \begin{tabular}[c]{@{}c@{}}104-100\\ 104-100\\ 102-100\end{tabular} & \beg
 \end{tabular}
 \end{table}
 
-Tras generar los partidos simulados, debemos aplicar un método de combinación para crear el ranking agregado. Aplicaremos como método de combinación Massey (se podría haber elegido cualquier otro).
+Tras generar los partidos simulados, debemos aplicar un método de combinación para crear el ranking agregado. Aplicaremos como método de combinación el método de Massey y el de Colley para comparar ambos resultados.\\
 
-\todo[backgroundcolor=red, inline]{Completar ejemplo}
+El sistema de Massey $\mathbf{M r} = \mathbf{p}$ queda de la siguiente manera:
 
+\begin{equation*}
+\left(\begin{array}{rrrrr}
+12 & -1 & -1 & -1 & -1 \\
+-1 & 12 & -1 & -1 & -1 \\
+-1 & -1 & 12 & -1 & -1 \\
+-1 & -1 & -1 & 12 & -1 \\
+ 1 &  1 &  1 &  1 &  1
+\end{array}\right)
+\left(\begin{array}{c}
+\mathbf{r}_\text{DEN}\\
+\mathbf{r}_\text{LAL}\\
+\mathbf{r}_\text{SAS}\\
+\mathbf{r}_\text{CHI}\\
+\mathbf{r}_\text{NYK}
+\end{array}\right)
+= 
+\left(\begin{array}{c}
+-30\\
+-5\\
+20\\
+-5\\
+0
+\end{array}\right)
+\end{equation*}
+
+El sistema de Colley $\mathbf{C r} = \mathbf{b}$ queda de la siguiente manera:
+
+\begin{equation*}
+\left(\begin{array}{rrrrr}
+14 & -3 & -3 & -3 & -3 \\
+-3 & 14 & -3 & -3 & -3 \\
+-3 & -3 & 14 & -3 & -3 \\
+-3 & -3 & -3 & 14 & -3 \\
+-3 & -3 & -3 & -3 & 14
+\end{array}\right)
+\left(\begin{array}{c}
+\mathbf{r}_\text{DEN}\\
+\mathbf{r}_\text{LAL}\\
+\mathbf{r}_\text{SAS}\\
+\mathbf{r}_\text{CHI}\\
+\mathbf{r}_\text{NYK}
+\end{array}\right)
+= 
+\left(\begin{array}{c}
+-5\\
+-0\\
+5\\
+4\\
+5
+\end{array}\right)
+\end{equation*}
+
+La Tabla \ref{tbl:partidos_simulados_resultados} muestra los resultados del cáculo de rating de Massey y de Colley, y su ranking. Notar que se producen empates al calcular los ratings. Los resolvemos de igual manera que en el Ejemplo \ref{ej:borda}.
+
+\begin{table}[h]
+\centering
+\caption{Resultados del Ejemplo \ref{ej:partidos_simulados}}
+\label{tbl:partidos_simulados_resultados}
+\begin{tabular}{@{}ccccc@{}}
+\cmidrule(l){2-5}
+    & \begin{tabular}[c]{@{}c@{}}$\mathbf{r}$\\ de Massey\end{tabular} & \begin{tabular}[c]{@{}c@{}}Ranking\\ agregado\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\mathbf{r}$\\ de Colley\end{tabular} & \begin{tabular}[c]{@{}c@{}}Ranking\\ agregado\end{tabular} \\ \midrule
+DEN & -2.3077                                                          & 5                                                          & 0.5000                                                           & 5                                                          \\
+LAL & -0.3846                                                          & 4                                                          & 0.7941                                                           & 4                                                          \\
+SAS & 1.5385                                                           & 1                                                          & 1.0882                                                           & 1                                                          \\
+CHI & -0.3846                                                          & 3                                                          & 1.0294                                                           & 3                                                          \\
+NYK & 1.5385                                                           & 2                                                          & 1.0884                                                           & 2                                                          \\ \bottomrule
+\end{tabular}
+\end{table}
 \end{ejemplo}
+
+\subsection{Método óptimo de agregación de rankings}
+
+\todo[backgroundcolor=red, inline]{Añadir información}
