@@ -1,2 +1,121 @@
 \chapter{Programación lineal}
 
+\begin{defi}
+Llamamos problema de programación lineal al siguiente conjunto de ecuaciones e inecuaciones:
+
+\begin{equation}\label{eq:lineal}
+\begin{array}{rl}
+\mathrm{min} & c_1x_1 + c_2x_2 + \dots + c_nx_n\\
+\mathrm{s.a} & a_{11}x_1 + a_{12}x_2 + \dots + a_{1n}x_n = b_1\\
+             & a_{21}x_1 + a_{22}x_2 + \dots + a_{2n}x_n = b_2\\
+             & \dots                                          \\
+             & a_{m1}x_1 + a_{m2}x_2 + \dots + a_{mn}x_n = b_m\\
+\text{y}     & x_1 \geq 0, x_2 \geq 0, \dots, x_n \geq 0
+\end{array}
+\end{equation}
+
+donde $b_i$, $c_i$ y $a_{ij}$ son constantes reales y $x_i$ son nuestras incógnitas.\\
+
+Si empleamos la notación vectorial, el problema tiene una notación más compacta:\\
+
+\begin{equation} \label{eq:forma_normal}
+\begin{array}{rl}
+\mathrm{min} & \mathbf{c}^T \mathbf{x}\\
+\mathrm{s.a} & \mathbf{A x} = \mathbf{b} \text{ y } \mathbf{x} \geq \mathbf{0}
+\end{array}
+\end{equation} 
+
+\end{defi}
+
+\begin{defi}
+La función $\mathbf{c}^T \mathbf{x}$ recibe el nombre de función objetivo.
+\end{defi}
+
+\begin{defi}
+Las ecuaciones $\sum_{j=1}^{n} a_{ij}x_i = b_i$ reciben el nombre de restricciones funcionales (o estructurales).\\
+
+Las inecuaciones $x_i \geq 0$ reciben el nombre de restricciones de no negatividad.
+\end{defi}
+
+\begin{defi}
+Se llama solución a cualquier conjunto de valores específico de las variables $\mathbf{x} = (x_1, x_2, \dots, x_n)^T$.
+\end{defi}
+
+\begin{defi}
+Una solución se dice factible si todas las restricciones (funcionales y de no negatividad) se satisfacen. En caso contrario, se dice que es una solución no factible.
+\end{defi}
+
+\begin{defi}
+La región factible es la unión de todas las soluciones factibles.
+\end{defi}
+
+\begin{ejemplo}
+Dado el siguiente problema de programación lineal
+
+\begin{equation}
+\begin{array}{rl}
+\mathrm{min} & 3x + 5y\\
+\mathrm{s.a} & x \leq 4\\
+			 & 2y \leq 12\\
+			 & 3x + 2y \leq 18\\
+			 & x, y \geq 0 
+\end{array} 
+\end{equation}
+
+La región del problema se puede ver en la Figura \ref{fig:ejemplo_region_factible}.
+
+\begin{figure}[htb]
+\centering
+\ejemploregionfactible
+\caption{Región factible}
+\label{fig:ejemplo_region_factible}
+\end{figure}
+\end{ejemplo}
+
+\begin{defi}
+Una solución es óptima si proporciona el valor más pequeño de la función objetivo.
+\end{defi}
+
+\begin{defi}
+Sea $\mathbf{A x} = \mathbf{b}$ el conjunto de restricciones de no negatividad. Sea $\mathbf{B} \in \R^{m \times m}$ cualquier submatriz compuesta de las columnas de $\mathbf{A}$. Entonces, si todas las $n-m$ componentes de $\mathbf{x}$ no asociadas con las columnas de $\mathbf{A}$ son iguales a cero, la solución del sistema resultante se dice una solución básica de $\mathbf{A x} = \mathbf{b}$ con respecto a la base $\mathbf{B}$. Las componentes asociadas a $\mathbf{x}$ con las columnas de $\mathbf{B}$ se llaman variables básicas.
+\end{defi}
+
+\begin{defi}
+Si una o más de las variables básicas de la solución básica tiene valor cero, se dice que es una solución básica degenerada.
+\end{defi}
+
+\begin{teo}[fundamental de programación lineal]
+Dado un problema lineal de la forma \ref{eq:forma_normal} donde $\mathbf{A} \in \R^{m \times n}$ con rango $m$. Entonces,
+
+\begin{enumerate}
+\item Si hay una solución factible, entonces es una solución básica factible.
+\item Si hay una solución factible óptima, es una solución factible básica óptima.
+\end{enumerate}
+\end{teo}
+
+\begin{defi}
+Llamamos problema primal al problema \ref{eq:dual}.\\
+
+Llamamos problema dual al problema 
+
+\begin{equation} \label{eq:dual}
+\begin{array}{rl}
+\mathrm{max} & \mathbf{\boldsymbol\lambda}^T \mathbf{b}\\
+\mathrm{s.a} & \mathbf{\boldsymbol\lambda}^T \mathbf{A} \leq \mathbf{c}^T 
+\end{array}
+\end{equation} 
+\end{defi}
+
+\begin{lema}(de dualidad débil)
+Si $\mathbf{x}$ y $\mathbf{\boldsymbol\lambda}$ son soluciones factibles de (\ref{eq:forma_normal}) y (\ref{eq:dual}), entonces
+
+\[ \mathbf{c}^T \geq \mathbf{\boldsymbol\lambda}^T \mathbf{b} \]
+\end{lema}
+
+\begin{cor}
+Si $\mathbf{x}_0$ y $\mathbf{\boldsymbol\lambda}_0$ son soluciones factibles de (\ref{eq:forma_normal}) y de (\ref{eq:dual}), respectivamente, y si $\mathbf{c}^T \mathbf{x_0} = \mathbf{\boldsymbol\lambda}_0^T \mathbf{b}$, entonces $\mathbf{x}_0$ y $\mathbf{\boldsymbol\lambda}_0$ son óptimas para sus respectivos problemas.
+\end{cor}
+
+\begin{teo}[de dualidad de programación lineal]
+Si cualquiera de los problemas (\ref{eq:forma_normal}) o (\ref{eq:dual}) tiene una solución óptima finita, también lo hace el otro, y los correspondientes valores de la función objetivo son iguales. Si cualquier problema una función objetivo no acotada, el otro problema no tiene solución factible.  
+\end{teo}
