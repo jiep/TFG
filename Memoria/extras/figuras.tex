@@ -313,3 +313,23 @@
   \draw[->, thick] (3.75,-5.75) to (3.75,-6.75);
        
 \end{tikzpicture}}
+
+\newcommand{\ejemploregionfactible}{
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.5cm,semithick]
+  \tikzstyle{every state}=[draw=white,text=black]
+ 
+  % Región factible
+  \draw[thick, fill=gray!20] (0,0) -- (0,6) -- (2,6) -- (4,3) -- (4,0) -- cycle;
+  \node[align=center] at (2,2.5) (factible) {Región \\ factible};
+
+  % Ejes
+  \draw[->, thick] (-0.5,0) to (6,0);
+  \draw[->, thick] (0,-0.5) to (0,8);
+  \node[align=center] at (6,-0.5) {$x$};
+  \node[align=center] at (-0.5,8) {$y$};
+  
+  % Restricciones
+  \node[align=center] (r1) at (1,6.5) {$2x = 12$};
+  \node[align=center] (r2) at (4.5,5) {$3x + 2y = 18$};
+  \node[align=center] (r3) at (5,1) {$x = 4$};
+\end{tikzpicture}}
