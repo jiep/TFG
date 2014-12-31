@@ -88,4 +88,43 @@ NYK & $1$    & $1$    & $3$    & $1.67$           & $2$              \\ \bottomr
 \end{ejemplo}
 
 
-\subsection{Datos de partidos simulados}
+\subsection{Método de datos de partidos simulados}
+
+El método de datos de partidos simulados\footnote{Simulated Game Data}, nace de una simple interpretación de un ranking. Si el equipo $A$ aparece por encima del equipo $B$ en un ranking, entonces en un emparejamiento entre estos dos equipos, $A$ debería batir al equipo $B$. Es más, si el equipo $A$ aparece en la parte de arriba del ranking y juega contra $B$, que aparece al final del ranking, esperaríamos que que $A$ gane a $B$ con un amplio margen de victoria. Un ranking da información implícita sobre los futuros resultados. Usamos rankings para generar los datos de partidos simulados, que usamos para agregar varios rankings en uno solo. Cada ranking de $n$ equipos proporciona datos para $\binom{n}{2}$ partidos simulados. Por tanto, si tenemos $k$ rankings de $n$ equipos tendremos $k \binom{n}{2}$. partidos simulados.\\
+
+La forma de generar los partidos simulados es, para cada ranking, asignar un punto de margen de victoria por cada posición de diferencia en el ranking. La ventaja de este método es que no es necesario tener rankings completos, es decir, que todos los rankings que contengan todos los equipos. \\
+
+Una vez que se han creado los partidos simulados, se aplica un método de combinado, que no es más que cualquiera de los métodos de rankings que hemos visto en el Capítulo \ref{chp:conceptos_basicos}. Se puede utilizar un método diferente distinto al de los rankings de entrada o utilizar el mismo método para favorecer los rankings con ese método. El método de combinación suaviza el efecto producido por los outliers (los datos atípicos del ranking). La Figura \ref{fig:partidos_simulados} muestra el esquema general del método.
+
+\begin{figure}[htb]
+\centering
+\partidossimulados
+\caption{Método de datos de partidos simulados}
+\label{fig:partidos_simulados}
+\end{figure}
+
+\begin{ejemplo} \label{ej:partidos_simulados}
+Consideremos los métodos rankings del Ejemplo \ref{ej:borda}. Tenemos tres rankings generados por tres métodos; Massey, Colley y Markov con $5$ equipos cada uno, por lo que tenemos que generar $3\binom{5}{2} = 30$ partidos simulados. \\
+
+Comenzamos con el ranking producido por el método de Massey. DEN aparece en la 5ª y última posición, por lo que hay una posición de diferencia con LAL, tres con SAS, dos con CHI y cuatro con NYK. De esta forma los partidos simulados serán de $100-101$, $100-103$, $100-102$ y $100-104$, respectivamente. Hemos considerado $100$ como la media de puntos a favor de todos los equipos, y se le suma la diferencia al equipo ganador. De la misma forma se repite para todos los equipos y todos los métodos. La Tabla \ref{tbl:partidos_simulados} muestra todos los partidos simulados. \\
+
+\begin{table}[h]
+\centering
+\caption[Partidos simulados del Ejemplo \ref{ej:partidos_simulados}]{Partidos simulados del Ejemplo \ref{ej:partidos_simulados}. El primer resultado de cada celda de la tabla es la simulación del partido según el ranking de Massey, el segundo por el método de Colley, y el tercero por el método de Markov}
+\label{tbl:partidos_simulados}
+\begin{tabular}{@{}cccccc@{}}
+\cmidrule(l){2-6}
+    & DEN                                                                 & LAL                                                                 & SAS                                                                 & CHI                                                                 & NYK                                                                 \\ \midrule
+DEN & ---                                                                 & \begin{tabular}[c]{@{}c@{}}100-101\\ 100-101\\ 100-103\end{tabular} & \begin{tabular}[c]{@{}c@{}}100-103\\ 100-103\\ 100-104\end{tabular} & \begin{tabular}[c]{@{}c@{}}100-102\\ 100-102\\ 100-101\end{tabular} & \begin{tabular}[c]{@{}c@{}}100-104\\ 100-104\\ 100-102\end{tabular} \\ \midrule
+LAL & \begin{tabular}[c]{@{}c@{}}101-100\\ 101-100\\ 103-100\end{tabular} & ---                                                                 & \begin{tabular}[c]{@{}c@{}}100-102\\ 100-102\\ 100-101\end{tabular} & \begin{tabular}[c]{@{}c@{}}100-101\\ 100-101\\ 102-100\end{tabular} & \begin{tabular}[c]{@{}c@{}}100-103\\ 100-103\\ 101-100\end{tabular} \\ \midrule
+SAS & \begin{tabular}[c]{@{}c@{}}103-100\\ 103-100\\ 104-100\end{tabular} & \begin{tabular}[c]{@{}c@{}}102-100\\ 102-100\\ 101-100\end{tabular} & ---                                                                 & \begin{tabular}[c]{@{}c@{}}101-100\\ 101-100\\ 103-100\end{tabular} & \begin{tabular}[c]{@{}c@{}}100-101\\ 100-101\\ 102-100\end{tabular} \\ \midrule
+CHI & \begin{tabular}[c]{@{}c@{}}102-100\\ 102-100\\ 101-100\end{tabular} & \begin{tabular}[c]{@{}c@{}}101-100\\ 101-100\\ 100-102\end{tabular} & \begin{tabular}[c]{@{}c@{}}100-101\\ 100-101\\ 100-103\end{tabular} & ---                                                                 & \begin{tabular}[c]{@{}c@{}}100-102\\ 100-102\\ 100-101\end{tabular} \\ \midrule
+NYK & \begin{tabular}[c]{@{}c@{}}104-100\\ 104-100\\ 102-100\end{tabular} & \begin{tabular}[c]{@{}c@{}}103-100\\ 103-100\\ 100-101\end{tabular} & \begin{tabular}[c]{@{}c@{}}101-100\\ 101-100\\ 100-102\end{tabular} & \begin{tabular}[c]{@{}c@{}}102-100\\ 102-100\\ 101-100\end{tabular} & ---                                                                 \\ \bottomrule
+\end{tabular}
+\end{table}
+
+Tras generar los partidos simulados, debemos aplicar un método de combinación para crear el ranking agregado. Aplicaremos como método de combinación Massey (se podría haber elegido cualquier otro).
+
+\todo[backgroundcolor=red, inline]{Completar ejemplo}
+
+\end{ejemplo}
