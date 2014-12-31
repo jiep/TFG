@@ -1,6 +1,6 @@
 \usepackage{pgf}
 \usepackage{tikz}
-\usetikzlibrary{arrows,automata}
+\usetikzlibrary{arrows,automata,fit}
 
 \newcommand{\ejemplografo}{
 \begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=3cm,semithick]
@@ -279,4 +279,37 @@
         (B) edge   node {}   (F)
         (D) edge   node {}   (F);
         	
+\end{tikzpicture}}
+
+\newcommand{\partidossimulados}{
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.5cm,semithick]
+  \tikzstyle{every state}=[draw=white,text=black]
+	\node         (A) [draw,thick,minimum width=2cm,minimum height=1.5cm,rounded corners=10pt] {Método $1$};
+	  
+    \node         (B) [draw,thick,minimum width=2cm,minimum height=1.5cm, right of=A,rounded corners=10pt] {Método $2$};
+
+   \node[state]         (C) [draw,thick,minimum width=2cm,minimum height=1.5cm, right of=B, rounded corners=10pt] {$\cdots$};
+
+   \node         (D) [draw,thick,minimum width=2cm,minimum height=1.5cm, right of=C, rounded corners=10pt] {Método $k$};
+
+   \node[fit=(A)(B)(C)(D)](group){};
+	  
+   \node         (E) [draw,thick,minimum width=9.5cm,minimum height=1.5cm, below of=group, rounded corners=10pt] {Datos de partidos simulados};
+   
+   \node         (F) [draw,thick,minimum width=5cm,minimum height=1.5cm, below of=E, rounded corners=10pt] {Método de combinación};
+   
+   \node         (G) [thick,minimum width=5cm,minimum height=1.5cm, below of=F, rounded corners=10pt] {$\left(\begin{array}{c}
+   \\ 
+   \text{Ranking}\\
+   \text{agregado}\\
+   \\
+   \end{array}\right)$};
+   
+  
+  \draw[->, thick] (0,-0.75) to (0,-1.75);
+  \draw[->, thick] (2.5,-0.75) to (2.5,-1.75);
+  \draw[->, thick] (7.5,-0.75) to (7.5,-1.75);
+  \draw[<->, thick] (3.75,-3.25) to (3.75,-4.25);
+  \draw[->, thick] (3.75,-5.75) to (3.75,-6.75);
+       
 \end{tikzpicture}}
