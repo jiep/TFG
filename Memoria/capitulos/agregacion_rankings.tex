@@ -199,4 +199,23 @@ NYK & 1.5385                                                           & 2      
 
 \subsection{Método óptimo de agregación de rankings}
 
-\todo[backgroundcolor=red, inline]{Añadir información}
+Hasta ahora sólo hemos visto métodos heurísticos, es decir, métodos no necesariamente óptimos. El método que veremos a continuación sí es óptimo, pero a costa de una mayor complejidad computacional y mayor tiempo de cómputo. Esta optimalidad puede ser necesaria cuando necesitamos una gran precisión al calcular un ranking agregado.\\
+
+El método fue creado por el Dr. Yoshitsugu Yamamoto, de la Universidad de Tsukuba, en Japón. Este método se basa en un programa de programación lineal que debe ser resuleto para calcular el ranking óptimo. Este método trata de medir la conformidad o el compromiso entre los rankings de entrada. Una forma de medir la conformidad es
+
+\begin{multline}
+c_{ij} = \text{número de rankings con $i$ por encima de $j$} \\ - \text{número de rankings con $i$ por debajo de $j$}
+\end{multline}
+
+Si disponemos de $k$ rankings con $n$ equipos, formaremos una matriz $\mathbf{C} \in \R^{n\times n}$ antisimétrica. Este método puede utilizarse cuando se dispone de rankings completos o rankings parciales.\\
+
+Nuestro objetivo es maximizar la conformidad. Para ello, creamos nuestras variables $x_{ij}$ de decisión definidas de la siguiente manera:
+
+\begin{equation}
+x_{ij} = \begin{cases}
+1 & \text{ si el equipo $i$ está por encima de $j$ en el ranking}\\
+0 & \text{ en caso contrario}
+\end{cases}
+\end{equation}
+
+\todo[backgroundcolor=red, inline]{Añadir más información}
