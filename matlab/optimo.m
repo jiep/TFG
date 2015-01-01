@@ -19,7 +19,7 @@ n=12;
 
 %Matriz de prueba
 %M = zeros(n,n);
-% Función objetivo
+% Funcion objetivo
 f = -reshape(M,[1,n^2]);
 
 b = 2*ones(n*(n-1)*(n-2),1);
