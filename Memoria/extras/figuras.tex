@@ -333,3 +333,22 @@
   \node[align=center] (r2) at (4.5,5) {$3x + 2y = 18$};
   \node[align=center] (r3) at (5,1) {$x = 4$};
 \end{tikzpicture}}
+
+\newcommand{\ejemplografodominancia}{
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm,semithick]
+  \tikzstyle{every state}=[draw=black,text=black]
+ 
+  
+  \node[state] (A)              {$A$};
+  \node[state] (B) [right of=A] {$B$};
+  \node[state] (C) [right of=B] {$C$};
+  \node[state] (D) [right of=C] {$D$};
+  
+  \path (A) edge              node {} (B);
+  \path (A) edge [bend left]  node {} (C);
+  \path (A) edge [bend left]  node {} (D);
+  \path (B) edge              node {} (C);
+  \path (B) edge [bend right] node {} (D);
+  \path (C) edge              node {} (D);
+  
+\end{tikzpicture}}
