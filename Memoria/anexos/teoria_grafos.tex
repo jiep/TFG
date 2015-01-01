@@ -215,3 +215,25 @@ Además la arista $\{C,C\}$ es un bucle porque $\mathrm{init}(\{C,C\}) = \mathrm
 \begin{defi}
 Un grafo dirigido $D = (V', E')$ es una orientación de un grafo (no dirgido) $G = (V,E)$ si $V = V'$ y $E = E'$ y $\{\mathrm{init}(e), \mathrm{ter}(e) \} = \{x,y\} \ \forall e = xy \in E$.
 \end{defi}
+
+\section{Algunos tipos de grafos}
+
+\begin{defi}
+Un grafo de dominancia $G=(V,E)$ es un grafo dirigido tal que para todo $x,y \in V$ se cumple una de las dos condiciones siguientes, pero no ambas simultáneamente:
+
+\begin{itemize}
+\item $\mathrm{init}(xy) = x$ \quad y \quad $\mathrm{ter}(xy) = y$
+\item $\mathrm{init}(xy) = y$ \quad y \quad $\mathrm{ter}(xy) = x$ 
+\end{itemize}
+\end{defi}
+
+\begin{ejemplo}
+Si consideramos el grafo de la Figura \ref{fig:grafo_dominancia}, vemos que para todo vértice $x,y \in \{A, B, C, D\}$ se cumple alguna de las dos condiciones anteriores, pero no ambas simultáneamente. Por ejemplo, para los vértices $A, D$ se cumple que $\mathrm{init}(\{A,D\}) = A$ y $\mathrm{ter}(\{A,D\}) = D$, pero no se cumple la otra condición. De la misma se comprueban los vértices restantes.   
+
+\begin{figure}[h]
+\centering
+\ejemplografodominancia
+\caption{Ejemplo de grafo de dominancia}
+\label{fig:grafo_dominancia}
+\end{figure}
+\end{ejemplo}
