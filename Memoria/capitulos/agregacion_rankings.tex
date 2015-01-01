@@ -218,4 +218,45 @@ x_{ij} = \begin{cases}
 \end{cases}
 \end{equation}
 
+Una vez tenemos formadas las matrices $\mathbf{C}$ y $\mathbf{X}$ tenemos debemos maximizar la conformidad, es decir, nuestra función objetivo será
+
+\begin{equation}
+\max \sum_{i=1}^{n} \sum_{j=1}^{n} c_{ij} x_{ij}
+\end{equation}
+
+donde $x_{ij} \in \{0,1\}$.\\
+
+A esta función objetivo debemos añadirle una dos restricciones. La primera restricción es
+
+\begin{equation}
+x_{ij} + x_{ji} = 1
+\end{equation}
+
+Esta restricción indica que el equipo $i$ o el equipo $j$ estará por encima de $j$ o de $i$ respectivamente, pero los dos pueden estar empatados.\\
+
+La segunda restricción es 
+
+\begin{equation}
+x_{ij} + x_{jk} + x_{ki} \leq 2
+\end{equation}
+
+Esta restricción indica transitividad en el rankings, es decir, si $i$ está por encima de $j$ y $j$ está por encima de $k$, entonces $i$ estará por encima de $k$.\\
+
+Por tanto, el problema a resolver es el siguiente:
+
+\begin{equation}
+\begin{array}{rl}
+\max         & \sum\limits_{i=1}^{n} \sum\limits_{j=1}^{n} c_{ij} x_{ij}\\
+\mathrm{s.a} & x_{ij} + x_{ji} = 1\\
+             & x_{ij} + x_{jk} + x_{ki} \leq 2\\
+             & x_{ij} \in \{0,1\}
+\end{array}
+\end{equation}
+
+Si tenemos $n$ equipos, nuestro problema tendá $n(n-1)$ variables de decisión, $n(n-1)$ restricciones del primer tipo y $n(n-1)(n-2)$ restricciones del segundo tipo. El orden computacional $\mathcal{O}(n^3)$ de las restricciones del segundo tipo limita el problema del tamaño del ranking a producir. Estos problemas se pueden solucionar con la relajación de restricciones y con la técnica algorítmica de ramifica y poda.
+
+\begin{ejemplo}
+
+\end{ejemplo}
+
 \todo[backgroundcolor=red, inline]{Añadir más información}
