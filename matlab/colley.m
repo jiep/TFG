@@ -7,14 +7,20 @@ function [rating, ranking] = colley(C, b)
 %   rating vector columna con el rating de cada equipos
 %   ranking vector columna con el ranking de cada equipo
 
-% Tamanio de la matriz y numero de equipos
+% Tamaño de la matriz y número de equipos
 [m,n] = size(C);
 
 % Calculamos el rating
 rating = C\b;
 
 % Creamos el ranking
-a = [[1:n]' rating];
-[E,ranking] = sortrows(a, -2);
+ranking = zeros(1,n);
+
+rating_ordenado = sort(rating, 'descend');
+for i=1:n 
+    ranking(i) = find(rating_ordenado == rating(i),1);
+end
+
+ranking = ranking';
 
 end

@@ -1,16 +1,16 @@
-function [X, obj, r] = metodo_optimo(C) 
+function [X, obj, r] = metodo_optimo_relajado(C) 
 % ENTRADA
 %   C matriz de conformidad
 %
 % SALIDA
-%   X matriz de las variables de decision
-%   obj valor de la funcion objetivo
-%   r ranking producido por el metodo
+%   X matriz de las variables de decisión
+%   obj valor de la función objetivo
+%   r ranking producido por el método
 
-% Tamanio de la matriz y numero de equipos
+% Tamaño de la matriz y número de equipos
 [m,n] = size(C);
 
-% Funcion objetivo
+% Función objetivo
 f = -reshape(C,[1,n^2]);
 
 % Vectores con las restricciones
@@ -60,21 +60,25 @@ for i=1:n
     end
 end
 
-% Todas las variables son enteras
-intercon = 1:n;
+%opts = optimoptions(@fmincon,'Display','off');
 
 % Resolvemos el problema
-[X,fval] = intlinprog(f, intercon, T2, b, T1, beq, lb, ub);
+[X,fval] = linprog(f, T2, b, T1, beq, lb, ub);
 
-% Valor de la funcion objetivo
+% Valor de la función objetivo
 obj = -fval; 
 
-% Matriz con las varibles de decision
+% Matriz con las varibles de decisión
 X = reshape(X',[n,n]);
 
 % Creamos el ranking
-a = [[1:n]' sum(X,2)];
-[E,r] = sortrows(a, -2);
+ranking = zeros(1,n);
 
+rating_ordenado = sort(rating, 'descend');
+for i=1:n 
+    ranking(i) = find(rating_ordenado == rating(i),1);
+end
+
+ranking = ranking';
 
 end

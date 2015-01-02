@@ -1,14 +1,14 @@
 function [rating, ranking] = markov(S, beta) 
 % ENTRADA
-%   S matriz estocastica, suma de todas las matrices estocasticas S_i
-%   beta parametro en caso de que S no sea irreducible
+%   S matriz estocástica, suma de todas las matrices estocásicas S_i
+%   beta parámetro en caso de que S no sea irreducibñe
 %
 % SALIDA
 %   rating vector columna con el rating de cada equipos
 %   ranking vector columna con el ranking de cada equipo
 
 
-% Tamanio de la matriz y numero de equipos
+% Tamaño de la matriz y número de equipos
 [m,n] = size(S);
 
 % Calculamos los autovalores de S
@@ -32,6 +32,12 @@ else
 end
 
 % Creamos el ranking
-a = [[1:n]' rating];
-[E,ranking] = sortrows(a, -2);
+ranking = zeros(1,n);
+
+rating_ordenado = sort(rating, 'descend');
+for i=1:n 
+    ranking(i) = find(rating_ordenado == rating(i),1);
+end
+
+ranking = ranking';
 end
