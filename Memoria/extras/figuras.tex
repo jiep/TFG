@@ -352,3 +352,27 @@
   \path (C) edge              node {} (D);
   
 \end{tikzpicture}}
+
+\newcommand{\ejemplografodominanciaoptimo}{
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm,semithick]
+  \tikzstyle{every state}=[draw=black,text=black]
+ 
+  
+  \node[state] (nyk)                {NYK};
+  \node[state] (sas) [right of=nyk] {SAS};
+  \node[state] (chi) [right of=sas] {CHI};
+  \node[state] (lal) [right of=chi] {LAL};
+  \node[state] (den) [right of=lal] {DEN};  
+  
+  \path (nyk)   edge [bend right]  node {} (chi);
+  \path (nyk)   edge [bend right]  node {} (lal);
+  \path (nyk)   edge [bend right]  node {} (den);
+  \path (nyk)   edge               node {} (sas);
+  \path (sas)   edge [bend left]   node {} (lal);
+  \path (sas)   edge [bend left]   node {} (den);  
+  \path (sas)   edge               node {} (chi);
+  \path (chi)   edge               node {} (lal);
+  \path (chi)   edge [bend right]  node {} (den);    
+  \path (lal)   edge               node {} (den);
+
+\end{tikzpicture}}
