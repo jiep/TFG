@@ -7,7 +7,7 @@ function [rating, ranking] = colley(C, b)
 %   rating vector columna con el rating de cada equipos
 %   ranking vector columna con el ranking de cada equipo
 
-% Tamaño de la matriz y número de equipos
+% Tamanio de la matriz y numero de equipos
 [m,n] = size(C);
 
 % Calculamos el rating
