@@ -1,17 +1,17 @@
-function [rating, ranking] = massey(M, p) 
+function [rating, ranking] = colley(C, b) 
 % ENTRADA
-%   M matriz de Massey
-%   p vector del lado derecho del sistema de Massey
+%   C matriz de Colley
+%   b vector del lado derecho del sistema de Colley
 %
 % SALIDA
 %   rating vector columna con el rating de cada equipos
 %   ranking vector columna con el ranking de cada equipo
 
 % Tamaño de la matriz y número de equipos
-[m,n] = size(M);
+[m,n] = size(C);
 
 % Calculamos el rating
-rating = M\p;
+rating = C\b;
 
 % Creamos el ranking
 a = [[1:n]' rating];
