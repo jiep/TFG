@@ -203,7 +203,7 @@ Hasta ahora sólo hemos visto métodos heurísticos, es decir, métodos no neces
 
 El método fue creado por el Dr. Yoshitsugu Yamamoto, de la Universidad de Tsukuba, en Japón. Este método se basa en un programa de programación lineal que debe ser resuleto para calcular el ranking óptimo. Este método trata de medir la conformidad o el compromiso entre los rankings de entrada. Una forma de medir la conformidad es
 
-\begin{multline}
+\begin{multline} \label{eq:conformidad}
 c_{ij} = \text{número de rankings con $i$ por encima de $j$} \\ - \text{número de rankings con $i$ por debajo de $j$}
 \end{multline}
 
@@ -217,6 +217,8 @@ x_{ij} = \begin{cases}
 0 & \text{ en caso contrario}
 \end{cases}
 \end{equation}
+
+Notar que la matriz $\mathbf{X}$ puede ser representada en forma de grafo de dominancia (ver Definición \ref{def:dominancia}).\\
 
 Una vez tenemos formadas las matrices $\mathbf{C}$ y $\mathbf{X}$ tenemos debemos maximizar la conformidad, es decir, nuestra función objetivo será
 
@@ -253,10 +255,151 @@ Por tanto, el problema a resolver es el siguiente:
 \end{array}
 \end{equation}
 
-Si tenemos $n$ equipos, nuestro problema tendá $n(n-1)$ variables de decisión, $n(n-1)$ restricciones del primer tipo y $n(n-1)(n-2)$ restricciones del segundo tipo. El orden computacional $\mathcal{O}(n^3)$ de las restricciones del segundo tipo limita el problema del tamaño del ranking a producir. Estos problemas se pueden solucionar con la relajación de restricciones y con la técnica algorítmica de ramifica y poda.
+Si tenemos $n$ equipos, nuestro problema tendá $n(n-1)$ variables de decisión, $n(n-1)$ restricciones del primer tipo y $n(n-1)(n-2)$ restricciones del segundo tipo. El orden computacional $\mathcal{O}(n^3)$ de las restricciones del segundo tipo limita el problema del tamaño del ranking a producir. Estos problemas se pueden solucionar con la relajación de restricciones y con la técnica algorítmica de ramifica y poda (ver \cite[pág 190-192]{langville2012s}).
 
-\begin{ejemplo}
+\begin{ejemplo} \label{ej:optimo}
+Consideramos de nuevo los rankings del Ejemplo \ref{ej:borda} producidos por los métodos de Massey, Colley y Markov. Aplicamos el método óptimo. Primero debemos formar la matriz de conformidad $\mathbf{C}$ quedando de la siguiente manera:
+
+\begin{equation*}
+\mathbf{C} = \left(\begin{array}{rrrrr}
+0 & -3 & -3 & -3 & -3 \\
+3 &  0 & -3 & -1 & -1 \\
+3 &  3 &  0 &  3 & -1 \\
+3 &  1 & -3 &  0 & -3 \\
+3 &  1 &  1	&  3 &	0
+\end{array}\right)
+\end{equation*}
+
+Resolviendo el problema de programación la matriz $\mathbf{X}$ con las variables de decisión queda así:
+
+\begin{equation*}
+\mathbf{X} = \left(\begin{array}{rrrrr}
+0 & 0 & 0 & 0 & 0 \\
+1 & 0 & 0 & 0 & 0 \\
+1 & 1 & 0 & 1 & 0 \\
+1 & 1 & 0 & 0 & 0 \\
+1 & 1 & 1 & 1 &	0
+\end{array}\right)
+\end{equation*}
+
+Y el valor de la función objetivo es $24$. El ranking producido se puede ver en la Tabla \ref{tbl:optimo_resultados}.
+
+\begin{table}[h]
+\centering
+\caption{Resultados del método óptimo}
+\label{tbl:optimo_resultados}
+\begin{tabular}{@{}cc@{}}
+\cmidrule(l){2-2}
+    & Ranking \\ \midrule
+DEN & 5       \\
+LAL & 4       \\
+SAS & 2       \\
+CHI & 3       \\
+NYK & 1       \\ \bottomrule
+\end{tabular}
+\end{table}
+
+Representamos la matriz $\mathbf{X}$ como grafo de dominancia (Figura \ref{fig:ejemplo_grafo_dominancia_optimo}).
+
+\begin{figure}[htb]
+\centering
+\ejemplografodominanciaoptimo
+\caption{Grafo de dominancia}
+\label{fig:ejemplo_grafo_dominancia_optimo}
+\end{figure}
 
 \end{ejemplo}
 
-\todo[backgroundcolor=red, inline]{Añadir más información}
+Normalmente, la solución del problema no es única ya que pueden existir valores de $\tilde{x}_{ij}$ que tengan el mismo valor de la función objetivo que $x_{ij}$. Una forma de comprobar si existe otra solución del problema es ir recorriendo el ranking obtenido e ir intercambiando las posiciones adyacentes del ranking. Si se mantiene el valor de la función objetivo, se tiene otra solución y, por tanto, no es única la solución.
+
+\subsubsection{Problema relajado}
+
+El problema relajado consiste en forzar a que las variables $x_{ij}$ no tengan valores binarios, sino que tomen valores reales, $0 \leq x_{ij} \leq 1$. De esta forma el problema relajado tiene el siguiente aspecto
+
+\begin{equation} \label{eq:problema_relajado}
+\begin{array}{rl}
+\max         & \sum\limits_{i=1}^{n} \sum\limits_{j=1}^{n} c_{ij} x_{ij}\\
+\mathrm{s.a} & x_{ij} + x_{ji} = 1\\
+             & x_{ij} + x_{jk} + x_{ki} \leq 2\\
+             & x_{ij} \geq 0
+\end{array}
+\end{equation}
+
+Este problema relajado puede representar valores fraccionales que son los empates entre equipos. Se pueden redondear al entero más próximo para obtener una solución subóptima. Además, si esta solución es factible puede ser aproximada a la solución óptima del problema binario. 
+
+\begin{ejemplo}
+Consideramos de nuevo los rankings del Ejemplo \ref{ej:borda} producidos por los métodos de Massey, Colley y Markov. Aplicamos el método óptimo relajado. Primero debemos formar la matriz de conformidad $\mathbf{C}$ quedando de la siguiente manera:
+
+\begin{equation*}
+\mathbf{C} = \left(\begin{array}{rrrrr}
+0 & -3 & -3 & -3 & -3 \\
+3 &  0 & -3 & -1 & -1 \\
+3 &  3 &  0 &  3 & -1 \\
+3 &  1 & -3 &  0 & -3 \\
+3 &  1 &  1	&  3 &	0
+\end{array}\right)
+\end{equation*}
+
+Resolviendo el problema de programación la matriz $\mathbf{X}$ con las variables de decisión queda así:
+
+\begin{equation*}
+\mathbf{X} = \left(\begin{array}{rrrrr}
+0.0000 & 0.000 & 0.0000 & 0.0000 & 0.0000 \\
+1.0000 & 0.000 & 0.0000 & 0.0000 & 0.0000 \\
+1.0000 & 1.000 & 0.0000 & 1.0000 & 0.0000 \\
+1.0000 & 1.000 & 0.0000 & 0.0000 & 0.0000 \\
+1.0000 & 1.000 & 1.0000 & 1.0000 & 0.0000
+\end{array}\right)
+\end{equation*}
+
+En este caso no se producen empates y se obtiene la misma solución que en el problema no relajado del Ejemplo \ref{ej:optimo}.
+
+
+\end{ejemplo}
+
+\subsubsection*{Resumen y algoritmo de cómputo}
+
+Las variables y su descripción se pueden encontrar en la siguiente tabla:
+
+\begin{longtable}{c c p{5cm} p{6cm}}
+\caption{Resumen del método óptimo de agregación de rankings}\\
+%\renewcommand{\arraystretch}{1.5}
+\toprule
+Variable & Tipo & Descripción & Elemento i-ésimo\\
+\hline
+\endfirsthead
+
+\multicolumn{4}{c}%
+{{\cftfigfont \tablename\ \thetable{} -- Continúa de la página anterior}} \\
+\toprule
+Variable & Tipo & Descripción & Elemento i-ésimo\\
+\hline
+\endhead
+
+$\mathbf{C}$ & $\R^{n \times n}$ & Matriz de conformidad & Ver Ecuación (\ref{eq:conformidad}) \\ \hline
+
+$n$ & $\N$ & Número de equipos en el ranking & ---\\
+\bottomrule
+\end{longtable}
+
+El algoritmo para calcular este método es:
+
+\begin{enumerate}
+\item Formar la matriz de conformidad $\mathbf{C}$.
+\item Resolver el problema de programación lineal relajado
+
+\begin{equation*}
+\begin{array}{rl}
+\max         & \sum\limits_{i=1}^{n} \sum\limits_{j=1}^{n} c_{ij} x_{ij}\\
+\mathrm{s.a} & x_{ij} + x_{ji} = 1\\
+             & x_{ij} + x_{jk} + x_{ki} \leq 2\\
+             & x_{ij} \geq 0
+\end{array}
+\end{equation*}
+
+Cuando $n$ es grande, utilizar técnicas como relajación de restricciones o ramifica y poda.
+
+\item El ranking óptimo se obtiene ordenando las columnas de la matriz $\mathbf{X}$ en orden ascendente. Los empates se reconocen por la presencia de valores fraccionales en $\mathbf{X}$.
+
+\end{enumerate}
+
