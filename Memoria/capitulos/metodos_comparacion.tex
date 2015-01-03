@@ -72,6 +72,228 @@ Para el último caso, tenemos que los pares que concuerdan en ambos rankings son
 
 \end{ejemplo}
 
+\subsection{Tau de Kendall en rankings parciales}
 
+No siempre disponemos de rankings completos, por lo que es necesario disponer de la tau de Kendall para rankings parciales. Una forma de definir la tau de Kendall para rankings parciales es la siguiente.
+
+\begin{defi}[Tau de Kendall para rankings parciales]
+
+La tau de Kendall para rankings parciales se define de la siguiente manera
+
+\begin{eqnarray}
+\tau_p = \frac{n_c - n_d - n_u}{\binom{n}{2} - n_u}
+\end{eqnarray}
+
+donde $n_c$ es el número de pares que concuerdan, $n_d$ es el número de pares que no concuerdan y $n_u$ es el número de pares que no aparecen en el ranking. En este caso, $n$ es el número de elementos únicos de los rankings.
+
+\end{defi}
+
+De esta manera $|\tau| \not \leq 1$, sino que se cumple que
+
+\begin{equation}
+\dfrac{-\binom{n}{2}}{\binom{n}{2} - n_u} \leq \tau_p \leq \dfrac{\binom{n}{2}}{\binom{n}{2} - n_u}
+\end{equation}
+
+Notar que $\tau_p$ generaliza a $\tau$. Cuando los rankings son completos, $n_u = 0$, que coincide con la definición de $\tau$ para rankings completos.
+
+\begin{ejemplo}
+Consideremos los siguientes rankings:
+
+\begin{equation*}
+c_1 = \left( \begin{array}{c}
+1\\
+3\\
+2
+\end{array} \right), \quad
+c_2 = \left( \begin{array}{c}
+4\\
+2\\
+1
+\end{array} \right), \quad
+c_3 = \left( \begin{array}{c}
+5\\
+4\\
+2\\
+3
+\end{array} \right), \quad
+c_4 = \left( \begin{array}{c}
+4\\
+1\\
+5\\
+6\\
+7
+\end{array} \right)
+\end{equation*}
+
+\todo[inline, backgroundcolor=red]{Completar ejemplo}
+
+\end{ejemplo}
+
+Esta medida tiene un problema. Al penalizar las discrepancias $n_d$ y $n_u$ entre rankings mediante simples cuentas, no se tienen en cuenta las posiciones entre las que se producen estas discrepacnias.
+
+\subsection{Tau de Kendall para una familia de rankings}
 
 \todo[inline, backgroundcolor=red]{Añadir información}
+
+\section{Ro de Spearman}
+
+\begin{defi}[Ro de Spearman]
+Definimos la ro de Spearman como la distancia $L_1$ entre dos rankings completos $c_1$ y $c_2$ de tamaño $n$. Esto es, 
+
+\begin{equation}
+\rho = \norm{c_1 - c_2}_1 = \sum\limits_{i=1}^{n} |c_1(i) - c_2(i)|
+\end{equation}
+
+donde $c_1(i)$ es la posición del equipo $i$ en el ranking $c_1$ y $c_2(i)$ es la posición del equipo $i$ en el ranking $c_2$.
+\end{defi}
+
+\begin{ejemplo}
+Consideremos los siguientes rankings:
+
+\begin{equation*}
+c_1 = \left( \begin{array}{c}
+2\\
+3\\
+4\\
+1\\
+5
+\end{array} \right), \quad
+c_2 = \left( \begin{array}{c}
+5\\
+4\\
+1\\
+3\\
+2
+\end{array} \right), \quad
+c_3 = \left( \begin{array}{c}
+1\\
+2\\
+3\\
+4\\
+5
+\end{array} \right), \quad
+c_4 = \left( \begin{array}{c}
+2\\
+3\\
+4\\
+1\\
+5
+\end{array} \right)
+\end{equation*}
+
+Para los rankings $c_1$ y $c_2$ se tiene que, para el primer equipo, $c_1(1) = 2$ y $c_2(1) = 5$. Así, $|2-5| = 3$, para el segundo equipo, la diferencia es $1$, para el tercero es $3$, para el cuarto es $2$ y para el quinto $3$. De esta forma $\rho(c_1, c_2) = 12$. De la misma forma se obtiene que 
+
+\begin{align*}
+\rho(c_1, c_3) & = 6\\
+\rho(c_1, c_4) & = 0\\
+\rho(c_2, c_3) & = 12\\
+\rho(c_3, c_4) & = 6
+\end{align*}  
+\end{ejemplo}
+
+\section{Fi de Spearman}
+
+A partir de la ro de Spearman, se puede definir otra medida, que llamaremos fi de Spearman, que tiene en cuenta las posiciones relativas entre los rankings.
+
+\subsection{Fi de Spearman para rankings completos}
+
+Si tenemos dos rankings completos de tamaño $n$, la fi de Spearman se define de la siguiente manera.
+
+\begin{defi}[Fi de Spearman para rankings completos]
+Se define la fi de Spearman entre dos rankings completos $c_1$ y $c_2$ de tamaño $n$ como 
+
+\begin{equation}
+\phi = \sum\limits_{i=1}^{n} \dfrac{|c_1(i) - c_2(i)|}{\mathrm{min}\{c_1(i), c_2(i)\}}
+\end{equation}
+\end{defi}
+
+\begin{ejemplo}
+Consideremos los siguientes rankings:
+
+\begin{equation*}
+c_1 = \left( \begin{array}{c}
+2\\
+3\\
+4\\
+1\\
+5
+\end{array} \right), \quad
+c_2 = \left( \begin{array}{c}
+5\\
+4\\
+1\\
+3\\
+2
+\end{array} \right), \quad
+c_3 = \left( \begin{array}{c}
+1\\
+2\\
+3\\
+4\\
+5
+\end{array} \right), \quad
+c_4 = \left( \begin{array}{c}
+2\\
+3\\
+4\\
+1\\
+5
+\end{array} \right)
+\end{equation*}
+
+Algunos valores de $\phi$ para estos rankings son
+
+\begin{align*}
+\phi(c_1, c_2) & = \dfrac{3}{2} + \dfrac{1}{3} + \dfrac{3}{1} + \dfrac{2}{1} + \dfrac{3}{2} = \dfrac{25}{3} = 8.3333\\
+\phi(c_1, c_3) & = \dfrac{1}{1} + \dfrac{1}{2} + \dfrac{1}{3} + \dfrac{3}{1} + \dfrac{0}{5} = \dfrac{29}{6} = 4.8333\\
+\phi(c_1, c_4) & = 0\\
+\phi(c_2, c_3) & = \dfrac{4}{1} + \dfrac{2}{2} + \dfrac{2}{1} + \dfrac{1}{3} + \dfrac{3}{2} = \dfrac{53}{6} = 8.8333
+\end{align*}  
+\end{ejemplo}
+
+Se tiene que $\phi \geq 0$, y cuanto más pequeño es $\phi$ más cerca están los rankings comparados. 
+
+\subsection{Fi de Spearman para rankings parciales}
+
+Cuando se trata de rankings parciales, la definición de fi de Spearman es más complicada como vemos a continuación.
+
+\begin{defi}[Fi de Spearman para rankings parciales]
+La fi de Spearman para dos rankings parciales $c_1$ y $c_2$ de longitud $n$ se define de la siguiente manera:
+
+\begin{equation}
+\phi = \dfrac{\sum\limits_{i=1}^{n} \phi_i}{\phi(l, l^c)}
+\end{equation} 
+
+donde 
+
+\begin{equation}
+\phi(l, l^c) = -2n + 2x\sum\limits_{i=1}^{n} \dfrac{1}{i}
+\end{equation}
+
+y $\phi_i$ se calcula de alguna de estas dos formas
+
+\begin{itemize}
+\item Si el elemento $i$ está en $c_1$ y $c_2$,
+
+\begin{equation}
+\phi_i = \dfrac{|c_1(i) - c_2(i)|}{\mathrm{min}\{c_1(i), c_2(i)\}}
+\end{equation}
+
+\item Si el elemento $i$ está en alguna de los dos rankings, que asumimos sin pérdida de generalidad que es $c_1$,
+
+
+\begin{equation}
+\phi_i = \dfrac{|c_1(i) - x|}{\mathrm{min}\{c_1(i), x\}}
+\end{equation} 
+
+donde $x$ se define como
+
+\begin{equation}
+x = \dfrac{n - 4 \lfloor n/2\rfloor + 2(n+1) \sum_{i=1}^{\lfloor n/2\rfloor} 1/i}{\sum_{i=1}^{n} 1/i}
+\end{equation}
+\end{itemize}
+\end{defi}
+
+\begin{ejemplo}
+\todo[backgroundcolor=red,inline]{Completar ejemplo}
+\end{ejemplo}
