@@ -1,3 +1,77 @@
 \chapter{Métodos de comparación}
 
-\todo[inline, bacgroundcolor=red]{Añadir información}
+En los capítulos anteriores hemos visto que se pueden crear distintos métodos para crear ratings (y rankings) y cómo se pueden agregar varios rankings en uno sólo. Ahora nos interesa saber cuál de todos los métodos es mejor. Para responder a ésto, veremos una serie de medidas que son permitirán comparar varios rankings. Estas medidas son la tau de Kendall (tanto en rankings parciales como en rankings completos), la ro de Spearman y la fi ponderada de Spearman (en rankings completos y en rankings parciales). Estas medidas están referidas a dos rankings. Veremos una generalización de la tau de Kendall a una familia finita de rankings.  
+
+\section{Tau de Kendall}
+
+La tau de Kendall es una medida que permite conocer la similaridad entre dos rankings. Consideraremos dos casos: cuando los rankings son completos y cuando son parciales. También veremos una generalización a una familia finita de rankings.
+
+\subsection{Tau de Kendall en rankings completos}
+
+La tau de Kendall es una medida que determina la correlación entre dos rankings completos. Recordemos que dos rankings son completos cuando tienen los mismos elementos. Esta medida fue desarrolla en 1938 por Maurice Kendall.\\
+
+\begin{defi}($\tau$ de Kendall en rankings completos) 
+
+La $\tau$ de Kendall para rankings completos con tamaño $n$ se define como sigue
+
+\begin{equation}
+\tau = \dfrac{n_c - n_d}{n(n-1)/2}
+\end{equation}
+
+donde $n_c$ es el número de pares que concuerdan en ambos rankings y $n_d$ es el número de pares que no concuerdan en ambos rankings.\\
+
+Un par $(i,j)$ se dice que concuerda si el elemento $i$ aparece por encima del elemento $j$ en ambos rankings. En caso contrario se dice que no concuerda.\\
+
+
+La $\tau$ de Kendall está acotada por $-1$ y $1$, es decir, $-1 \leq \tau \leq 1$. Cuando $\tau = 1$, los rankings son iguales y cuando $\tau = -1$, los rankings están en orden inverso.  
+\end{defi}
+
+\begin{ejemplo}
+Consideremos los siguientes rankings:
+
+\begin{equation*}
+c_1 = \left( \begin{array}{c}
+3\\
+2\\
+1\\
+4\\
+5
+\end{array} \right), \quad
+c_2 = \left( \begin{array}{c}
+3\\
+2\\
+1\\
+4\\
+5
+\end{array} \right), \quad
+c_3 = \left( \begin{array}{c}
+5\\
+4\\
+1\\
+2\\
+3
+\end{array} \right), \quad
+c_4 = \left( \begin{array}{c}
+2\\
+1\\
+4\\
+5\\
+3
+\end{array} \right)
+\end{equation*}
+
+Calculemos la tau de Kendall para estos rankings.
+
+\begin{align*}
+\tau(c_1, c_2) & = \dfrac{10 - 0}{5 \cdot 4/2} = 1\\
+\tau(c_1, c_3) & = \dfrac{0 - 10}{10} = -1\\
+\tau(c_3, c_4) & = \dfrac{4 -  6}{10} = -\dfrac{2}{10} = - \dfrac{1}{5}
+\end{align*}
+
+Para el último caso, tenemos que los pares que concuerdan en ambos rankings son $(1,3)$, $(2,3)$, $(3,4)$ y $(3,5)$. Los pares que no concuerdan son $(1,2)$, $(1,4)$, $(1,5)$, $(2,4)$, $(2,5)$ y $(4,5)$.
+
+\end{ejemplo}
+
+
+
+\todo[inline, backgroundcolor=red]{Añadir información}
