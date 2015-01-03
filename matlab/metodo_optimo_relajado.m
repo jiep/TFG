@@ -3,14 +3,14 @@ function [X, obj, r] = metodo_optimo_relajado(C)
 %   C matriz de conformidad
 %
 % SALIDA
-%   X matriz de las variables de decisión
-%   obj valor de la función objetivo
-%   r ranking producido por el método
+%   X matriz de las variables de decision
+%   obj valor de la funcion objetivo
+%   r ranking producido por el metodo
 
-% Tamaño de la matriz y número de equipos
+% Tamanio de la matriz y numero de equipos
 [m,n] = size(C);
 
-% Función objetivo
+% Funcion objetivo
 f = -reshape(C,[1,n^2]);
 
 % Vectores con las restricciones
@@ -65,10 +65,10 @@ end
 % Resolvemos el problema
 [X,fval] = linprog(f, T2, b, T1, beq, lb, ub);
 
-% Valor de la función objetivo
+% Valor de la funcion objetivo
 obj = -fval; 
 
-% Matriz con las varibles de decisión
+% Matriz con las variables de decision
 X = reshape(X',[n,n]);
 
 % Creamos el ranking
