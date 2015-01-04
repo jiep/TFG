@@ -376,3 +376,22 @@
   \path (lal)   edge               node {} (den);
 
 \end{tikzpicture}}
+
+\newcommand{\ejemplografocompetitividad}{
+\begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=3cm,semithick]
+  \tikzstyle{every state}=[draw=black,text=black]
+ 
+  
+  \node[state] (por)                      {POR};
+  \node[state] (ock) [below right of=por] {OCK};
+  \node[state] (den) [below       of=ock] {DEN};
+  \node[state] (min) [below left  of=por] {MIN};
+  \node[state] (uta) [below       of=min] {UTA};  
+  
+  \path (por)   edge                node {} (ock);
+  \path (por)   edge [bend right]   node {} (den);  
+  \path (por)   edge                node {} (uta);
+  \path (uta)   edge                node {} (den);
+  \path (ock)   edge                node {} (den);
+  
+\end{tikzpicture}}
