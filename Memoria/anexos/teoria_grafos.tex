@@ -218,6 +218,58 @@ Un grafo dirigido $D = (V', E')$ es una orientación de un grafo (no dirgido) $G
 
 \section{Algunos tipos de grafos}
 
+\begin{defi}
+Un grafo ponderado es un grafo dirigido con una función $w : E \to \R$, es decir, que $w$ asocia un número real a cada arista.
+\end{defi}
+
+\begin{ejemplo}
+El grafo $G = (V,E)$ con 
+
+\begin{eqnarray}
+V = \{A, B, C\}\\
+E = \{ \{A,B\}, \{A,C\}, \{B,C\} \}
+\end{eqnarray} 
+
+junto con las funciones
+
+\begin{center}
+\begin{tabular}{l|r}
+\begin{tabular}{r c c c}
+$\mathrm{init}:$ & $E$ & $\to$ & $V$\\
+			     & $\{A,B\}$ & $\mapsto$ & $A$\\
+			     & $\{A,C\}$ & $\mapsto$ & $A$\\
+			     & $\{B,C\}$ & $\mapsto$ & $B$
+			      
+\end{tabular} &
+\begin{tabular}{r c c c}
+$\mathrm{ter}:$ & $E$ & $\to$ & $V$\\
+			     & $\{A,B\}$ & $\mapsto$ & $B$\\
+			     & $\{A,C\}$ & $\mapsto$ & $C$\\
+			     & $\{B,C\}$ & $\mapsto$ & $C$
+			    
+\end{tabular} 
+\end{tabular}
+\end{center}
+
+es un grafo dirigido. Si le añadimos la función $\mathrm{w} : E \to \R$ definida de la siguiente forma, $G$ es un grafo ponderado (ver Figura \ref{fig:grafo_ponderado}).
+
+\begin{equation*}
+\begin{tabular}{r c c c}
+$\mathrm{w}:$ & $E$ & $\to$ & $\R$\\
+			     & $\{A,B\}$ & $\mapsto$ & $e$\\
+			     & $\{A,C\}$ & $\mapsto$ & $5$\\
+			     & $\{B,C\}$ & $\mapsto$ & $\pi$
+			      
+\end{tabular}
+\end{equation*}
+\begin{figure}[htb]
+\centering
+\ejemplografoponderado
+\caption{Ejemplo de grafo ponderado}
+\label{fig:grafo_ponderado}
+\end{figure} 
+\end{ejemplo}
+
 \begin{defi} \label{def:dominancia}
 Un grafo de dominancia $G=(V,E)$ es un grafo dirigido tal que para todo $x,y \in V$ se cumple una de las dos condiciones siguientes, pero no ambas simultáneamente:
 
