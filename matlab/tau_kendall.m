@@ -20,17 +20,18 @@ for i=2:n
         posicion_c2_i = find(c_2 == unicos(i),1);
         posicion_c2_j = find(c_2 == unicos(j),1);
             
-        if (isempty(posicion_c1_i) && isempty(posicion_c1_j)) && (~isempty(posicion_c2_i) && ~isempty(posicion_c2_j)) || (~isempty(posicion_c1_i) && ~isempty(posicion_c1_j)) && (isempty(posicion_c2_i) && isempty(posicion_c2_j))
+        if (isempty(posicion_c1_i) || isempty(posicion_c1_j)) && (~isempty(posicion_c2_i) && ~isempty(posicion_c2_j)) || (~isempty(posicion_c1_i) && ~isempty(posicion_c1_j)) && (isempty(posicion_c2_i) || isempty(posicion_c2_j))
             n_u = n_u + 1;
         
         else
             a = abs(posicion_c1_i - posicion_c2_i);
             b = abs(posicion_c1_j - posicion_c2_j);
-            if (posicion_c1_i >= posicion_c1_j) && (posicion_c2_i >= posicion_c2_j)
+            if (a - b > 0)
                 n_c = n_c + 1;
             else
                 n_d = n_d + 1;
             end
+                        
         end
         
 
@@ -38,9 +39,5 @@ for i=2:n
 end
 
 tau = (n_c - n_d - n_u)/(n*(n-1)/2 - n_u);   
-
-n_c
-n_d
-n_u
 
 end
