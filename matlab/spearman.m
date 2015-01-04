@@ -9,8 +9,11 @@ function ro = spearman(c_1, c_2)
 [m,n] = size(c_1);
 ro = 0;
 
-for i=1:m
-    ro = ro + abs(c_1(i) - c_2(i));
+for i=1:length(c_1)
+    posicion_c1 = find(c_1 == c_1(i));
+    posicion_c2 = find(c_2 == c_1(i));
+    ro = ro + abs(posicion_c1 - posicion_c2);
+
 end
 
 end
