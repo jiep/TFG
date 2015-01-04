@@ -219,7 +219,7 @@ Un grafo dirigido $D = (V', E')$ es una orientación de un grafo (no dirgido) $G
 \section{Algunos tipos de grafos}
 
 \begin{defi}
-Un grafo ponderado es un grafo dirigido con una función $w : E \to \R$, es decir, que $w$ asocia un número real a cada arista.
+Un grafo ponderado es un grafo con una función $\mathrm{w} : E \to \R$, es decir, que $\mathrm{w}$ asocia un número real a cada arista.
 \end{defi}
 
 \begin{ejemplo}
@@ -230,28 +230,7 @@ V = \{A, B, C\}\\
 E = \{ \{A,B\}, \{A,C\}, \{B,C\} \}
 \end{eqnarray} 
 
-junto con las funciones
-
-\begin{center}
-\begin{tabular}{l|r}
-\begin{tabular}{r c c c}
-$\mathrm{init}:$ & $E$ & $\to$ & $V$\\
-			     & $\{A,B\}$ & $\mapsto$ & $A$\\
-			     & $\{A,C\}$ & $\mapsto$ & $A$\\
-			     & $\{B,C\}$ & $\mapsto$ & $B$
-			      
-\end{tabular} &
-\begin{tabular}{r c c c}
-$\mathrm{ter}:$ & $E$ & $\to$ & $V$\\
-			     & $\{A,B\}$ & $\mapsto$ & $B$\\
-			     & $\{A,C\}$ & $\mapsto$ & $C$\\
-			     & $\{B,C\}$ & $\mapsto$ & $C$
-			    
-\end{tabular} 
-\end{tabular}
-\end{center}
-
-es un grafo dirigido. Si le añadimos la función $\mathrm{w} : E \to \R$ definida de la siguiente forma, $G$ es un grafo ponderado (ver Figura \ref{fig:grafo_ponderado}).
+es un grafo. Si le añadimos la función $\mathrm{w} : E \to \R$ definida de la siguiente forma, $G$ es un grafo ponderado (ver Figura \ref{fig:grafo_ponderado}).
 
 \begin{equation*}
 \begin{tabular}{r c c c}
