@@ -1,10 +1,10 @@
 \chapter{Métodos de comparación}
 
-En los capítulos anteriores hemos visto que se pueden crear distintos métodos para crear ratings (y rankings) y cómo se pueden agregar varios rankings en uno sólo. Ahora nos interesa saber cuál de todos los métodos es mejor. Para responder a ésto, veremos una serie de medidas que son permitirán comparar varios rankings. Estas medidas son la tau de Kendall (tanto en rankings parciales como en rankings completos), la ro de Spearman y la fi ponderada de Spearman (en rankings completos y en rankings parciales). Estas medidas están referidas a dos rankings. Veremos una generalización de la tau de Kendall a una familia finita de rankings.  
+En los capítulos anteriores hemos visto que se pueden crear distintos métodos para crear ratings (y rankings) y cómo se pueden agregar varios rankings en uno sólo. Ahora nos interesa saber cuál de todos los métodos es mejor. Para responder a ésto, veremos una serie de medidas que son permitirán comparar varios rankings. Estas medidas son la tau de Kendall (tanto en rankings parciales como en rankings completos), la ro de Spearman y la fi ponderada de Spearman (en rankings completos y en rankings parciales). Estas medidas están referidas a dos rankings.
 
 \section{Tau de Kendall}
 
-La tau de Kendall es una medida que permite conocer la similaridad entre dos rankings. Consideraremos dos casos: cuando los rankings son completos y cuando son parciales. También veremos una generalización a una familia finita de rankings.
+La tau de Kendall es una medida que permite conocer la similaridad entre dos rankings. Consideraremos dos casos: cuando los rankings son completos y cuando son parciales.
 
 \subsection{Tau de Kendall en rankings completos}
 
@@ -131,10 +131,6 @@ c_4 = \left( \begin{array}{c}
 
 Esta medida tiene un problema. Al penalizar las discrepancias $n_d$ y $n_u$ entre rankings mediante simples cuentas, no se tienen en cuenta las posiciones entre las que se producen estas discrepacnias.
 
-\subsection{Tau de Kendall para una familia de rankings}
-
-\todo[inline, backgroundcolor=red]{Añadir información}
-
 \section{Ro de Spearman}
 
 \begin{defi}[Ro de Spearman]
@@ -181,7 +177,7 @@ c_4 = \left( \begin{array}{c}
 \end{array} \right)
 \end{equation*}
 
-Para los rankings $c_1$ y $c_2$ se tiene que, para el primer equipo, $c_1(1) = 2$ y $c_2(1) = 5$. Así, $|2-5| = 3$, para el segundo equipo, la diferencia es $1$, para el tercero es $3$, para el cuarto es $2$ y para el quinto $3$. De esta forma $\rho(c_1, c_2) = 12$. De la misma forma se obtiene que 
+Para los rankings $c_1$ y $c_2$ se tiene que, para el primer equipo, $c_1(1) = 4$ y $c_2(1) = 3$. Así, $|4-3| = 1$, para el segundo equipo, la diferencia es $4$, para el tercero es $2$, para el cuarto es $1$ y para el quinto $4$. De esta forma $\rho(c_1, c_2) = 12$. De la misma forma se obtiene que 
 
 \begin{align*}
 \rho(c_1, c_3) & = 6\\
@@ -207,7 +203,7 @@ Se define la fi de Spearman entre dos rankings completos $c_1$ y $c_2$ de tamañ
 \end{equation}
 \end{defi}
 
-\begin{ejemplo}
+\begin{ejemplo} \label{ej:fi_spearman_completo}
 Consideremos los siguientes rankings:
 
 \begin{equation*}
@@ -244,10 +240,10 @@ c_4 = \left( \begin{array}{c}
 Algunos valores de $\phi$ para estos rankings son
 
 \begin{align*}
-\phi(c_1, c_2) & = \dfrac{3}{2} + \dfrac{1}{3} + \dfrac{3}{1} + \dfrac{2}{1} + \dfrac{3}{2} = \dfrac{25}{3} = 8.3333\\
-\phi(c_1, c_3) & = \dfrac{1}{1} + \dfrac{1}{2} + \dfrac{1}{3} + \dfrac{3}{1} + \dfrac{0}{5} = \dfrac{29}{6} = 4.8333\\
+\phi(c_1, c_2) & = 9.8333 \\
+\phi(c_1, c_3) & = 4.8333\\
 \phi(c_1, c_4) & = 0\\
-\phi(c_2, c_3) & = \dfrac{4}{1} + \dfrac{2}{2} + \dfrac{2}{1} + \dfrac{1}{3} + \dfrac{3}{2} = \dfrac{53}{6} = 8.8333
+\phi(c_2, c_3) & = 8.8333
 \end{align*}  
 \end{ejemplo}
 
@@ -294,6 +290,93 @@ x = \dfrac{n - 4 \lfloor n/2\rfloor + 2(n+1) \sum_{i=1}^{\lfloor n/2\rfloor} 1/i
 \end{itemize}
 \end{defi}
 
+Se tiene que $0 \leq \phi \leq 1$, y cuanto más cerca está $\phi$ de $0$, más se parecen los rankings.
+
 \begin{ejemplo}
-\todo[backgroundcolor=red,inline]{Completar ejemplo}
+Consideremos los siguientes rankings:
+
+\begin{equation*}
+c_1 = \left( \begin{array}{c}
+2\\
+3\\
+4\\
+1\\
+5
+\end{array} \right), \quad
+c_2 = \left( \begin{array}{c}
+5\\
+4\\
+1\\
+3\\
+2
+\end{array} \right), \quad
+c_3 = \left( \begin{array}{c}
+1\\
+2\\
+3\\
+4\\
+5
+\end{array} \right), \quad
+c_4 = \left( \begin{array}{c}
+2\\
+3\\
+4\\
+1\\
+5
+\end{array} \right)
+\end{equation*}
+
+Algunos valores de $\phi$ para estos rankings son
+
+\begin{align*}
+\phi(c_1, c_2) & = 0.4917 \\
+\phi(c_1, c_3) & = 0.2417 \\
+\phi(c_1, c_4) & = 0\\
+\phi(c_2, c_3) & = 0.4417
+\end{align*}  
+
+Estos rankings son los mismos que en el Ejemplo \ref{ej:fi_spearman_completo}, por lo que son completos. Si comparamos resultados, vemos que no se tienen los mimos reultados en ambos casos, por lo que, en principio, no generaliza al caso de rankings completos. Si dividimos entre el valor $\phi(l, l^c)$, obtenemos los mismos resultados. En este caso, $\phi(l, l^c) = 20$, por lo que $\phi(c_1, c_2)/20 = 0.4917$ que coincide con el valor obtenido con por el método de los rankings parciales.\\
+
+Si ahora consideramos estos rankings parciales,
+
+\begin{equation*}
+c_5 = \left( \begin{array}{c}
+6\\
+8\\
+3\\
+4\\
+1
+\end{array} \right), \quad
+c_6 = \left( \begin{array}{c}
+9\\
+3\\
+4\\
+2\\
+1
+\end{array} \right), \quad
+c_7 = \left( \begin{array}{c}
+1\\
+2\\
+3\\
+4\\
+5
+\end{array} \right), \quad
+c_8 = \left( \begin{array}{c}
+2\\
+9\\
+7\\
+6\\
+5
+\end{array} \right)
+\end{equation*}
+
+Todos los valores de $\phi$ para estos rankings son
+
+\begin{equation*}
+\begin{array}{ccc}
+\phi(c_5, c_6) = 0.7450, & \phi(c_5, c_7) = 0.7226, & \phi(c_5, c_8) = 0.8394\\
+\phi(c_6, c_7) = 0.5858, & \phi(c_6, c_8) = 0.4967, & \phi(c_7, c_8) = 0.6258 
+\end{array}
+\end{equation*}
+
 \end{ejemplo}
