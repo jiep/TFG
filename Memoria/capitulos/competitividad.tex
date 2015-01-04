@@ -1,1 +1,114 @@
 \chapter{Competitividad en rankings}
+
+Cuando se dispone de una gran cantidad de rankings, es interasante ver cómo se van intercambiando las posiciones los equipos. Cuando se produzca ésto, diremos que los equipos compiten. Ésto dará lugar a os tipos de grafos: el grafo de competitividad y el grafo de competitividad evolutivo. Veremos las relaciones de este grafo con otros tipos de grafos conocidos, como los grafos cordales, de comparabilidad y de permutaciones. También veremos una generalización de la tau de Kendall para una familia de rankings y varias medidas de competitividad a partir del grafo de competitividad.\\
+
+Empezamos definiendo la competitividad entre una familia de rankings.
+
+\begin{defi}
+Dada una familia $\mathcal{R} = \{c_1, c_2, \dots, c_r\}$ de rankings, decimos que los nodos $(i,j) \in \mathcal{N} \times \mathcal{N}$ compiten si existe $t \in \{1,2,\dots, r-1\}$ tal que $i$ y $j$ intercambian sus posiciones relativas entre rankings consecutivos $c_t$ y $c_{t+1}$.
+\end{defi}
+
+\begin{ejemplo}
+Si consideramos la familia de rankings $\mathcal{R} = \{c_1, c_2\}$ donde $c_1$ y $c_2$ son, respectivamente
+
+\begin{equation*}
+c_1 = \left( \begin{array}{c}
+1\\
+3\\
+2\\
+4\\
+5
+\end{array} \right), \quad
+c_2 = \left( \begin{array}{c}
+1\\
+2\\
+4\\
+3\\
+5
+\end{array} \right)
+\end{equation*}
+
+Los pares $(1,2)$ y $(1,3)$ no compiten, puesto que los nodos no intercambian sus posiciones relativas entre rankings consecutivos. Sin embargo, los pares $(3,4)$ y $(2,3)$ sí compiten puesto que intercambian sus posiciones relativas entre rankings consecutivos, $c_1$ y $c_2$.
+\end{ejemplo}
+
+\section{Grafo de competitividad}
+Los pares de nodos que compiten pueden dar lugar a un grafo, que llamaremos grafo de competitividad. Este grafo tiene propiedades interesantes como veremos a continuación.
+
+\begin{defi}[Grafo de competitividad]
+Definimos grafo de competitividad de la familia de rankings $\mathcal{R}$, y lo denotaremos como $G_c(\mathcal{R}) = (\mathcal{N}, E_\mathcal{R})$, donde $\mathcal{N}$ es el conjunto de nodos $E_\mathcal{R}$ denota el conjunto de arcos dados por la siguiente regla: existe un arco entre $i$ y $j$ si el par $(i,j)$ compite.
+\end{defi}
+
+\begin{ejemplo} \label{ej:grafo_competitividad}
+Consideremos cuatro clasificaciones ficticias correspondientes a la División Noroeste de la NBA, compuesta por Porland Trail Blazers (POR), Ockahoma City Thunder (OCK), Denver Nuggets (DEN), Utah Jazz (UTA) y Minnesota Timberwolves~(MIN).\\
+
+Las clasificaciones $\mathcal{R} = \{c_1, c_2, c_3, c_4\}$ son las siguientes:
+
+\begin{equation*}
+c_1 = \left( \begin{array}{c}
+\text{DEN}\\
+\text{POR}\\
+\text{OCK}\\
+\text{UTA}\\
+\text{MIN}
+\end{array} \right), \quad
+c_2 = \left( \begin{array}{c}
+\text{POR}\\
+\text{OCK}\\
+\text{UTA}\\
+\text{DEN}\\
+\text{MIN}
+\end{array} \right), \quad
+c_3 = \left( \begin{array}{c}
+\text{POR}\\
+\text{OCK}\\
+\text{DEN}\\
+\text{UTA}\\
+\text{MIN}
+\end{array} \right), \quad
+c_4 = \left( \begin{array}{c}
+\text{OCK}\\
+\text{UTA}\\
+\text{POR}\\
+\text{DEN}\\
+\text{MIN}
+\end{array} \right)
+\end{equation*}
+
+El grafo de competitividad $G_c(\mathcal{R})$ de la familia de rankings $\mathcal{R}$ se muestra en la Figura~\ref{fig:grafo_competitividad}. El grafo tiene dos componentes conexas: $\{\text{POR}, \text{OCK}, \text{DEN}, \text{UTA}\}$ y $\{\text{MIN}\}$. Vemos que hay pares de equipos que compiten más de una vez, por ejemplo, el par $(\text{UTA}, \text{DEN})$ cambian sus posiciones relativas tres veces en los rankings $c_1$, $c_2$, $c_3$ y $c_4$. Esta información no la recoge el grafo de competitividad. Esta información la recogerá el grafo de competitividad evolutivo.
+
+\begin{figure}[htb]
+\centering
+\ejemplografocompetitividad
+\caption[Grafo de competitividad]{Grafo de competitividad de $\mathcal{R}$}
+\label{fig:grafo_competitividad}
+\end{figure} 
+
+\end{ejemplo}
+
+\begin{defi}
+Decimos que los nodos $i$, $j$ compiten $k$ veces si $k$ es el número de veces máximo de rankings donde $i$ y $j$ compiten.
+\end{defi}
+
+\begin{defi}
+El grafo de competitividad evolutivo de $\mathcal{R}$, denotado por $G_c^e(\mathcal{R}) = (\mathcal{N}, E_\mathcal{R}^e)$ es el grafo ponderado con el conjunto $\mathcal{N}$ como nodos y aristas dadas por la siguiente regla: hay una arista entre $i$ y $j$ con peso $k$ si $(i,j)$ compiten $k$ veces.
+\end{defi}
+
+\begin{ejemplo}
+Consideramos de nuevo la familia $\mathcal{R}$ de rankings del Ejemplo \ref{ej:grafo_competitividad}. El grafo de competitividad de $\mathcal{R}$ se muestra en la Figura~\ref{fig:grafo_competitividad_evolutivo}.
+
+\begin{figure}[htb]
+\centering
+\ejemplografocompetitividadevolutivo
+\caption[Grafo de competitividad evolutivo]{Grafo de competitividad evolutivo de $\mathcal{R}$}
+\label{fig:grafo_competitividad_evolutivo}
+\end{figure}
+
+\end{ejemplo}
+
+Notar que si eliminamos los pesos del grafo de competitividad evolutivo, obtenemos el grafo de competitividad.
+
+\section{Medidas de competitividad}
+
+\section{Relaciones con otros grafos}
+
+\section{Cálculo de las componentes conexas}
