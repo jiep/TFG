@@ -359,28 +359,41 @@ En este caso no se producen empates y se obtiene la misma solución que en el pr
 
 \subsubsection*{Resumen y algoritmo de cómputo}
 
-Las variables y su descripción se pueden encontrar en la siguiente tabla:
+Las variables y su descripción se pueden encontrar en la Tabla \ref{tbl:optimo}.
 
-\begin{longtable}{c c p{5cm} p{6cm}}
-\caption{Resumen del método óptimo de agregación de rankings}\\
+%\begin{longtable}{c c p{5cm} p{6cm}}
+%\caption{Resumen del método óptimo de agregación de rankings}\\
+%\label{tbl:resumen_optimo}\\
 %\renewcommand{\arraystretch}{1.5}
-\toprule
-Variable & Tipo & Descripción & Elemento i-ésimo\\
-\hline
-\endfirsthead
+%\toprule
+%Variable & Tipo & Descripción & Elemento i-ésimo\\
+%\hline
+%\endfirsthead
 
-\multicolumn{4}{c}%
-{{\cftfigfont \tablename\ \thetable{} -- Continúa de la página anterior}} \\
-\toprule
-Variable & Tipo & Descripción & Elemento i-ésimo\\
-\hline
-\endhead
+%\multicolumn{4}{c}%
+%{{\cftfigfont \tablename\ \thetable{} -- Continúa de la página anterior}} \\
+%\toprule
+%Variable & Tipo & Descripción & Elemento i-ésimo\\
+%\hline
+%\endhead
 
-$\mathbf{C}$ & $\R^{n \times n}$ & Matriz de conformidad & Ver Ecuación (\ref{eq:conformidad}) \\ \hline
+%$\mathbf{C}$ & $\R^{n \times n}$ & Matriz de conformidad & Ver Ecuación (\ref{eq:conformidad}) \\ \hline
 
-$n$ & $\N$ & Número de equipos en el ranking & ---\\
-\bottomrule
-\end{longtable}
+%$n$ & $\N$ & Número de equipos en el ranking & ---\\
+%\bottomrule
+%\end{longtable}
+
+\begin{table}[h]
+	\centering
+	\caption{Resumen del método óptimo de agregación de rankings}
+	\label{tbl:resumen_optimo}
+	\begin{tabular}{@{}cccc@{}}
+		\toprule
+		Variable     & Tipo              & Descripción                     & Elemento i-ésimo                      \\ \midrule
+		$\mathbf{C}$ & $\R^{n \times n}$ & Matriz de conformidad           & Ver Ecuación (\ref{eq:conformidad}) \\ \midrule
+		$n$          & $\N$              & Número de equipos en el ranking & ---                                   \\ \bottomrule
+	\end{tabular}
+\end{table}
 
 El algoritmo para calcular este método es:
 
