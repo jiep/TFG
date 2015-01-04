@@ -395,3 +395,19 @@
   \path (ock)   edge                node {} (den);
   
 \end{tikzpicture}}
+
+\newcommand{\ejemplografoponderado}{
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm,semithick]
+  \tikzstyle{every state}=[draw=black,text=black]
+ 
+  
+  \node[state] (a)              {A};
+  \node[state] (b) [right of=a] {B};
+  \node[state] (c) [right of=b] {C};
+  
+  \path (a)     edge                node {$e$} (b);
+  \path (a)   edge [bend left]   node {$5$} (c);  
+  \path (b)   edge                node {$\pi$} (c);
+ 
+  
+\end{tikzpicture}}
