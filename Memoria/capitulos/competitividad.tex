@@ -479,34 +479,36 @@ Ver el Teorema 4.3 de \cite{journals/corr/CriadoGPR13a}.
 
 La prueba de este teorema da un algoritmo para calcular las componentes conexas del grafo de competitividad. 
 
-%\begin{algorithm}\label{algoritmo}
-%\SetKwInOut{Input}{Entrada}\SetKwInOut{Output}{Salida}
-% \Input{}
-% \begin{itemize}
-% 	\item Un conjunto finito de nodos $\mathcal{N} = %\{1,\dots, n\} (n \in \N)$
-% 	\item Un conjunto finito de rankings $\mathcal{R} = \{c_1,\dots,c_r\}$ de $\mathcal{N}$ $(r \in \N)$
-% \end{itemize}
+\begin{algorithm}\label{algoritmo}
+\SetKwInOut{Input}{Entrada}\SetKwInOut{Output}{Salida}
+ \Input{}
+ \begin{itemize}
+ 	\item Un conjunto finito de nodos $\mathcal{N} = \{1,\dots, n\} (n \in \N)$
+ 	\item Un conjunto finito de rankings $\mathcal{R} = \{c_1,\dots,c_r\}$ de $\mathcal{N}$ $(r \in \N)$
+ \end{itemize}
  
-% \Begin{
-% 	$j := 1$\;
-% 	$q_0 := 0$\;
-% 	$q_j := 1$\;
-% 	\While{$|\mathcal{N}| > 0$}{
-% 		$D_j := \emptyset$\;
-% 		$p_0 := q_{j-1}$\;
-% 		$p_1 := q_j$\;
-%		$i := 0$\;
-% 		\While{$p_i \neq p_{i+1}$}{
-% 			$i := i + 1$\;
-% 			Construir $D_j := D_{[q_j,p_i]}$\;
-% 			$p_{i+1} := \max_{x \in D, c \in \mathcal{R}} c^{-1}(x)$\;
-% 		}
-% 		$\mathcal{N} := \mathcal{N} \setminus D_j$\;
-% 		$j := j + 1$\;
-% 		$q_j := p_i$\;
-% 	}
+ \Begin{
+ 	$j := 1$\;
+ 	$q_0 := 0$\;
+ 	$q_j := 1$\;
+ 	\While{$|\mathcal{N}| > 0$}{
+ 		$D_j := \emptyset$\;
+ 		$p_0 := q_{j-1}$\;
+ 		$p_1 := q_j$\;
+		$i := 0$\;
+ 		\While{$p_i \neq p_{i+1}$}{
+ 			$i := i + 1$\;
+ 			Construir $D_j := D_{[q_j,p_i]}$\;
+ 			$p_{i+1} := \max_{x \in D, c \in \mathcal{R}} c^{-1}(x)$\;
+ 		}
+ 		$\mathcal{N} := \mathcal{N} \setminus D_j$\;
+ 		$j := j + 1$\;
+ 		$q_j := p_i$\;
+ 	}
  
-% }
+ }
+ 
+ \end{algorithm}
 
 \todo[backgroundcolor=red, inline]{Corregir error con paquete algorithm2e}
 
