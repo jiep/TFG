@@ -531,3 +531,17 @@
   \path (1)   edge    node {} (3);
   
 \end{tikzpicture}}
+
+\newcommand{\ejemplogfgrafo}{
+\begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=3cm,semithick]
+  \tikzstyle{every state}=[draw=black,text=black]
+ 
+  \node[state] (1)                    {3};
+  \node[state] (4) [below left  of=1] {1};
+  \node[state] (2) [below right of=1] {2};
+  
+  \path (1)   edge    node {} (4);
+  \path (1)   edge    node {} (2);  
+  \path (2)   edge    node {} (4); 
+  
+\end{tikzpicture}}
