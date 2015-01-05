@@ -451,3 +451,24 @@
   \path (3)   edge                node {} (5); 
   
 \end{tikzpicture}}
+
+\newcommand{\ejemplofuerzamedia}{
+\begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=3cm,semithick]
+  \tikzstyle{every state}=[draw=black,text=black]
+ 
+  
+  \node[state] (1)                      {1};
+  \node[state] (4) [below right of=1] {4};
+  \node[state] (5) [below       of=4] {5};
+  \node[state] (3) [below left  of=1] {3};
+  \node[state] (2) [below       of=3] {2};  
+  
+  \path (1)   edge                node {$1$} (4);
+  \path (1)   edge    node {$2$} (2);  
+  \path (2)   edge   [bend right]  node {$1$} (4);
+  \path (2)   edge   [bend right] node {$1$} (5);
+  \path (2)   edge                node {$3$} (3);
+  \path (4)   edge   [bend left]  node {$2$} (5); 
+  \path (3)   edge   [bend right]  node {$1$} (5); 
+  
+\end{tikzpicture}}
