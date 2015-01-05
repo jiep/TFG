@@ -493,3 +493,41 @@
   \path (5)   edge    node {} (6);            
   
 \end{tikzpicture}}
+
+\newcommand{\ejemplografopermutacion}{
+\begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=3cm,semithick]
+  \tikzstyle{every state}=[draw=black,text=black]
+ 
+  \node[state] (1)                      {4};
+  \node[state] (4) [below       of=1]   {3};
+  \node[state] (2) [left  of=4]         {1};
+  \node[state] (3) [below       of=4]   {5};
+  \node[state] (5) [right       of=4]   {2};  
+  
+  \path (1)   edge    node {} (4);
+  \path (1)   edge    node {} (2);  
+  \path (2)   edge    node {} (4); 
+  \path (2)   edge    node {} (3);
+  \path (3)   edge    node {} (5);
+  \path (1)   edge    node {} (5);
+  \path (4)   edge    node {} (5);
+  
+\end{tikzpicture}}
+
+\newcommand{\ejemplografocomparabilidad}{
+\begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=3cm,semithick]
+  \tikzstyle{every state}=[draw=black,text=black]
+ 
+  \node[state] (1)                      {1};
+  \node[state] (4) [below       of=1]   {3};
+  \node[state] (2) [right  of=4]         {2};
+  \node[state] (3) [right       of=1]   {4};
+  
+  
+  \path (1)   edge    node {} (4);
+  \path (1)   edge    node {} (2);  
+  \path (2)   edge    node {} (4); 
+  \path (2)   edge    node {} (3);
+  \path (1)   edge    node {} (3);
+  
+\end{tikzpicture}}
