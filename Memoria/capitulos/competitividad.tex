@@ -109,6 +109,109 @@ Notar que si eliminamos los pesos del grafo de competitividad evolutivo, obtenem
 
 \section{Medidas de competitividad}
 
+Cuando se dispone de más de una familia de rankings, es necesario disponer una serie de medidas que permitan medir la competitividad en cada uno de los grafos de competitividad. Estas medidas son grado medio normalizado, fuerza media normalizada, coeficiente de clustering y una generalización de la tau de Kendall para una familia de rankings.
+
+\subsection*{Grado medio normalizado}
+
+\begin{defi}
+Se define grado medio normalizado de una familia de rankings $\mathcal{R}$, como la suma de todos los grados de los nodos en el grafo de competitividad $G_c(\mathcal{R})$ dividido por la suma sobre todos los nodos de sus grados más altos posibles. Esto es,
+
+\begin{equation}
+\mathrm{ND}(\mathcal{R}) = \dfrac{1}{n(n-1)} \sum_{i \in \mathcal{N}} d_i
+\end{equation}
+
+donde $d_i$ es el número de nodos adyacentes al nodo  $i$.
+\end{defi}
+
+\begin{defi}
+Se dice que la familia de rankings $\mathcal{R}$ es más competitiva que la familia de rankings $\mathcal{S}$ con respecto al grado medio normalizado si $\mathrm{ND}(\mathcal{R}) > \mathrm{ND}(\mathcal{S})$.
+\end{defi}
+
+\begin{ejemplo}
+Consideremos la familia de rankings $\mathcal{R}$ y el grafo de competitividad del Ejemplo~ \ref{ej:grafo_competitividad} y el grafo de competitividad $G_c(\mathcal{S})$ de la Figura~\ref{fig:grado_medio}.\\
+
+
+\begin{figure}[htb]
+\centering
+\ejemplogradomedio
+\caption{Grafo de competitividad de $\mathcal{S}$}
+\label{fig:grado_medio}
+\end{figure}
+
+El grado medio de las dos familias son:
+
+\begin{eqnarray*}
+\mathrm{ND}(\mathcal{R}) = \dfrac{1}{5\cdot 4} (3 + 1 + 1 + 1 + 0) = \dfrac{6}{20} = \dfrac{3}{10}\\
+\mathrm{ND}(\mathcal{S}) = \dfrac{1}{5\cdot 4} (2 + 4 + 2 + 3 + 3) = \dfrac{14}{20} = \dfrac{7}{10}
+\end{eqnarray*}
+
+Puesto que $\mathrm{ND}(\mathcal{S}) > \mathrm{ND}(\mathcal{R})$, la familia $\mathcal{S}$ es más competitiva que la familia $\mathcal{R}$.
+\end{ejemplo}
+
+\subsection*{Fuerza media normalizada}
+
+\begin{defi}
+Se define la fuerza media normalizada de una familia de rankings $\mathcal{R}$ como la suma de todos pesos de las aristas del grafo de competitividad evolutivo $G_c^e(\mathcal{R})$ dividido entre la suma de todas las posibles aristas con sus posibles pesos. Esto es,
+
+\begin{equation}
+\mathrm{NS}(\mathcal{R}) = \dfrac{w(E_\mathcal{R}^e)}{\binom{n}{2} (r-1)}
+\end{equation} 
+
+donde $w(E_\mathcal{R}^e)$ denota la suma de todos los pesos de las aristas del grafo de competitividad evolutivo $G_\mathcal{R}^e$ y $r$ es el número de rankings de la familia $\mathcal{R}$.
+\end{defi}
+
+\begin{defi}
+Se dice que $\mathcal{R}$ es más competitivo que $\mathcal{S}$ con respecto a la fuerza media normalizada si $\mathrm{NS}(\mathcal{R}) > \mathrm{NS}(\mathcal{S})$.
+\end{defi}
+
+\begin{ejemplo}
+Consideremos la familia $\mathcal{R}$ del Ejemplo~\ref{ej:grafo_competitividad} y el grafo de competitividad evolutivo de la familia $\mathcal{S}$ compuesto por $5$ rankings de la Figura~\ref{fig:fuerza_media}.\\
+
+
+\begin{figure}[htb]
+\centering
+\ejemplofuerzamedia
+\caption{Grafo de competitividad evolutivo de $\mathcal{S}$}
+\label{fig:fuerza_media}
+\end{figure}
+
+Calculamos la fuerza media de cada una de las familias de rankings,
+
+\begin{eqnarray*}
+\mathrm{NS}(\mathcal{R}) = \dfrac{7}{10 \cdot 3} = \dfrac{7}{30}\\
+\mathrm{NS}(\mathcal{S}) = \dfrac{11}{10\cdot 4} = \dfrac{11}{40}
+\end{eqnarray*}
+
+Como $\mathrm{NS}(\mathcal{S}) > \mathrm{NS}(\mathcal{R})$, la familia de rankings $\mathcal{S}$ es más competitiva con respecto a la fuerza media normalizada que la familia $\mathcal{R}$.
+
+\end{ejemplo}
+
+\subsection*{Coeficiente de clustering}
+
+\begin{defi}
+El coeficiente de clustering de un nodo $i$ se define como
+
+\begin{equation}
+C_i = \dfrac{e_i}{\binom{d_i}{2}}
+\end{equation}
+
+donde $d_i$ es el número de vértices adyacentes al nodo $i$ y $e_i$ es el número de pares conectados entre los adyacentes a $i$.
+\end{defi}
+
+\begin{defi}
+Dada una familia de rankings $\mathcal{R}$, se define el coeficiente de clustering de $\mathcal{R}$ como la media aritmética de los coeficientes de clustering de los nodos del grafo de competitividad $G_c(\mathcal{R})$. Esto es,
+
+\begin{equation}
+C(\mathcal{R}) = \dfrac{1}{n} \sum_{i \in \mathcal{N}} C_i
+\end{equation}
+\end{defi}
+
+\begin{ejemplo}
+
+\end{ejemplo}
+
+\subsection*{Tau de Kendall generalizada}
+
 \section{Relaciones con otros grafos}
 
 \section{Cálculo de las componentes conexas}
