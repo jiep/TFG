@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{tfg}[2014/12/28 Paquete Trabajo Fin de Grado (TFG)]
+\ProvidesPackage{tfg}[2015/01/10 Paquete Trabajo Fin de Grado (TFG)]
 
 % Paquetes necesarios
 \RequirePackage{amsmath, amssymb, amsthm}
@@ -101,10 +101,13 @@
 % Personalizamos el encabezado y el pie de página
 \pagestyle{fancy}{
 \fancyhead[LO]{}
-\fancyhead[RO]{\sffamily\large{\currentname}  \ \ \ \ \normalfont\sffamily\large\Large\bfseries\scshape{\thepage}}
+\fancyhead[RO]{\sffamily\large{\nouppercase{\rightmark}}  \ \ \ \ \normalfont\sffamily\large\Large\bfseries\scshape{\thepage}}
 \fancyhead[RE]{}
-\fancyhead[LE]{{\normalfont\sffamily\Large\bfseries\scshape{\thepage}} \ \ \ \ \sffamily\large{\chaptername\ \thechapter \ \ \currentchapter}}
+\fancyhead[LE]{{\normalfont\sffamily\Large\bfseries\scshape{\thepage}} \ \ \ \ \sffamily\large{\nouppercase{\leftmark}}}
 \fancyfoot[CO,CE]{}
+
+
+
 }
 
 % Personalizamos la primera hoja del capítulo
