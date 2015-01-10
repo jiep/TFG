@@ -1,6 +1,6 @@
 \chapter{Competitividad en rankings}
 
-Cuando se dispone de una gran cantidad de rankings, es interasante ver cómo se van intercambiando las posiciones los equipos. Cuando se produzca ésto, diremos que los equipos compiten. Ésto dará lugar a os tipos de grafos: el grafo de competitividad y el grafo de competitividad evolutivo. Veremos las relaciones de este grafo con otros tipos de grafos conocidos, como los grafos cordales, de comparabilidad y de permutaciones. También veremos una generalización de la tau de Kendall para una familia de rankings y varias medidas de competitividad a partir del grafo de competitividad.\\
+Cuando se dispone de una gran cantidad de rankings, es interasante ver cómo se van intercambiando las posiciones los equipos. Cuando se produzca ésto, diremos que los equipos compiten. Ésto dará lugar a dos tipos de grafos: el grafo de competitividad y el grafo de competitividad evolutivo. Veremos las relaciones de este grafo con otros tipos de grafos conocidos, como los grafos cordales, de comparabilidad, de permutaciones y f-grafos. También veremos una generalización de la tau de Kendall para una familia de rankings y varias medidas de competitividad a partir del grafo de competitividad.\\
 
 Empezamos definiendo la competitividad entre una familia de rankings.
 
@@ -157,7 +157,7 @@ Se define la fuerza media normalizada de una familia de rankings $\mathcal{R}$ c
 \mathrm{NS}(\mathcal{R}) = \dfrac{w(E_\mathcal{R}^e)}{\binom{n}{2} (r-1)}
 \end{equation} 
 
-donde $w(E_\mathcal{R}^e)$ denota la suma de todos los pesos de las aristas del grafo de competitividad evolutivo $G_\mathcal{R}^e$ y $r$ es el número de rankings de la familia $\mathcal{R}$.
+donde $w(E_\mathcal{R}^e)$ denota la suma de todos los pesos de las aristas del grafo de competitividad evolutivo $G_c^e(\mathcal{R})$ y $r$ es el número de rankings de la familia $\mathcal{R}$.
 \end{defi}
 
 \begin{defi}
@@ -207,19 +207,19 @@ C(\mathcal{R}) = \dfrac{1}{n} \sum_{i \in \mathcal{N}} C_i
 \end{defi}
 
 \begin{defi}
-Decimos que la familia de rankings $\mathcal{R}$ es más competitiva con respecto al coeficiente de clustering que la familia de rankings $\mathcal{S}$ si $C(\mathcal{R} > C(\mathcal{S}$.
+Decimos que la familia de rankings $\mathcal{R}$ es más competitiva con respecto al coeficiente de clustering que la familia de rankings $\mathcal{S}$ si $C(\mathcal{R}) > C(\mathcal{S})$.
 \end{defi}
 
 \begin{ejemplo}
 Consideramos los grafos de competitividad de las Figuras~\ref{fig:grafo_competitividad}~y~\ref{fig:grado_medio}. Los coeficientes de clustering de cada uno de los nodos de la familia $\mathcal{S}$ son los siguientes:
 
-\begin{eqnarray*}
-\mathrm{C}_\text{MIN} =  0\\
-\mathrm{C}_\text{POR} = \dfrac{4}{6} = \dfrac{2}{3}\\
-\mathrm{C}_\text{OCK} = \dfrac{2}{2} = 1\\
-\mathrm{C}_\text{DEN} = \dfrac{4}{6} = \dfrac{2}{3}\\
-\mathrm{C}_\text{UTA} = \dfrac{2}{2} = 1
-\end{eqnarray*}
+\begin{align*}
+\mathrm{C}_\text{MIN} & =  0\\
+\mathrm{C}_\text{POR} & = \dfrac{4}{6} = \dfrac{2}{3}\\
+\mathrm{C}_\text{OCK} & = \dfrac{2}{2} = 1\\
+\mathrm{C}_\text{DEN} & = \dfrac{4}{6} = \dfrac{2}{3}\\
+\mathrm{C}_\text{UTA} & = \dfrac{2}{2} = 1
+\end{align*}
 
 El coeficiente de clustering de la familia $\mathcal{R}$ es 
 
@@ -323,7 +323,7 @@ Volvemos a considerar los grafos evolutivos de las Figuras~\ref{fig:grafo_compet
 Una vez vistas una serie de medidas para medir la competitividad entre familias de rankings, es interesante ver si este tipo de grafo está relacionado con algún otro conocido, como los grafos de comprarabilidad, grafos de permutaciones, grafos cordales y los f-grafos y ver las inclusiones que se dan entre cada tipo de grafo. Para empezar, definiremos estos tipos de grafos.
 
 \begin{defi}
-Un grafo $G = (\mathcal{N}, E)$ es cordal si cada sus ciclos de cuatro o más vértices tiene una cuerda, que es un vértice que une dos nodos que no son adyacentes en el ciclo.
+Un grafo $G = (\mathcal{N}, E)$ es cordal si cada sus ciclos de cuatro o más vértices tiene una cuerda, que es un arco que une dos nodos que no son adyacentes en el ciclo.
 \end{defi} 
 
 \begin{ejemplo}
@@ -362,7 +362,7 @@ La Figura \ref{fig:grafo_comparabilidad} muestra un grafo de comparabilidad.
 \begin{figure}[htb]
 \centering
 \ejemplografocomparabilidad
-\caption{Grafo de permutaciones}
+\caption{Grafo de comparabilidad}
 \label{fig:grafo_comparabilidad}
 \end{figure}
 \end{ejemplo}
@@ -380,7 +380,7 @@ Consideremos el conjunto $D = \{\gamma_1, \gamma_2, \gamma_3\}$ compuesto por la
 \gamma_3(t) = (t, t^2)
 \end{eqnarray*}
 
-Este conjunto $D$ es un f-diagrama.
+Este conjunto $D$ es un f-diagrama ya que cumple todas y cada una de las condiciones de la definición anterior.
 
 \end{ejemplo}
 
@@ -403,8 +403,8 @@ La Figura \ref{fig:f-grafo} muestra el f-grafo del f-diagrama $D$ del Ejemplo \r
 Sea $G = (V,E)$ un grafo no dirigido con $n$ nodos. Las siguientes afirmaciones son equivalentes:
 
 \begin{enumerate}
-\item $G$ es un f-grafo que representa un f-diagrama de $n$ cuervas en $\R^2$.
-\item $\overline{G}$ (grafo complementario de $G$) es un grafo de comparabilidad.
+\item $G$ es un f-grafo que representa un f-diagrama de $n$ curvas en $\R^2$.
+\item El grafo complementario de $G$ es un grafo de comparabilidad.
 \item Existen permutaciones $c_1,c_2, \dots, c_r$ de $\mathcal{N} = \{1,\dots,n\}$ tales que
 
 \begin{equation*}
@@ -458,13 +458,11 @@ Si tenemos una familia de rankings $\mathcal{R} = \{c_1,\dots,c_r\}$ de nodos $\
 \end{defi}
 
 \begin{defi}
-Un conjunto $D \subseteq \mathcal{N}$ se llama conjunto de competidores eventuales si es un conjunto maximal con respecto a la propiedad de comprtición eventual entre sus elementos.
+Un conjunto $D \subseteq \mathcal{N}$ se llama conjunto de competidores eventuales si es un conjunto maximal con respecto a la propiedad de competición eventual entre sus elementos.
 \end{defi}
 
-Denotaremos con $c_s^{-1}(a) = k$ al elemento $a$ que aparece en la posición k-ésima del ranking $c_s$.
-
 \begin{teo}
-Dada un conjunto finito $\mathcal{R} = \{ c_1, \dots, c_r \}$ de rankings de nodos $\mathcal{N} = \{1,\dots, n\}$ el conjunto de competidores eventuales puede ser identificado con los intervalos cerrados de números naturales $[p,q]$ en el siguiente sentido:
+Dado un conjunto finito $\mathcal{R} = \{ c_1, \dots, c_r \}$ de rankings de nodos $\mathcal{N} = \{1,\dots, n\}$ el conjunto de competidores eventuales puede ser identificado con los intervalos cerrados de números naturales $[p,q]$ en el siguiente sentido:
 
 \begin{equation*}
 D_{[p,q]} = \{ x \in \mathcal{N} \mid c_s^{-1} \in [p,q] \text{ para algún } c_s \in \mathcal{R} \}
@@ -477,7 +475,7 @@ Además, $p$ y $q$ son la primera y la última posición de los elementos de $D_
 Ver el Teorema 4.3 de \cite{journals/corr/CriadoGPR13a}.
 \end{proof}
 
-La prueba de este teorema da un algoritmo para calcular las componentes conexas del grafo de competitividad. 
+La prueba de este teorema da un algoritmo para calcular los conjuntos de competidores eventuales del grafo de competitividad, que coinciden con las componentes conexas de dicho grafo.
 
 \begin{algorithm}\label{algoritmo}
 \SetKwInOut{Input}{Entrada}\SetKwInOut{Output}{Salida}
@@ -509,7 +507,5 @@ La prueba de este teorema da un algoritmo para calcular las componentes conexas 
  }
  
  \end{algorithm}
-
-\todo[backgroundcolor=red, inline]{Corregir error con paquete algorithm2e}
 
 \todo[backgroundcolor=red, inline]{Añadir ejemplo}
