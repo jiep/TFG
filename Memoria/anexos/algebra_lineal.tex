@@ -58,7 +58,7 @@ El conjunto de todas las matrices de tamaño $m \times n$ con coeficientes reale
 \subsection*{Operaciones con matrices}
 
 \begin{defi}
-Si $\mathbf{A}, \mathbf{B} \in \R^{m \times n}$, la suma de $\mathbf{A}$ y $\mathbf{B}$ se define como la matriz $\mathbf{A} + \mathbf{B}$ que se obtiene de sumar sus respectivas entradas. Esto es, $[\mathbf{A}]_{ij} = \mathbf{A+ B}_{ij} + \mathbf{B}_{ij}$.
+Si $\mathbf{A}, \mathbf{B} \in \R^{m \times n}$, la suma de $\mathbf{A}$ y $\mathbf{B}$ se define como la matriz $\mathbf{A} + \mathbf{B}$ que se obtiene de sumar sus respectivas entradas. Esto es, $(a+b)_{ij} = a_{ij} + b_{ij}$.
 \end{defi}
 
 \begin{prop}
@@ -74,7 +74,7 @@ Sean $\mathbf{A}, \mathbf{B}, \mathbf{C} \in \R^{m\times n}$. Las siguientes pro
 \end{prop}
 
 \begin{defi}
-El producto de un escalar $\alpha$ por una matriz $\mathbf{A}$, denotado como $\alpha \mathbf{A}$, se define como la matriz obtenida de multiplicar cada entrada de $\mathbf{A}$ por $\alpha$. Esto es $[\alpha\mathbf{A}]_{ij} = \alpha \mathbf{A}_{ij}$.
+El producto de un escalar $\alpha$ por una matriz $\mathbf{A}$, denotado como $\alpha \mathbf{A}$, se define como la matriz obtenida de multiplicar cada entrada de $\mathbf{A}$ por $\alpha$. Esto es $(\alpha a_{ij}) = \alpha a_{ij}$.
 \end{defi}
 
 \begin{prop}
@@ -90,7 +90,7 @@ Sean $\mathbf{A}, \mathbf{B} \in \R^{m \times n}$ y $\alpha, \beta \in \R$. Las 
 \end{prop}
 
 \begin{defi}
-La matriz transpuesta de $A \in \R^{m \times n}$ se define como la matriz $\mathbf{A}^T$ obtenida de intercambiar filas por columnas en $\mathbf{A}$. Esto es, $\mathbf{A}^T_{ij} = \mathbf{A}_{ji}$.
+La matriz transpuesta de $A \in \R^{m \times n}$ se define como la matriz $\mathbf{A}^T$ obtenida de intercambiar filas por columnas en $\mathbf{A}$. Esto es, $a_{ij}^T = a_{ji}$.
 \end{defi}
 
 \begin{prop}
@@ -114,7 +114,7 @@ Sea $\mathbf{A} \in \R^{n\times n}$.
 \begin{defi}
 Sean $\mathbf{A} \in \R^{m \times p}$ y $\mathbf{B} \in \R^{p \times n}$. El producto matricial $\mathbf{A}\mathbf{B}$ se define como la matriz de tamaño $m \times n$ tal que
 
-\[ [\mathbf{A}\mathbf{B}]_{ij} = \sum_{k=1}^{p} \mathbf{A}_{ik}\mathbf{B}_{kj} \] 
+\[ (ab)_{ij} = \sum_{k=1}^{p} a_{ik}b_{kj} \] 
 \end{defi}
 
 \begin{defi}
@@ -129,7 +129,7 @@ Sean $\mathbf{A} \in \R^{m \times p}$ y $\mathbf{B}, \mathbf{C} \in \R^{p \times
 \begin{defi}
 La matriz $\mathbf{I} \in \R^{n \times n}$ definida como 
 
-\[ \mathbf{I}_{ij} = \delta_{ij} = \begin{cases}
+\[ i_{ij} = \delta_{ij} = \begin{cases}
 1 \text{ si } i = j\\
 0 \text{ si } i \neq j
 \end{cases} \]
@@ -165,7 +165,7 @@ Sean $\mathbf{A}$, $\mathbf{B}$ matrices no singulares. Las siguientes propiedad
 \begin{defi}\label{def:diagonalmente_dominante}
 Una matriz $\mathbf{A} \in \R^{n \times n}$ se dice diagonalmente dominante si 
 
-\[ |\mathbf{A}_{ii}| > \sum_{j=1 \\ j \neq i}^{n} |\mathbf{A}_{ij}| \quad \forall i = 1,\dots, n \]
+\[ |a_{ii}| > \sum_{\substack{j=1 \\ j \neq i}}^{n} |a_{ij}| \quad \forall i = 1,\dots, n \]
 \end{defi}
 
 
@@ -220,7 +220,7 @@ Una matriz $A \in \C^{n \times n}$ es diagonalizable si y sólo si $\mathrm{mg}_
 \subsection{M-matrices} \label{sec:m_matrices}
 
 \begin{defi}
-Una M-matriz $\mathbf{A}$ es una matriz tal que $\mathbf{A}_{ij} \leq 0 \ \ \forall i \neq j$ y $\mathbf{A}^{-1} \geq \mathbf{0}$.
+Una M-matriz $\mathbf{A}$ es una matriz tal que $a_{ij} \leq 0 \ \ \forall i \neq j$ y $\mathbf{A}^{-1} \geq \mathbf{0}$.
 \end{defi}
 
 \begin{defi}
@@ -230,7 +230,7 @@ Si $\mathbf{A} \in \R^{n\times n}$, el número
 \end{defi}
 
 \begin{prop}
-Las siguiente condiciones se cumplen si $\mathbf{A}$ es una M-matriz:
+Las siguientes condiciones se cumplen si $\mathbf{A}$ es una M-matriz:
 
 \begin{itemize}
 \item $\mathbf{A}$ es una M-matriz si y sólo si existe una matriz $\mathbf{A} \geq \mathbf{0}$ y un número $r > \rho(\mathbf{B})$ tal que $\mathbf{A} = r\mathbf{I} - \mathbf{B}$.
