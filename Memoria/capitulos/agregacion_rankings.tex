@@ -2,7 +2,7 @@
 
 En el capítulo anterior hemos visto distintos métodos para crear ratings, y por tanto, rankings. Estos ratings crean distintos rankings para un mismo conjunto de datos, según el método que apliquemos. Estamos interesados en alguna forma de combinar estos rankings para crear uno sólo a partir de los rankings iniciales. Esto es lo que se conoce como agregación de rankings. \\
 
-La idea es de la agregación de rankings es que dados $k$ rankings obtenidos por distintos métodos, obtener un sólo ranking a partir de los rankings iniciales (Figura \ref{fig:agregacion_rankings}). Naturalmente, la calidad del ranking agregado dependerá de la calidad de los rankings iniciales. Es decir, si partimos de unos rankings con buena calidad tendremos un buen ranking agregado. De la misma forma, con malos rankings iniciales, obtendremos malos rankings agregados. 
+La idea de la agregación de rankings es que dados $k$ rankings obtenidos por distintos métodos, obtener un sólo ranking a partir de los rankings iniciales (Figura \ref{fig:agregacion_rankings}). Naturalmente, la calidad del ranking agregado dependerá de la calidad de los rankings iniciales. Es decir, si partimos de unos rankings con buena calidad tendremos un buen ranking agregado. De la misma forma, con malos rankings iniciales, obtendremos malos rankings agregados. 
 
 \begin{figure}[htb]
 \centering
@@ -12,14 +12,14 @@ La idea es de la agregación de rankings es que dados $k$ rankings obtenidos por
 \end{figure}
 
 \section{Métodos de agregación de rankings}
-\todo[backgroundcolor=red, inline]{Añadir pequeña introducción}
+A continuación veremos una serie de métodos de agregación de rankings. Los métodos son el método de Borda, basado en un método de votación del siglo XVIII, el método del ranking promedio, que tiene en cuenta todas las posiciones de los rankings iniciales, el método de datos de partidos simulados que es un nuevo método propuesto en~\cite{langville2012s} que simula partidos para obtener el ranking agregado, y finalmente, el método óptimo basado en un problema de programación lineal.
 \subsection{Método de Borda}
 El método de Borda fue creado por Jean-Charles de Borda y data de 1770. Borda intentaba agregar rankings de listas de candidatos de unas elecciones políticas. Para cada lista de candidatos, cada candidato recibía una puntuación igual al número de candidatos que le superaban. La puntuación de cada lista es sumada para cada candidato para crear un solo ranking, que se llama recuento de Borda. Los candidatos son ordenados en orden descendente según este método. Este método puede manejar rankings de entrada con empates. Además, también puede producir un ranking de salida que contenga empates.  Aunque este método es muy sencillo, tiene un gran problema: que es fácil manipulable.
 
 \begin{ejemplo}\label{ej:borda}
 Consideramos los rankings producidos por el método de Massey (Tabla \ref{tbl:massey_resultados}), de Colley (Tabla \ref{tbl:colley_resultados_sin_empates}) y de Markov (Tabla \ref{tbl:markov_resultados}).\\
 
-Aplicamos a estos tres rankings el método de Borda. Para DEN, en los tres rankings se encuentra en 5ª y última posición, por lo que ha sido superado por cuatro equipos. Por lo que su recuento de borda será $4 + 4 + 4 = 12$. Para LAL, tanto el ranking de Massey como de Colley está 4º posición, por lo que ha sido superado por $3$ equipos, y en el ranking de Markov está en 2ª posición, por lo que ha sido superado por $1$ equipo. Así, su recuento de Borda será de $3 + 3 + 1 = 7$. Análogo para el resto de equipos. El resultado y el ranking agregado por el método de Borda se muestra en la Tabla \ref{tbl:borda_resultados}.
+Aplicamos a estos tres rankings el método de Borda. Para DEN, en los tres rankings se encuentra en 5ª y última posición, por lo que ha sido superado por cuatro equipos en cada ranking. Por lo que su recuento de borda será $4 + 4 + 4 = 12$. Para LAL, tanto el ranking de Massey como de Colley está 4º posición, por lo que ha sido superado por $3$ equipos, y en el ranking de Markov está en 2ª posición, por lo que ha sido superado por $1$ equipo. Así, su recuento de Borda será de $3 + 3 + 1 = 7$. Análogo para el resto de equipos. El resultado y el ranking agregado por el método de Borda se muestra en la Tabla \ref{tbl:borda_resultados}.
 
 \begin{table}[h]
 \centering
@@ -43,7 +43,7 @@ Se producen dos empates que rompemos teniendo en cuenta su enfrentamiento direct
 
 \begin{ejemplo}[Ejemplo de manipulación que puede sufrir el método. Adaptado de \cite{burger2005heart}]\label{ej:borda_elecciones} 
 
-En un país de $76.2$ millones de habitantes, se convocan elecciones para Presidente, Ministro y Alcalde, ordenados de mayor a menor responsabilidad. Se presentan a estos cargos tres candicatos A, B y C. Todo votante elige a cada candicato según sus preferencias, pero elegiendo a cada candidato en algún cargo. En la elecciones se aplica el método de Borda. Los resultados de las elecciones se muestran en la Tabla \ref{tbl:borda_elecciones}.\\
+En un país de $76.2$ millones de habitantes, donde votan todos sus habitantes, se convocan elecciones para Presidente, Ministro y Alcalde, ordenados de mayor a menor responsabilidad. Se presentan a estos cargos tres candicatos A, B y C. Todo votante elige a cada candicato según sus preferencias, pero elegiendo a cada candidato en algún cargo. En la elecciones se aplica el método de Borda. Los resultados de las elecciones se muestran en la Tabla \ref{tbl:borda_elecciones}.\\
  
 \begin{savenotes}
 \begin{table}[h]
@@ -65,10 +65,10 @@ Aplicando el recuento de Borda, el candidato A tendría $67.3$ millones de ``vot
 \end{ejemplo}
 
 \subsection{Ranking promedio}
-Otro método muy sencillo de agregación de rankings es el ranking promedio. En este caso, a los enteros que representan el orden en el ranking en los múltiples rankings, se hace la media con éstos para crear el ranking agregado. Una desventaja de este método es la frecuente aparición de empates en el rating. Este método sólo puede usarse cuando todos los rankings contienen los mismos elementos. 
+Otro método muy sencillo de agregación de rankings es el ranking promedio. En este caso, a los enteros que representan el orden en el ranking en los múltiples rankings, se hace la media con éstos para crear el ranking agregado. Una desventaja de este método es la frecuente aparición de empates en el rating. Este método sólo puede usarse cuando todos los rankings contienen los mismos elementos, es decir, son rsnkings completos. 
 
 \begin{ejemplo}
-Consideramos los mismos rankings que en el Ejemplo \ref{ej:borda}. DEN aparece en 5ª posición en los tres rankings por lo que la media es $5$. Para LAL, que aparece en dos cuartas posiciones y un segundo lugar, la media es $3.33$. Análogo para el resto de equipos. Los resultados se pueden ver en la Tabla \ref{tbl:promedio_resultados}. Se producen los mismos empates que en el Ejemplo \ref{ej:borda}, por lo que rompemos los empates de la misma forma.
+Consideramos los mismos rankings que en el Ejemplo \ref{ej:borda}. DEN aparece en 5ª posición en los tres rankings por lo que la media de sus rankings es $5$. Para LAL, que aparece en dos cuartas posiciones y un segundo lugar, la media es $3.33$. Análogo para el resto de equipos. Los resultados se pueden ver en la Tabla \ref{tbl:promedio_resultados}. Se producen los mismos empates que en el Ejemplo \ref{ej:borda}, por lo que rompemos los empates de la misma forma.
 
 \begin{table}[h]
 \centering
@@ -90,11 +90,11 @@ NYK & $1$    & $1$    & $3$    & $1.67$           & $2$              \\ \bottomr
 
 \subsection{Método de datos de partidos simulados}
 
-El método de datos de partidos simulados\footnote{Simulated Game Data}, nace de una simple interpretación de un ranking. Si el equipo $A$ aparece por encima del equipo $B$ en un ranking, entonces en un emparejamiento entre estos dos equipos, $A$ debería batir al equipo $B$. Es más, si el equipo $A$ aparece en la parte de arriba del ranking y juega contra $B$, que aparece al final del ranking, esperaríamos que que $A$ gane a $B$ con un amplio margen de victoria. Un ranking da información implícita sobre los futuros resultados. Usamos rankings para generar los datos de partidos simulados, que usamos para agregar varios rankings en uno solo. Cada ranking de $n$ equipos proporciona datos para $\binom{n}{2}$ partidos simulados. Por tanto, si tenemos $k$ rankings de $n$ equipos tendremos $k \binom{n}{2}$. partidos simulados.\\
+El método de datos de partidos simulados\footnote{Simulated Game Data}, nace de una simple interpretación de un ranking. Si el equipo $A$ aparece por encima del equipo $B$ en un ranking, entonces en un emparejamiento directo entre estos dos equipos, $A$ debería batir al equipo $B$. Es más, si el equipo $A$ aparece en la parte de arriba del ranking y juega contra $B$, que aparece al final del ranking, esperaríamos que que $A$ gane a $B$ con un amplio margen de victoria. La idea es que un ranking da información implícita sobre los futuros resultados. Usamos rankings para generar los datos de partidos simulados, que usamos para agregar varios rankings en uno solo. Cada ranking de $n$ equipos proporciona datos para $\binom{n}{2}$ partidos simulados. Por tanto, si tenemos $k$ rankings de $n$ equipos tendremos $k \binom{n}{2}$. partidos simulados.\\
 
-La forma de generar los partidos simulados es, para cada ranking, asignar un punto de margen de victoria por cada posición de diferencia en el ranking. La ventaja de este método es que no es necesario tener rankings completos, es decir, que todos los rankings que contengan todos los equipos. \\
+La forma de generar los partidos simulados es, para cada ranking, asignar un punto de margen de victoria por cada posición de diferencia en el ranking. La ventaja de este método es que no es necesario tener rankings completos, es decir, que todos los rankings contengan todos los equipos. \\
 
-Una vez que se han creado los partidos simulados, se aplica un método de combinado, que no es más que cualquiera de los métodos de rankings que hemos visto en el Capítulo \ref{chp:conceptos_basicos}. Se puede utilizar un método diferente distinto al de los rankings de entrada o utilizar el mismo método para favorecer los rankings con ese método. El método de combinación suaviza el efecto producido por los outliers (los datos atípicos del ranking). La Figura \ref{fig:partidos_simulados} muestra el esquema general del método.
+Una vez que se han creado los partidos simulados, se aplica un método de combinación, que no es más que cualquiera de los métodos de rankings  que hemos visto en el Capítulo \ref{chp:conceptos_basicos} (puede ser cualquier otro). Se puede utilizar un método diferente distinto al de los rankings de entrada o utilizar el mismo método para favorecer los rankings con ese método. El método de combinación suaviza el efecto producido por los outliers (los datos atípicos del ranking). La Figura \ref{fig:partidos_simulados} muestra el esquema general del método.
 
 \begin{figure}[htb]
 \centering
@@ -104,7 +104,7 @@ Una vez que se han creado los partidos simulados, se aplica un método de combin
 \end{figure}
 
 \begin{ejemplo} \label{ej:partidos_simulados}
-Consideremos los métodos rankings del Ejemplo \ref{ej:borda}. Tenemos tres rankings generados por tres métodos; Massey, Colley y Markov con $5$ equipos cada uno, por lo que tenemos que generar $3\binom{5}{2} = 30$ partidos simulados. \\
+Consideremos los métodos rankings para producir rankings del Ejemplo \ref{ej:borda}. Tenemos tres rankings generados por tres métodos: Massey, Colley y Markov con $5$ equipos cada uno, por lo que tenemos que generar $3\binom{5}{2} = 30$ partidos simulados. \\
 
 Comenzamos con el ranking producido por el método de Massey. DEN aparece en la 5ª y última posición, por lo que hay una posición de diferencia con LAL, tres con SAS, dos con CHI y cuatro con NYK. De esta forma los partidos simulados serán de $100-101$, $100-103$, $100-102$ y $100-104$, respectivamente. Hemos considerado $100$ como la media de puntos a favor de todos los equipos, y se le suma la diferencia al equipo ganador. De la misma forma se repite para todos los equipos y todos los métodos. La Tabla \ref{tbl:partidos_simulados} muestra todos los partidos simulados. \\
 
@@ -201,7 +201,7 @@ NYK & 1.5385                                                           & 2      
 
 Hasta ahora sólo hemos visto métodos heurísticos, es decir, métodos no necesariamente óptimos. El método que veremos a continuación sí es óptimo, pero a costa de una mayor complejidad computacional y mayor tiempo de cómputo. Esta optimalidad puede ser necesaria cuando necesitamos una gran precisión al calcular un ranking agregado.\\
 
-El método fue creado por el Dr. Yoshitsugu Yamamoto, de la Universidad de Tsukuba, en Japón. Este método se basa en un programa de programación lineal que debe ser resuleto para calcular el ranking óptimo. Este método trata de medir la conformidad o el compromiso entre los rankings de entrada. Una forma de medir la conformidad es
+El método fue creado por el Dr. Yoshitsugu Yamamoto, de la Universidad de Tsukuba, en Japón. Este método se basa en un programa de programación lineal que debe ser resuleto para calcular el ranking óptimo. Este método trata de medir la conformidad o el compromiso entre los rankings de entrada. Una forma de medir la conformidad definida en \cite{langville2012s} es
 
 \begin{multline} \label{eq:conformidad}
 c_{ij} = \text{número de rankings con $i$ por encima de $j$} \\ - \text{número de rankings con $i$ por debajo de $j$}
@@ -234,7 +234,7 @@ A esta función objetivo debemos añadirle una dos restricciones. La primera res
 x_{ij} + x_{ji} = 1
 \end{equation}
 
-Esta restricción indica que el equipo $i$ o el equipo $j$ estará por encima de $j$ o de $i$ respectivamente, pero los dos pueden estar empatados.\\
+Esta restricción indica que el equipo $i$ o el equipo $j$ estará por encima de $j$ o de $i$ respectivamente, pero los dos no pueden estar empatados.\\
 
 La segunda restricción es 
 
@@ -242,7 +242,7 @@ La segunda restricción es
 x_{ij} + x_{jk} + x_{ki} \leq 2
 \end{equation}
 
-Esta restricción indica transitividad en el rankings, es decir, si $i$ está por encima de $j$ y $j$ está por encima de $k$, entonces $i$ estará por encima de $k$.\\
+Esta restricción indica transitividad en el rankings, es decir, si $i$ está por encima de $j$ y $j$ está por encima de $k$, entonces $i$ estará por encima de $k$, pero no $k$ por encima de $i$.\\
 
 Por tanto, el problema a resolver es el siguiente:
 
@@ -282,7 +282,7 @@ Resolviendo el problema de programación la matriz $\mathbf{X}$ con las variable
 \end{array}\right)
 \end{equation*}
 
-Y el valor de la función objetivo es $24$. El ranking producido se puede ver en la Tabla \ref{tbl:optimo_resultados}.
+Y el valor de la función objetivo es $24$. El ranking producido se puede ver en la Tabla~ \ref{tbl:optimo_resultados}.
 
 \begin{table}[h]
 \centering
@@ -299,7 +299,7 @@ NYK & 1       \\ \bottomrule
 \end{tabular}
 \end{table}
 
-Representamos la matriz $\mathbf{X}$ como grafo de dominancia (Figura \ref{fig:ejemplo_grafo_dominancia_optimo}).
+Representamos la matriz $\mathbf{X}$ como grafo de dominancia (Figura \ref{fig:ejemplo_grafo_dominancia_optimo}). Se puede ver como NYK domina a todos los demás equipos, SAS domina a CHI, LAL y DEN. CHI domina a LAL y a DEN. LAL domina a DEN. DEN no domina a nadie, es dominado por todos los demás equipos.
 
 \begin{figure}[htb]
 \centering
@@ -325,7 +325,7 @@ El problema relajado consiste en forzar a que las variables $x_{ij}$ no tengan v
 \end{array}
 \end{equation}
 
-Este problema relajado puede representar valores fraccionales que son los empates entre equipos. Se pueden redondear al entero más próximo para obtener una solución subóptima. Además, si esta solución es factible puede ser aproximada a la solución óptima del problema binario. 
+Este problema relajado puede tener valores fraccionales que son los empates entre equipos. Se pueden redondear al entero más próximo para obtener una solución subóptima. Además, si esta solución es factible puede ser aproximada a la solución óptima del problema binario. 
 
 \begin{ejemplo}
 Consideramos de nuevo los rankings del Ejemplo \ref{ej:borda} producidos por los métodos de Massey, Colley y Markov. Aplicamos el método óptimo relajado. Primero debemos formar la matriz de conformidad $\mathbf{C}$ quedando de la siguiente manera:
@@ -359,7 +359,8 @@ En este caso no se producen empates y se obtiene la misma solución que en el pr
 
 \subsubsection*{Resumen y algoritmo de cómputo}
 
-Las variables y su descripción se pueden encontrar en la Tabla \ref{tbl:optimo}.
+Las variables y su descripción se pueden encontrar en la Tabla \ref{tbl:optimo}.\\
+
 
 %\begin{longtable}{c c p{5cm} p{6cm}}
 %\caption{Resumen del método óptimo de agregación de rankings}\\
