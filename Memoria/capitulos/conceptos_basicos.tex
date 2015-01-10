@@ -1,11 +1,11 @@
 \chapter{Conceptos básicos} \label{chp:conceptos_basicos}
 
-En este capítulo veremos dos conceptos centrales de esta memoria: ranking y rating, y veremos varios métodos para crear rankings.\\
+En este capítulo veremos dos conceptos centrales de esta memoria: ranking y rating, y veremos varios métodos para crear rankings. Veremos los métodos de Massey, que está basado en la teoría de mínimos cuadrados, el método de Colley, basado en la regla de Laplace, y el método de Markov, basado en las cadenas del mismo nombre.\\
 
-Para entender estos conceptos intuitivamente veamos un ejemplo:
+Para entender los conceptos de rating y rating, intuitivamente, veamos un ejemplo:
 
 \begin{ejemplo}
-Si consideramos los siguientes jugadores de la NBA: Kareem Abdul-Jabbar, Karl Malone, Michael Jordan, Kobe Bryant y Wilt Chamberlain, y consideramos los puntos y rebotes\footnote{Datos extraídos de \url{http://stats.nba.com/leaders/alltime}} anotados por cada uno de estos jugadores a lo largo de su carrera en temporada regular, obtenemos la siguiente tabla:
+Si consideramos los siguientes jugadores de la NBA: Kareem Abdul-Jabbar, Karl Malone, Michael Jordan, Kobe Bryant y Wilt Chamberlain, y consideramos los puntos y rebotes\footnote{Datos extraídos de \url{http://stats.nba.com/leaders/alltime}} anotados por cada uno de estos jugadores a lo largo de su carrera en temporada regular. La Tabla \ref{tbl:puntos_rebotes} muestra estos datos.
 
 \begin{table}[h]
 \centering
@@ -78,7 +78,7 @@ En general, los ratings producen distintos rankings. En el ejemplo, se puede ver
 
 \end{ejemplo}
 
-De forma intuitiva, podríamos decir que un rating es un criterio para ordenar una serie de elementos, y un ranking son todas los posibles ordenamientos de un un conjunto de elementos. De forma rigurosa, las definiciones anteriores quedan así:
+De forma intuitiva, podríamos decir que un rating es un criterio para ordenar una serie de elementos, y un ranking es alguno de los posibles ordenamientos de un un conjunto de elementos. De forma rigurosa, las definiciones anteriores quedan así:
 
 \begin{defi} \label{def:ranking}
 Dado un conjunto $\mathcal{N} = \{1,\dots,n\}$ que llamamos nodos, definimos el ranking $c$ como cualquier biyección $c : \mathcal{N} \to \mathcal{N}$.
@@ -99,18 +99,29 @@ que es claramente una biyección, por lo que $c$ es un ranking de acuerdo a la d
 
 Además, escribiremos $i \prec_c j$ cuando el nodo $i \in \mathcal{N}$ aparezca antes que el nodo $j \in \mathcal{N}$ en el ranking $c$.
 
+\begin{ejemplo}
 En el ejemplo, el nodo $5 \prec_c 3$ ya que el nodo $5$, WC aparece más alto que el nodo $3$, MJ.
+\end{ejemplo}
 
 \begin{defi}
-Dado un conjunto $\mathcal{N} = \{1,\dots, n\}$ de nodos, decimos que es un rating si a cada $i \in \mathcal{N}$ se le asigna un valor real. 
+Dado un conjunto $\mathcal{N} = \{1,\dots, n\}$ de nodos, decimos que es un rating si a cada $i \in \mathcal{N}$ se le asigna un valor real, es decir, una función $\mathrm{r} : \mathcal{N} \to \R$.
 \end{defi}
 
 Notar que un rating cuando se ordena (ascendente o descendentemente), crea un ranking.\\
 
-En el ejemplo anterior, la cantidad de puntos y rebotes a lo largo de la carrera en temporada regular en la NBA son ratings, y dados éstos obtenemos un ranking. En estos dos casos, hemos ordenado descendentemente el rating, pero también podría ordenarse de forma ascendente como en el caso de número de pérdidas de balón por partido a lo largo de la temporada regular. 
+Otra forma de ver los rankings y los ratings es en forma de vector. Si tenemos un ranking $c$, cada una de las posiciones del vector $c$, se corresponde con alguno de los nodos, y la posición en la aparezca en el vector es la posición que tiene en el ranking $c$. De igual forma para un rating.\\
+
+Denotaremos con $c^{-1}(a) = k$ al elemento $a$ que aparece en la posición k-ésima del ranking $c$.
+
+\begin{ejemplo}
+En el ejemplo anterior, la cantidad de puntos y rebotes a lo largo de la carrera en temporada regular en la NBA son ratings, y dados éstos obtenemos un ranking. En estos dos casos, hemos ordenado descendentemente el rating, pero también podría ordenarse de forma ascendente como en el caso de número de pérdidas de balón por partido a lo largo de la temporada regular.\\
+
+El ranking de puntos lo podemos ver como un vector, donde las posiciones del vector son los jugadores de la NBA, y éstas indican el ranking ordenado. Además,  si denotamos con $c$ al ranking de puntos, se tiene que $c^{-1}(\text{MJ}) = 3$, ya que Michael Jordan aparece en tercera posición en el ranking $c$.
+\end{ejemplo} 
 
 \section{Métodos para obtener ratings (y rankings)}
-\todo[backgroundcolor=red, inline]{Añadir pequeña introducción}
+En esta sección veremos tres métodos para obtener ratings (y rankings). Los tres métodos que veremos son el método de Massey, basado en la teoría de mínimos cuadrados, el método de Colley, basado en la regla de Laplace, y el método de Markov, basado en las cadenas del mismo nombre. Existen más métodos de obtener ratings que se pueden encontrar en \cite{langville2012s}.
+
 \subsection{Método de Massey}
 El método de Massey fue creado por Kenneth Massey en 1997 con la intención de obtener rankings de los equipos universitarios de EEUU. Este método usa la teoría de mínimos cuadrados. La idea fundamental de este método se basa en la siguiente ecuación idealizada:
 
@@ -126,7 +137,7 @@ El objetivo es asociar un rating a cada equipo en una liga con $n$ equipos, dond
 
 Los coeficientes de cada fila de la matriz $\mathbf{X}$ son casi todos nulos, excepto en la posición $i$ que tiene un $1$, y en la posición $j$ con un $-1$, para indicar que el equipo $i$ gana al equipo $j$ en un partido. Normalmente, $m \gg n$ que hace que el sistema sea incompatible y no tenga solución. Se puede obtener una solución aplicando las ecuaciones normales de los mínimos cuadrados, quedando el sistema $\mathbf{X^T X r} = \mathbf{X^T y}$. \\
 
-Massey descubrió que debido a la estructura de $\mathbf{X}$ era ventajoso la utilización de la matriz $\mathbf{M} = \mathbf{X^T X}$. De hecho, esta matriz no necesita ser calculada. Se puede obtener fácilmente usando el hecho de que los elementos de la diagonal $\mathbf{M}_{ii}$ es el total de partidos jugados por el $i$ contra el equipo $j$, y los elementos $\mathbf{M}_{ij}$ con $(i \neq j)$ es la negación del número de partidos jugados por el equipo $i$ contra el equipo $j$. El elemento i-ésimo de parte derecha de la ecuación se puede calcular es la suma de las diferencias de puntos para cada partidos disputado por el equipo $i$, y así definimos $\mathbf{p} = \mathbf{X^T y}$.\\
+Massey descubrió que debido a la estructura de $\mathbf{X}$ era ventajoso la utilización de la matriz $\mathbf{M} = \mathbf{X^T X}$. De hecho, esta matriz no necesita ser calculada. Se puede obtener fácilmente usando el hecho de que los elementos de la diagonal $\mathbf{m}_{ii}$ es el total de partidos jugados por el $i$ contra el equipo $j$, y los elementos $\mathbf{M}_{ij}$ con $(i \neq j)$ es el número de partidos cambiados de signo jugados por el equipo $i$ contra el equipo $j$. El elemento i-ésimo del lado derecho de la ecuación se puede calcular como la suma de las diferencias de puntos para cada partidos disputado por el equipo $i$, y así definimos $\mathbf{p} = \mathbf{X^T y}$.\\
 Usando estas notaciones el sistema se transforma en el siguiente sistema:
 
 \[ \mathbf{M r} = \mathbf{p} \]
@@ -135,7 +146,7 @@ Usando estas notaciones el sistema se transforma en el siguiente sistema:
 
 \begin{enumerate}
 \item La matriz $\mathbf{M}$ es una matriz cuadrada de orden $n$.
-\item $\mathbf{M}$ es una matriz diagonalmente dominante.
+\item $\mathbf{M}$ es una M-matriz diagonalmente dominante (ver Definición \ref{def:diagonalmente_dominante} y Sección~\ref{sec:m_matrices}).
 \item Sus filas suman $0$. Como consecuencia, sus columnas son linealmente dependientes. Esto hace que el sistema  $\mathbf{M r} = \mathbf{p}$ no tenga solución única cuando el $\rang(\mathbf{M}) < n$. El problema se puede solventar añadiendo una fila entera de $1$ y en la posición correspondiente de $\mathbf{p}$ añadir un $0$. Con la nueva fila, el sistema queda 
 \begin{equation}
 \overline{\mathbf{M}} \mathbf{r} = \overline{\mathbf{p}} \label{eq:massey_general}
@@ -209,7 +220,7 @@ NYK & 4.8          & 1       \\ \bottomrule
 \end{ejemplo}
 \subsubsection{Método de Massey avanzado}
 
-El método de Massey avanzado crea dos nuevos vectores respecto al método anterior: el rating ofensivo $\mathbf{o}$ y el rating defensivo $\mathbf{d}$, con $\mathbf{r} = \mathbf{o} + \mathbf{d}$. Este método descompone $\mathbf{p}$ en otros dos vectores: $ \mathbf{p} = \mathbf{f} - \mathbf{a}$, donde $\mathbf{f}$ es el número total de puntos marcados por cada equipo, y $\mathbf{a}$ es el número total de puntos marcados contra cada equipo durante la temporada. También se descompone la matriz $\mathbf{M}$ como $\mathbf{M} = \mathbf{T} - \mathbf{P}$, donde $\mathbf{T}$ es una matriz diagonal que contiene el número total de partidos disputados por cada equipo, y $\mathbf{P}$ una matriz sin elementos en la diagonal que contiene el número de parejas de partidos entre los equipos a lo largo de la temporada. Haciendo las sustituciones al sistema $\mathbf{M r } = \mathbf{p}$, el sistema se convierte en
+El método de Massey avanzado crea dos nuevos vectores respecto al método anterior: el rating ofensivo $\mathbf{o}$ y el rating defensivo $\mathbf{d}$, con $\mathbf{r} = \mathbf{o} + \mathbf{d}$. Este método descompone $\mathbf{p}$ en otros dos vectores: $ \mathbf{p} = \mathbf{f} - \mathbf{a}$, donde $\mathbf{f}$ es el número total de puntos marcados por cada equipo, y $\mathbf{a}$ es el número total de puntos encajados por cada equipo durante la temporada. También se descompone la matriz $\mathbf{M}$ como $\mathbf{M} = \mathbf{T} - \mathbf{P}$, donde $\mathbf{T}$ es una matriz diagonal que contiene el número total de partidos disputados por cada equipo, y $\mathbf{P}$ una matriz con elementos no nulos fuera de la diagonal principal que contiene el número de partidos entre los equipos a lo largo de la temporada. Haciendo las sustituciones al sistema $\mathbf{M r } = \mathbf{p}$, el sistema se convierte en
 
 \begin{equation}
 \mathbf{T o} - \mathbf{P o} + \mathbf{T d} - \mathbf{P d} = \mathbf{f} - \mathbf{a}
@@ -287,39 +298,39 @@ Variable & Tipo & Descripción & Elemento i-ésimo\\
 \hline
 \endfirsthead
 
-$n$ & $\N$ & Número de equipos en la liga. Orden de las matrices $\mathbf{T}$,$\mathbf{T}$ y $\mathbf{P}$. & ---\\
+$n$ & $\N$ & Número de equipos en la liga. Orden de las matrices $\mathbf{T}$,$\mathbf{P}$ y $\mathbf{M}$. & ---\\
 \hline
 $m$ & $\N$ & Número de partidos jugados & ---\\
 \hline
-$\mathbf{X}$ & $M_{m\times n}$\footnote{Matrices de tamaño $m \times n$} & Matriz de partidos por equipo & $\mathbf{X}_{ki} = \begin{cases}
+$\mathbf{X}$ & $\R^{m\times n}$ & Matriz de partidos por equipo & $x_{ki} = \begin{cases}
 1 & \text{si } i \text{ ganó en el partido } k \\
  -1 & \text{si } i \text{ perdió} \\ 
 0 & \text{en otro caso}
 \end{cases}$ \\
 \hline
-$\mathbf{T}$ & $M_{n\times n}$ & Matriz diagonal que contiene el número total de partidos disputados & $\mathbf{T}_{ii} = $ número total de partidos disputados por el equipo $i$ \\
+$\mathbf{T}$ & $\R^{n\times n}$ & Matriz diagonal que contiene el número total de partidos disputados & $t_{ii} = $ número total de partidos disputados por el equipo $i$ \\
 \hline
-$\mathbf{P}$ & $M_{n\times n}$ & Matriz sin elementos en la diagonal que  contiene información de los partidos & $\mathbf{P}_{ij} = $ número de partidos entre $i$ y $j$ \\
+$\mathbf{P}$ & $\R^{n\times n}$ & Matriz con elementos no nulos en la diagonal principal que contiene información de los partidos & $p_{ij} = $ número de partidos entre $i$ y $j$ \\
 \hline
-$\mathbf{M}$ & $M_{n\times n}$ & Matriz simétrica llamada matriz de Massey & $\mathbf{M} = \mathbf{T}-\mathbf{P}$ \\
+$\mathbf{M}$ & $\R^{n\times n}$ & Matriz simétrica llamada matriz de Massey & $\mathbf{M} = \mathbf{T}-\mathbf{P}$ \\
 \hline 
-$\overline{\mathbf{M}}$ & $M_{n \times n}$ & Matriz ajustada de Massey que se crea  remplazando una fila de $\mathbf{M}$ por un vector de unos & --- \\
+$\overline{\mathbf{M}}$ & $\R^{n \times n}$ & Matriz ajustada de Massey que se crea remplazando una fila de $\mathbf{M}$ por un vector de unos & --- \\
 \hline 
-$\mathbf{f}$ & $M_{n\times 1}$ & Vector de puntos marcados & $\mathbf{f}_i = $ número de puntos  marcados por $i$ durante la temporada \\
+$\mathbf{f}$ & $\R^{n\times 1}$ & Vector de puntos marcados & $f_i = $ número de puntos  marcados por $i$ durante la temporada \\
 \hline 
-$\mathbf{a}$ & $M_{n\times 1}$ & Vector de puntos encajados & $\mathbf{f}_i = $ número de puntos encajados por $i$ durante la temporada \\
+$\mathbf{a}$ & $\R^{n\times 1}$ & Vector de puntos encajados & $f_i = $ número de puntos encajados por $i$ durante la temporada \\
 \hline 
-$\mathbf{p}$ & $M_{n\times 1}$ & Vector de diferencias de puntos & $\mathbf{p}_i = f_i - a_i$ diferencia de puntos acumulados por $i$ durante la temporada \\
+$\mathbf{p}$ & $\R^{n\times 1}$ & Vector de diferencias de puntos & $p_i = f_i - a_i$ diferencia de puntos acumulados por $i$ durante la temporada \\
 \hline 
-$\overline{\mathbf{T}}$ & $M_{n\times 1}$ & Vector de diferencias de puntos ajustado creado poniendo un  elemento de $\mathbf{p}$ con $0$ & ---\\
+$\overline{\mathbf{T}}$ & $\R^{n\times 1}$ & Vector de diferencias de puntos ajustado creado poniendo un  elemento de $\mathbf{p}$ con $0$ & ---\\
 \hline
-$\mathbf{r}$ & $M_{n\times 1}$ & Vector de rating producido por 
+$\mathbf{r}$ & $\R^{n\times 1}$ & Vector de rating producido por 
 \ref{eq:massey_general} & ---\\
 \hline
-$\mathbf{o}$ & $M_{n\times 1}$ & Vector de ranking ofensivo producido
+$\mathbf{o}$ & $\R^{n\times 1}$ & Vector de ranking ofensivo producido
 por \ref{eq:massey_general} & ---\\
 \hline 
-$\mathbf{d}$ & $M_{n\times 1}$ & Vector de ranking defensivo producido por \ref{eq:massey_general} & ---\\
+$\mathbf{d}$ & $\R^{n\times 1}$ & Vector de ranking defensivo producido por \ref{eq:massey_general} & ---\\
 
 \bottomrule
 \end{longtable}
@@ -341,7 +352,7 @@ r_i = \dfrac{w_i}{t_i}
 \end{equation}
 
 La ecuación anterior tiene algunos problemas como que al inicio de la temporada se obtiene un rating de $0/0$, no se tiene en cuenta el adversario al que se enfrenta un equipo, es decir, no se tiene en cuenta si un equipo ``fuerte'' se enfrenta a uno ``débil'' o viceversa. \\
-Para solucionar estos problemas, Colley modifica la ecuación de tal forma que se soluciones los problemas anteriores. La ecuación queda de la siguiente manera:
+Para solucionar estos problemas, Colley modifica la ecuación de tal forma que se solucionan los problemas anteriores. La ecuación queda de la siguiente manera:
 
 \begin{equation}
 r_i = \dfrac{1 + w_i}{2 + t_i} \label{eq:colley}
@@ -445,7 +456,7 @@ NYK & 0.6429       & 1       \\ \bottomrule
 \end{tabular}
 \end{table}
 
-Notar que en este caso se producen empates. Para romperlos se pueden seguir varias estrategias: una de ellas es hacer uso de los datos pasados, es decir, si los equipos $i$ y $j$ están empatados y se enfrentaron entre ellos, el equipo ganador estará por encima del equipo perdedor. Otra opción es aplicar una un ``rating de desempate'' que consiste en tener otro rating, y desempatar a partir de éste, es decir, si dos equipos están empatados aparecerá primero en el ranking el primero que aparezca en el rating de desempate. La elección de este rating no tiene que ser arbitraria, sino que puede ser elegida de acuerdo a algún criterio específico.\\
+Notar que en este caso se producen empates. Para romperlos se pueden seguir varias estrategias: una de ellas es hacer uso de los datos pasados, es decir, si los equipos $i$ y $j$ están empatados y se enfrentaron entre ellos, el equipo ganador estará por encima del equipo perdedor. Otra opción es aplicar un ``rating de desempate'' que consiste en tener otro rating, y desempatar a partir de éste, es decir, si dos equipos están empatados aparecerá primero en el ranking el primero que aparezca en el rating de desempate. La elección de este rating no tiene que ser arbitraria, sino que puede ser elegida de acuerdo a algún criterio específico.\\
 
 En nuestro caso, aplicamos el rating de desempate, el de los puntos de diferencia (Tabla \ref{tbl:massey}). Al aplicar este criterio para desempatar, NYK se coloca por encima de SAS por tener mayor diferencia de puntos (24 contra 21). De la misma forma, se rompe el empate entre LAL y DEN. La Tabla \ref{tbl:colley_resultados_sin_empates} muestra el resultado tras romper los empates.
 
@@ -487,7 +498,7 @@ Variable & Tipo & Descripción & Elemento i-ésimo\\
 \hline
 \endhead
 
-$\mathbf{C}$ & $M_{n \times n}$ & Matriz de Colley. Matriz simétrica y definida positiva & $ \mathbf{C}_{ij} = \begin{cases}
+$\mathbf{C}$ & $\R^{n \times n}$ & Matriz de Colley. Matriz simétrica y definida positiva & $ c_{ij} = \begin{cases}
 2 + t_i & \text{si } i = j\\
 -n_{ij} & \text{si } i \neq j
 \end{cases}$\\
@@ -496,13 +507,13 @@ $t_i$ & $\N$ & Número total de partidos jugados por el equipo $i$ & ---\\
 \hline 
 $n_{ij}$ & $\N$ & Número de veces que $i$ y $j$ se han enfrentado & ---\\
 \hline
-$\mathbf{b}$ & $M_{n \times 1}$ & Vector del lado derecho del sistema & $b_i = 1+ \dfrac{1}{2}(w_i - l_i)$ \\
+$\mathbf{b}$ & $\R^{n \times 1}$ & Vector del lado derecho del sistema & $b_i = 1+ \dfrac{1}{2}(w_i - l_i)$ \\
 \hline 
 $w_i$ & $\N$ & Número de victorias del equipo $i$ & --- \\
 \hline
 $l_i$ & $\N$ & Número de derrotas del equipo $i$ & ---\\
 \hline 
-$\mathbf{r}$ & $M_{n\times 1}$ & Vector de ratings producido por el método de Colley & ---\\
+$\mathbf{r}$ & $\R^{n\times 1}$ & Vector de ratings producido por el método de Colley & ---\\
 \hline
 $n$ & $\N$ & Número de equipos en la liga. Orden de $\mathbf{C}$ & ---\\
 \bottomrule
@@ -516,9 +527,9 @@ El algoritmo para calcular este método es:
 
 \subsection{Método de Markov}
 
-El método de Markov hace uso de las cadenas de Markov, que inventó en 1906, para describir procesos estocásticos. Aquí las aplicaremos para crear rankings deportivos.\\
+El método de Markov hace uso de las cadenas de Markov, que inventó en 1906, para describir procesos estocásticos (ver Apéndice \ref{ap:markov}). Aquí las aplicaremos para crear rankings deportivos.\\
 
-Este método se basa en utilizar varios parámetros stadísticos como victorias y derrotas, diferencias de puntos entre dos equipos, etc para crear un rating. El objetivo es crear una matriz estocastica de todos los parámetros y calcular el punto fijo de la cadena de Markov, que será nuestro rating $\mathbf{r}$. Para cada uno de los parámetros, se crea una matriz $\mathbf{V}_i$. Necesitamos una matriz estocástica $\mathbf{S}_i$. Normalmente, esta matriz $\mathbf{V}_i$ no será estocástica, por lo que debemos normalizar cada fila, diviendo entre la suma de cada fila. Es posible que haciendo esto no se consiga una matriz estocástica, puesto que puede haber filas completamente llenas de ceros. Para tratar con ésto, se pueden seguir varias estrategias: una forma sencilla es sustituir la fila de ceros por una columna de unos y normalizar la fila como hemos comentado anteriormente. Esta forma resuelve el problema y crea una matriz estocástica, pero hay otras formas de resolver el problema que tienen más sentido en rankings deportivos.  Otra forma es sustituir el i-ésimo cero por un uno en la fila. Esto crea un nuevo problema, y es que la cadena no es necesarimente irreducible (lo que asegura la existencia y unicidad del punto fijo). Para conseguir esto creamos una matriz $\overline{\mathbf{S}}$, definida de la siguiente manera:
+Este método se basa en utilizar varios parámetros estadísticos como victorias y derrotas, diferencias de puntos entre dos equipos, etc para crear un rating. El objetivo es crear una matriz estocastica de todos los parámetros y calcular el punto fijo de la cadena de Markov, que será nuestro rating $\mathbf{r}$. Para cada uno de los parámetros, se crea una matriz $\mathbf{V}_i$. Necesitamos una matriz estocástica $\mathbf{S}_i$. Normalmente, esta matriz $\mathbf{V}_i$ no será estocástica, por lo que debemos normalizar cada fila, diviendo entre la suma de cada fila. Es posible que haciendo esto no se consiga una matriz estocástica, puesto que puede haber filas completamente llenas de ceros. Para tratar con ésto, se pueden seguir varias estrategias: una forma sencilla es sustituir la fila de ceros por una columna de unos y normalizar la fila como hemos comentado anteriormente. Esta forma resuelve el problema y crea una matriz estocástica, pero hay otras formas de resolver el problema que tienen más sentido en rankings deportivos: otra forma es sustituir el i-ésimo cero por un uno en la fila de ceros. Esto crea un nuevo problema, y es que la cadena no es necesarimente irreducible (lo que asegura la existencia y unicidad del punto fijo). Para conseguir esto creamos una matriz $\overline{\mathbf{S}}$, definida de la siguiente manera:
 
 \begin{equation}
 \overline{\mathbf{S}} = \beta \mathbf{S} + \dfrac{(1 - \beta)}{n} \mathbf{E}
@@ -530,7 +541,7 @@ De esta forma se consigue que cada fila sea un vector de probabilidad. Para obte
 \mathbf{S} = \sum_{i=1}^{k} \alpha_i \mathbf{S}_i
 \end{equation}
 
-donde $a_i \geq 0$ y $\sum_{i=1}^{k} \alpha_i = 1$. 
+donde $a_i \geq 0$ y $\sum_{i=1}^{k} \alpha_i = 1$. Esta combinación convexa de matrices estocástica es de nuevo una matriz estocástica.
 
 \begin{ejemplo}\label{ej:markov}
 Volvemos a considerar los datos de la Tabla \ref{tbl:massey} y \ref{tbl:colley}. Sólo consideraremos dos estadísticas: la de puntos y la de victorias.\\
@@ -634,7 +645,7 @@ Variable & Tipo & Descripción & Elemento i-ésimo\\
 
 $k$ & $\N$ & Número de estadísticas para incorporar al método de Markov & ---\\
 \hline
-$\mathbf{V}_k$ & $\R^{n \times n}$ & Matriz k-ésima con los resultados de la estadística $k$  & $[\mathbf{V}_k]_{ij}$ estadística k-ésima que se le asigna al equipo $i$ contra el equipo $j$. \\
+$\mathbf{V}_k$ & $\R^{n \times n}$ & Matriz k-ésima con los resultados de la estadística $k$  & $(v_k)_{ij}$ estadística k-ésima que se le asigna al equipo $i$ contra el equipo $j$. \\
 \hline 
 $\mathbf{S}_k$ & $\R^{n \times n}$ & Matrices estocásticas construidas a partir de $\mathbf{V}_k$ & ---\\
 \hline
@@ -797,7 +808,7 @@ Aunque a primera vista ambos métodos parecen no tener poco o nada en común. Co
 
 \[ r_i - r_j = y_k \]
 
-que indica que el equipo $i$ gana al equipo $j$ por $y_k$ puntos de diferencia. Si representamos la información del método de Massey mediante un grafo ponderado donde los pesos son la diferencia de puntos y comparamos con el grafo que proviene de la matriz $\mathbf{V}$ de diferencia de puntos, veremos que son el mismo grafo, pero con distinta orientación. En el grafo de Massey, la orientación implica dominancia, mientras que en el grafo de Markov implica debilidad.
+que indica que el equipo $i$ gana al equipo $j$ por $y_k$ puntos de diferencia. Si representamos la información del método de Massey mediante un grafo ponderado donde los pesos son la diferencia de puntos y comparamos con el grafo que proviene de la matriz $\mathbf{V}$ de diferencia de puntos, veremos que son el mismo grafo, pero con distinta orientación (ver Definición~\ref{def:orientacion}). En el grafo de Massey, la orientación implica dominancia, mientras que en el grafo de Markov implica debilidad.
 
 \begin{ejemplo}
 Si consideramos la diferencia de puntos de la Tabla \ref{tbl:massey}, y dibujamos los grafos de Massey y de Markov, vemos que son el mismo grafo, pero con orientación opuesta.

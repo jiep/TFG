@@ -162,7 +162,7 @@ Sean $\mathbf{A}$, $\mathbf{B}$ matrices no singulares. Las siguientes propiedad
 \end{itemize}
 \end{defi}
 
-\begin{defi}
+\begin{defi}\label{def:diagonalmente_dominante}
 Una matriz $\mathbf{A} \in \R^{n \times n}$ se dice diagonalmente dominante si 
 
 \[ |\mathbf{A}_{ii}| > \sum_{j=1 \\ j \neq i}^{n} |\mathbf{A}_{ij}| \quad \forall i = 1,\dots, n \]
@@ -217,7 +217,7 @@ Para toda $\mathbf{A} \in \C^{n \times n}$ y todo $\lambda \in \sigma(\mathbf{A}
 Una matriz $A \in \C^{n \times n}$ es diagonalizable si y sólo si $\mathrm{mg}_\mathbf{A}(\lambda) = \mathrm{ma}_\mathbf{A}(\lambda)$ para todo $\lambda \in \sigma(\mathbf{A})$.
 \end{teo}
 
-\subsection{M-matrices}
+\subsection{M-matrices} \label{sec:m_matrices}
 
 \begin{defi}
 Una M-matriz $\mathbf{A}$ es una matriz tal que $\mathbf{A}_{ij} \leq 0 \ \ \forall i \neq j$ y $\mathbf{A}^{-1} \geq \mathbf{0}$.
