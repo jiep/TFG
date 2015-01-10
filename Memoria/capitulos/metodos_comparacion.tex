@@ -4,7 +4,7 @@ En los capítulos anteriores hemos visto que se pueden crear distintos métodos 
 
 \section{Tau de Kendall}
 
-La tau de Kendall es una medida que permite conocer la similaridad entre dos rankings. Consideraremos dos casos: cuando los rankings son completos y cuando son parciales.
+La tau de Kendall es una medida que permite conocer la similitud entre dos rankings. Consideraremos dos casos: cuando los rankings son completos y cuando son parciales.
 
 \subsection{Tau de Kendall en rankings completos}
 
@@ -143,7 +143,7 @@ Hay que tener en cuenta que si queremos comparar estos valores, debemos calcular
 
 \end{ejemplo}
 
-Esta medida tiene un problema. Al penalizar las discrepancias $n_d$ y $n_u$ entre rankings mediante simples cuentas, no se tienen en cuenta las posiciones entre las que se producen estas discrepacnias.
+Esta medida tiene un problema: al penalizar las discrepancias $n_d$ y $n_u$ entre rankings mediante simples cuentas, no se tienen en cuenta las posiciones entre las que se producen estas discrepancias.
 
 \section{Ro de Spearman}
 
@@ -151,10 +151,10 @@ Esta medida tiene un problema. Al penalizar las discrepancias $n_d$ y $n_u$ entr
 Definimos la ro de Spearman como la distancia $L_1$ entre dos rankings completos $c_1$ y $c_2$ de tamaño $n$. Esto es, 
 
 \begin{equation}
-\rho = \norm{c_1 - c_2}_1 = \sum\limits_{i=1}^{n} |c_1(i) - c_2(i)|
+\rho = \norm{c_1 - c_2}_1 = \sum\limits_{i=1}^{n} |c_1^{-1}(i) - c_2^{-1}(i)|
 \end{equation}
 
-donde $c_1(i)$ es la posición del equipo $i$ en el ranking $c_1$ y $c_2(i)$ es la posición del equipo $i$ en el ranking $c_2$.
+donde $c_1^{-1}(i)$ es la posición del equipo $i$ en el ranking $c_1$ y $c_2^{-1}(i)$ es la posición del equipo $i$ en el ranking $c_2$.
 \end{defi}
 
 \begin{ejemplo}
@@ -191,7 +191,7 @@ c_4 = \left( \begin{array}{c}
 \end{array} \right)
 \end{equation*}
 
-Para los rankings $c_1$ y $c_2$ se tiene que, para el primer equipo, $c_1(1) = 4$ y $c_2(1) = 3$. Así, $|4-3| = 1$, para el segundo equipo, la diferencia es $4$, para el tercero es $2$, para el cuarto es $1$ y para el quinto $4$. De esta forma $\rho(c_1, c_2) = 12$. De la misma forma se obtiene que 
+Para los rankings $c_1$ y $c_2$ se tiene que, para el primer equipo, $c_1^{-1}(1) = 4$ y $c_2^{-1}(1) = 3$. Así, $|4-3| = 1$, para el segundo equipo, la diferencia es $4$, para el tercero es $2$, para el cuarto es $1$ y para el quinto $4$. De esta forma $\rho(c_1, c_2) = 12$. De la misma forma se obtiene que 
 
 \begin{align*}
 \rho(c_1, c_3) & = 6\\
@@ -213,7 +213,7 @@ Si tenemos dos rankings completos de tamaño $n$, la fi de Spearman se define de
 Se define la fi de Spearman entre dos rankings completos $c_1$ y $c_2$ de tamaño $n$ como 
 
 \begin{equation}
-\phi = \sum\limits_{i=1}^{n} \dfrac{|c_1(i) - c_2(i)|}{\mathrm{min}\{c_1(i), c_2(i)\}}
+\phi = \sum\limits_{i=1}^{n} \dfrac{|c_1^{-1}(i) - c_2^{-1}(i)|}{\mathrm{min}\{c_1^{-1}(i), c_2^{-1}(i)\}}
 \end{equation}
 \end{defi}
 
@@ -286,14 +286,14 @@ y $\phi_i$ se calcula de alguna de estas dos formas
 \item Si el elemento $i$ está en $c_1$ y $c_2$,
 
 \begin{equation}
-\phi_i = \dfrac{|c_1(i) - c_2(i)|}{\mathrm{min}\{c_1(i), c_2(i)\}}
+\phi_i = \dfrac{|c_1^{-1}(i) - c_2^{-1}(i)|}{\mathrm{min}\{c_1^{-1}(i), c_2^{-1}(i)\}}
 \end{equation}
 
 \item Si el elemento $i$ está en alguna de los dos rankings, que asumimos sin pérdida de generalidad que es $c_1$,
 
 
 \begin{equation}
-\phi_i = \dfrac{|c_1(i) - x|}{\mathrm{min}\{c_1(i), x\}}
+\phi_i = \dfrac{|c_1^{-1}(i) - x|}{\mathrm{min}\{c_1^{-1}(i), x\}}
 \end{equation} 
 
 donde $x$ se define como
@@ -349,7 +349,7 @@ Algunos valores de $\phi$ para estos rankings son
 \phi(c_2, c_3) & = 0.4417
 \end{align*}  
 
-Estos rankings son los mismos que en el Ejemplo \ref{ej:fi_spearman_completo}, por lo que son completos. Si comparamos resultados, vemos que no se tienen los mimos reultados en ambos casos, por lo que, en principio, no generaliza al caso de rankings completos. Si dividimos entre el valor $\phi(l, l^c)$, obtenemos los mismos resultados. En este caso, $\phi(l, l^c) = 20$, por lo que $\phi(c_1, c_2)/20 = 0.4917$ que coincide con el valor obtenido con por el método de los rankings parciales.\\
+Estos rankings son los mismos que en el Ejemplo \ref{ej:fi_spearman_completo}, por lo que son completos. Si comparamos resultados, vemos que no se tienen los mimos reultados en ambos casos, por lo que, en principio, no generaliza al caso de rankings completos. Si dividimos entre el valor $\phi(l, l^c)$, obtenemos los mismos resultados. En este caso, $\phi(l, l^c) = 20$, por lo que $\phi(c_1, c_2)/20 = 0.4917$ que coincide con el valor obtenido con por el método de los rankings parciales. Para los demás valores, también se obtiene el resultado del Ejemplo~\ref{ej:fi_spearman_completo}.\\
 
 Si ahora consideramos estos rankings parciales,
 
