@@ -545,3 +545,34 @@
   \path (2)   edge    node {} (4); 
   
 \end{tikzpicture}}
+
+\newcommand{\ejemplografocomplementario}{
+\begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=2cm,semithick]
+  \tikzstyle{every state}=[draw=black,text=black]
+
+% Grafo G
+  \node[state]         (B)                          {$A$};
+  \node[state]         (C) [below of=B]             {$C$};
+  \node[state]         (D) [right of=B]             {$B$};
+  \node[state]         (E) [right of=C]             {$D$};
+
+  \path (B) edge                node {}  (C)
+        (B) edge                node {}  (D)      
+        (C) edge                node {}  (D);
+        
+% Grafo \overline{G}
+  \node[state]         (H) [right of= E]       {$C$};
+  \node[state]         (I) [right of= D]       {$A$};
+  \node[state]         (G) [right of= H]       {$D$};
+  \node[state]         (F) [right of= I]       {$B$};
+  
+  \path (G) edge                node {}  (I)
+        (G) edge                node {}  (F)
+        (H) edge                node {}  (G);
+        
+% Etiquetas con el nombre de los grafos
+  \node[align=center, below right of=C] (Z) {$G$};
+  \node[align=center, below right of=H] (Y) {$\overline{G}$};
+
+
+\end{tikzpicture}}

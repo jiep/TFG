@@ -1,7 +1,7 @@
 \chapter{Teoría de grafos}
 
 \begin{defi}
-Un grafo es un par $G = (V,E)$ de conjuntos que satisfacen que $E \subseteq V^2$ y $V \cap E = \emptyset$. Los elementos de $V$ se denominan vértices (o nodos) del grafo $G$ y los elementos de $E$ se denominan arcos (o aristas). Una arista entre los véctices $x, y \in V$ se denota como $xy$ o $yx$.
+Un grafo (o grafo no dirigido) es un par $G = (V,E)$ de conjuntos que satisfacen que $E \subseteq V^2$ y $V \cap E = \emptyset$. Los elementos de $V$ se denominan vértices (o nodos) del grafo $G$ y los elementos de $E$ se denominan arcos (o aristas). Una arista entre los véctices $x, y \in V$ se denota como $xy$ o $yx \in E$.
 \end{defi}
 
 La forma usual de representar un grafo es dibujar un punto (o círculo) por cada vértice y unir dos de estos dos puntos (o círculos) con una línea para formar un arco. Cómo estén dibujados los vértices y los arcos es irrelevante. sólo importa qué pares de nodos forman una arista y cuáles no.
@@ -227,7 +227,7 @@ Un grafo dirigido $D = (V', E')$ es una orientación de un grafo (no dirgido) $G
 \section{Algunos tipos de grafos}
 
 \begin{defi}
-Un grafo ponderado es un grafo con una función $\mathrm{w} : E \to \R$, es decir, que $\mathrm{w}$ asocia un número real a cada arista.
+Un grafo ponderado es un grafo con una función $\mathrm{w} : E \to \R$, es decir, que $\mathrm{w}$ asocia un número real a cada arista. Esta función recibe el nombre de función peso.
 \end{defi}
 
 \begin{ejemplo}
@@ -285,4 +285,19 @@ Si consideramos el grafo de la Figura \ref{fig:grafo_dominancia}, vemos que para
 \end{figure}
 \end{ejemplo}
 
-\todo[backgroundcolor=red, inline]{Añadir definición de grafo complementario}
+\begin{defi}
+Llamamos grafo complementario de $G = (V,E)$, y lo denotamos como $\overline{G}$ al grafo que tiene como conjunto de vértices $V$ y como conjunto de aristas, las aristas que no están unidas de $G$.
+\end{defi}
+
+\begin{ejemplo}
+
+La Figura~\ref{fig:grafo_complementario} muestra un grafo $G$ y su correspondiente grafo complementario $\overline{G}$. Las aristas que no están unidas en $G$, sí lo están en $\overline{G}$.
+
+\begin{figure}[h]
+\centering
+\ejemplografocomplementario
+\caption{Ejemplo de grafo complementario}
+\label{fig:grafo_complementario}
+\end{figure}
+\end{ejemplo}
+\end{ejemplo}
