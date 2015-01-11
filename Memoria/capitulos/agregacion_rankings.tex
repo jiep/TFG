@@ -65,7 +65,7 @@ Aplicando el recuento de Borda, el candidato A tendría $67.3$ millones de ``vot
 \end{ejemplo}
 
 \subsection{Ranking promedio}
-Otro método muy sencillo de agregación de rankings es el ranking promedio. En este caso, a los enteros que representan el orden en el ranking en los múltiples rankings, se hace la media con éstos para crear el ranking agregado. Una desventaja de este método es la frecuente aparición de empates en el rating. Este método sólo puede usarse cuando todos los rankings contienen los mismos elementos, es decir, son rsnkings completos. 
+Otro método muy sencillo de agregación de rankings es el ranking promedio. En este caso, a los enteros que representan el orden en el ranking en los múltiples rankings, se hace la media con éstos para crear el ranking agregado. Una desventaja de este método es la frecuente aparición de empates en el rating. Este método sólo puede usarse cuando todos los rankings contienen los mismos elementos, es decir, son rankings completos. 
 
 \begin{ejemplo}
 Consideramos los mismos rankings que en el Ejemplo \ref{ej:borda}. DEN aparece en 5ª posición en los tres rankings por lo que la media de sus rankings es $5$. Para LAL, que aparece en dos cuartas posiciones y un segundo lugar, la media es $3.33$. Análogo para el resto de equipos. Los resultados se pueden ver en la Tabla \ref{tbl:promedio_resultados}. Se producen los mismos empates que en el Ejemplo \ref{ej:borda}, por lo que rompemos los empates de la misma forma.
@@ -94,7 +94,7 @@ El método de datos de partidos simulados\footnote{Simulated Game Data}, nace de
 
 La forma de generar los partidos simulados es, para cada ranking, asignar un punto de margen de victoria por cada posición de diferencia en el ranking. La ventaja de este método es que no es necesario tener rankings completos, es decir, que todos los rankings contengan todos los equipos. \\
 
-Una vez que se han creado los partidos simulados, se aplica un método de combinación, que no es más que cualquiera de los métodos de rankings  que hemos visto en el Capítulo \ref{chp:conceptos_basicos} (puede ser cualquier otro). Se puede utilizar un método diferente distinto al de los rankings de entrada o utilizar el mismo método para favorecer los rankings con ese método. El método de combinación suaviza el efecto producido por los outliers (los datos atípicos del ranking). La Figura \ref{fig:partidos_simulados} muestra el esquema general del método.
+Una vez que se han creado los partidos simulados, se aplica un método de combinación, que no es más que cualquiera de los métodos de rankings  que hemos visto en el Capítulo \ref{chp:conceptos_basicos} (puede ser cualquier otro). Se puede utilizar un método distinto al de los rankings de entrada o utilizar el mismo método para favorecer los rankings con ese método. El método de combinación suaviza el efecto producido por los outliers (los datos atípicos del ranking). La Figura \ref{fig:partidos_simulados} muestra el esquema general del método.
 
 \begin{figure}[htb]
 \centering
@@ -104,7 +104,7 @@ Una vez que se han creado los partidos simulados, se aplica un método de combin
 \end{figure}
 
 \begin{ejemplo} \label{ej:partidos_simulados}
-Consideremos los métodos rankings para producir rankings del Ejemplo \ref{ej:borda}. Tenemos tres rankings generados por tres métodos: Massey, Colley y Markov con $5$ equipos cada uno, por lo que tenemos que generar $3\binom{5}{2} = 30$ partidos simulados. \\
+Consideremos los métodos para producir rankings del Ejemplo \ref{ej:borda}. Tenemos tres rankings generados por tres métodos: Massey, Colley y Markov con $5$ equipos cada uno, por lo que tenemos que generar $3\binom{5}{2} = 30$ partidos simulados. \\
 
 Comenzamos con el ranking producido por el método de Massey. DEN aparece en la 5ª y última posición, por lo que hay una posición de diferencia con LAL, tres con SAS, dos con CHI y cuatro con NYK. De esta forma los partidos simulados serán de $100-101$, $100-103$, $100-102$ y $100-104$, respectivamente. Hemos considerado $100$ como la media de puntos a favor de todos los equipos, y se le suma la diferencia al equipo ganador. De la misma forma se repite para todos los equipos y todos los métodos. La Tabla \ref{tbl:partidos_simulados} muestra todos los partidos simulados. \\
 
@@ -201,7 +201,7 @@ NYK & 1.5385                                                           & 2      
 
 Hasta ahora sólo hemos visto métodos heurísticos, es decir, métodos no necesariamente óptimos. El método que veremos a continuación sí es óptimo, pero a costa de una mayor complejidad computacional y mayor tiempo de cómputo. Esta optimalidad puede ser necesaria cuando necesitamos una gran precisión al calcular un ranking agregado.\\
 
-El método fue creado por el Dr. Yoshitsugu Yamamoto, de la Universidad de Tsukuba, en Japón. Este método se basa en un programa de programación lineal que debe ser resuleto para calcular el ranking óptimo. Este método trata de medir la conformidad o el compromiso entre los rankings de entrada. Una forma de medir la conformidad definida en \cite{langville2012s} es
+El método fue creado por el Dr. Yoshitsugu Yamamoto, de la Universidad de Tsukuba, en Japón. Este método se basa en un programa de programación lineal que debe ser resuelto para calcular el ranking óptimo. Este método trata de medir la conformidad o el compromiso entre los rankings de entrada. Una forma de medir la conformidad definida en \cite{langville2012s} es
 
 \begin{multline} \label{eq:conformidad}
 c_{ij} = \text{número de rankings con $i$ por encima de $j$} \\ - \text{número de rankings con $i$ por debajo de $j$}
@@ -228,7 +228,7 @@ Una vez tenemos formadas las matrices $\mathbf{C}$ y $\mathbf{X}$ tenemos debemo
 
 donde $x_{ij} \in \{0,1\}$.\\
 
-A esta función objetivo debemos añadirle una dos restricciones. La primera restricción es
+A esta función objetivo debemos añadirle dos tipos de restricciones. El primer tipo de restricción es
 
 \begin{equation}
 x_{ij} + x_{ji} = 1
@@ -236,7 +236,7 @@ x_{ij} + x_{ji} = 1
 
 Esta restricción indica que el equipo $i$ o el equipo $j$ estará por encima de $j$ o de $i$ respectivamente, pero los dos no pueden estar empatados.\\
 
-La segunda restricción es 
+El segundo tipo de restricción es 
 
 \begin{equation}
 x_{ij} + x_{jk} + x_{ki} \leq 2
@@ -255,7 +255,7 @@ Por tanto, el problema a resolver es el siguiente:
 \end{array}
 \end{equation}
 
-Si tenemos $n$ equipos, nuestro problema tendá $n(n-1)$ variables de decisión, $n(n-1)$ restricciones del primer tipo y $n(n-1)(n-2)$ restricciones del segundo tipo. El orden computacional $\mathcal{O}(n^3)$ de las restricciones del segundo tipo limita el problema del tamaño del ranking a producir. Estos problemas se pueden solucionar con la relajación de restricciones y con la técnica algorítmica de ramifica y poda (ver \cite[pág 190-192]{langville2012s}).
+Si tenemos $n$ equipos, nuestro problema tendrá $n(n-1)$ variables de decisión, $n(n-1)$ restricciones del primer tipo y $n(n-1)(n-2)$ restricciones del segundo tipo. El orden computacional $\mathcal{O}(n^3)$ de las restricciones del segundo tipo limita el problema del tamaño del ranking a producir. Estos problemas se pueden solucionar con la relajación de restricciones y con la técnica algorítmica de ramifica y poda (ver \cite[pág 190-192]{langville2012s}).
 
 \begin{ejemplo} \label{ej:optimo}
 Consideramos de nuevo los rankings del Ejemplo \ref{ej:borda} producidos por los métodos de Massey, Colley y Markov. Aplicamos el método óptimo. Primero debemos formar la matriz de conformidad $\mathbf{C}$ quedando de la siguiente manera:

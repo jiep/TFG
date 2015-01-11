@@ -241,7 +241,7 @@ De la misma forma los coeficientes de clustering de cada uno de los nodos de la 
 C(\mathcal{S}) = \dfrac{1}{5}\left( 1 + \dfrac{1}{2} + 1 + \dfrac{2}{3} + \dfrac{2}{3} \right) = \dfrac{23}{30}
 \end{equation*}
 
-Como $C(\mathcal{R}) > C(\mathcal{S})$, la familia $\mathcal{S}$ de rankings es más competitiva que la familia $\mathcal{R}$.
+Como $C(\mathcal{S}) > C(\mathcal{R})$, la familia $\mathcal{S}$ de rankings es más competitiva que la familia $\mathcal{R}$.
  
 \end{ejemplo}
 
@@ -320,7 +320,7 @@ Volvemos a considerar los grafos evolutivos de las Figuras~\ref{fig:grafo_compet
 
 \section{Relaciones con otros grafos}
 
-Una vez vistas una serie de medidas para medir la competitividad entre familias de rankings, es interesante ver si este tipo de grafo está relacionado con algún otro conocido, como los grafos de comprarabilidad, grafos de permutaciones, grafos cordales y los f-grafos y ver las inclusiones que se dan entre cada tipo de grafo. Para empezar, definiremos estos tipos de grafos.
+Una vez vistas una serie de medidas para medir la competitividad entre familias de rankings, es interesante ver si este tipo de grafo está relacionado con algún otro conocido, como los grafos de comparabilidad, grafos de permutaciones, grafos cordales y los f-grafos y ver las inclusiones que se dan entre cada tipo de grafo. Para empezar, definiremos estos tipos de grafos.
 
 \begin{defi}
 Un grafo $G = (\mathcal{N}, E)$ es cordal si cada sus ciclos de cuatro o más vértices tiene una cuerda, que es un arco que une dos nodos que no son adyacentes en el ciclo.
@@ -429,13 +429,13 @@ Si $\mathcal{G}$ es el conjunto de todos los grafos finitos, $CH\mathcal{G}$, $P
 
 \item Hay grafos de competitividad que no son grafos de comparabilidad ni grafos cordales, es decir, $CP\mathcal{G} \setminus (C\mathcal{G}\cup CH\mathcal{G}) \neq \emptyset$.
 
-\item Hay grafos que no son ni de comparabilidad, ni competitivivos ni cordales, es decir, $\mathcal{G} \setminus (C\mathcal{G} \cup CP\mathcal{G} \cup C\mathcal{G}) \neq \emptyset$.
+\item Hay grafos que no son ni de comparabilidad, ni de competitividad ni cordales, es decir, $\mathcal{G} \setminus (C\mathcal{G} \cup CP\mathcal{G} \cup C\mathcal{G}) \neq \emptyset$.
 
 \item Los grafos de permutaciones coinciden con la intersección de los grafos de competitividad y de comparabilidad, pero no cada grafo de permutación es cordal, es decir, $P\mathcal{G} = C\mathcal{G}\cap CP\mathcal{G}$ y $P\mathcal{G} \not \subseteq CH\mathcal{G}$.
 
 \item Hay grafos cordales que no son grafos de comparabilidad ni de competitividad, es decir, $CH\mathcal{G} \setminus (C\mathcal{G} \cup CP\mathcal{G}) \neq \emptyset$.
 
-\item Hay grafos que son de competitividad y de cordales, pero no son de comparabilidad, es decir, $CP\mathcal{G} \cap CH\mathcal{G} \cap (\mathcal{G} \setminus C\mathcal{G}) \neq \emptyset$.
+\item Hay grafos que son de competitividad y cordales, pero no son de comparabilidad, es decir, $CP\mathcal{G} \cap CH\mathcal{G} \cap (\mathcal{G} \setminus C\mathcal{G}) \neq \emptyset$.
 
 \item Hay grafos que son de competitividad y cordales, pero no de competitividad, es decir, $C\mathcal{G} \cap CH\mathcal{G} \cap (\mathcal{G} \ C\mathcal{G}) \neq \emptyset$.
 

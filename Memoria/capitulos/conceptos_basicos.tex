@@ -50,7 +50,7 @@ Estas dos ordenaciones de los jugadores es lo que recibe el nombre de rating. De
 \end{array}
 \]
 
-En general, los ratings producen distintos rankings. En el ejemplo, se puede ver como en el ranking de rebotes Wilt Chamberlain se encuentra en 1ª posición, mientras que en el de rebotes se encuentra en 5ª posición. Otros rankings ficticios para el ejemplo podrían ser
+En general, los ratings producen distintos rankings. En el ejemplo, se puede ver como en el ranking de rebotes Wilt Chamberlain se encuentra en 1ª posición, mientras que en el de puntos se encuentra en 5ª posición. Otros rankings ficticios para el ejemplo podrían ser
 
 \[
 \begin{array}{ccc}
@@ -137,7 +137,7 @@ El objetivo es asociar un rating a cada equipo en una liga con $n$ equipos, dond
 
 Los coeficientes de cada fila de la matriz $\mathbf{X}$ son casi todos nulos, excepto en la posición $i$ que tiene un $1$, y en la posición $j$ con un $-1$, para indicar que el equipo $i$ gana al equipo $j$ en un partido. Normalmente, $m \gg n$ que hace que el sistema sea incompatible y no tenga solución. Se puede obtener una solución aplicando las ecuaciones normales de los mínimos cuadrados, quedando el sistema $\mathbf{X^T X r} = \mathbf{X^T y}$. \\
 
-Massey descubrió que debido a la estructura de $\mathbf{X}$ era ventajoso la utilización de la matriz $\mathbf{M} = \mathbf{X^T X}$. De hecho, esta matriz no necesita ser calculada. Se puede obtener fácilmente usando el hecho de que los elementos de la diagonal $\mathbf{m}_{ii}$ es el total de partidos jugados por el $i$ contra el equipo $j$, y los elementos $\mathbf{M}_{ij}$ con $(i \neq j)$ es el número de partidos cambiados de signo jugados por el equipo $i$ contra el equipo $j$. El elemento i-ésimo del lado derecho de la ecuación se puede calcular como la suma de las diferencias de puntos para cada partidos disputado por el equipo $i$, y así definimos $\mathbf{p} = \mathbf{X^T y}$.\\
+Massey descubrió que debido a la estructura de $\mathbf{X}$ era ventajoso la utilización de la matriz $\mathbf{M} = \mathbf{X^T X}$. De hecho, esta matriz no necesita ser calculada. Se puede obtener fácilmente usando el hecho de que los elementos de la diagonal $m_{ii}$ es el total de partidos jugados por el $i$ contra el equipo $j$, y los elementos $m_{ij}$ con $(i \neq j)$ es el número de partidos cambiados de signo jugados por el equipo $i$ contra el equipo $j$. El elemento i-ésimo del lado derecho de la ecuación se puede calcular como la suma de las diferencias de puntos para cada partidos disputado por el equipo $i$, y así definimos $\mathbf{p} = \mathbf{X^T y}$.\\
 Usando estas notaciones el sistema se transforma en el siguiente sistema:
 
 \[ \mathbf{M r} = \mathbf{p} \]
@@ -804,7 +804,7 @@ NYK & -0.2      & 5       \\ \bottomrule
 
 \subsubsection{Relación entre el método de Markov y el de Massey}
 
-Aunque a primera vista ambos métodos parecen no tener poco o nada en común. Como apuntábamos anteriormente, el método de Markov permite tratar distintas estadísticas entre las que se encuentra la diferencia de puntos, en lo que está basado el método de Massey. Recordemos que que la ecuación fundamental del método de Massey es
+Aunque a primera vista ambos métodos parecen no tener poco o nada en común. Como apuntábamos anteriormente, el método de Markov permite tratar distintas estadísticas entre las que se encuentra la diferencia de puntos, en lo que está basado el método de Massey. Recordemos que la ecuación fundamental del método de Massey es
 
 \[ r_i - r_j = y_k \]
 
