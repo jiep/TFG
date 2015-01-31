@@ -1,4 +1,5 @@
 <?php
+// traductor_matlab.txt
 
 	$archivo = fopen("./datos/salidas.txt","r") or die();
 	
