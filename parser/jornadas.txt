@@ -1,7 +1,7 @@
 Descargando datos de lfp.es ... 
 
 Jornada 1 
------------------------ 
+-------------------------------- 
 Málaga 1-0 Athletic
 Sevilla 1-1 Valencia
 Granada 2-1 Deportivo
@@ -12,9 +12,9 @@ FC Barcelona 3-0 Elche
 Levante 0-2 Villarreal
 R. Madrid 2-0 Córdoba
 Rayo 0-0 Atlético
----------------------
+--------------------------------
 Jornada 2 
------------------------ 
+-------------------------------- 
 Getafe 1-0 Almería
 Valencia 3-0 Málaga
 Córdoba 1-1 Celta
@@ -25,9 +25,9 @@ Villarreal 0-1 FC Barcelona
 R. Sociedad 4-2 R. Madrid
 Deportivo 2-2 Rayo
 Elche 1-1 Granada
----------------------
+--------------------------------
 Jornada 3 
------------------------ 
+-------------------------------- 
 Almería 1-1 Córdoba
 FC Barcelona 2-0 Athletic
 Málaga 0-0 Levante
@@ -38,9 +38,9 @@ Valencia 3-1 Espanyol
 Sevilla 2-0 Getafe
 Granada 0-0 Villarreal
 Eibar 0-1 Deportivo
----------------------
+--------------------------------
 Jornada 4 
------------------------ 
+-------------------------------- 
 Elche 0-2 Eibar
 Deportivo 2-8 R. Madrid
 Athletic 0-1 Granada
@@ -51,9 +51,9 @@ Villarreal 4-2 Rayo
 Córdoba 1-3 Sevilla
 Levante 0-5 FC Barcelona
 Getafe 0-3 Valencia
----------------------
+--------------------------------
 Jornada 5 
------------------------ 
+-------------------------------- 
 R. Madrid 5-1 Elche
 Celta 2-1 Deportivo
 Almería 0-1 Atlético
@@ -64,9 +64,9 @@ Granada 0-1 Levante
 Málaga 0-0 FC Barcelona
 Espanyol 2-0 Getafe
 Valencia 3-0 Córdoba
----------------------
+--------------------------------
 Jornada 6 
------------------------ 
+-------------------------------- 
 Elche 0-1 Celta
 Villarreal 0-2 R. Madrid
 FC Barcelona 6-0 Granada
@@ -77,9 +77,9 @@ Getafe 1-0 Málaga
 Deportivo 0-1 Almería
 R. Sociedad 1-1 Valencia
 Córdoba 0-0 Espanyol
----------------------
+--------------------------------
 Jornada 7 
------------------------ 
+-------------------------------- 
 Getafe 1-1 Córdoba
 Valencia 3-1 Atlético
 Rayo 0-2 FC Barcelona
@@ -90,9 +90,9 @@ Sevilla 4-1 Deportivo
 Celta 1-3 Villarreal
 Espanyol 2-0 R. Sociedad
 R. Madrid 5-0 Athletic
----------------------
+--------------------------------
 Jornada 8 
------------------------ 
+-------------------------------- 
 Granada 0-1 Rayo
 Levante 0-5 R. Madrid
 Athletic 1-1 Celta
@@ -103,9 +103,9 @@ Deportivo 3-0 Valencia
 Elche 0-2 Sevilla
 Villarreal 2-0 Almería
 R. Sociedad 1-2 Getafe
----------------------
+--------------------------------
 Jornada 9 
------------------------ 
+-------------------------------- 
 Celta 3-0 Levante
 Almería 0-1 Athletic
 R. Madrid 3-1 FC Barcelona
@@ -116,9 +116,9 @@ Málaga 4-0 Rayo
 Espanyol 0-0 Deportivo
 Sevilla 2-1 Villarreal
 Getafe 0-1 Atlético
----------------------
+--------------------------------
 Jornada 10 
------------------------ 
+-------------------------------- 
 Deportivo 1-2 Getafe
 Granada 0-4 R. Madrid
 Atlético 4-2 Córdoba
@@ -129,9 +129,9 @@ Villarreal 1-3 Valencia
 Levante 2-1 Almería
 Elche 2-1 Espanyol
 Rayo 2-3 Eibar
----------------------
+--------------------------------
 Jornada 11 
------------------------ 
+-------------------------------- 
 Córdoba 0-0 Deportivo
 Almería 1-2 FC Barcelona
 Getafe 0-0 Elche
@@ -142,9 +142,9 @@ Sevilla 1-1 Levante
 Espanyol 1-1 Villarreal
 Valencia 0-0 Athletic
 R. Sociedad 2-1 Atlético
----------------------
+--------------------------------
 Jornada 12 
------------------------ 
+-------------------------------- 
 Athletic 3-1 Espanyol
 Atlético 3-1 Málaga
 Eibar 0-4 R. Madrid
@@ -155,9 +155,9 @@ Levante 2-1 Valencia
 Elche 2-2 Córdoba
 Villarreal 2-1 Getafe
 Granada 0-0 Almería
----------------------
+--------------------------------
 Jornada 13 
------------------------ 
+-------------------------------- 
 R. Sociedad 3-0 Elche
 Getafe 1-2 Athletic
 Espanyol 2-1 Levante
@@ -168,9 +168,9 @@ Sevilla 5-1 Granada
 Córdoba 0-2 Villarreal
 Valencia 0-1 FC Barcelona
 Almería 0-1 Rayo
----------------------
+--------------------------------
 Jornada 14 
------------------------ 
+-------------------------------- 
 Elche 0-2 Atlético
 Athletic 0-1 Córdoba
 R. Madrid 3-0 Celta
@@ -181,9 +181,9 @@ Villarreal 4-0 R. Sociedad
 Granada 1-1 Valencia
 Eibar 5-2 Almería
 Levante 1-1 Getafe
----------------------
+--------------------------------
 Jornada 15 
------------------------ 
+-------------------------------- 
 Almería 1-4 R. Madrid
 Getafe 0-0 FC Barcelona
 Valencia 3-0 Rayo
@@ -194,9 +194,9 @@ Sevilla 0-0 Eibar
 Atlético 0-1 Villarreal
 R. Sociedad 1-1 Athletic
 Deportivo 1-0 Elche
----------------------
+--------------------------------
 Jornada 16 
------------------------ 
+-------------------------------- 
 Celta 0-1 Almería
 FC Barcelona 5-0 Córdoba
 Levante 1-1 R. Sociedad
@@ -207,9 +207,9 @@ Granada 1-1 Getafe
 Elche 1-2 Málaga
 Athletic 1-4 Atlético
 R. Madrid 20:45 Sevilla
----------------------
+--------------------------------
 Jornada 17 
------------------------ 
+-------------------------------- 
 Atlético 3-1 Levante
 Sevilla 1-0 Celta
 Elche 2-2 Villarreal
@@ -220,9 +220,9 @@ Valencia 2-1 R. Madrid
 Espanyol 1-2 Eibar
 R. Sociedad 1-0 FC Barcelona
 Córdoba 2-0 Granada
----------------------
+--------------------------------
 Jornada 18 
------------------------ 
+-------------------------------- 
 Levante 0-0 Deportivo
 R. Madrid 3-0 Espanyol
 Málaga 1-1 Villarreal
@@ -233,9 +233,9 @@ Athletic 1-2 Elche
 Granada 1-1 R. Sociedad
 FC Barcelona 3-1 Atlético
 Rayo 0-1 Córdoba
----------------------
+--------------------------------
 Jornada 19 
------------------------ 
+-------------------------------- 
 Córdoba 1-1 Eibar
 R. Sociedad 0-1 Rayo
 Valencia 3-2 Almería
@@ -246,9 +246,9 @@ Atlético 2-0 Granada
 Deportivo 0-4 FC Barcelona
 Elche 1-0 Levante
 Sevilla 2-0 Málaga
----------------------
+--------------------------------
 Jornada 20 
------------------------ 
+-------------------------------- 
 Córdoba 1-2 R. Madrid
 Elche 0-6 FC Barcelona
 Atlético 3-1 Rayo
@@ -259,4 +259,4 @@ Athletic 1-1 Málaga
 Espanyol 3-0 Almería
 Valencia 3-1 Sevilla
 Getafe 2-1 Celta
----------------------
+--------------------------------
