@@ -1,3 +1,4 @@
+Conexión establecida con éxito con la base de datos
 Descargando datos de lfp.es ... 
 
 Jornada 1 
@@ -206,7 +207,6 @@ Villarreal 3-0 Deportivo
 Granada 1-1 Getafe
 Elche 1-2 Málaga
 Athletic 1-4 Atlético
-R. Madrid 20:45 Sevilla
 --------------------------------
 Jornada 17 
 -------------------------------- 
