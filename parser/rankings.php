@@ -26,7 +26,12 @@ echo "Jornada $i \n-------------------------------- \n";
 
 	for($j = 0; $j < count($locales); $j++){
 
-		echo($locales[$j]->innertext . " " . $resultados[$j]->innertext . " " . $visitantes[$j]->innertext . "\n");	
+		if(strpos($resultados[$j]->innertext,'-') !== false){
+
+			$goles = explode("-", $resultados[$j]->innertext);
+			echo($locales[$j]->innertext . " " . $goles[0] . "-" . $goles[1] . " " . $visitantes[$j]->innertext . "\n");
+
+		}	
 
 	}
 
