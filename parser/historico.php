@@ -3,6 +3,8 @@
 require("simple_html_dom.php");
 require_once("conexion.php");
 
+$ACTUAL = date("Y");
+
 for($temporada = 1928; $temporada <= $ACTUAL-2; $temporada++){
   if($temporada >= 2000){
     $temp = "1" . substr($temporada, 2, 2);
