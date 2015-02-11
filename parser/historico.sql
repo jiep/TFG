@@ -22,18 +22,6 @@
 DROP TABLE IF EXISTS `partidos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `partidos` (
-  `id` int(6) unsigned NOT NULL AUTO_INCREMENT,
-  `temporada` varchar(9) COLLATE utf8_unicode_ci NOT NULL,
-  `jornada` int(2) unsigned NOT NULL,
-  `equipo_local` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `equipo_visitante` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `goles_local` int(2) NOT NULL,
-  `goles_visitante` int(2) NOT NULL,
-  `dif_goles` int(2) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23156 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `partidos`
