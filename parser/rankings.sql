@@ -19,4 +19,20 @@ CREATE TABLE IF NOT EXISTS `equipos` (
   `nombre` varchar(50) CHARACTER SET utf8 NOT NULL,
   `escudo` blob NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS `rankings` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `equipo` varchar(50) CHARACTER SET utf8 NOT NULL,
+  `posicion` int(2) unsigned NOT NULL,
+  `puntos` int(4) unsigned NOT NULL,
+  `partidos_ganados` int(4) unsigned NOT NULL,
+  `partidos_empatados` int(4) unsigned NOT NULL,
+  `partidos_perdidos` int(4) unsigned NOT NULL,
+  `goles_favor` int(4) unsigned NOT NULL,
+  `goles_contra` int(4) unsigned NOT NULL,
+  `diferencia_goles` tinyint(4) NOT NULL,
+  `jornada` int(2) unsigned NOT NULL,
+  `temporada` varchar(10) CHARACTER SET utf8 NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
