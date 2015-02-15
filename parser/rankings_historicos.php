@@ -63,6 +63,25 @@ for($temporada = 1928; $temporada <= $ACTUAL-2; $temporada++){
       $diferencia_goles = $fila_equipo->find("td", 9)->innertext;
 
       echo "$posicion $nombre_equipo $puntos $partidos_ganados $partidos_empatados $partidos_perdidos $goles_favor $goles_contra $diferencia_goles\n";
+
+      $db_query = sprintf("INSERT INTO rankings(equipo, posicion, puntos, partidos_ganados, partidos_empatados, partidos_perdidos, goles_favor, goles_contra, diferencia_goles, jornada, temporada) VALUES ('%s', %u, %u, %u, %u, %u, %u, %u, %d, %u, '%s')",
+        $nombre_equipo,
+        $posicion,
+        intval($puntos),
+        intval($partidos_ganados),
+        intval($partidos_empatados),
+        intval($partidos_perdidos),
+        intval($goles_favor),
+        intval($goles_contra),
+        intval($diferencia_goles),
+        intval($jornada_numero),
+        $temp3);
+
+      $resultado = mysql_query($db_query);
+      if(!$resultado){
+        echo mysql_error() . "\n";
+      }
+
     }
 
     echo "\n";
