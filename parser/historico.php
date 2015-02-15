@@ -1,6 +1,7 @@
 <?php
 require("simple_html_dom.php");
 require_once("conexion.php");
+
 $N_JORNADAS = 20;
 $TEMPORADA = "2014/2015";
 echo "Descargando datos de lfp.es ... \n\n";
@@ -13,7 +14,7 @@ for($i = 1; $i <= $N_JORNADAS; $i++){
 	$locales = $datos->find("div[id=div_jornada_" . $i . "_1_2] * a span[class=equipo left local] span[class=team]");
 	$visitantes = $datos->find("div[id=div_jornada_" . $i . "_1_2] * a span[class=equipo left visitante] span[class=team]");
 	$resultados = $datos->find("div[id=div_jornada_" . $i . "_1_2] * a span[class=hora_resultado left] span[class=horario_partido]");
-echo "Jornada $i \n-------------------------------- \n"; 
+echo "Jornada $i \n-------------------------------- \n";
 	for($j = 0; $j < count($locales); $j++){
 		$resultado = $resultados[$j]->innertext;
 		if(strpos($resultado,'-') !== false){
@@ -26,7 +27,7 @@ echo "Jornada $i \n-------------------------------- \n";
 			if(!$resultado){
 				echo mysql_error() . "\n";
 			}
-		}	
+		}
 	}
 echo "--------------------------------\n";
 }
