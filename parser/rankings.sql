@@ -13,3 +13,10 @@ CREATE TABLE IF NOT EXISTS `partidos` (
   `dif_goles` int(2) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS `equipos` (
+  `id` int(3) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(50) CHARACTER SET utf8 NOT NULL,
+  `escudo` blob NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
