@@ -37,8 +37,8 @@ class RankingCollection {
       for($i = 0; $i < $ranking->getLength() - 1; $i++){
         for($j = 0; $j < $ranking->getLength() - 1 - $i; $j++){
           if($ranking->get($j) < $ranking->get($j+1)){
-            $adjacencyMatrix[$i][$j]++;
-            $adjacencyMatrix[$j][$i]++;
+            $this->adjacencyMatrix[$i][$j]++;
+            $this->adjacencyMatrix[$j][$i]++;
           }
         }
       }
