@@ -1,0 +1,49 @@
+body{
+  background-color: #414141;
+  padding-top: 70px;
+  height:100%;
+}
+
+.navbar {
+  border-radius: 0px;
+}
+
+.nav-pills>li>a {
+  border-radius: 0px;
+}
+
+.nav-stacked {
+  position: fixed;
+  margin-top: -10px;
+  background-color: #313131;
+  height: 100%;
+}
+
+.nav-stacked>li+li {
+  margin-top: 0px;
+}
+
+.table td {
+   text-align: center;
+}
+
+.table th {
+  text-align: center;
+}
+
+.panel {
+  border-radius: 0px;
+}
+
+#panel-historico {
+  width: 95% !important;
+}
+
+#cy {
+  height: 30% !important;
+  position: absolute;
+  width: 96.5% !important;
+  background-color: #ffffff;
+  margin-bottom: 30px;
+  border-color: #ddd;
+}
