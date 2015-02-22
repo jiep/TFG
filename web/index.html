@@ -59,7 +59,7 @@
   }
   </script>
 
-  <script>
+  <!--<script>
   $(function(){ // on dom ready
 
     var cy = cytoscape({
@@ -132,6 +132,53 @@
         });
 
         });
+  </script>-->
+
+  <script>
+  $(function(){
+
+  var graph = $.ajax({
+    url: 'https://gist.githubusercontent.com/jiep/d8131a4974eb3235d1f7/raw/competitivitygraph.json',
+    type: 'GET',
+    dataType: 'json'
+  });
+
+  // when both graph export json and style loaded, init cy
+  Promise.all([ graph]).then(initCy);
+
+  function initCy( then ){
+    var expJson = then[0];
+    var elements = expJson.elements;
+
+    console.log(elements);
+
+    var cy = window.cy = cytoscape({
+      container: document.getElementById('cy'),
+      elements: elements,
+      zoom: 1,
+      zoomingEnabled: false,
+      layout: {
+        name: 'circle'
+      },
+      style : cytoscape.stylesheet()
+        .selector('node')
+          .css({
+            'height': 80,
+            'width': 80,
+            'background-fit': 'cover',
+            'border-width': 2,
+            'border-opacity': 0.1,
+            'background-color': '#dfdfdf',
+            'background-opacity': 0.1,
+            'content': 'data(id)',
+            'text-valign': 'center',
+            'text-halign': 'center'
+          })
+
+    });
+
+  }
+});
   </script>
 
 </head>

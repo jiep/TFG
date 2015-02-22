@@ -35,14 +35,23 @@ class Ranking {
     }
   }
 
-  function get($i){
+  function getPosition($team){
     $key = null;
-    $k = array_search($i, $this->ranking);
+    $k = array_search($team, $this->ranking);
     if($k !== false){
       $key = $k;
     }
 
     return $key;
+  }
+
+  function get($index){
+    $team = null;
+    if(array_key_exists($index, $this->ranking)){
+      $team = $this->ranking[$index];
+    }
+
+    return $team;
   }
 
 }

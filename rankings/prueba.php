@@ -8,8 +8,7 @@ $r1->add("Betis");
 $r1->add("Barça");
 //print_r($r1);
 
-//echo "Es: " . $r1->get("Barça") . "\n";
-
+//echo "Es: " . $r1->getPosition("Barça") . "\n";
 
 $r2 = new Ranking();
 $r2->add("Barça");
@@ -28,6 +27,9 @@ $r = array($r1, $r2, $r3);
 $rankings = new RankingCollection($r);
 //print_r($rankings);
 
-print_r($rankings->calculateCompetitivityGraph());
+//print_r($rankings->calculateEvolutiveCompetitivityGraph());
+
+echo $rankings->calculateEvolutiveCompetitivityGraph()->exportAsCytoscapeJSON() . "\n";
+
 
 ?>

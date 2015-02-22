@@ -1,7 +1,12 @@
 <?php
 
 require("simple_html_dom.php");
-require_once("conexion.php");
+require_once("connection.inc.php");
+require_once("Connection.php");
+
+$connection = new Connection(DB_HOST, DB_PORT, DB_USERNAME, DB_PASSWORD, DB_NAME);
+$connection->connect();
+$connection->selectDatabase();
 
 $ACTUAL = date("Y");
 
@@ -77,7 +82,8 @@ for($temporada = 1928; $temporada <= $ACTUAL-2; $temporada++){
         intval($jornada_numero),
         $temp3);
 
-      $resultado = mysql_query($db_query);
+      $resultado = $connection->query($db_query);
+
       if(!$resultado){
         echo mysql_error() . "\n";
       }
@@ -98,7 +104,7 @@ for($temporada = 1928; $temporada <= $ACTUAL-2; $temporada++){
       $goles_visitante = substr($v1[1], 4, 1);
 
       $db_query = sprintf("INSERT INTO partidos(temporada, jornada, equipo_local, equipo_visitante, goles_local, goles_visitante) VALUES ('%s', '%u','%s','%s','%u','%u')", $temp3, $jornada_numero, $equipo_local, $equipo_visitante, $goles_local, $goles_visitante);
-      $resultado = mysql_query($db_query);
+      $resultado = $connection->query($db_query);
 
       if(!$resultado){
         echo mysql_error() . "\n";
@@ -114,5 +120,5 @@ for($temporada = 1928; $temporada <= $ACTUAL-2; $temporada++){
 
 curl_close($ch);
 
-require_once("cerrar-conexion.php");
+$connection->closeConnection();
 ?>

@@ -1,0 +1,101 @@
+{
+    "elements": {
+        "nodes": [
+            {
+                "data": {
+                    "id": "1"
+                }
+            },
+            {
+                "data": {
+                    "id": "2"
+                }
+            },
+            {
+                "data": {
+                    "id": "3"
+                }
+            },
+            {
+                "data": {
+                    "id": "4"
+                }
+            },
+            {
+                "data": {
+                    "id": "5"
+                }
+            },
+            {
+                "data": {
+                    "id": "6"
+                }
+            }
+        ],
+        "edges": [
+            {
+                "data": {
+                    "source": 1,
+                    "target": 0,
+                    "weight": 1
+                }
+            },
+            {
+                "data": {
+                    "source": 2,
+                    "target": 0,
+                    "weight": 1
+                }
+            },
+            {
+                "data": {
+                    "source": 2,
+                    "target": 1,
+                    "weight": 3
+                }
+            },
+            {
+                "data": {
+                    "source": 3,
+                    "target": 1,
+                    "weight": 2
+                }
+            },
+            {
+                "data": {
+                    "source": 4,
+                    "target": 2,
+                    "weight": 2
+                }
+            },
+            {
+                "data": {
+                    "source": 4,
+                    "target": 3,
+                    "weight": 1
+                }
+            },
+            {
+                "data": {
+                    "source": 5,
+                    "target": 0,
+                    "weight": 1
+                }
+            },
+            {
+                "data": {
+                    "source": 5,
+                    "target": 3,
+                    "weight": 1
+                }
+            },
+            {
+                "data": {
+                    "source": 5,
+                    "target": 4,
+                    "weight": 1
+                }
+            }
+        ]
+    }
+}

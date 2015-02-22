@@ -5,7 +5,7 @@ abstract class Graph {
   var $elements;
   var $adjacencyMatrix;
 
-  function Grafo($elements, $adjacenyMatrix){
+  function Graph($elements, $adjacenyMatrix){
     $this->elements = $elements;
     $this->adjacencyMatrix = $adjacenyMatrix;
   }
