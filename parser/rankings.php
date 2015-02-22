@@ -1,7 +1,12 @@
 <?php
 
 require("simple_html_dom.php");
-require_once("conexion.php");
+require_once("connection.inc.php");
+require_once("Connection.php");
+
+$connection = new Connection(DB_HOST, DB_PORT, DB_USERNAME, DB_PASSWORD, DB_NAME);
+$connection->connect();
+$connection->selectDatabase();
 
 $N_JORNADAS = 20;
 $TEMPORADA = "2014/2015";
@@ -23,7 +28,7 @@ for($i = 1; $i <= $N_JORNADAS; $i++){
 	$visitantes = $datos->find("div[id=div_jornada_" . $i . "_1_2] * a span[class=equipo left visitante] span[class=team]");
 	$resultados = $datos->find("div[id=div_jornada_" . $i . "_1_2] * a span[class=hora_resultado left] span[class=horario_partido]");
 
-echo "Jornada $i \n-------------------------------- \n"; 
+echo "Jornada $i \n-------------------------------- \n";
 
 
 	for($j = 0; $j < count($locales); $j++){
@@ -36,13 +41,13 @@ echo "Jornada $i \n-------------------------------- \n";
 			echo($equipo_local . " " . $goles[0] . "-" . $goles[1] . " " . $equipo_visitante . "\n");
 
 			$db_query = sprintf("INSERT INTO partidos(temporada, jornada, equipo_local, equipo_visitante, goles_local, goles_visitante) VALUES ('%s', '%u','%s','%s','%u','%u')", $TEMPORADA, $i, $equipo_local, $equipo_visitante, $goles[0], $goles[1]);
-			$resultado = mysql_query($db_query);
+			$resultado = $connection->query($db_query);
 
 			if(!$resultado){
 				echo mysql_error() . "\n";
 			}
 
-		}	
+		}
 
 	}
 
@@ -52,6 +57,5 @@ echo "--------------------------------\n";
 
 curl_close($ch);
 
-require_once("cerrar-conexion.php");
-
+$connection->closeConnection();
 ?>
