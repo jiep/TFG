@@ -16,7 +16,6 @@ class EvolutiveCompetitivityGraph extends Graph {
   }
 
   function exportAsCytoscapeJSON(){
-    $container = htmlentities("document.getElementById(\"cy\")");
     $nodes = array();
     $edges = array();
 
