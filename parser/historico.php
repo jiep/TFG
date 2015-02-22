@@ -51,10 +51,6 @@ for($temporada = 1928; $temporada <= $ACTUAL-2; $temporada++){
 			$db_query = sprintf("INSERT INTO partidos(temporada, jornada, equipo_local, equipo_visitante, goles_local, goles_visitante) VALUES ('%s', '%u','%s','%s','%u','%u')", $temp3, $jornada_numero, $equipo_local, $equipo_visitante, $goles_local, $goles_visitante);
 			$resultado = $connection->query($db_query);
 
-			if(!$resultado){
-				echo mysql_error() . "\n";
-			}
-
 			echo "$equipo_local $goles_local - $goles_visitante $equipo_visitante \n";
 		}
 		echo "\n";
@@ -62,5 +58,5 @@ for($temporada = 1928; $temporada <= $ACTUAL-2; $temporada++){
 }
 curl_close($ch);
 
-$connection->closeConnection();
+$connection->close();
 ?>
