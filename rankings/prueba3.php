@@ -3,25 +3,20 @@
 include("autoload.php");
 
 $r1 = new Ranking();
-$r1->add("Real Madrid");
-$r1->add("Betis");
-$r1->add("Barça");
-//print_r($r1);
-
-//echo "Es: " . $r1->getPosition("Barça") . "\n";
-
+$r1->add("1");
+$r1->add("2");
+$r1->add("3");
 
 $r2 = new Ranking();
-$r2->add("Barça");
-$r2->add("Real Madrid");
-$r2->add("Betis");
+$r2->add("1");
+$r2->add("2");
+$r2->add("3");
 //print_r($r2);
 
-
 $r3 = new Ranking();
-$r3->add("Barça");
-$r3->add("Real Madrid");
-$r3->add("Betis");
+$r3->add("2");
+$r3->add("1");
+$r3->add("3");
 //print_r($r3);
 
 $r = array($r1, $r2, $r3);

@@ -1,8 +1,8 @@
 <?php
 
-class CompetitivityGraph extends Graph {
+class EvolutiveCompetitivityGraph extends Graph {
 
-  function CompetitivityGraph($elements, $adjacenyMatrix){
+  function EvolutiveCompetitivityGraph($elements, $adjacenyMatrix){
     $this->elements = $elements;
     $this->adjacenyMatrix = $adjacenyMatrix;
   }
