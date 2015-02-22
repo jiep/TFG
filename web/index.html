@@ -137,7 +137,13 @@
   <script>
   $(function(){
 
-  var graph = $.post("../rankings/randomGraph.php", {rankings: 38, teams: 20});
+  var graph = $.ajax({
+    type: "POST",
+    url: "../rankings/randomGraph.php",
+    data: {rankings: 38, teams: 20},
+    dataType: "json"
+  });
+
     //url: 'https://gist.githubusercontent.com/jiep/d8131a4974eb3235d1f7/raw/competitivitygraph.json',
     //url: 'https://gist.githubusercontent.com/jiep/087e1a08dbece5602e70/raw/randomCompetitivityGraph.json',
 
