@@ -5,6 +5,7 @@ require_once("connection.inc.php");
 require_once("Connection.php");
 
 $connection = new Connection(DB_HOST, DB_PORT, DB_USERNAME, DB_PASSWORD, DB_NAME);
+print_r($connection);
 $connection->connect();
 $connection->selectDatabase();
 
@@ -42,11 +43,6 @@ echo "Jornada $i \n-------------------------------- \n";
 
 			$db_query = sprintf("INSERT INTO partidos(temporada, jornada, equipo_local, equipo_visitante, goles_local, goles_visitante) VALUES ('%s', '%u','%s','%s','%u','%u')", $TEMPORADA, $i, $equipo_local, $equipo_visitante, $goles[0], $goles[1]);
 			$resultado = $connection->query($db_query);
-
-			if(!$resultado){
-				echo mysql_error() . "\n";
-			}
-
 		}
 
 	}
@@ -57,5 +53,5 @@ echo "--------------------------------\n";
 
 curl_close($ch);
 
-$connection->closeConnection();
+$connection->close();
 ?>
