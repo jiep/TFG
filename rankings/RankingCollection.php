@@ -40,7 +40,7 @@ class RankingCollection {
       print_r($k2);
       for($i = 0; $i < $n - 1; $i++){
         for($j = 0; $j < $n - 1 - $i; $j++){
-          $pos_i_r1 = $k1->get($elements->getRanking()[$i]);
+          $pos_i_r1 = $k1->get($elements->getRanking()->get($i));
           $pos_j_r1 = $k1->get($elements[$j]);
           $pos_i_r2 = $k2->get($elements[$i]);
           $pos_j_r2 = $k2->get($elements[$j]);

@@ -37,7 +37,9 @@ class Ranking {
 
   function get($i){
     $key = null;
-    if($key = array_search($i, $this->ranking) !== false){
+    $k = array_search($i, $this->ranking);
+    if($k !== false){
+      $key = $k;
     }
 
     return $key;
