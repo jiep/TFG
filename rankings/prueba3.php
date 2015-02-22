@@ -25,4 +25,10 @@ $rankings = new RankingCollection($r);
 
 print_r($rankings->calculateEvolutiveCompetitivityGraph());
 
+echo "JSON: \n";
+
+print_r($rankings->calculateEvolutiveCompetitivityGraph()->exportAsCytoscapeJSON());
+
+echo "\n";
+
 ?>
