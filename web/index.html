@@ -137,11 +137,10 @@
   <script>
   $(function(){
 
-  var graph = $.ajax({
-    url: 'https://gist.githubusercontent.com/jiep/d8131a4974eb3235d1f7/raw/competitivitygraph.json',
-    type: 'GET',
-    dataType: 'json'
-  });
+  var graph = $.post("../rankings/randomGraph.php", {rankings: 38, teams: 20});
+    //url: 'https://gist.githubusercontent.com/jiep/d8131a4974eb3235d1f7/raw/competitivitygraph.json',
+    //url: 'https://gist.githubusercontent.com/jiep/087e1a08dbece5602e70/raw/randomCompetitivityGraph.json',
+
 
   // when both graph export json and style loaded, init cy
   Promise.all([ graph]).then(initCy);
@@ -163,8 +162,8 @@
       style : cytoscape.stylesheet()
         .selector('node')
           .css({
-            'height': 80,
-            'width': 80,
+            'height': 30,
+            'width': 30,
             'background-fit': 'cover',
             'border-width': 2,
             'border-opacity': 0.1,
