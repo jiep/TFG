@@ -135,6 +135,7 @@
   </script>-->
 
   <script>
+
   $(function(){
 
   var graph = $.ajax({
@@ -151,7 +152,7 @@
   // when both graph export json and style loaded, init cy
   Promise.all([ graph]).then(initCy);
 
-  function initCy( then ){
+  function initCy(then){
     var expJson = then[0];
     var elements = expJson.elements;
 
@@ -188,7 +189,27 @@
     });
 
   }
-});
+
+  $("#randomGraph").click(function(){
+    var rankings = $("#rankings").val();
+    console.log(rankings);
+    var teams = $("#teams").val();
+    console.log(teams);
+
+    var graph = $.ajax({
+      type: "POST",
+      url: "../rankings/randomGraph.php",
+      data: {rankings: rankings, teams: teams},
+      dataType: "json"
+    });
+
+    Promise.all([ graph]).then(initCy);
+
+  });
+
+  });
+
+
   </script>
 
 </head>
@@ -492,7 +513,13 @@
         </div>
 
         <div class="panel panel-default" id="competitividad">
-          <div class="panel-heading"><span class="glyphicon glyphicon-th"></span> Análisis competitividad</div>
+          <div class="panel-heading"><span class="glyphicon glyphicon-th"></span> Análisis competitividad
+            <div>
+              <input id="rankings" type="text" name="rankings" placeholder="Número de rankings">
+              <input id="teams" type="text" name="teams" placeholder="Número de equipos">
+              <button id="randomGraph" type="button">Generar grafo de competitividad</button>
+            </div>
+          </div>
           <div class="panel-body" id="cy"></div>
         </div>
 
