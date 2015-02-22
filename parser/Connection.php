@@ -9,7 +9,7 @@ class Connection {
   var $database;
   var $connection;
 
-  function __contruct($host, $port, $username, $password, $database){
+  function __construct($host, $port, $username, $password, $database){
     $this->host = $host;
     $this->port = $port;
     $this->username = $username;
@@ -32,21 +32,22 @@ class Connection {
   }
 
   function close(){
-    mysql_close($this->myconn);
+    mysql_close($this->connection);
   }
 
   function query($query){
     $i = 0;
-
+    $data = array();
     $result = mysql_query($query);
-    while($row = mysql_fetch_array($result))
-    {
-        foreach($row as $key => $value)
-        {
-            $data[$i][$key] = $value;
-            $i++;
+    if($result !== TRUE && $result !== FALSE){
+      while($row = mysql_fetch_array($result)){
+        foreach($row as $key => $value){
+          $data[$i][$key] = $value;
+          $i++;
         }
+      }
     }
+
     return $data;
   }
 }
