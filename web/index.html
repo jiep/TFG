@@ -168,8 +168,9 @@
       style : cytoscape.stylesheet()
         .selector('node')
           .css({
-            'height': 30,
-            'width': 30,
+            'height': 40,
+            'width': 4
+            0,
             'background-fit': 'cover',
             'border-width': 2,
             'border-opacity': 0.1,
@@ -178,6 +179,11 @@
             'content': 'data(id)',
             'text-valign': 'center',
             'text-halign': 'center'
+          })
+        .selector('edge')
+          .css({
+            'width': 2,
+            'line-color': '#ff0000'
           })
 
     });
