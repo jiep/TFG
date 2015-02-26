@@ -36,6 +36,7 @@ class Connection {
   }
 
   function query($query){
+    mysql_query("SET NAMES 'utf8'");
     $i = 0;
     $data = array();
     $result = mysql_query($query);
