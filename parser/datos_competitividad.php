@@ -31,6 +31,6 @@ function datos_competitividad($temporada){
 }
 
 
-echo(datos_competitividad('1928/1929'));
+echo(datos_competitividad($_POST["temporada"]));
 
 ?>
