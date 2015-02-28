@@ -1,108 +1,52 @@
-/* Toolbar area */
+/*body {
+  background-color: #414141;
+  height: 100%;
+}*/
 
-*{
-  background-color: #000000;
+md-toolbar.md-default-theme {
+  background-color: #262626;
   color: #ffffff;
 }
 
-.menuBtn {
-  background-color: transparent;
-  border: none;
-  height: 38px;
-  margin: 16px;
-  width: 36px;
+#left {
+  background-color: #313131;
+  height: 100%;
 }
 
-md-toolbar h1 {
-  margin: auto;
+span {
+  font-size:  1.2em;
+  /*font-weight: bold;*/
+  color: #ffffff;
+  list-style: none;
+  padding-top: 10px;
+  padding-above: 10px;
 }
 
-/* Sidenav area */
-
-md-list .md-button {
-  color: inherit;
-  font-weight: 500;
-  text-align: left;
-  width: 100%;
-}
-  md-list .md-button.selected {
-    color: #03a9f4;
-  }
-
-
-/* Primary content area */
-
-#content {
-  overflow: hidden;
+li {
+  list-style: none;
+  padding-right: 20px;
 }
 
-#content  {
-  padding-left: 40px;
-  padding-right: 40px;
-  padding-top: 5px;
+a > img {
+  padding-right: 20px;
+  padding-left: 20px;
+
 }
 
-#content .md-button.action {
-  background-color: transparent;
-  border: none;
-  width: 48px;
-  height: 48px;
-  margin: 8px auto 16px 0;
+#logo {
+  line-height: 60px;
+  text-indent: 1px;
+}
+
+#panel-historico {
+  width: 95% !important;
+}
+
+#cy {
+  height: 95% !important;
   position: absolute;
-  top: 10px;
-  right: 25px;
-}
-
-#content .md-button.action > md-icon {
-  fill:black;
-  width:36px;
-  height:36px;
-}
-
-md-button.menuBtn > md-icon {
-  fill:white;
-  width:24px;
-  height:24px;
-}
-
-#content .md-button.action:active > md-icon {
-  background-color: #dadada;
-  border-radius: 75%;
-  padding:4px;
-  transition: all 100ms ease-out 30ms;
-}
-
-#content img {
-  display: block;
-  height: auto;
-  max-width: 500px;
-}
-
-/* Utils */
-
-.content-wrapper {
-  position: relative;
-}
-
-/* Typography support coming in 0.8.0 */
-
-md-toolbar h1 {
-  font-size: 1.250em;
-  font-weight: 400;
-}
-
-.avatar {
-  position: relative;
-  width: 128px;
-  height: 128px;
-  border: 1px solid #ddd;
-  border-radius: 50%;
-  display: inline-block;
-  overflow: hidden;
-  margin: 0px;
-  vertical-align: middle;
-  zoom:0.70;
-  transform: translateZ(0);
-  -webkit-transform: scale(0.70);
-  -moz-transform:scale(0.70);
+  width: 96.5% !important;
+  background-color: #ffffff;
+  margin-bottom: 30px;
+  border-color: #ddd;
 }
