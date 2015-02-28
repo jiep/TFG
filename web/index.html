@@ -12,51 +12,143 @@
 
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-aria.min.js"></script>
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-messages.min.js"></script>
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-animate.min.js"></script>
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-route.min.js"></script>
+  <script type="text/javascript" src="http://cdn.jsdelivr.net/angular-material-icons/0.4.0/angular-material-icons.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+  <script>
+  angular.module('demoapp', ['ngMdIcons'])
+    .controller('democtrl', function($scope) {
+
+    });
+  </script>
+
+  <script type="text/javascript" src="js/Chart.js/Chart.js"></script>
+  <script type="text/javascript" src="js/cytoscape.js/cytoscape.min.js"></script>
+  <script>
+    var randomScalingFactor = function(){ return Math.round(Math.random()*20)};
+    var lineChartData = {
+      labels : ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","27","28","29","30","31","32","33","34","35","36","37","38"],
+      datasets : [
+        {
+          pointStrokeColor : "#fd25f0",
+          data : [randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor()]
+        },
+        {
+          pointStrokeColor : "#66ff00",
+          data : [randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor()]
+        }
+      ]
+    }
+    window.onload = function(){
+    var ctx = document.getElementById("canvas").getContext("2d");
+    window.myLine = new Chart(ctx).Line(lineChartData, {
+      responsive: true,
+      bezierCurve : false,
+      datasetFill : false
+    });
+  }
+  </script>
+
+  <script>
+  $(function(){
+  var graph = $.ajax({
+    type: "GET",
+    url: "https://gist.githubusercontent.com/jiep/d8131a4974eb3235d1f7/raw/competitivitygraph.json",
+    dataType: "json"
+  });
+    //url: 'https://gist.githubusercontent.com/jiep/d8131a4974eb3235d1f7/raw/competitivitygraph.json',
+    //url: 'https://gist.githubusercontent.com/jiep/087e1a08dbece5602e70/raw/randomCompetitivityGraph.json',
+  // when both graph export json and style loaded, init cy
+  Promise.all([ graph]).then(initCy);
+  function initCy(then){
+    var expJson = then[0];
+    var elements = expJson.elements;
+    console.log(elements);
+    var cy = window.cy = cytoscape({
+      container: document.getElementById('cy'),
+      elements: elements,
+      zoom: 1,
+      zoomingEnabled: false,
+      layout: {
+        name: 'circle'
+      },
+      style : cytoscape.stylesheet()
+        .selector('node')
+          .css({
+            'height': 40,
+            'width': 40,
+            'background-fit': 'cover',
+            'border-width': 2,
+            'border-opacity': 0.1,
+            'background-color': '#dfdfdf',
+            'background-opacity': 0.1,
+            'content': 'data(id)',
+            'text-valign': 'center',
+            'text-halign': 'center'
+          })
+        .selector('edge')
+          .css({
+            'width': 2,
+            'line-color': '#ff0000'
+          })
+    });
+  }
+
+  });
+  </script>
 
 
 </head>
 
-<body layout="row">
+<body ng-app="demoapp" ng-controller="democtrl" layout="row">
 
-  <md-sidebar class="site-sidebar md-site-sidebar-left md-whiteframe-z2 md-close md-locked-open" md-component-id="left">
+  <md-sidebar id="left" class="site-sidebar md-site-sidebar-left md-whiteframe-z2 md-close md-locked-open" md-component-id="left">
 
     <md-toolbar class="md-default-theme">
       <h1 class="md-toolbar-tools">
         <a ng-href="#" layout="row" flex href="#">
-          <div class="logo">Rankings</div>
+          <img  src="img/logo.png"></img>
+          <div id="logo">Rankings</div>
         </a>
       </h1>
     </md-toolbar>
 
     <md-content flex class="md-default-theme">
+
       <ul class="lateral">
-        <li>Histórico</li>
-        <li>Predicción</li>
-        <li>Home</li>
-        <li>Estadísticas</li>
+        <li><button class="md-primary md-button md-default-theme"><span><ng-md-icon icon="trending_up" size="20"></ng-md-icon> Predicción</span></button></li>
+        <li><button class="md-primary md-button md-default-theme"><span><ng-md-icon icon="3d_rotation" size="20"></ng-md-icon> Histórico</span></button></li>
+        <li><button class="md-primary md-button md-default-theme"><span><ng-md-icon icon="equalizer" size="20"></ng-md-icon> Estadísticas<span></button></li>
       </ul>
     </md-content>
 
   </md-sidebar>
 
+  <div layout="column" tabindex="-1" role="main" flex>
 
-    <div layout="column" tabindex="-1" role="main" flex>
-      <md-toolbar class="md-default-theme">
-        <div class="md-toolbar-tools" tabindex="0">
-          <div layout="row" flex class="fill-height">
-            <span>Liga BBVA</span>
-            <span>Liga Adelante</span>
-          </div>
+    <md-toolbar class="md-default-theme">
+      <div class="md-toolbar-tools" tabindex="0">
+        <div layout="row" flex class="fill-height">
+          <a href="#"><img src="http://statics.lfp.es/img/liga-bbva.png" alt="Liga BBVA"/></a>
+          <a href="#"><img src="http://statics.lfp.es/img/liga-adelante.png" alt="Liga Adelante"/></a>
+        </div>
+        <div ><button class="md-primary md-button md-default-theme"><span id="login"><ng-md-icon icon="account_box" size="24"></ng-md-icon id="login"> Login</span></button></div>
+
+      </div>
+    </md-toolbar>
+
+    <md-content ng-view md-scroll-y flex class="md-padding ng-scope md-default-theme">
+      <md-toolbar class="md-warn">
+        <div class="md-toolbar-tools">
+          <span class="md-flex">Toolbar: md-warn</span>
         </div>
       </md-toolbar>
+        <md-content class="md-padding" style="height: 600px;padding: 24px;">
+          <div id="cy">
+          </div>
+        </md-content>
+    </md-content>
 
-      <md-content ng-view md-scroll-y flex class="md-padding ng-scope md-default-theme">
-        <h1>Prueba</h1>
-      </md-content>
-
-    </div>
+  </div>
 
 </body>
