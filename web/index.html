@@ -34,7 +34,7 @@
   <script type="text/javascript" src="js/cytoscape.js/cytoscape.min.js"></script>
 
   <script>
-  
+
     var lineChartData = {
       labels : [],
       datasets : [
@@ -95,13 +95,21 @@
     dataType: "json"
   });
 
+  var style = $.ajax({
+    type: "POST",
+    url: "../parser/estilo_competitividad.php",
+    data: {season: "2013/2014"},
+    dataType: "json"
+  });
+
     //url: 'https://gist.githubusercontent.com/jiep/d8131a4974eb3235d1f7/raw/competitivitygraph.json',
     //url: 'https://gist.githubusercontent.com/jiep/087e1a08dbece5602e70/raw/randomCompetitivityGraph.json',
 
-  Promise.all([graph]).then(initCy);
+  Promise.all([graph, style]).then(initCy);
 
   function initCy(then){
     var expJson = then[0];
+    var styleJson = then[1];
     var elements = expJson.elements;
 
     console.log(elements);
@@ -124,7 +132,7 @@
             'border-opacity': 0.1,
             'background-color': '#dfdfdf',
             'background-opacity': 0.1,
-            'content': 'data(id)',
+            'content': 'data(name)',
             'text-valign': 'center',
             'text-halign': 'center'
           })
@@ -133,6 +141,7 @@
             'width': 2,
             'line-color': '#ff0000'
           })
+      //style: styleJson
 
     });
 
@@ -145,6 +154,13 @@
     var graph = $.ajax({
       type: "POST",
       url: "../parser/datos_competitividad.php",
+      data: {season: temporada},
+      dataType: "json"
+    });
+
+    var style = $.ajax({
+      type: "POST",
+      url: "../parser/estilo_competitividad.php",
       data: {season: temporada},
       dataType: "json"
     });

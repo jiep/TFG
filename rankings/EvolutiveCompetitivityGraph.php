@@ -21,10 +21,10 @@ class EvolutiveCompetitivityGraph extends Graph {
 
     $count = 0;
     for($i = 0; $i < $this->elements->getLength(); $i++){
-      $nodes[$i] = array("data" => array("id" => $this->elements->get($i)));
+      $nodes[$i] = array("data" => array("id" => "$i", "name"=>$this->elements->get($i)));
       for($j = 0; $j < $i; $j++){
         if($this->adjacencyMatrix[$i][$j] !== 0){
-          $edges[$count] = array("data" => array("source" => $this->elements->get($i), "target" => $this->elements->get($j), "weight" => $this->adjacencyMatrix[$i][$j]));
+          $edges[$count] = array("data" => array("source" => "$i", "target" => "$j", "weight" => $this->adjacencyMatrix[$i][$j]));
           $count++;
         }
       }

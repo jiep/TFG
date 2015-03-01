@@ -59,6 +59,35 @@ for($temporada = 1928; $temporada <= $ACTUAL-2; $temporada++){
     foreach($filas_equipo as $fila_equipo){
       $posicion = substr($fila_equipo->find("td", 0)->innertext, 0, -2);
       $nombre_equipo = $fila_equipo->find("td span", 0)->innertext;
+      if($nombre_equipo == "Atlético Madrid"){
+        $nombre_equipo = "At. de Madrid";
+      }else if($nombre_equipo == "Elche C.F."){
+        $nombre_equipo = "Elche CF";
+      }else if($nombre_equipo == "Getafe C.F."){
+        $nombre_equipo = "Getafe CF";
+      }else if($nombre_equipo == "Granada C.F."){
+        $nombre_equipo = "Granada CF";
+      }else if($nombre_equipo == "Levante U.D."){
+        $nombre_equipo = "Levante UD";
+      }else if($nombre_equipo == "Málaga C.F."){
+        $nombre_equipo = "Málaga CF";
+      }else if($nombre_equipo == "Real Betis B. S."){
+        $nombre_equipo = "Real Betis";
+      }else if($nombre_equipo == "Real Madrid C.F."){
+        $nombre_equipo = "Real Madrid CF";
+      }else if($nombre_equipo == "Sevilla F.C."){
+        $nombre_equipo = "Sevilla FC";
+      }else if($nombre_equipo == "U.D. Almería"){
+        $nombre_equipo = "UD Almería";
+      }else if($nombre_equipo == "Valencia C.F."){
+        $nombre_equipo = "Valencia CF";
+      }else if($nombre_equipo == "Villarreal C.F."){
+        $nombre_equipo = "Villarreal CF";
+      }else if($nombre_equipo == "C. At. Osasuna"){
+        $nombre_equipo = "CA Osasuna";
+      }else if($nombre_equipo == "F.C. Barcelona"){
+        $nombre_equipo = "FC Barcelona";
+      }
       $puntos = $fila_equipo->find("td", 2)->innertext;
       $partidos_ganados = $fila_equipo->find("td", 4)->innertext;
       $partidos_empatados = $fila_equipo->find("td", 5)->innertext;
@@ -98,6 +127,66 @@ for($temporada = 1928; $temporada <= $ACTUAL-2; $temporada++){
       $equipo_visitante = $v1[0];
       $goles_visitante = substr($v1[1], 4, 1);
 
+      if($equipo_visitante == "Atlético Madrid"){
+        $equipo_visitante = "At. de Madrid";
+      }else if($equipo_visitante == "Elche C.F."){
+        $equipo_visitante = "Elche CF";
+      }else if($equipo_visitante == "Getafe C.F."){
+        $equipo_visitante = "Getafe CF";
+      }else if($equipo_visitante == "Granada C.F."){
+        $equipo_visitante = "Granada CF";
+      }else if($equipo_visitante == "Levante U.D."){
+        $equipo_visitante = "Levante UD";
+      }else if($equipo_visitante == "Málaga C.F."){
+        $equipo_visitante = "Málaga CF";
+      }else if($equipo_visitante == "Real Betis B. S."){
+        $equipo_visitante = "Real Betis";
+      }else if($equipo_visitante == "Real Madrid C.F."){
+        $equipo_visitante = "Real Madrid CF";
+      }else if($equipo_visitante == "Sevilla F.C."){
+        $equipo_visitante = "Sevilla FC";
+      }else if($equipo_visitante == "U.D. Almería"){
+        $equipo_visitante = "UD Almería";
+      }else if($equipo_visitante == "Valencia C.F."){
+        $equipo_visitante = "Valencia CF";
+      }else if($equipo_visitante == "Villarreal C.F."){
+        $equipo_visitante = "Villarreal CF";
+      }else if($equipo_visitante == "C. At. Osasuna"){
+        $equipo_visitante = "CA Osasuna";
+      }else if($equipo_visitante == "F.C. Barcelona"){
+        $equipo_visitante = "FC Barcelona";
+      }
+
+      if($equipo_local == "Atlético Madrid"){
+        $equipo_local = "At. de Madrid";
+      }else if($equipo_local == "Elche C.F."){
+        $equipo_local = "Elche CF";
+      }else if($equipo_local == "Getafe C.F."){
+        $equipo_local = "Getafe CF";
+      }else if($equipo_local == "Granada C.F."){
+        $equipo_local = "Granada CF";
+      }else if($equipo_local == "Levante U.D."){
+        $equipo_local = "Levante UD";
+      }else if($equipo_local == "Málaga C.F."){
+        $equipo_local = "Málaga CF";
+      }else if($equipo_local == "Real Betis B. S."){
+        $equipo_local = "Real Betis";
+      }else if($equipo_local == "Real Madrid C.F."){
+        $equipo_local = "Real Madrid CF";
+      }else if($equipo_local == "Sevilla F.C."){
+        $equipo_local = "Sevilla FC";
+      }else if($equipo_local == "U.D. Almería"){
+        $equipo_local = "UD Almería";
+      }else if($equipo_local == "Valencia C.F."){
+        $equipo_local = "Valencia CF";
+      }else if($equipo_local == "Villarreal C.F."){
+        $equipo_local = "Villarreal CF";
+      }else if($equipo_local == "C. At. Osasuna"){
+        $equipo_local = "CA Osasuna";
+      }else if($equipo_local == "F.C. Barcelona"){
+        $equipo_local = "FC Barcelona";
+      }
+
       $db_query = sprintf("INSERT INTO partidos(temporada, jornada, equipo_local, equipo_visitante, goles_local, goles_visitante) VALUES ('%s', '%u','%s','%s','%u','%u')", $temp3, $jornada_numero, $equipo_local, $equipo_visitante, $goles_local, $goles_visitante);
       $resultado = $connection->query($db_query);
 
@@ -111,5 +200,5 @@ for($temporada = 1928; $temporada <= $ACTUAL-2; $temporada++){
 
 curl_close($ch);
 
-$connection->closeConnection();
+$connection->close();
 ?>
