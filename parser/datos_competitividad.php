@@ -7,7 +7,10 @@ include("../rankings/Graph.php");
 include("../rankings/EvolutiveCompetitivityGraph.php");
 require_once("connection.inc.php");
 
-function datos_competitividad($temporada){
+$temporada = $_POST["season"] ? $_POST["season"] : "2013/2014";
+
+
+//function datos_competitividad($temporada){
 
   $con = new Connection (DB_HOST,DB_PORT,DB_USERNAME,DB_PASSWORD,DB_NAME);
   $con->connect();
@@ -27,10 +30,12 @@ function datos_competitividad($temporada){
   }
   $rankings = new RankingCollection($ranking_col);
   $con->close();
-  return($rankings->calculateEvolutiveCompetitivityGraph()->exportAsCytoscapeJSON());
-}
+  //return($rankings->calculateEvolutiveCompetitivityGraph()->exportAsCytoscapeJSON());
+//}
+
+echo $rankings->calculateEvolutiveCompetitivityGraph()->exportAsCytoscapeJSON() . "\n";
 
 
-echo(datos_competitividad('1928/1929'));
+//echo(datos_competitividad($season));
 
 ?>
