@@ -97,6 +97,10 @@ class RankingCollection {
     return 2*$sum/($n*($n-1)*(count($this->rankings)-1));
   }
 
+  function generalizedKendallsTau(){
+    return 1-2*$this->normalizedMeanStrength();
+  }
+
 
 
 }//Fin de clase

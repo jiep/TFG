@@ -48,5 +48,6 @@ print_r($rankings->calculateEvolutiveCompetitivityGraph());
 //echo $rankings->calculateEvolutiveCompetitivityGraph()->exportAsCytoscapeJSON() . "\n";
 
 echo $rankings->normalizedMeanStrength() . "\n";
+echo $rankings->generalizedKendallsTau() . "\n";
 
 ?>

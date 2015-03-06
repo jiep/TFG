@@ -30,6 +30,7 @@ $rankings = new RankingCollection($r);
 //print_r($rankings->calculateEvolutiveCompetitivityGraph());
 
 echo $rankings->normalizedMeanStrength() . "\n";
+echo $rankings->generalizedKendallsTau() . "\n";
 
 
 ?>
