@@ -116,6 +116,7 @@ class RankingCollection {
       if ($deg==$k)
         $sum++;
     }
+
     return $sum/$n;
   }
 
@@ -175,6 +176,9 @@ class RankingCollection {
      }
      return $count;
    }
+
+
+
 
 
 }//Fin de clase

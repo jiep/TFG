@@ -29,7 +29,11 @@ $rankings = new RankingCollection($r);
 
 //print_r($rankings->calculateEvolutiveCompetitivityGraph());
 
-echo $rankings->calculateEvolutiveCompetitivityGraph()->exportAsCytoscapeJSON() . "\n";
-
+//echo $rankings->normalizedMeanStrength() . "\n";
+//echo $rankings->generalizedKendallsTau() . "\n";
+echo $rankings->normalizedCumulativeDegreeDistribution(0) . "\n";
+echo $rankings->normalizedCumulativeDegreeDistribution(1) . "\n";
+echo $rankings->normalizedCumulativeDegreeDistribution(2) . "\n";
+echo $rankings->normalizedCumulativeDegreeDistribution(3) . "\n";
 
 ?>

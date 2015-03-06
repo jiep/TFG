@@ -25,10 +25,17 @@ $rankings = new RankingCollection($r);
 
 print_r($rankings->calculateEvolutiveCompetitivityGraph());
 
-echo "JSON: \n";
+//echo "JSON: \n";
 
-print_r($rankings->calculateEvolutiveCompetitivityGraph()->exportAsCytoscapeJSON());
+//print_r($rankings->calculateEvolutiveCompetitivityGraph()->exportAsCytoscapeJSON());
+
+echo $rankings->normalizedCumulativeDegreeDistribution(0) . "\n";
+echo $rankings->normalizedCumulativeDegreeDistribution(1) . "\n";
+echo $rankings->normalizedCumulativeDegreeDistribution(2) . "\n";
+echo $rankings->normalizedCumulativeDegreeDistribution(3) . "\n";
+
 
 echo "\n";
+
 
 ?>

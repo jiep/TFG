@@ -8,7 +8,7 @@ class EvolutiveCompetitivityGraph extends Graph {
   }
 
   function getAdjacencyMatrix(){
-    return $this->adjacenyMatrix;
+    return $this->adjacencyMatrix;
   }
 
   function getElements(){
