@@ -54,7 +54,7 @@ class RankingCollection {
           $pos_j_r2 = $k2->getPosition($elements->get($j));
           $sign_r1 = $this->sign($pos_i_r1 - $pos_j_r1);
           $sign_r2 = $this->sign($pos_i_r2 - $pos_j_r2);
-          
+
           if($sign_r1 !== $sign_r2){
               $adjacencyMatrix[$i][$j]++;
               $adjacencyMatrix[$j][$i]++;
@@ -67,7 +67,119 @@ class RankingCollection {
 
   }
 
-}
+
+  function normalizedMeanDegree(){
+    $cont=0;
+    $graph = $this->calculateEvolutiveCompetitivityGraph()->getAdjacencyMatrix();
+    $elements = $this->rankings[0];
+    $n = $elements->getLength();
+    for ($i=0;$i<$n;$i++){
+      for ($j=0;$j<$n;$j++){
+        if ($graph[$i][$j]!=0)
+          $cont++;
+      }
+    }
+
+    return $cont/($n*($n-1));
+  }
+
+  function normalizedMeanStrength(){
+    $sum=0;
+    $graph = $this->calculateEvolutiveCompetitivityGraph()->getAdjacencyMatrix();
+    $elements = $this->rankings[0];
+    $n = $elements->getLength();
+    for ($i=0;$i<$n;$i++){
+      for ($j=0;$j<$i;$j++){
+          $sum=$sum+$graph[$i][$j];
+      }
+    }
+
+    return 2*$sum/($n*($n-1)*(count($this->rankings)-1));
+  }
+
+  function generalizedKendallsTau(){
+    return 1-2*$this->normalizedMeanStrength();
+  }
+
+  function normalizedDegreeDistribution($k){
+    $sum=0;
+    $graph = $this->calculateEvolutiveCompetitivityGraph()->getAdjacencyMatrix();
+    $elements = $this->rankings[0];
+    $n = $elements->getLength();
+    for ($i=0;$i<$n;$i++){
+      $deg=0;
+      for ($j=0;$j<$n;$j++){
+        if ($graph[$i][$j]!=0){
+          $deg++;
+        }
+      }
+      if ($deg==$k)
+        $sum++;
+    }
+    return $sum/$n;
+  }
+
+  function normalizedCumulativeDegreeDistribution($k){
+    $sum=0;
+    $graph = $this->calculateEvolutiveCompetitivityGraph()->getAdjacencyMatrix();
+    $elements = $this->rankings[0];
+    $n = $elements->getLength();
+    for ($i=0;$i<$n;$i++){
+      $deg=0;
+      for ($j=0;$j<$n;$j++){
+        if ($graph[$i][$j]!=0){
+          $deg++;
+        }
+      }
+      if ($deg>=$k)
+        $sum++;
+    }
+
+
+    return $sum/$n;
+  }
+
+  private function depthFirstSearch($v) {
+      $count = 0;
+      $graph = $this->calculateEvolutiveCompetitivityGraph()->getAdjacencyMatrix();
+      $elements = $this->rankings[0];
+      $n = $elements->getLength();
+      $position = $elements->getPosition($v);
+      $marked = array();
+      $id = array();
+      $size = array();
+      $marked[$v] = true;
+      $id[$v] = $count;
+      $size[$count]++;
+      for ($i=0;$i<$n;$i++) {
+        if ((!$marked[$i])&&($graph[$position][$i]!=0)) {
+          depthFirstSearch($i);
+        }
+      }
+      return array($count,$marked,$id,$size);
+    }
+
+
+  function connectedComponents() {
+     $marked = array();
+     $id = array();
+     $size = array();
+     $graph = $this->calculateEvolutiveCompetitivityGraph()->getAdjacencyMatrix();
+     $elements = $this->rankings[0];
+     $n = $elements->getLength();
+     for ($i=0;$i<$n;$i++) {
+         if (!$marked[$i]) {
+           $this->depthFirstSearch($i);
+           $count++;
+       }
+     }
+     return $count;
+   }
+
+
+}//Fin de clase
+
+
 
 
 ?>
