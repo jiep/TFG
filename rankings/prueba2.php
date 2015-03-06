@@ -47,9 +47,9 @@ print_r($rankings->calculateEvolutiveCompetitivityGraph());
 
 //echo $rankings->calculateEvolutiveCompetitivityGraph()->exportAsCytoscapeJSON() . "\n";
 
-echo $rankings->normalizedDegreeDistribution(0) . "\n";
-echo $rankings->normalizedDegreeDistribution(1) . "\n";
-echo $rankings->normalizedDegreeDistribution(2) . "\n";
-echo $rankings->normalizedDegreeDistribution(3) . "\n";
+echo $rankings->normalizedCumulativeDegreeDistribution(0) . "\n";
+echo $rankings->normalizedCumulativeDegreeDistribution(1) . "\n";
+echo $rankings->normalizedCumulativeDegreeDistribution(2) . "\n";
+echo $rankings->normalizedCumulativeDegreeDistribution(4) . "\n";
 
 ?>

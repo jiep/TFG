@@ -31,9 +31,9 @@ $rankings = new RankingCollection($r);
 
 //echo $rankings->normalizedMeanStrength() . "\n";
 //echo $rankings->generalizedKendallsTau() . "\n";
-echo $rankings->normalizedDegreeDistribution(0) . "\n";
-echo $rankings->normalizedDegreeDistribution(1) . "\n";
-echo $rankings->normalizedDegreeDistribution(2) . "\n";
-echo $rankings->normalizedDegreeDistribution(3) . "\n";
+echo $rankings->normalizedCumulativeDegreeDistribution(0) . "\n";
+echo $rankings->normalizedCumulativeDegreeDistribution(1) . "\n";
+echo $rankings->normalizedCumulativeDegreeDistribution(2) . "\n";
+echo $rankings->normalizedCumulativeDegreeDistribution(3) . "\n";
 
 ?>

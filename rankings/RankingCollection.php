@@ -121,6 +121,26 @@ class RankingCollection {
     return $sum/$n;
   }
 
+  function normalizedCumulativeDegreeDistribution($k){
+    $sum=0;
+    $graph = $this->calculateEvolutiveCompetitivityGraph()->getAdjacencyMatrix();
+    $elements = $this->rankings[0];
+    $n = $elements->getLength();
+    for ($i=0;$i<$n;$i++){
+      $deg=0;
+      for ($j=0;$j<$n;$j++){
+        if ($graph[$i][$j]!=0){
+          $deg++;
+        }
+      }
+      if ($deg>=$k)
+        $sum++;
+    }
+
+
+    return $sum/$n;
+  }
+
 
 }//Fin de clase
 
