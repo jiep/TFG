@@ -43,9 +43,10 @@ $r = array($r1, $r2, $r3, $r4);
 $rankings = new RankingCollection($r);
 //print_r($rankings);
 
-//print_r($rankings->calculateEvolutiveCompetitivityGraph());
+print_r($rankings->calculateEvolutiveCompetitivityGraph());
 
-echo $rankings->calculateEvolutiveCompetitivityGraph()->exportAsCytoscapeJSON() . "\n";
+//echo $rankings->calculateEvolutiveCompetitivityGraph()->exportAsCytoscapeJSON() . "\n";
 
+echo $rankings->normalizedMeanDegree() . "\n";
 
 ?>

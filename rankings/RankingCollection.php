@@ -54,7 +54,7 @@ class RankingCollection {
           $pos_j_r2 = $k2->getPosition($elements->get($j));
           $sign_r1 = $this->sign($pos_i_r1 - $pos_j_r1);
           $sign_r2 = $this->sign($pos_i_r2 - $pos_j_r2);
-          
+
           if($sign_r1 !== $sign_r2){
               $adjacencyMatrix[$i][$j]++;
               $adjacencyMatrix[$j][$i]++;
@@ -67,7 +67,29 @@ class RankingCollection {
 
   }
 
+
+  function normalizedMeanDegree(){
+    $cont=0;
+    $graph = $this->calculateEvolutiveCompetitivityGraph()->getAdjacencyMatrix();
+    $elements = $this->rankings[0];
+    $n = $elements->getLength();
+    for ($i=0;$i<$n;$i++){
+      for ($j=0;$j<$n;$j++){
+        if ($graph[$i][$j]!=0)
+          $cont++;
+      }
+    }
+
+    return $cont/($n*($n-1));
+  }
+
+
+
+
+
 }
+
+
 
 
 ?>
