@@ -83,11 +83,23 @@ class RankingCollection {
     return $cont/($n*($n-1));
   }
 
+  function normalizedMeanStrength(){
+    $sum=0;
+    $graph = $this->calculateEvolutiveCompetitivityGraph()->getAdjacencyMatrix();
+    $elements = $this->rankings[0];
+    $n = $elements->getLength();
+    for ($i=0;$i<$n;$i++){
+      for ($j=0;$j<$i;$j++){
+          $sum=$sum+$graph[$i][$j];
+      }
+    }
+
+    return 2*$sum/($n*($n-1)*(count($this->rankings)-1));
+  }
 
 
 
-
-}
+}//Fin de clase
 
 
 

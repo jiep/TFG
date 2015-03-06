@@ -29,7 +29,7 @@ print_r($rankings->calculateEvolutiveCompetitivityGraph());
 
 //print_r($rankings->calculateEvolutiveCompetitivityGraph()->exportAsCytoscapeJSON());
 
-echo $rankings->normalizedMeanDegree() . "\n";
+echo $rankings->normalizedMeanStrength() . "\n";
 
 echo "\n";
 

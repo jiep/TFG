@@ -29,7 +29,7 @@ $rankings = new RankingCollection($r);
 
 //print_r($rankings->calculateEvolutiveCompetitivityGraph());
 
-echo $rankings->normalizedMeanDegree() . "\n";
+echo $rankings->normalizedMeanStrength() . "\n";
 
 
 ?>
