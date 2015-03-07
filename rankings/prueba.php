@@ -31,9 +31,10 @@ $rankings = new RankingCollection($r);
 
 //echo $rankings->normalizedMeanStrength() . "\n";
 //echo $rankings->generalizedKendallsTau() . "\n";
-echo $rankings->normalizedCumulativeDegreeDistribution(0) . "\n";
-echo $rankings->normalizedCumulativeDegreeDistribution(1) . "\n";
-echo $rankings->normalizedCumulativeDegreeDistribution(2) . "\n";
-echo $rankings->normalizedCumulativeDegreeDistribution(3) . "\n";
+echo $rankings->calculateEvolutiveCompetitivityGraph()->normalizedMeanDegree() . "\n";
+echo "La fuerza media es: " . $rankings->calculateEvolutiveCompetitivityGraph()->normalizedMeanStrength() . "\n";
+echo "La tau de Kendall es: " . $rankings->calculateEvolutiveCompetitivityGraph()->generalizedKendallsTau() . "\n";
+echo $rankings->calculateEvolutiveCompetitivityGraph()->normalizedCumulativeDegreeDistribution(4) . "\n";
+
 
 ?>

@@ -29,10 +29,7 @@ print_r($rankings->calculateEvolutiveCompetitivityGraph());
 
 //print_r($rankings->calculateEvolutiveCompetitivityGraph()->exportAsCytoscapeJSON());
 
-echo $rankings->normalizedCumulativeDegreeDistribution(0) . "\n";
-echo $rankings->normalizedCumulativeDegreeDistribution(1) . "\n";
-echo $rankings->normalizedCumulativeDegreeDistribution(2) . "\n";
-echo $rankings->normalizedCumulativeDegreeDistribution(3) . "\n";
+echo $rankings->calculateEvolutiveCompetitivityGraph()->normalizedMeanDegree() . "\n";
 
 
 echo "\n";
