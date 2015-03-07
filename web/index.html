@@ -32,6 +32,8 @@
   <script type="text/javascript" src="js/scripts.js"></script>
   <script type="text/javascript" src="js/Chart.js/Chart.js"></script>
   <script type="text/javascript" src="js/cytoscape.js/cytoscape.min.js"></script>
+  <script type="text/javascript" src="js/pdfmake/pdfmake.min.js"></script>
+  <script type="text/javascript" src="js/pdfmake/vfs_fonts.js"></script>
 
   <script>
 
@@ -135,11 +137,24 @@
 
     Promise.all([graph, style]).then(initCy);
 
-    console.log(style);
+    });
 
+  $("#download").click(function(){
+    var graph = cy.png();
+    var docDefinition = {
+      pageMargins: [40, 60, 40, 60],
+      footer: function(currentPage, pageCount) { return currentPage.toString() + ' de ' + pageCount; },
+      content: ['Grafo de competitividad de la temporada ' + $("select[name=season]").val(),
+    {
+			image: graph,
+      fit: [500, 500]
+		}
+    ]};
+
+    pdfMake.createPdf(docDefinition).open();
   });
 
-  });
+});
 
 
   </script>
@@ -534,6 +549,7 @@
               </select>
 
               <button id="randomGraph" type="button">Generar grafo de competitividad</button>
+              <button id="download">Descargar como PDF</button>
             </div>
           </div>
           <div class="panel-body" id="cy"></div>
