@@ -27,7 +27,7 @@ $selector_e = array("selector" => "edge", "css" => array('width' => 2, 'line-col
 
 $con->close();
 
-
-echo(json_encode(array($selector_n, $selector_e, $style),JSON_UNESCAPED_SLASHES));
+array_unshift($style, $selector_n, $selector_e);
+echo(json_encode($style, JSON_UNESCAPED_SLASHES));
 
 ?>
