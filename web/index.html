@@ -35,54 +35,41 @@
 
   <script>
 
-    var lineChartData = {
-      labels : [],
-      datasets : [
-        {
-          pointStrokeColor : "#fd25f0",
-          data : []
-        },
-        {
-          pointStrokeColor : "#66ff00",
-          data : []
+  $(function(){
+
+    var dat = $.ajax({
+      type: "POST",
+      url: "../parser/lineas.php",
+      data: {season: "2013/2014"},
+      dataType: "json"
+    }) .success(function(result){
+        var lineChartData = [];
+        lineChartData['labels'] = [];
+        lineChartData['datasets'] = [];
+
+        lineChartData.labels = result.labels;
+
+        for(i = 0; i < result.datasets.length; i++){
+          lineChartData.datasets[i] = [];
+          lineChartData.datasets[i].data = result.datasets[i];
+          lineChartData.datasets[i].fillColor = "#08ff00";
         }
-      ]
 
-    }
+        console.log(lineChartData);
 
-    window.onload = function(){
-    var ctx = document.getElementById("canvas").getContext("2d");
-    window.myLine = new Chart(ctx).Line(lineChartData, {
-      responsive: true,
-      bezierCurve : false,
-      datasetFill : false
+        myLine = new Chart(document.getElementById("canvas").getContext("2d")).Line(lineChartData, {
+          responsive: true,
+          bezierCurve : false,
+          datasetFill : false
+        });
+
     });
-  }
+
+
+    });
+
+
   </script>
-
-  <!--
-        .selector('#a')
-          .css({
-            'background-image': 'http://statics.lfp.es/img/escudos/liga-bbva/barcelona.png?7'
-          })
-        .selector('#b')
-          .css({
-            'background-image': 'http://statics.lfp.es/img/escudos/liga-bbva/real-madrid.png?7'
-          })
-        .selector('#c')
-          .css({
-            'background-image': 'http://statics.lfp.es/img/escudos/liga-bbva/sevilla.png?7'
-          })
-      .selector('#d')
-          .css({
-            'background-image': 'http://statics.lfp.es/img/escudos/liga-bbva/villarreal.png?7'
-          })
-      .selector('#e')
-          .css({
-            'background-image': 'http://statics.lfp.es/img/escudos/liga-bbva/valencia.png?7'
-          })
-
-        -->
 
   <script>
 
