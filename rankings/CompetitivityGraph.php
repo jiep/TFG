@@ -35,6 +35,8 @@ class CompetitivityGraph extends Graph {
 
   }
 
+  
+
 }
 
 
