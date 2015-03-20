@@ -35,11 +35,6 @@ class CompetitivityGraph extends Graph {
 
   }
 
-<<<<<<< HEAD
-  
-
-}
-=======
   function floyd(){
     $infinito = 10000;
     $graph = $this->getAdjacencyMatrix();
@@ -115,7 +110,5 @@ class CompetitivityGraph extends Graph {
   }
 
 }//FIN
->>>>>>> fdc957d4ffc639819fd79145a18cc66ab6b17295
-
 
 ?>
