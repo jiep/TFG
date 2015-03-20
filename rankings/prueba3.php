@@ -23,13 +23,19 @@ $r = array($r1, $r2, $r3);
 $rankings = new RankingCollection($r);
 //print_r($rankings);
 
-print_r($rankings->calculateEvolutiveCompetitivityGraph());
+echo($rankings->calculateEvolutiveCompetitivityGraph()->normalizedCumulativeStrengthDistribution(0)."\n");
+echo($rankings->calculateEvolutiveCompetitivityGraph()->normalizedCumulativeStrengthDistribution(1)."\n");
+echo($rankings->calculateEvolutiveCompetitivityGraph()->normalizedCumulativeStrengthDistribution(2)."\n");
+echo($rankings->calculateEvolutiveCompetitivityGraph()->normalizedCumulativeStrengthDistribution(3)."\n");
+echo($rankings->calculateEvolutiveCompetitivityGraph()->normalizedCumulativeStrengthDistribution(4)."\n");
+echo($rankings->calculateEvolutiveCompetitivityGraph()->normalizedCumulativeStrengthDistribution(5)."\n");
+echo($rankings->calculateEvolutiveCompetitivityGraph()->normalizedCumulativeStrengthDistribution(6)."\n");
 
 //echo "JSON: \n";
 
 //print_r($rankings->calculateEvolutiveCompetitivityGraph()->exportAsCytoscapeJSON());
 
-echo $rankings->calculateEvolutiveCompetitivityGraph()->normalizedMeanDegree() . "\n";
+//echo $rankings->calculateEvolutiveCompetitivityGraph()->normalizedMeanDegree() . "\n";
 
 
 echo "\n";

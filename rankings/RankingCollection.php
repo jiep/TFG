@@ -93,15 +93,17 @@ class RankingCollection {
           $sign_r2 = $this->sign($pos_i_r2 - $pos_j_r2);
 
           if($sign_r1 !== $sign_r2){
-              $adjacencyMatrix[$i][$j] == 0 ? $adjacencyMatrix[$i][$j]++;
-              $adjacencyMatrix[$j][$i] == 0 ? $adjacencyMatrix[$j][$i]++;
+              if ($adjacencyMatrix[$i][$j] == 0){
+                $adjacencyMatrix[$i][$j]++;
+                $adjacencyMatrix[$j][$i]++;
+              }
           }
         }
       }
     }
 
     return new CompetitivityGraph($elements, $adjacencyMatrix, count($this->rankings));
-
+    }
 
 }//Fin de clase
 
