@@ -27,14 +27,14 @@ $r = array($r1, $r2, $r3);
 $rankings = new RankingCollection($r);
 //print_r($rankings);
 
-//print_r($rankings->calculateEvolutiveCompetitivityGraph());
+print_r($rankings->calculateCompetitivityGraph());
 
 //echo $rankings->normalizedMeanStrength() . "\n";
 //echo $rankings->generalizedKendallsTau() . "\n";
-echo $rankings->calculateEvolutiveCompetitivityGraph()->normalizedMeanDegree() . "\n";
-echo "La fuerza media es: " . $rankings->calculateEvolutiveCompetitivityGraph()->normalizedMeanStrength() . "\n";
-echo "La tau de Kendall es: " . $rankings->calculateEvolutiveCompetitivityGraph()->generalizedKendallsTau() . "\n";
-echo $rankings->calculateEvolutiveCompetitivityGraph()->normalizedCumulativeDegreeDistribution(4) . "\n";
+//echo $rankings->calculateEvolutiveCompetitivityGraph()->normalizedMeanDegree() . "\n";
+//echo "La fuerza media es: " . $rankings->calculateEvolutiveCompetitivityGraph()->normalizedMeanStrength() . "\n";
+//echo "La tau de Kendall es: " . $rankings->calculateEvolutiveCompetitivityGraph()->generalizedKendallsTau() . "\n";
+//echo $rankings->calculateEvolutiveCompetitivityGraph()->normalizedCumulativeDegreeDistribution(4) . "\n";
 
 
 ?>
