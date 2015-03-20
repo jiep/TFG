@@ -102,7 +102,6 @@ class RankingCollection {
 
     return new CompetitivityGraph($elements, $adjacencyMatrix, count($this->rankings));
 
-  }
 
 }//Fin de clase
 
