@@ -8,8 +8,7 @@ $temporada = $_POST["season"] ? $_POST["season"] : "2013/2014";
 $con = new Connection (DB_HOST,DB_PORT,DB_USERNAME,DB_PASSWORD,DB_NAME);
 $con->connect();
 $con->selectDatabase();
-$equipos = $con->query("SELECT DISTINCT equipo from rankings where temporada = \"$temporada\"");
-
+$equipos = $con->query("SELECT DISTINCT equipo from rankings where temporada = \"$temporada\" order by equipo");
 
 $i = 0;
 foreach($equipos as $equipo){
