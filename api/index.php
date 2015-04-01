@@ -7,6 +7,7 @@ $hostname = "localhost";
 $username = "rankings";
 $password = "1234";
 
+
 try {
   $dbh = new PDO("mysql:host=$hostname;dbname=rankings;charset=utf8", $username, $password);
   $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -39,6 +40,25 @@ $app->get('/sport/:sportname/:league/teams', function ($sportname, $league) use 
   }
 });
 
+$app->get('/sport/:sportname/:league/competitivity', function($sportname, $league) use($dbh, $app){
+  include '../parser/datos_competitividad.php';
+  $season = $app->request()->get("season");
+  try {
+    if($season){
+      $app->response->status(200);
+      $app->response->body(datos_competitividad($season));
+    }else{
+      $app->response->status(200);
+      $app->response->body(datos_competitividad());
+    }
+  }catch(PDOException $e){
+    echo "Error: " + $e->getMessage();
+  }
+});
+
+$app->get('/sport/:sportname/:league/measures', function($sportname, $league) se($dbh, $app){
+
+});
 
 $app->run();
 
