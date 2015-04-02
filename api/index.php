@@ -56,8 +56,56 @@ $app->get('/sport/:sportname/:league/competitivity', function($sportname, $leagu
   }
 });
 
-$app->get('/sport/:sportname/:league/measures', function($sportname, $league) se($dbh, $app){
+$app->get('/sport/:sportname/:league/measures', function($sportname, $league) use($dbh, $app){
+  include '../parser/medidas_competitividad.php';
+  $season = $app->request()->get("season");
+  try {
+    if($season){
+      $app->response->status(200);
+      $app->response->body(medidas_competitividad($season));
+    }else{
+      $app->response->status(200);
+      $app->response->body(medidas_competitividad());
+    }
+  }catch(PDOException $e){
+    echo "Error: " + $e->getMessage();
+  }
+});
 
+$app->get('/sport/:sportname/:league/clasification', function($sportname, $league) use($dbh, $app){
+  include '../parser/medidas_competitividad.php';
+  try{
+    $season = $app->request()->get("season");
+    $fixture = $app->request()->get("fixture");
+
+    if($season){
+      if($fixture){
+        $sql = $dbh->prepare("select * from rankings where temporada = \"$season\" and jornada = $fixture order by posicion;");
+      }else{
+        $sql = $dbh->prepare("select * from rankings where temporada = \"$season\" and jornada = (SELECT max(jornada) from rankings where temporada = \"$season\") order by posicion;");
+      }
+    }else{
+      $season = getLastSeason();
+      if($fixture){
+        $sql = $dbh->prepare("select * from rankings where temporada = \"$season\" and jornada = $fixture order by posicion;");
+      }else{
+        $sql = $dbh->prepare("select * from rankings where temporada = \"$season\" and jornada = (SELECT max(jornada) from rankings where temporada = \"$season\") order by posicion;");
+      }
+    }
+    $sql->execute();
+    $result = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+    if($result){
+      $app->response->status(200);
+      $app->contentType('application/json; charset=utf-8');
+      $app->response->body(json_encode($result));
+    }else{
+      $app->response->status(404);
+      $app->response->body(json_encode(array("error" => "Resource not found")));
+    }
+  }catch(PDOException $e){
+    echo "Error: " + $e->getMessage();
+  }
 });
 
 $app->run();
