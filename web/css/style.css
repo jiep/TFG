@@ -54,5 +54,6 @@ body{
 #cy {
   height: 30em;
   position: relative;
-  border-color: #ddd;
+  margin: 0%;
+  width: 100%;
 }
