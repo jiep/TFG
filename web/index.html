@@ -14,6 +14,7 @@
 
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/style.css" rel="stylesheet">
+  <link href="css/loading-bar.min.css" rel="stylesheet">
 
   <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
   <!--[if lt IE 9]>
@@ -32,8 +33,36 @@
   <script type="text/javascript" src="js/scripts.js"></script>
   <script type="text/javascript" src="js/Chart.js/Chart.js"></script>
   <script type="text/javascript" src="js/cytoscape.js/cytoscape.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+  <script src="js/loading-bar.min.js"></script>
   <script type="text/javascript" src="js/pdfmake/pdfmake.min.js"></script>
   <script type="text/javascript" src="js/pdfmake/vfs_fonts.js"></script>
+
+
+
+
+  <script>
+      var app = angular.module('app', ['chieffancypants.loadingBar']);
+
+      app.config(function(cfpLoadingBarProvider) {
+        cfpLoadingBarProvider.includeSpinner = true;
+      });
+
+      app.controller("PostsCtrl", function($scope, $http) {
+        $http.get('https://gist.githubusercontent.com/jiep/d8131a4974eb3235d1f7/raw/b1e76fd445df23188ee338dcf7b1be30be9957de/competitivitygraph.json').
+      success(function(data, status, headers, config, cfpLoadingBarProvider) {
+
+        $scope.cy = data;
+
+          cy = cytoscape({
+            container: $('#cy')[0],
+            elements: $scope.cy.elements,
+            layout: 'circle'
+          });
+      });
+    });
+
+      </script>
 
   <script>
 
@@ -195,7 +224,7 @@
 
 </head>
 
-<body>
+<body ng-app="app">
   <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
       <div class="container">
         <div class="navbar-header">
@@ -599,7 +628,7 @@
             </div>
           </div>
           <div class="panel-body">
-            <div id="cy"></div>
+            <div id="cy" ng-controller="PostsCtrl"></div>
           </div>
         </div>
 
