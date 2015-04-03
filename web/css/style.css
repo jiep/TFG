@@ -17,7 +17,8 @@ body{
   margin-top: -10px;
   background-color: #313131;
   height: 100%;
-  overflow-y: auto;
+  overflow: scroll;
+  overflow-x: hidden;
 }
 
 .nav-stacked ul li {
