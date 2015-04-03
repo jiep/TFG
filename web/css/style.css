@@ -17,6 +17,16 @@ body{
   margin-top: -10px;
   background-color: #313131;
   height: 100%;
+  overflow-y: auto;
+}
+
+.nav-stacked ul li {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.nav-stacked ul li a {
+  padding: 20px;
 }
 
 .nav-stacked>li+li {
