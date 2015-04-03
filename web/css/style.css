@@ -35,6 +35,10 @@ body{
   border-radius: 0px;
 }
 
+.panel-body {
+  padding: 0px;
+}
+
 #panel-historico {
   width: 95% !important;
 }
@@ -48,10 +52,7 @@ body{
 }
 
 #cy {
-  height: 30% !important;
-  position: absolute;
-  width: 96.5% !important;
-  background-color: #ffffff;
-  margin-bottom: 30px;
+  height: 30em;
+  position: relative;
   border-color: #ddd;
 }
