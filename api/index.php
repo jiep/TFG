@@ -15,6 +15,7 @@ try {
 }
 
 $app = new \Slim\Slim();
+
 $app->get('/sport/:sportname/:league/teams', function ($sportname, $league) use ($dbh, $app) {
   try {
       $season = $app->request()->get('season');
@@ -23,6 +24,25 @@ $app->get('/sport/:sportname/:league/teams', function ($sportname, $league) use 
       } else {
           $sql = $dbh->prepare('SELECT DISTINCT equipo as name from rankings order by equipo');
       }
+      $sql->execute();
+      $result = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+      if ($result) {
+          $app->response->status(200);
+          $app->contentType('application/json; charset=utf-8');
+          $app->response->body(json_encode($result));
+      } else {
+          $app->response->status(404);
+          $app->response->body(json_encode(array('error' => 'Resource not found')));
+      }
+  } catch (PDOException $e) {
+      echo 'Error: ' + $e->getMessage();
+  }
+});
+
+$app->get('/sport/:sportname/:league/seasons', function ($sportname, $league) use ($dbh, $app) {
+  try {
+      $sql = $dbh->prepare('SELECT DISTINCT temporada as season from rankings order by temporada desc');
       $sql->execute();
       $result = $sql->fetchAll(PDO::FETCH_ASSOC);
 
