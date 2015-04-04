@@ -31,205 +31,20 @@
 
   <script type="text/javascript" src="js/jquery.min.js"></script>
   <script type="text/javascript" src="js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="js/scripts.js"></script>
   <script type="text/javascript" src="js/Chart.js/Chart.js"></script>
   <script type="text/javascript" src="js/cytoscape.js/cytoscape.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
-  <script src="js/loading-bar.min.js"></script>
-  <script src="js/restangular.min.js"></script>
+  <script type="text/javascript" src="js/angular.min.js"></script>
+  <script type="text/javascript" src="js/angular-route.min.js"></script>
+  <script type="text/javascript" src="js/loading-bar.min.js"></script>
+  <script type="text/javascript" src="js/underscore.min.js"></script>
+  <script type="text/javascript" src="js/restangular.min.js"></script>
   <script type="text/javascript" src="js/pdfmake/pdfmake.min.js"></script>
   <script type="text/javascript" src="js/pdfmake/vfs_fonts.js"></script>
-
-  <script>
-    var app = angular.module('app', ['chieffancypants.loadingBar']);
-
-    app.config(function(cfpLoadingBarProvider) {
-      cfpLoadingBarProvider.includeSpinner = true;
-    });
-
-    app.controller("PostsCtrl", function($scope, $http) {
-      $http.get('https://gist.githubusercontent.com/jiep/d8131a4974eb3235d1f7/raw/b1e76fd445df23188ee338dcf7b1be30be9957de/competitivitygraph.json').
-      success(function(data, status, headers, config, cfpLoadingBarProvider) {
-
-        $scope.cy = data;
-
-        cy = cytoscape({
-          container: $('#cy')[0],
-          elements: $scope.cy.elements,
-          layout: 'circle'
-        });
-      });
-    });
-  </script>
-
-  <script>
-    $(function() {
-
-      var dat = $.ajax({
-        type: "POST",
-        url: "../parser/lineas.php",
-        data: {
-          season: "2013/2014"
-        },
-        dataType: "json"
-      }).success(function(result) {
-        var lineChartData = [];
-        lineChartData['labels'] = [];
-        lineChartData['datasets'] = [];
-
-        lineChartData.labels = result.labels;
-
-        for (i = 0; i < result.datasets.length; i++) {
-          lineChartData.datasets[i] = [];
-          lineChartData.datasets[i].data = result.datasets[i];
-          lineChartData.datasets[i].fillColor = "#08ff00";
-        }
-
-        myLine = new Chart(document.getElementById("canvas").getContext("2d")).Line(lineChartData, {
-          responsive: true,
-          bezierCurve: false,
-          datasetFill: false
-        });
-
-      });
-
-      var dato = $.ajax({
-        type: "POST",
-        url: "../parser/medidas_competitividad.php",
-        data: {
-          season: "2013/2014"
-        },
-        dataType: "json"
-      }).success(function(result) {
-        var lineChartData = [];
-        lineChartData['labels'] = [];
-        lineChartData['datasets'] = [];
-        lineChartData.labels = result.labels_array;
-        lineChartData.datasets[0] = [];
-        lineChartData.datasets[1] = [];
-        lineChartData.datasets[0].data = result.ncdd;
-        lineChartData.datasets[1].data = result.ndd;
-        lineChartData.datasets[0].fillColor = "#08ff00";
-        lineChartData.datasets[1].fillColor = "#004cff";
-        myLine = new Chart(document.getElementById("canvas2").getContext("2d")).Line(lineChartData, {
-          responsive: true,
-          bezierCurve: false,
-          datasetFill: false
-        });
-
-        var radarChartData = [];
-        radarChartData['labels'] = [];
-        radarChartData['datasets'] = [];
-        radarChartData.labels = result.labels;
-        radarChartData.datasets[0] = [];
-        radarChartData.datasets[0].data = result.medidas;
-        radarChartData.datasets[0].fillColor = "#004cff";
-        myRadar = new Chart(document.getElementById("canvas3").getContext("2d")).Radar(radarChartData, {
-          responsive: true,
-          datasetFill: false
-        });
-
-      });
-
-
-    });
-  </script>
-
-  <script>
-    $(function() {
-
-      var graph = $.ajax({
-        type: "POST",
-        url: "../parser/datos_competitividad.php",
-        data: {
-          season: "2013/2014"
-        },
-        dataType: "json"
-      });
-
-      var style = $.ajax({
-        type: "POST",
-        url: "../parser/estilo_competitividad.php",
-        data: {
-          season: "2013/2014"
-        },
-        dataType: "json"
-      });
-
-      //url: 'https://gist.githubusercontent.com/jiep/d8131a4974eb3235d1f7/raw/competitivitygraph.json',
-      //url: 'https://gist.githubusercontent.com/jiep/087e1a08dbece5602e70/raw/randomCompetitivityGraph.json',
-
-      Promise.all([graph, style]).then(initCy);
-
-      function initCy(then) {
-        var expJson = then[0];
-        var styleJson = then[1];
-        var elements = expJson.elements;
-
-        console.log(elements);
-
-        var cy = window.cy = cytoscape({
-          container: document.getElementById('cy'),
-          elements: elements,
-          zoom: 1,
-          zoomingEnabled: false,
-          layout: {
-            name: 'circle'
-          },
-          style: styleJson
-
-        });
-
-      }
-
-      $("#randomGraph").click(function() {
-        var temporada = $("select[name=season]").val();
-        console.log(temporada);
-
-        var graph = $.ajax({
-          type: "POST",
-          url: "../parser/datos_competitividad.php",
-          data: {
-            season: temporada
-          },
-          dataType: "json"
-        });
-
-        var style = $.ajax({
-          type: "POST",
-          url: "../parser/estilo_competitividad.php",
-          data: {
-            season: temporada
-          },
-          dataType: "json"
-        });
-
-        Promise.all([graph, style]).then(initCy);
-
-      });
-
-      $("#download").click(function() {
-        var graph = cy.png();
-        var docDefinition = {
-          pageMargins: [40, 60, 40, 60],
-          footer: function(currentPage, pageCount) {
-            return currentPage.toString() + ' de ' + pageCount;
-          },
-          content: ['Grafo de competitividad de la temporada ' + $("select[name=season]").val(), {
-            image: graph,
-            fit: [500, 500]
-          }]
-        };
-
-        pdfMake.createPdf(docDefinition).open();
-      });
-
-    });
-  </script>
+  <script type="text/javascript" src="js/scripts.js"></script>
 
 </head>
 
-<body ng-app="app">
+<body ng-app="app" ng-controller="MainCtrl">
   <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
     <div class="container">
       <div class="navbar-header">
@@ -284,8 +99,7 @@
             <span class="glyphicon glyphicon-home"></span> Temporadas</a>
         </li>
         <ul>
-          <li><a>Temporada 1</a></li>
-          <li><a>Temporada 1</a></li>
+          <li ng-repeat="season in seasons"><a>{{season.season}}</a></li>
         </ul>
 
         <li>
@@ -293,17 +107,7 @@
             <span class="glyphicon glyphicon-film"></span> Equipos</a>
         </li>
         <ul>
-          <li><a>Equipo 1</a></li>
-          <li><a>Equipo 2</a></li>
-          <li><a>Equipo 1</a></li>
-          <li><a>Equipo 2</a></li>
-          <li><a>Equipo 1</a></li>
-          <li><a>Equipo 2</a></li>
-          <li><a>Equipo 1</a></li>
-          <li><a>Equipo 2</a></li>
-          <li><a>Equipo 1</a></li>
-          <li><a>Equipo 2</a></li>
-          <li><a>Equipo 1</a></li>
+          <li ng-repeat="team in teams"><a>{{team.name}}</a></li>
         </ul>
 
         <li>
@@ -690,7 +494,7 @@
           </div>
         </div>
         <div class="panel-body">
-          <div id="cy" ng-controller="PostsCtrl"></div>
+          <div id="cy"></div>
         </div>
       </div>
 
