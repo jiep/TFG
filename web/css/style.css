@@ -1,17 +1,14 @@
-body{
+body {
   background-color: #414141;
   padding-top: 70px;
-  height:100%;
+  height: 100%;
 }
-
 .navbar {
   border-radius: 0px;
 }
-
 .nav-pills>li>a {
   border-radius: 0px;
 }
-
 .nav-stacked {
   position: fixed;
   margin-top: -10px;
@@ -20,48 +17,34 @@ body{
   overflow: scroll;
   overflow-x: hidden;
 }
-
 .nav-stacked ul li {
   margin-top: 10px;
   margin-bottom: 10px;
 }
-
 .nav-stacked ul li a {
   padding: 20px;
 }
-
 .nav-stacked>li+li {
   margin-top: 0px;
 }
-
 .table td {
-   text-align: center;
+  text-align: center;
 }
-
 .table th {
   text-align: center;
 }
-
 .panel {
   border-radius: 0px;
 }
-
 .panel-body {
   padding: 0px;
 }
-
 #panel-historico {
   width: 95% !important;
 }
-
 #panel-grado {
   width: 95% !important;
 }
-
-#panel-radar {
-  width: 95% !important;
-}
-
 #cy {
   height: 30em;
   position: relative;
