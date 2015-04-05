@@ -43,14 +43,6 @@ app.controller("MainCtrl", function(Restangular, $scope) {
     });
   });
 
-  /*var measures = Restangular.one("measures");
-  measures.get().then(function(measures) {
-    $scope.measures = measures;
-    $scope.labels = $scope.measures.labels;
-    $scope.data = [$scope.measures.measures];
-
-  });*/
-
   var chartLine = Restangular.one("chartLine");
   chartLine.get().then(function(chartLine) {
     $scope.chartLine = chartLine;
@@ -66,4 +58,13 @@ app.controller("MainCtrl", function(Restangular, $scope) {
     };
   });
 
+});
+
+app.controller('RadarCtrl', function($scope, Restangular) {
+  var measures = Restangular.one("measures");
+  measures.get().then(function(measures) {
+    $scope.measures = measures;
+    $scope.labels = $scope.measures.labels;
+    $scope.data = [$scope.measures.measures];
+  });
 });
