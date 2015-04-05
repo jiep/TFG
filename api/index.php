@@ -127,4 +127,28 @@ $app->get('/sport/:sportname/:league/clasification', function ($sportname, $leag
   }
 });
 
+$app->get('/sport/:sportname/:league/chartLine', function ($sportname, $league) use ($dbh, $app) {
+  include '../parser/lineas.php';
+  try {
+      $season = $app->request()->get('season');
+
+      if ($season == null) {
+          $season = getLastSeason();
+      }
+
+      $result = getLineChart($season);
+
+      if ($result) {
+          $app->response->status(200);
+          $app->contentType('application/json; charset=utf-8');
+          $app->response->body($result);
+      } else {
+          $app->response->status(404);
+          $app->response->body(json_encode(array('error' => 'Resource not found')));
+      }
+  } catch (PDOException $e) {
+      echo 'Error: ' + $e->getMessage();
+  }
+});
+
 $app->run();

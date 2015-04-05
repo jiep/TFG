@@ -40,10 +40,10 @@ body {
   padding: 0px;
 }
 #panel-historico {
-  width: 95% !important;
+  width: 100%;
 }
 #panel-grado {
-  width: 95% !important;
+  width: 100%;
 }
 #panel-radar {
   padding: 15px;

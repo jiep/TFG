@@ -7,9 +7,6 @@ include '../rankings/Graph.php';
 include '../rankings/EvolutiveCompetitivityGraph.php';
 require_once 'connection.inc.php';
 
-//$temporada = $_POST["season"] ? $_POST["season"] : "2013/2014";
-//$temporada = "2000/2001";
-
 function getLastSeason()
 {
     try {

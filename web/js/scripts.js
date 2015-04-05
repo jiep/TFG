@@ -43,11 +43,27 @@ app.controller("MainCtrl", function(Restangular, $scope) {
     });
   });
 
-  var measures = Restangular.one("measures");
+  /*var measures = Restangular.one("measures");
   measures.get().then(function(measures) {
     $scope.measures = measures;
     $scope.labels = $scope.measures.labels;
     $scope.data = [$scope.measures.measures];
 
+  });*/
+
+  var chartLine = Restangular.one("chartLine");
+  chartLine.get().then(function(chartLine) {
+    $scope.chartLine = chartLine;
+
+    $scope.series = $scope.chartLine.teams;
+    $scope.labels = $scope.chartLine.labels;
+    $scope.data = $scope.chartLine.datasets;
+    $scope.options = {
+      responsive: true,
+      animation: false,
+      bezierCurve: false,
+      datasetFill: false
+    };
   });
+
 });
