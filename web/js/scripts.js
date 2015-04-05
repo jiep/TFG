@@ -58,6 +58,66 @@ app.controller("MainCtrl", function(Restangular, $scope) {
     };
   });
 
+  $scope.downloadPDF = function(){
+
+    function parseClasification(){
+      var clasif = Restangular.stripRestangular($scope.clasification);
+      var c = [];
+      var d = [];
+      var headers = ["#", "Equipo", "PG", "PE", "PP", "GF", "GC", "Puntos"];
+      d.push(headers);
+      for(var i = 0; i < 20; i++){
+        c = [];
+        c.push(clasif[i].posicion);
+        c.push(clasif[i].equipo);
+        c.push(clasif[i].partidos_ganados);
+        c.push(clasif[i].partidos_empatados);
+        c.push(clasif[i].partidos_perdidos);
+        c.push(clasif[i].goles_favor);
+        c.push(clasif[i].goles_contra);
+        c.push(clasif[i].puntos);
+        d.push(c);
+      }
+      return d;
+    }
+
+    var d = new parseClasification();
+
+    var hist = document.getElementById("canvas2").toDataURL("image/png",1);
+
+    var dd = {
+	     content: [
+         {
+           columns: [
+            { width: '*', text: '' },
+        {
+            width: 'auto',
+            table: {
+              headerRows : 1,
+              alignment: 'center',
+              body : d
+            }
+        },
+        { width: '*', text: '' },
+    ]
+  },
+    'Cambios de posición',
+    {
+      image: hist,
+			width: 300,
+			height: 300,
+    },
+    'Grafo de competitividad',
+    {
+      image: $scope.cy.png(),
+			width: 300,
+			height: 300,
+    }
+       ]
+    }
+
+    pdfMake.createPdf(dd).open();
+    };
 });
 
 app.controller('RadarCtrl', function($scope, Restangular) {
