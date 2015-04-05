@@ -1,0 +1,154 @@
+<nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Rankings</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+          <a href="#">
+            <img src="http://statics.lfp.es/img/liga-bbva.png" aria-hidden="true">
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <img src="http://statics.lfp.es/img/liga-adelante.png" aria-hidden="true">
+          </a>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Iniciar sesión
+            <strong class="caret"></strong>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-right">
+            <div class="input-group input-group-lg">
+              <form role="form">
+                <div class="form-group">
+                  <input type="email" class="form-control" placeholder="Usuario">
+                  <input type="password" class="form-control" placeholder="Contraseña">
+                </div>
+              </form>
+            </div>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="row">
+  <!--<div class="col-md-3 column">
+    <ul class="nav nav-pills nav-stacked">
+      <li class="active">
+        <a href="#temporadas">
+          <span class="glyphicon glyphicon-home"></span> Temporadas</a>
+      </li>
+      <ul>
+        <li ng-repeat="season in seasons"><a>{{season.season}}</a></li>
+      </ul>
+
+      <li>
+        <a href="#equipos">
+          <span class="glyphicon glyphicon-film"></span> Equipos</a>
+      </li>
+      <ul>
+        <li ng-repeat="team in teams"><a>{{team.name}}</a></li>
+      </ul>
+
+      <li>
+        <a href="#competitividad">
+          <span class="glyphicon glyphicon-cloud"></span> Estadísticas</a>
+      </li>
+      <ul>
+        <li><a>Estadística 1</a></li>
+        <li><a>Estadística 2</a></li>
+        <li><a>Estadística 3</a></li>
+      </ul>
+      <li>
+        <a href="#">
+          <span class="glyphicon glyphicon-signal"></span> Predicción</a>
+      </li>
+    </ul>
+  </div> -->
+
+  <!----------------------------------------- -->
+
+  <div class="col-md-12 column">
+    <div class="panel panel-default" id="clasificacion">
+      <div class="panel-heading">
+        <span class="glyphicon glyphicon-th"></span> Clasificación</div>
+      <div class="panel-body">
+
+        <div class="table-responsible">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Equipo</th>
+                <th>Partidos ganados</th>
+                <th>Partidos empatos</th>
+                <th>Partidos perdidos</th>
+                <th>Goles a favor</th>
+                <th>Goles en contra</th>
+                <th>Puntos</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="row in clasification">
+                <td>{{row.posicion}}</td>
+                <td>{{row.equipo}}</td>
+                <td>{{row.partidos_ganados}}</td>
+                <td>{{row.partidos_empatados}}</td>
+                <td>{{row.partidos_perdidos}}</td>
+                <td>{{row.goles_favor}}</td>
+                <td>{{row.goles_contra}}</td>
+                <td>{{row.puntos}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel panel-default" id="historico">
+      <div class="panel-heading">
+        <span class="glyphicon glyphicon-th"></span> Histórico</div>
+      <div class="panel-body" id="panel-historico">
+        <canvas id="canvas"></canvas>
+      </div>
+    </div>
+    <div class="panel panel-default" id="grado">
+      <div class="panel-heading">
+        <span class="glyphicon glyphicon-th"></span> Grado medio normalizado vs distribución acumulada</div>
+      <div class="panel-body" id="panel-grado">
+        <canvas id="canvas2"></canvas>
+      </div>
+    </div>
+    <div class="panel panel-default" id="radar">
+      <div class="panel-heading">
+        <span class="glyphicon glyphicon-th"></span> Medidas de competitividad</div>
+      <div class="panel-body" id="panel-radar">
+        <canvas id="canvas3" class="chart chart-radar" data="data" labels="labels"></canvas>
+      </div>
+    </div>
+
+    <div class="panel panel-default" id="competitividad">
+      <div class="panel-heading">
+        <span class="glyphicon glyphicon-th"></span> Grafo de competitividad
+      </div>
+      <div class="panel-body">
+        <div id="cy"></div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

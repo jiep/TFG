@@ -8,7 +8,7 @@ app.config(function($routeProvider, RestangularProvider) {
   $routeProvider.
   when('/', {
     controller: "MainCtrl",
-    templateUrl: 'index.html'
+    templateUrl: 'templates/season.html'
   }).
   otherwise({
     redirectTo: '/'
@@ -32,30 +32,21 @@ app.controller("MainCtrl", function(Restangular, $scope) {
     $scope.clasification = clasification;
   });
 
-  $scope.viewCompetitivityGraph = function(season) {
-    var competitivityGraph = Restangular.one("competitivity?season=" + season);
-    competitivityGraph.get().then(function(competitivityGraph) {
-      $scope.competitivityGraph = competitivityGraph;
+  var competitivityGraph = Restangular.one("competitivity");
+  competitivityGraph.get().then(function(competitivityGraph) {
+    $scope.competitivityGraph = competitivityGraph;
 
-      cy = cytoscape({
-        container: $('#cy')[0],
-        elements: $scope.competitivityGraph.elements,
-        layout: 'circle'
-      });
+    $scope.cy = cytoscape({
+      container: $('#cy')[0],
+      elements: $scope.competitivityGraph.elements,
+      layout: 'circle'
     });
-  };
+  });
 
   var measures = Restangular.one("measures");
   measures.get().then(function(measures) {
     $scope.measures = measures;
-
-    console.log(measures.measures);
-
-    /*$scope.labels = measures.labels;
-    $scope.data = measures.measures;*/
-
     $scope.labels = $scope.measures.labels;
-
     $scope.data = [$scope.measures.measures];
 
   });

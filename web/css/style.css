@@ -45,6 +45,9 @@ body {
 #panel-grado {
   width: 95% !important;
 }
+#panel-radar {
+  padding: 15px;
+}
 #cy {
   height: 30em;
   position: relative;
