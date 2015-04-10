@@ -34,12 +34,16 @@ app.controller("MainCtrl", function(Restangular, $scope) {
 
   var competitivityGraph = Restangular.one("competitivity");
   competitivityGraph.get().then(function(competitivityGraph) {
-    $scope.competitivityGraph = competitivityGraph;
+    $scope.competitivityGraph = competitivityGraph.data;
+    $scope.style = competitivityGraph.style;
 
     $scope.cy = cytoscape({
       container: $('#cy')[0],
       elements: $scope.competitivityGraph.elements,
-      layout: 'circle'
+      zoom: 1,
+      zoomingEnabled: false,
+      layout: {name: 'circle'},
+      style: $scope.style
     });
   });
 

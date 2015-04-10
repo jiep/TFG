@@ -55,11 +55,34 @@ function datos_competitividad($temporada = NULL){
     $ranking_col[$i - 1] = $ranking;
   }
   $rankings = new RankingCollection($ranking_col);
-  return($rankings->calculateEvolutiveCompetitivityGraph()->exportAsCytoscapeJSON());
+  $data=json_decode($rankings->calculateEvolutiveCompetitivityGraph()->exportAsCytoscapeJSON());
+
+  $equipos = $dbh->prepare("SELECT DISTINCT equipo from rankings where temporada = \"$temporada\" order by equipo");
+  $equipos->execute();
+  $arrayequipos = $equipos->fetchAll();
+
+  $i = 0;
+  foreach($arrayequipos as $equipo){
+    if (array_key_exists('equipo', $equipo)){
+      $eq = $equipo["equipo"];
+      $res = $dbh->prepare("SELECT id from equipos where nombre = \"$eq\"");
+      $res->execute();
+      $elem=$res->fetch()[0];
+      $style[$i] = array("selector" => "#$i", "css" => array("background-image" => "img/escudos/$elem.png"));
+      $i++;
+    }
+  }
+
+  $selector_n = array("selector" => "node", "css" => array('height' => 40, 'width' => 40, 'background-fit' => 'cover', 'border-width' => 2, 'border-opacity' => 0.1, 'background-color' => '#dfdfdf', 'background-opacity' => 0.1, 'content' => 'data(name)', 'text-valign' => 'center', 'text-halign' => 'center'));
+  $selector_e = array("selector" => "edge", "css" => array('width' => 2, 'line-color' => '#ff0000'));
+
+  array_unshift($style, $selector_n, $selector_e);
+
+  return(json_encode(array("data"=>$data,"style"=>$style),JSON_UNESCAPED_SLASHES));
+
 }
 
 //echo $rankings->calculateEvolutiveCompetitivityGraph()->exportAsCytoscapeJSON() . "\n";
 
-//echo(datos_competitividad($season));
 
 ?>

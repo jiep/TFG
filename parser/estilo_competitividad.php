@@ -3,7 +3,9 @@
 include("autoload.php");
 require_once("connection.inc.php");
 
-$temporada = $_POST["season"] ? $_POST["season"] : "2013/2014";
+//$temporada = $_POST["season"] ? $_POST["season"] : "2013/2014";
+
+$temporada="1928/1929";
 
 $con = new Connection (DB_HOST,DB_PORT,DB_USERNAME,DB_PASSWORD,DB_NAME);
 $con->connect();
