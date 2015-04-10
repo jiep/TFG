@@ -55,7 +55,7 @@ function datos_competitividad($temporada = NULL){
     $ranking_col[$i - 1] = $ranking;
   }
   $rankings = new RankingCollection($ranking_col);
-  $data=json_decode($rankings->calculateEvolutiveCompetitivityGraph()->exportAsCytoscapeJSON());
+  $data = json_decode($rankings->calculateEvolutiveCompetitivityGraph()->exportAsCytoscapeJSON());
 
   $equipos = $dbh->prepare("SELECT DISTINCT equipo from rankings where temporada = \"$temporada\" order by equipo");
   $equipos->execute();
@@ -81,6 +81,8 @@ function datos_competitividad($temporada = NULL){
   return(json_encode(array("data"=>$data,"style"=>$style),JSON_UNESCAPED_SLASHES));
 
 }
+
+//datos_competitividad();
 
 //echo $rankings->calculateEvolutiveCompetitivityGraph()->exportAsCytoscapeJSON() . "\n";
 
