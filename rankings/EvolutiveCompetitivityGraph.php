@@ -153,44 +153,7 @@ class EvolutiveCompetitivityGraph extends Graph {
     return 1 - 2*$this->normalizedMeanStrength();
   }
 
-  /*private function depthFirstSearch($v) {
-      $count = 0;
-      $graph = $this->calculateEvolutiveCompetitivityGraph()->getAdjacencyMatrix();
-      $elements = $this->rankings[0];
-      $n = $elements->getLength();
-      $position = $elements->getPosition($v);
-      $marked = array();
-      $id = array();
-      $size = array();
-      $marked[$v] = true;
-      $id[$v] = $count;
-      $size[$count]++;
-      for ($i=0;$i<$n;$i++) {
-        if ((!$marked[$i])&&($graph[$position][$i]!=0)) {
-          depthFirstSearch($i);
-        }
-      }
-      return array($count,$marked,$id,$size);
-    }
-
-
-  function connectedComponents() {
-     $marked = array();
-     $id = array();
-     $size = array();
-     $graph = $this->calculateEvolutiveCompetitivityGraph()->getAdjacencyMatrix();
-     $elements = $this->rankings[0];
-     $n = $elements->getLength();
-     for ($i=0;$i<$n;$i++) {
-         if (!$marked[$i]) {
-           $this->depthFirstSearch($i);
-           $count++;
-       }
-     }
-     return $count;
-   }
-   */
-
+ 
 }
 
 
