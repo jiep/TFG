@@ -79,7 +79,7 @@ app.controller("MainCtrl", function(Restangular, $scope) {
         c.push(clasif[i].partidos_perdidos);
         c.push(clasif[i].goles_favor);
         c.push(clasif[i].goles_contra);
-        c.push(clasif[i].puntos);
+        c.push(clasif[i].puntos);0
         d.push(c);
       }
       return d;
@@ -130,5 +130,20 @@ app.controller('RadarCtrl', function($scope, Restangular) {
     $scope.measures = measures;
     $scope.labels = $scope.measures.labels;
     $scope.data = [$scope.measures.measures];
+  });
+});
+
+app.controller('MeasureCtrl', function($scope, Restangular) {
+  var measures = Restangular.one("measures");
+  measures.get().then(function(measures) {
+    $scope.measuresp = measures;
+    $scope.labels = $scope.measuresp.labels_array;
+    $scope.data = [$scope.measuresp.ndd,$scope.measuresp.ncdd,$scope.measuresp.nsd,$scope.measuresp.ncsd];
+    $scope.options = {
+      responsive: true,
+      animation: false,
+      bezierCurve: false,
+      datasetFill: false
+    };
   });
 });
