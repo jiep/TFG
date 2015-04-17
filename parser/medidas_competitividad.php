@@ -5,6 +5,7 @@ include '../rankings/Ranking.php';
 include '../rankings/RankingCollection.php';
 include '../rankings/Graph.php';
 include '../rankings/EvolutiveCompetitivityGraph.php';
+include '../rankings/CompetitivityGraph.php';
 require_once 'connection.inc.php';
 
 function getLastSeason()
@@ -60,6 +61,7 @@ function medidas_competitividad($temporada = null)
     $rankings = new RankingCollection($ranking_col);
 
     $graph = $rankings->calculateEvolutiveCompetitivityGraph();
+    $graph2 = $rankings->calculateCompetitivityGraph();
     $mat = $graph->getAdjacencyMatrix();
 
     $k = 0;
@@ -77,24 +79,33 @@ function medidas_competitividad($temporada = null)
 
     $ndd = array();
     $ncdd = array();
+    $nsd = array();
+    $ncsd = array();
     $labels_array = array();
 
     for ($i = 0; $i <= $k; $i++) {
         $labels_array[$i] = $i;
         $ndd[$i] = $graph->normalizedDegreeDistribution($i);
         $ncdd[$i] = $graph->normalizedCumulativeDegreeDistribution($i);
+        $nsd[$i] = $graph->normalizedStrengthDistribution($i);
+        $ncsd[$i] = $graph->normalizedCumulativeStrengthDistribution($i);
     }
 
-    $labels = array('Fuerza media normalizada', 'Tau de Kendall generalizada', 'Grado medio normalizado');
+    $labels = array('Fuerza media normalizada', 'Tau de Kendall generalizada', 'Grado medio normalizado','Diámetro','Longitud del camino característico','Eficiencia');
 
     $nms = $graph->normalizedMeanStrength();
     $gkt = $graph->generalizedKendallsTau();
     $nmd = $graph->normalizedMeanDegree();
+    $diam = $graph2->diameter();
+    $cpl = $graph2->characteristicPathLength();
+    $efic = $graph2->efficiency();
 
-    $json = json_encode(array('labels_array' => $labels_array, 'labels' => $labels, 'ndd' => $ndd, 'ncdd' => $ncdd, 'measures' => array($nmd, $nms, $gkt)));
+    $json = json_encode(array('labels_array' => $labels_array, 'labels' => $labels, 'ndd' => $ndd, 'ncdd' => $ncdd, 'nsd' => $nsd, 'ncsd' => $ncsd, 'measures' => array($nmd, $nms, $gkt,  $diam,  $cpl, $efic)));
 
     return $json;
 }
 
 //echo $json;
-;
+
+
+?>
