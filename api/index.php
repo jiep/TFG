@@ -117,7 +117,8 @@ $app->get('/sport/:sportname/:league/clasification', function ($sportname, $leag
       if ($result) {
           $app->response->status(200);
           $app->contentType('application/json; charset=utf-8');
-          $app->response->body(json_encode($result));
+          $app->response->body(json_encode(array('number' => count($result), 'clasification' => $result)));
+          //$app->response->body(json_encode($result));
       } else {
           $app->response->status(404);
           $app->response->body(json_encode(array('error' => 'Resource not found')));

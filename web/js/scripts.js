@@ -1,4 +1,4 @@
-var app = angular.module('app', ['chieffancypants.loadingBar', 'restangular', 'ngRoute', 'chart.js', 'rt.encodeuri']);
+var app = angular.module('app', ['chieffancypants.loadingBar', 'restangular', 'ngRoute', 'chart.js']);
 
 app.config(function(cfpLoadingBarProvider) {
   cfpLoadingBarProvider.includeSpinner = true;
@@ -37,9 +37,10 @@ app.controller("MainCtrl", function(Restangular, $scope, $routeParams) {
     $scope.teams = teams;
   });
 
-  resource = Restangular.all("clasification?season=" + season);
-  resource.getList().then(function(clasification) {
-    $scope.clasification = clasification;
+  var clasification = Restangular.one("clasification?season=" + season);
+  clasification.get().then(function(clasification_info) {
+    $scope.number_teams = clasification_info.number;
+    $scope.clasification = clasification_info.clasification;
   });
 
   var competitivityGraph = Restangular.one("competitivity?season=" + season);
@@ -82,7 +83,7 @@ app.controller("MainCtrl", function(Restangular, $scope, $routeParams) {
       var d = [];
       var headers = ["#", "Equipo", "PG", "PE", "PP", "GF", "GC", "Puntos"];
       d.push(headers);
-      for (var i = 0; i < 20; i++) {
+      for (var i = 0; i < $scope.number_teams; i++) {
         c = [];
         c.push(clasif[i].posicion);
         c.push(clasif[i].equipo);
