@@ -12,6 +12,7 @@ body {
 .nav-stacked {
   position: fixed;
   margin-top: -10px;
+  margin-left: -90px;
   background-color: #313131;
   height: 100%;
   overflow: scroll;

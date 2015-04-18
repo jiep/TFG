@@ -45,7 +45,7 @@
 </nav>
 
 <div class="row">
-  <div class="col-md-3 column">
+  <div class="col-md-2 column">
     <ul class="nav nav-pills nav-stacked">
       <li class="active">
         <a href="#temporadas">
@@ -68,9 +68,7 @@
           <span class="glyphicon glyphicon-cloud"></span> Estadísticas</a>
       </li>
       <ul>
-        <li><a>Estadística 1</a></li>
-        <li><a>Estadística 2</a></li>
-        <li><a>Estadística 3</a></li>
+        <li>Estadística</li>
       </ul>
       <li>
         <a href="#">
@@ -81,11 +79,7 @@
 
   <!----------------------------------------- -->
 
-  <div class="col-md-9 column">
-
-    <div class="panel panel-default pull-right">
-      <button class="btn btn-default" ng-click="downloadPDF()">Descargar como PDF</button>
-    </div>
+  <div class="col-md-10 column">
 
     <div class="panel panel-default" id="clasificacion">
       <div class="panel-heading">
@@ -164,4 +158,8 @@
 
   </div>
 
-  </div
+  <div class="panel panel-default">
+    <button class="btn btn-default pull-right" ng-click="downloadPDF()">Descargar como PDF</button>
+  </div>
+
+</div>
