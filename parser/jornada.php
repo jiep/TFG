@@ -1,8 +1,8 @@
 <?php
 
-require("simple_html_dom.php");
-require_once("connection.inc.php");
-require_once("Connection.php");
+require 'simple_html_dom.php';
+require_once 'connection.inc.php';
+require_once 'Connection.php';
 
 $connection = new Connection(DB_HOST, DB_PORT, DB_USERNAME, DB_PASSWORD, DB_NAME);
 print_r($connection);
@@ -10,38 +10,123 @@ $connection->connect();
 $connection->selectDatabase();
 
 $N_JORNADA = $argv[1];
-$TEMPORADA = "2014/2015";
+$TEMPORADA = '2014/2015';
 
-$ch = curl_init("http://www.lfp.es/includes/ajax.php?action=cambiar_jornada_widget_liga");
+for ($jornada = 1; $jornada <= $N_JORNADA; $jornada++) {
+    $ch = curl_init('http://www.lfp.es/includes/ajax.php?action=cambiar_jornada_widget_liga');
+    curl_setopt($ch, CURLOPT_POSTFIELDS, 'num_jornada='.$jornada.'&competicion=1&temporada=2');
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
+    $respuesta = curl_exec($ch);
 
-curl_setopt($ch, CURLOPT_POSTFIELDS, 'num_jornada=' . $N_JORNADA . '&competicion=1&temporada=2');
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    $datos = new simple_html_dom($respuesta);
 
-$respuesta = curl_exec($ch);
+    $locales = $datos->find('div[id=div_jornada_'.$jornada.'_1_2] * a span[class=equipo left local] span[class=team]');
+    $visitantes = $datos->find('div[id=div_jornada_'.$jornada.'_1_2] * a span[class=equipo left visitante] span[class=team]');
+    $resultados = $datos->find('div[id=div_jornada_'.$jornada.'_1_2] * a span[class=hora_resultado left] span[class=horario_partido]');
 
-$datos = new simple_html_dom($respuesta);
+    $clas = array();
 
-$locales = $datos->find("div[id=div_jornada_" . $N_JORNADA . "_1_2] * a span[class=equipo left local] span[class=team]");
-$visitantes = $datos->find("div[id=div_jornada_" . $N_JORNADA . "_1_2] * a span[class=equipo left visitante] span[class=team]");
-$resultados = $datos->find("div[id=div_jornada_" . $N_JORNADA . "_1_2] * a span[class=hora_resultado left] span[class=horario_partido]");
+    $k = 0;
+    for ($j = 0; $j < count($locales); $j++) {
+        $resultado = $resultados[$j]->innertext;
+        if (strpos($resultado, '-') !== false) {
+            $goles = explode('-', $resultado);
+            $equipo_local = $locales[$j]->innertext;
+            $equipo_visitante = $visitantes[$j]->innertext;
+            echo($equipo_local.' '.$goles[0].'-'.$goles[1].' '.$equipo_visitante."\n");
 
-for($j = 0; $j < count($locales); $j++){
+            $clas[$k]['equipo'] = $equipo_local;
+            $clas[$k]['goles_favor'] = $goles[0];
+            $clas[$k]['goles_contra'] = $goles[1];
+            $k++;
+            $clas[$k]['equipo'] = $equipo_visitante;
+            $clas[$k]['goles_favor'] = $goles[1];
+            $clas[$k]['goles_contra'] = $goles[0];
+            $k++;
+            //$db_query = sprintf("INSERT INTO partidos(temporada, jornada, equipo_local, equipo_visitante, goles_local, goles_visitante) VALUES ('%s', '%u','%s','%s','%u','%u')", $TEMPORADA, $jornada, $equipo_local, $equipo_visitante, $goles[0], $goles[1]);
+            //$resultado = $connection->query($db_query);
+        }
+    }
+    curl_close($ch);
 
-	$resultado = $resultados[$j]->innertext;
-	if(strpos($resultado,'-') !== false){
-		$goles = explode("-", $resultado);
-		$equipo_local = $locales[$j]->innertext;
-		$equipo_visitante = $visitantes[$j]->innertext;
-		echo($equipo_local . " " . $goles[0] . "-" . $goles[1] . " " . $equipo_visitante . "\n");
+    $clasificacion = array();
+    if ($jornada == 1) {
+        for ($i = 0; $i < count($clas); $i++) {
+            $clasificacion[$i]['equipo'] = $clas[$i]['equipo'];
+            $clasificacion[$i]['goles_favor'] = $clas[$i]['goles_favor'];
+            $clasificacion[$i]['goles_contra'] = $clas[$i]['goles_contra'];
+            if ($clas[$i]['goles_favor'] > $clas[$i]['goles_contra']) {
+                $clasificacion[$i]['partidos_ganados'] = 1;
+                $clasificacion[$i]['partidos_empatados'] = 0;
+                $clasificacion[$i]['partidos_perdidos'] = 0;
+                $clasificacion[$i]['puntos'] = 3;
+            } elseif ($clas[$i]['goles_favor'] < $clas[$i]['goles_contra']) {
+                $clasificacion[$i]['partidos_perdidos'] = 1;
+                $clasificacion[$i]['partidos_empatados'] = 0;
+                $clasificacion[$i]['partidos_ganados'] = 0;
+                $clasificacion[$i]['puntos'] = 0;
+            } elseif ($clas[$i]['goles_favor'] == $clas[$i]['goles_contra']) {
+                $clasificacion[$i]['partidos_empatados'] = 1;
+                $clasificacion[$i]['partidos_ganados'] = 0;
+                $clasificacion[$i]['partidos_perdidos'] = 0;
+                $clasificacion[$i]['puntos'] = 1;
+            }
+            $clasificacion[$i]['diferencia_goles'] = $clas[$i]['goles_favor'] - $clas[$i]['goles_contra'];
+        }
+    } else {
+        $jornada_anterior = $jornada - 1;
 
-		$db_query = sprintf("INSERT INTO partidos(temporada, jornada, equipo_local, equipo_visitante, goles_local, goles_visitante) VALUES ('%s', '%u','%s','%s','%u','%u')", $TEMPORADA, $N_JORNADA, $equipo_local, $equipo_visitante, $goles[0], $goles[1]);
-		$resultado = $connection->query($db_query);
-	}
+        for ($i = 0; $i < count($clas); $i++) {
+            $clasificacion[$i]['equipo'] = $clas[$i]['equipo'];
+            $equipo = $clasificacion[$i]['equipo'];
+            $db_query = sprintf("SELECT puntos, partidos_ganados, partidos_perdidos, partidos_empatados, goles_favor, goles_contra, diferencia_goles from rankings where temporada = \"$TEMPORADA\" and jornada = \"$jornada_anterior\" and equipo=\"$equipo\"");
+            $resultado = $connection->query($db_query);
+            $clasificacion[$i]['goles_favor'] = $clas[$i]['goles_favor'] + $resultado[9]['goles_favor'];
+            $clasificacion[$i]['goles_contra'] = $clas[$i]['goles_contra'] + $resultado[11]['goles_contra'];
+            if ($clas[$i]['goles_favor'] > $clas[$i]['goles_contra']) {
+                $clasificacion[$i]['partidos_ganados'] = $resultado[3]['partidos_ganados'] + 1;
+                $clasificacion[$i]['partidos_empatados'] = $resultado[7]['partidos_empatados'];
+                $clasificacion[$i]['partidos_perdidos'] = $resultado[5]['partidos_perdidos'];
+                $clasificacion[$i]['puntos'] = $resultado[1]['puntos'] + 3;
+            } elseif ($clas[$i]['goles_favor'] < $clas[$i]['goles_contra']) {
+                $clasificacion[$i]['partidos_perdidos'] = $resultado[5]['partidos_perdidos'] + 1;
+                $clasificacion[$i]['partidos_empatados'] = $resultado[7]['partidos_empatados'];
+                $clasificacion[$i]['partidos_ganados'] = $resultado[3]['partidos_ganados'];
+                $clasificacion[$i]['puntos'] = $resultado[1]['puntos'];
+            } elseif ($clas[$i]['goles_favor'] == $clas[$i]['goles_contra']) {
+                $clasificacion[$i]['partidos_empatados'] =  $resultado[7]['partidos_empatados'] + 1;
+                $clasificacion[$i]['partidos_ganados'] = $resultado[3]['partidos_ganados'];
+                $clasificacion[$i]['partidos_perdidos'] = $resultado[5]['partidos_perdidos'];
+                $clasificacion[$i]['puntos'] = $resultado[1]['puntos'] + 1;
+            }
+            $clasificacion[$i]['diferencia_goles'] = $resultado[13]['diferencia_goles'] + $clas[$i]['goles_favor'] - $clas[$i]['goles_contra'];
+        }
+    }
 
+    foreach ($clasificacion as $clave => $fila) {
+        $puntos[$clave] = $fila['puntos'];
+        $goles[$clave] = $fila['goles_favor'];
+        $dif[$clave] = $fila['diferencia_goles'];
+    }
+    array_multisort($puntos, SORT_DESC, $goles, SORT_DESC, $dif, SORT_DESC, $clasificacion);
+
+    for ($i = 0; $i < count($clasificacion); $i++) {
+        $db_query = sprintf("INSERT INTO rankings(equipo, posicion, puntos, partidos_ganados, partidos_empatados, partidos_perdidos, goles_favor, goles_contra, diferencia_goles, jornada, temporada) VALUES ('%s', %u, %u, %u, %u, %u, %u, %u, %d, %u, '%s')",
+        $clasificacion[$i]['equipo'],
+      $i+1,
+      intval($clasificacion[$i]['puntos']),
+      intval($clasificacion[$i]['partidos_ganados']),
+      intval($clasificacion[$i]['partidos_empatados']),
+      intval($clasificacion[$i]['partidos_perdidos']),
+      intval($clasificacion[$i]['goles_favor']),
+      intval($clasificacion[$i]['goles_contra']),
+      intval($clasificacion[$i]['diferencia_goles']),
+      intval($jornada),
+      $TEMPORADA);
+        $resultado = $connection->query($db_query);
+    }
+    print_r($clasificacion);
 }
 
-curl_close($ch);
-
-$connection->close();
-?>
+    $connection->close();

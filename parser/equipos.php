@@ -1,14 +1,14 @@
 <?php
 
-require("simple_html_dom.php");
-require_once("connection.inc.php");
-require_once("Connection.php");
+require 'simple_html_dom.php';
+require_once 'connection.inc.php';
+require_once 'Connection.php';
 
 $connection = new Connection(DB_HOST, DB_PORT, DB_USERNAME, DB_PASSWORD, DB_NAME);
 $connection->connect();
 $connection->selectDatabase();
 
-$ch = curl_init("http://www.lfp.es/includes/ajax.php?action=estadisticas_historicas");
+/*$ch = curl_init("http://www.lfp.es/includes/ajax.php?action=estadisticas_historicas");
 
 curl_setopt($ch, CURLOPT_POSTFIELDS, 'tipo=clasificacion_historica');
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -25,9 +25,18 @@ foreach($equipos as $equipo){
   $resultado = $connection->query($db_query);
 }
 
+curl_close($ch);*/
 
+$db_query = sprintf('SELECT DISTINCT equipo from rankings order by equipo');
+$resultados = $connection->query($db_query);
 
-curl_close($ch);
+$equipos = array();
+
+foreach ($resultados as $resultado) {
+    if (array_key_exists('equipo', $resultado)) {
+        $db_query = sprintf("INSERT INTO equipos(nombre) VALUES ('%s')", $resultado['equipo']);
+        $resultado = $connection->query($db_query);
+    }
+}
 
 $connection->close();
-?>
