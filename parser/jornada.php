@@ -36,6 +36,90 @@ for ($jornada = 1; $jornada <= $N_JORNADA; $jornada++) {
             $equipo_visitante = $visitantes[$j]->innertext;
             echo($equipo_local.' '.$goles[0].'-'.$goles[1].' '.$equipo_visitante."\n");
 
+            if ($equipo_visitante == 'Atlético') {
+                $equipo_visitante = 'Atlético Madrid';
+            } elseif ($equipo_visitante == 'Elche') {
+                $equipo_visitante = 'Elche CF';
+            } elseif ($equipo_visitante == 'Getafe') {
+                $equipo_visitante = 'Getafe CF';
+            } elseif ($equipo_visitante == 'Granada') {
+                $equipo_visitante = 'Granada CF';
+            } elseif ($equipo_visitante == 'Levante') {
+                $equipo_visitante = 'Levante UD';
+            } elseif ($equipo_visitante == 'Málaga') {
+                $equipo_visitante = 'Málaga CF';
+            } elseif ($equipo_visitante == 'R. Madrid') {
+                $equipo_visitante = 'Real Madrid CF';
+            } elseif ($equipo_visitante == 'Sevilla') {
+                $equipo_visitante = 'Sevilla FC';
+            } elseif ($equipo_visitante == 'Almería') {
+                $equipo_visitante = 'UD Almería';
+            } elseif ($equipo_visitante == 'Valencia') {
+                $equipo_visitante = 'Valencia CF';
+            } elseif ($equipo_visitante == 'Villarreal') {
+                $equipo_visitante = 'Villarreal CF';
+            } elseif ($equipo_visitante == 'FC Barcelona') {
+                $equipo_visitante = 'FC Barcelona';
+            } elseif ($equipo_visitante == 'Espanyol') {
+                $equipo_visitante = 'RCD Espanyol';
+            } elseif ($equipo_visitante == 'Athletic') {
+                $equipo_visitante = 'Athletic Club';
+            } elseif ($equipo_visitante == 'Celta') {
+                $equipo_visitante = 'RC Celta de Vigo';
+            } elseif ($equipo_visitante == 'R. Sociedad') {
+                $equipo_visitante = 'Real Sociedad';
+            } elseif ($equipo_visitante == 'Rayo') {
+                $equipo_visitante = 'Rayo Vallecano';
+            } elseif ($equipo_visitante == 'Eibar') {
+                $equipo_visitante = 'SD Eibar';
+            } elseif ($equipo_visitante == 'Deportivo') {
+                $equipo_visitante = 'R.C. Deportivo';
+            } elseif ($equipo_visitante == 'Córdoba') {
+                $equipo_visitante = 'Córdoba C.F.';
+            }
+
+            if ($equipo_local == 'Atlético') {
+                $equipo_local = 'Atlético Madrid';
+            } elseif ($equipo_local == 'Elche') {
+                $equipo_local = 'Elche CF';
+            } elseif ($equipo_local == 'Getafe') {
+                $equipo_local = 'Getafe CF';
+            } elseif ($equipo_local == 'Granada') {
+                $equipo_local = 'Granada CF';
+            } elseif ($equipo_local == 'Levante') {
+                $equipo_local = 'Levante UD';
+            } elseif ($equipo_local == 'Málaga') {
+                $equipo_local = 'Málaga CF';
+            } elseif ($equipo_local == 'R. Madrid') {
+                $equipo_local = 'Real Madrid CF';
+            } elseif ($equipo_local == 'Sevilla') {
+                $equipo_local = 'Sevilla FC';
+            } elseif ($equipo_local == 'Almería') {
+                $equipo_local = 'UD Almería';
+            } elseif ($equipo_local == 'Valencia') {
+                $equipo_local = 'Valencia CF';
+            } elseif ($equipo_local == 'Villarreal') {
+                $equipo_local = 'Villarreal CF';
+            } elseif ($equipo_local == 'FC Barcelona') {
+                $equipo_local = 'FC Barcelona';
+            } elseif ($equipo_local == 'Espanyol') {
+                $equipo_local = 'RCD Espanyol';
+            } elseif ($equipo_local == 'Athletic') {
+                $equipo_local = 'Athletic Club';
+            } elseif ($equipo_local == 'Celta') {
+                $equipo_local = 'RC Celta de Vigo';
+            } elseif ($equipo_local == 'R. Sociedad') {
+                $equipo_local = 'Real Sociedad';
+            } elseif ($equipo_local == 'Rayo') {
+                $equipo_local = 'Rayo Vallecano';
+            } elseif ($equipo_local == 'Eibar') {
+                $equipo_local = 'SD Eibar';
+            } elseif ($equipo_local == 'Deportivo') {
+                $equipo_local = 'R.C. Deportivo';
+            } elseif ($equipo_local == 'Córdoba') {
+                $equipo_local = 'Córdoba C.F.';
+            }
+
             $clas[$k]['equipo'] = $equipo_local;
             $clas[$k]['goles_favor'] = $goles[0];
             $clas[$k]['goles_contra'] = $goles[1];
@@ -44,8 +128,9 @@ for ($jornada = 1; $jornada <= $N_JORNADA; $jornada++) {
             $clas[$k]['goles_favor'] = $goles[1];
             $clas[$k]['goles_contra'] = $goles[0];
             $k++;
-            //$db_query = sprintf("INSERT INTO partidos(temporada, jornada, equipo_local, equipo_visitante, goles_local, goles_visitante) VALUES ('%s', '%u','%s','%s','%u','%u')", $TEMPORADA, $jornada, $equipo_local, $equipo_visitante, $goles[0], $goles[1]);
-            //$resultado = $connection->query($db_query);
+
+            $db_query = sprintf("INSERT INTO partidos(temporada, jornada, equipo_local, equipo_visitante, goles_local, goles_visitante) VALUES ('%s', '%u','%s','%s','%u','%u')", $TEMPORADA, $jornada, $equipo_local, $equipo_visitante, $goles[0], $goles[1]);
+            $resultado = $connection->query($db_query);
         }
     }
     curl_close($ch);
@@ -82,6 +167,7 @@ for ($jornada = 1; $jornada <= $N_JORNADA; $jornada++) {
             $equipo = $clasificacion[$i]['equipo'];
             $db_query = sprintf("SELECT puntos, partidos_ganados, partidos_perdidos, partidos_empatados, goles_favor, goles_contra, diferencia_goles from rankings where temporada = \"$TEMPORADA\" and jornada = \"$jornada_anterior\" and equipo=\"$equipo\"");
             $resultado = $connection->query($db_query);
+            print_r($resultado);
             $clasificacion[$i]['goles_favor'] = $clas[$i]['goles_favor'] + $resultado[9]['goles_favor'];
             $clasificacion[$i]['goles_contra'] = $clas[$i]['goles_contra'] + $resultado[11]['goles_contra'];
             if ($clas[$i]['goles_favor'] > $clas[$i]['goles_contra']) {
