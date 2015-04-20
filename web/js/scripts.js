@@ -142,7 +142,7 @@ app.controller('RadarCtrl', function($scope, Restangular, $routeParams) {
   if ($routeParams.season) {
     season = $routeParams.season.replace('-', '/');
   }
-  var measures = Restangular.one("measures?season" + season);
+  var measures = Restangular.one("measures?season=" + season);
   measures.get().then(function(measures) {
     $scope.measures = measures;
     $scope.labels = $scope.measures.labels;
@@ -155,7 +155,7 @@ app.controller('MeasureCtrl', function($scope, Restangular, $routeParams) {
   if ($routeParams.season) {
     season = $routeParams.season.replace('-', '/');
   }
-  var measures = Restangular.one("measures?season" + season);
+  var measures = Restangular.one("measures?season=" + season);
   measures.get().then(function(measures) {
     $scope.measuresp = measures;
     $scope.labels = $scope.measuresp.labels_array;
