@@ -81,85 +81,37 @@
 
   <div class="col-md-10 column">
 
-    <div class="panel panel-default" id="clasificacion">
+    <h1>{{team_stats.name}}</h1>
+    <div class="panel panel-default">
       <div class="panel-heading">
-        <span class="glyphicon glyphicon-th"></span> Clasificación</div>
+        <span class="glyphicon glyphicon-th"></span> Estadísticas globales</div>
       <div class="panel-body">
+        <p>Número de temporadas en primera división: {{team_stats.seasons}}</p>
+        <p>Número de goles a favor: {{team_stats.local_goals_favor + away_goals_favor}}</p>
+        <p>Número de goles en contra: {{team_stats.local_goals_contra + away_goals_contra}}</p>
+        <p>Número de victorias como local: {{team_stats.local_win}}</p>
+        <p>Número de empates como local: {{team_stats.local_draw}}</p>
+        <p>Número de derrotas como local: {{team_stats.local_defeat}}</p>
+        <p>Número de victorias como visitante: {{team_stats.away_win}}</p>
+        <p>Número de empates como visitante: {{team_stats.away_draw}}</p>
+        <p>Número de derrotas como visitante: {{team_stats.away_defeat}}</p>
+        <p>Número de partidos jugados como local: {{team_stats.local_total}}</p>
+        <p>Número de partidos jugados como visitante: {{team_stats.away_total}}</p>
+        <p>Porcentaje de victorias como local: {{team_stats.local_win/team_stats.local_total*100}}</p>
+        <p>Porcentaje de empates como local: {{team_stats.local_draw/team_stats.local_total*100}}</p>
+        <p>Porcentaje de derrotas como local: {{team_stats.local_defeat/team_stats.local_total*100}}</p>
+        <p>Porcentaje de victorias como visitante: {{team_stats.away_win/team_stats.away_total*100}}</p>
+        <p>Porcentaje de empates como visitante: {{team_stats.away_draw/team_stats.away_total*100}}</p>
+        <p>Porcentaje de derrotas como visitante: {{team_stats.away_defeat/team_stats.away_total*100}}</p>
 
-        <div class="table-responsible">
-          <table class="table">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Equipo</th>
-                <th>Partidos ganados</th>
-                <th>Partidos empatados</th>
-                <th>Partidos perdidos</th>
-                <th>Goles a favor</th>
-                <th>Goles en contra</th>
-                <th>Puntos</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr ng-repeat="row in clasification">
-                <td>{{row.posicion}}</td>
-                <td>{{row.equipo}}</td>
-                <td>{{row.partidos_ganados}}</td>
-                <td>{{row.partidos_empatados}}</td>
-                <td>{{row.partidos_perdidos}}</td>
-                <td>{{row.goles_favor}}</td>
-                <td>{{row.goles_contra}}</td>
-                <td>{{row.puntos}}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
       </div>
     </div>
-
-    <div class="panel panel-default" id="historico">
+    <div class="panel panel-default" ng-controller="TotalsCtrl" id="totals">
       <div class="panel-heading">
-        <span class="glyphicon glyphicon-th"></span> Histórico</div>
-      <div class="panel-body" id="panel-historico">
-        <canvas id="canvas2" class="chart chart-line" data="data" labels="labels" legend="true" series="series" options="options"></canvas>
-      </div>
-    </div>
-    <!--<div class="panel panel-default" id="grado">
-      <div class="panel-heading">
-        <span class="glyphicon glyphicon-th"></span> Grado medio normalizado vs distribución acumulada</div>
-      <div class="panel-body" id="panel-grado">
-        <canvas></canvas>
-      </div>
-    </div>-->
-    <div class="panel panel-default" ng-controller="RadarCtrl" id="radar">
-      <div class="panel-heading">
-        <span class="glyphicon glyphicon-th"></span> Medidas de competitividad</div>
+        <span class="glyphicon glyphicon-th"></span> Resultados como local</div>
       <div class="panel-body" id="panel-radar">
-        <canvas id="canvas3" class="chart chart-radar" data="data" labels="labels"></canvas>
+        <canvas id="canvas" class="chart chart-radar" data="data" labels="labels"></canvas>
       </div>
     </div>
-
-    <div class="panel panel-default" ng-controller="MeasureCtrl" id="measure">
-      <div class="panel-heading">
-        <span class="glyphicon glyphicon-th"></span> Medidas de competitividad 2</div>
-      <div class="panel-body" id="panel-measure">
-        <canvas id="canvas4" class="chart chart-line" data="data" options="options" labels="labels"></canvas>
-      </div>
-    </div>
-
-    <div class="panel panel-default" id="competitividad">
-      <div class="panel-heading">
-        <span class="glyphicon glyphicon-th"></span> Grafo de competitividad
-      </div>
-      <div class="panel-body">
-        <div id="cy"></div>
-      </div>
-    </div>
-
   </div>
-
-  <div class="panel panel-default">
-    <button class="btn btn-default pull-right" ng-click="downloadPDF()">Descargar como PDF</button>
-  </div>
-
 </div>

@@ -14,6 +14,10 @@ app.config(function($routeProvider, RestangularProvider, $locationProvider) {
     controller: "MainCtrl",
     templateUrl: 'templates/season.html'
   }).
+  when('/bbva/team/:team', {
+    controller: "TeamCtrl",
+    templateUrl: 'templates/team.html'
+  }).
   otherwise({
     redirectTo: '/'
   });
@@ -35,6 +39,7 @@ app.controller("MainCtrl", function(Restangular, $scope, $routeParams) {
   resource = Restangular.all("teams?season=" + season);
   resource.getList().then(function(teams) {
     $scope.teams = teams;
+    console.log($scope.teams);
   });
 
   var clasification = Restangular.one("clasification?season=" + season);
@@ -167,4 +172,30 @@ app.controller('MeasureCtrl', function($scope, Restangular, $routeParams) {
       datasetFill: false
     };
   });
+});
+
+app.controller("TeamCtrl", function(Restangular, $scope, $routeParams, $rootScope) {
+  var team;
+  if ($routeParams.team) {
+    team = $routeParams.team;
+  }
+  var resource = Restangular.all("seasons");
+  resource.getList().then(function(seasons) {
+    $scope.seasons = seasons;
+  });
+
+  resource = Restangular.all("teams");
+  resource.getList().then(function(teams) {
+    $scope.teams = teams;
+  });
+
+  var team_stats = Restangular.one("team/" + team);
+  team_stats.get().then(function(stats) {
+    $scope.team_stats = stats;
+  });
+
+});
+
+app.controller("TotalsCtrl", function($scope) {
+
 });
