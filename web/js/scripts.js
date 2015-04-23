@@ -1,5 +1,9 @@
 var app = angular.module('app', ['chieffancypants.loadingBar', 'restangular', 'ngRoute', 'chart.js']);
 
+app.run(function($rootScope) {
+  $rootScope.team_stats = [];
+});
+
 app.config(function(cfpLoadingBarProvider) {
   cfpLoadingBarProvider.includeSpinner = true;
 });
@@ -39,7 +43,6 @@ app.controller("MainCtrl", function(Restangular, $scope, $routeParams) {
   resource = Restangular.all("teams?season=" + season);
   resource.getList().then(function(teams) {
     $scope.teams = teams;
-    console.log($scope.teams);
   });
 
   var clasification = Restangular.one("clasification?season=" + season);
@@ -178,6 +181,7 @@ app.controller("TeamCtrl", function(Restangular, $scope, $routeParams, $rootScop
   var team;
   if ($routeParams.team) {
     team = $routeParams.team;
+    $scope.team_id = team;
   }
   var resource = Restangular.all("seasons");
   resource.getList().then(function(seasons) {
@@ -192,10 +196,42 @@ app.controller("TeamCtrl", function(Restangular, $scope, $routeParams, $rootScop
   var team_stats = Restangular.one("team/" + team);
   team_stats.get().then(function(stats) {
     $scope.team_stats = stats;
+    $rootScope.team_stats = stats;
   });
+});
+
+app.controller("LocalCtrl", function(Restangular, $location, $scope) {
+  var team = $location.url().split("/")[3];
+
+  var team_stats = Restangular.one("team/" + team);
+  team_stats.get().then(function(stats) {
+    $scope.team_stats = stats;
+    $scope.labels = ["Partidos ganados", "Partidos empatados", "Partidos perdidos"];
+    $scope.data = [parseFloat($scope.team_stats.local_win), parseFloat($scope.team_stats.local_draw), parseFloat($scope.team_stats.local_defeat)];
+    $scope.options = {
+      responsive: true,
+      animation: false,
+      bezierCurve: false,
+      datasetFill: false
+    };
+  });
+
 
 });
 
-app.controller("TotalsCtrl", function($scope) {
+app.controller("AwayCtrl", function(Restangular, $location, $scope) {
+  var team = $location.url().split("/")[3];
 
+  var team_stats = Restangular.one("team/" + team);
+  team_stats.get().then(function(stats) {
+    $scope.team_stats = stats;
+    $scope.labels = ["Partidos ganados", "Partidos empatados", "Partidos perdidos"];
+    $scope.data = [parseFloat($scope.team_stats.away_win), parseFloat($scope.team_stats.away_draw), parseFloat($scope.team_stats.away_defeat)];
+    $scope.options = {
+      responsive: true,
+      animation: false,
+      bezierCurve: false,
+      datasetFill: false
+    };
+  });
 });

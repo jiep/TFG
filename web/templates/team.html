@@ -82,35 +82,109 @@
   <div class="col-md-10 column">
 
     <h1>{{team_stats.name}}</h1>
+    <img src="img/escudos/{{team_id}}.png" class="img img-responsive center-block" />
     <div class="panel panel-default">
       <div class="panel-heading">
         <span class="glyphicon glyphicon-th"></span> Estadísticas globales</div>
       <div class="panel-body">
-        <p>Número de temporadas en primera división: {{team_stats.seasons}}</p>
-        <p>Número de goles a favor: {{team_stats.local_goals_favor + away_goals_favor}}</p>
-        <p>Número de goles en contra: {{team_stats.local_goals_contra + away_goals_contra}}</p>
-        <p>Número de victorias como local: {{team_stats.local_win}}</p>
-        <p>Número de empates como local: {{team_stats.local_draw}}</p>
-        <p>Número de derrotas como local: {{team_stats.local_defeat}}</p>
-        <p>Número de victorias como visitante: {{team_stats.away_win}}</p>
-        <p>Número de empates como visitante: {{team_stats.away_draw}}</p>
-        <p>Número de derrotas como visitante: {{team_stats.away_defeat}}</p>
-        <p>Número de partidos jugados como local: {{team_stats.local_total}}</p>
-        <p>Número de partidos jugados como visitante: {{team_stats.away_total}}</p>
-        <p>Porcentaje de victorias como local: {{team_stats.local_win/team_stats.local_total*100}}</p>
-        <p>Porcentaje de empates como local: {{team_stats.local_draw/team_stats.local_total*100}}</p>
-        <p>Porcentaje de derrotas como local: {{team_stats.local_defeat/team_stats.local_total*100}}</p>
-        <p>Porcentaje de victorias como visitante: {{team_stats.away_win/team_stats.away_total*100}}</p>
-        <p>Porcentaje de empates como visitante: {{team_stats.away_draw/team_stats.away_total*100}}</p>
-        <p>Porcentaje de derrotas como visitante: {{team_stats.away_defeat/team_stats.away_total*100}}</p>
+        <table class="table">
+          <thead>
+            <th>Estadística</th>
+            <th>Número</th>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Número de temporadas en primera división</td>
+              <td>{{team_stats.seasons}}</td>
+            </tr>
+            <tr>
+              <td>Número de goles a favor</td>
+              <td> {{team_stats.local_goals_favor + away_goals_favor}}</td>
+            </tr>
+            <tr>
+              <td>Número de goles en contra</td>
+              <td> {{team_stats.local_goals_contra + away_goals_contra}}</td>
+            </tr>
+            <tr>
+              <td>Número de victorias como local</td>
+              <td> {{team_stats.local_win}}</td>
+            </tr>
+            <tr>
+              <td>Número de empates como local</td>
+              <td> {{team_stats.local_draw}}</td>
+            </tr>
+            <tr>
+              <td>Número de derrotas como local</td>
+              <td> {{team_stats.local_defeat}}</td>
+            </tr>
+            <tr>
+              <td>Número de victorias como visitante</td>
+              <td> {{team_stats.away_win}}</td>
+            </tr>
+            <tr>
+              <td>Número de empates como visitante</td>
+              <td> {{team_stats.away_draw}}</td>
+            </tr>
+            </tr>
+            <td>Número de derrotas como visitante</td>
+            <td> {{team_stats.away_defeat}}</td>
+            </tr>
+            <tr>
+              <td>Número de partidos jugados como local</td>
+              <td> {{team_stats.local_total}}</td>
+            </tr>
+            <tr>
+              <td>Número de partidos jugados como visitante</td>
+              <td> {{team_stats.away_total}}</td>
+            </tr>
+            <tr>
+              <td>Porcentaje de victorias como local</td>
+              <td> {{team_stats.local_win/team_stats.local_total*100 | number:4}} %</td>
+            </tr>
+            <tr>
+              <td>Porcentaje de empates como local</td>
+              <td> {{team_stats.local_draw/team_stats.local_total*100 | number:4}} %</td>
+            </tr>
+            <tr>
+              <td>Porcentaje de derrotas como local</td>
+              <td> {{team_stats.local_defeat/team_stats.local_total*100 | number:4}} %</td>
+            </tr>
+            <tr>
+              <td>Porcentaje de victorias como visitante</td>
+              <td> {{team_stats.away_win/team_stats.away_total*100 | number:4}} %</td>
+            </tr>
+            <tr>
+              <td>Porcentaje de empates como visitante</td>
+              <td> {{team_stats.away_draw/team_stats.away_total*100 | number:4}} %</td>
+            </tr>
+            <tr>
+              <td>Porcentaje de derrotas como visitante</td>
+              <td> {{team_stats.away_defeat/team_stats.away_total*100 | number:4}} %</p>
+            </tr>
 
+          </tbody>
+
+        </table>
       </div>
     </div>
-    <div class="panel panel-default" ng-controller="TotalsCtrl" id="totals">
-      <div class="panel-heading">
-        <span class="glyphicon glyphicon-th"></span> Resultados como local</div>
-      <div class="panel-body" id="panel-radar">
-        <canvas id="canvas" class="chart chart-radar" data="data" labels="labels"></canvas>
+    <div class="row">
+      <div class="col-md-6 column">
+        <div class="panel panel-default" ng-controller="LocalCtrl" id="local">
+          <div class="panel-heading">
+            <span class="glyphicon glyphicon-th"></span> Resultados como local</div>
+          <div class="panel-body" id="panel-locales">
+            <canvas id="doughnut" class="chart chart-doughnut" data="data" labels="labels" series="series" options="options" legend="true"></canvas>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 column">
+        <div class="panel panel-default" ng-controller="AwayCtrl" id="away">
+          <div class="panel-heading">
+            <span class="glyphicon glyphicon-th"></span> Resultados como visitante</div>
+          <div class="panel-body" id="panel-visitantes">
+            <canvas id="doughnut" class="chart chart-doughnut" data="data" labels="labels" series="series" options="options" legend="true"></canvas>
+          </div>
+        </div>
       </div>
     </div>
   </div>
