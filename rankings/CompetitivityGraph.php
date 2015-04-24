@@ -64,6 +64,26 @@ class CompetitivityGraph extends Graph {
 
   }
 
+  function normalizedCumulativeDegreeDistribution($k){
+    $sum = 0;
+    $graph = $this->getAdjacencyMatrix();
+    $elements = $this->elements;
+    $n = $elements->getLength();
+    for($i = 0; $i < $n; $i++){
+      $deg = 0;
+      for($j = 0; $j < $n; $j++){
+          $deg+=$graph[$i][$j];
+      }
+
+      if ($deg>=$k){
+        $sum++;
+      }
+    }
+
+    return 2*$sum/($n*($n - 1));
+  }
+
+
   function diameter(){
     $ans = $this->floyd();
     $elements = $this->elements;

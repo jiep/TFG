@@ -77,18 +77,37 @@ function medidas_competitividad($temporada = null)
         }
     }
 
+    $w = 0;
+    for ($i = 0; $i < count($mat); $i++) {
+        $sum = 0;
+        for ($j = 0; $j < count($mat); $j++) {
+            if ($mat[$i][$j] != 0) {
+                $sum++;
+            }
+        }
+        if ($sum > $w) {
+            $w = $sum;
+        }
+    }
+
     $ndd = array();
     $ncdd = array();
     $nsd = array();
     $ncsd = array();
     $labels_array = array();
 
+    for($i=0;$i<=max($k,$w);$i++){
+        $labels_array[$i] = $i;        
+    }
+
     for ($i = 0; $i <= $k; $i++) {
-        $labels_array[$i] = $i;
         $ndd[$i] = $graph->normalizedDegreeDistribution($i);
-        $ncdd[$i] = $graph->normalizedCumulativeDegreeDistribution($i);
         $nsd[$i] = $graph->normalizedStrengthDistribution($i);
         $ncsd[$i] = $graph->normalizedCumulativeStrengthDistribution($i);
+    }
+
+    for ($i = 0; $i <= $w; $i++) {
+        $ncdd[$i] = $graph2->normalizedCumulativeDegreeDistribution($i);
     }
 
     $labels = array('Fuerza media normalizada', 'Tau de Kendall generalizada', 'Grado medio normalizado','Diámetro','Longitud del camino característico','Eficiencia');

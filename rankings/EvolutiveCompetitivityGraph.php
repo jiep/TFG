@@ -73,26 +73,6 @@ class EvolutiveCompetitivityGraph extends Graph {
     return $sum/$n;
   }
 
-  function normalizedCumulativeDegreeDistribution($k){
-    $sum = 0;
-    $graph = $this->getAdjacencyMatrix();
-    $elements = $this->elements;
-    $n = $elements->getLength();
-    for($i = 0; $i < $n; $i++){
-      $deg = 0;
-      for($j = 0; $j < $n; $j++){
-        if($graph[$i][$j] != 0){
-          $deg++;
-        }
-      }
-
-      if ($deg>=$k){
-        $sum++;
-      }
-    }
-
-    return $sum/$n;
-  }
 
   function normalizedMeanStrength(){
     $sum = 0;
@@ -136,9 +116,7 @@ class EvolutiveCompetitivityGraph extends Graph {
     for($i = 0; $i < $n; $i++){
       $str = 0;
       for($j = 0; $j < $n; $j++){
-        if($graph[$i][$j] != 0){
-          $str++;
-        }
+        $str+=$graph[$i][$j];
       }
 
       if ($str>=$k){
@@ -146,14 +124,14 @@ class EvolutiveCompetitivityGraph extends Graph {
       }
     }
 
-    return $sum/$n;
+    return 2*$sum/($n*($n - 1));
   }
 
   function generalizedKendallsTau(){
     return 1 - 2*$this->normalizedMeanStrength();
   }
 
- 
+
 }
 
 
