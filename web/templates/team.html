@@ -187,5 +187,25 @@
         </div>
       </div>
     </div>
+    <div class="row">
+      <div class="col-md-6 column">
+        <div class="panel panel-default" ng-controller="GoalsLocalCtrl" id="local">
+          <div class="panel-heading">
+            <span class="glyphicon glyphicon-th"></span> Goles a favor y en contra como local</div>
+          <div class="panel-body" id="panel-locales">
+            <canvas id="doughnut" class="chart chart-doughnut" data="data" labels="labels" series="series" options="options" legend="true"></canvas>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 column">
+        <div class="panel panel-default" ng-controller="GoalsAwayCtrl" id="away">
+          <div class="panel-heading">
+            <span class="glyphicon glyphicon-th"></span> Goles a favor y en contra como visitante</div>
+          <div class="panel-body" id="panel-visitantes">
+            <canvas id="doughnut" class="chart chart-doughnut" data="data" labels="labels" series="series" options="options" legend="true"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
