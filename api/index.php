@@ -16,6 +16,110 @@ try {
 
 $app = new \Slim\Slim();
 
+function authenticate(\Slim\Route $route)
+{
+    $hostname = 'localhost';
+    $username = 'rankings';
+    $password = '1234';
+    $headers = apache_request_headers();
+    $app = \Slim\Slim::getInstance();
+
+    $dbh = new PDO("mysql:host=$hostname;dbname=rankings;charset=utf8", $username, $password);
+    $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    if (isset($headers['Authorization'])) {
+        $api_key = $headers['Authorization'];
+
+        $id = $dbh->prepare('select id from users where apiKey = :apiKey');
+        $id->bindParam('apiKey', $api_key, PDO::PARAM_STR);
+        $result = $id->execute();
+
+        if ($id->rowCount() == 0) {
+            $app->status(401);
+            $app->contentType('application/json; charset=utf-8');
+            echo json_encode(array('error' => 'Acceso denegado. ApiKey inválida'));
+            $app->stop();
+        } else {
+            global $user_id;
+        }
+    } else {
+        $app->status(400);
+        $app->contentType('application/json; charset=utf-8');
+        echo json_encode(array('error' => 'Falta apiKey en la petición'));
+        $app->stop();
+    }
+}
+
+$app->post('/register', function () use ($app, $dbh) {
+  if ($app->request->post('username') && $app->request->post('password') && $app->request->post('email')) {
+      include '../rankings/User.php';
+
+      $username = $app->request->post('username');
+      $password = $app->request->post('password');
+      $email = $app->request->post('email');
+
+      $username_valid = $dbh->prepare('select username from users where username = :username');
+      $username_valid->bindParam('username', $username, PDO::PARAM_STR);
+      $username_valid->execute();
+
+      if ($username_valid->rowCount() == 0) {
+          $user = new User($username, $password, $email);
+
+          $sql = $dbh->prepare('INSERT INTO users (username, password, email, apiKey) VALUES (:username, :password, :email, :apikey)');
+          $sql->bindParam('username', $user->getUsername(), PDO::PARAM_STR);
+          $sql->bindParam('password', $user->getPassword(), PDO::PARAM_STR);
+          $sql->bindParam('email', $user->getEmail(), PDO::PARAM_STR);
+          $sql->bindParam('apikey', $user->getApiKey(), PDO::PARAM_STR);
+
+          $result = $sql->execute();
+
+          $app->response->status(201);
+          $app->contentType('application/json; charset=utf-8');
+          $app->response->body(json_encode(array('message' => 'Usuario creado con éxito')));
+      } else {
+          $app->response->status(200);
+          $app->contentType('application/json; charset=utf-8');
+          $app->response->body(json_encode(array('message' => 'Usuario ya existe')));
+      }
+  } else {
+      $app->response->status(200);
+      $app->contentType('application/json; charset=utf-8');
+      $app->response->body(json_encode(array('error' => 'Alguno(s) de lo(s) parámetro(s) no es válido o falta alguno de ellos')));
+  }
+});
+
+$app->post('/login', function () use ($dbh, $app) {
+  function getPasswordHash($password)
+  {
+      return crypt($password, '$2a'.substr(sha1(mt_rand()), 0, 30));
+  }
+  if ($app->request->post('username') && $app->request->post('password')) {
+      $username = $app->request->post('username');
+      $password = $app->request->post('password');
+
+      $login_valid = $dbh->prepare('select username, email, apiKey, id from users where username = :username and password = :password');
+      $login_valid->bindParam('username', $username, PDO::PARAM_STR);
+      $password_hash = getPasswordHash($password);
+      $login_valid->bindParam('password', $password_hash, PDO::PARAM_STR);
+      $login_valid->execute();
+
+      if ($login_valid->rowCount() == 0) {
+          $app->response->status(200);
+          $app->contentType('application/json; charset=utf-8');
+          $app->response->body(json_encode(array('message' => 'Nombre de usuario y/o contraseña incorrectos')));
+      } else {
+          $results = $login_valid->fetch(PDO::FETCH_ASSOC);
+          $app->response->status(200);
+          $app->contentType('application/json; charset=utf-8');
+          $app->response->body(json_encode($results));
+      }
+  } else {
+      $app->response->status(200);
+      $app->contentType('application/json; charset=utf-8');
+      $app->response->body(json_encode(array('message' => 'Alguno(s) de lo(s) parámetro(s) no es válido o falta alguno de ellos')));
+  }
+});
+
 $app->get('/sport/:sportname/:league/teams', function ($sportname, $league) use ($dbh, $app) {
   include '../parser/datos_competitividad.php';
   try {
