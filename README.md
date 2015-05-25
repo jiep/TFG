@@ -1,7 +1,6 @@
 # Rankings
-Wikiroutes: discover, share and rate routes close to you
 
-# Cómo instalar
+## Cómo instalar
 
 Para instalar, se requiere disponer de Bower. Para instalarlo, se pueden seguir los siguientes pasos:
 
