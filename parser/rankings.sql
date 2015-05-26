@@ -45,3 +45,26 @@ CREATE TABLE IF NOT EXISTS `users` (
   `apiKey` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS `competitivity_graph` (
+  `id` int(3) NOT NULL AUTO_INCREMENT,
+  `id_user` int(3) NOT NULL,
+  `nms` double NOT NULL,
+  `eficiency` double NOT NULL,
+  `cpl` double NOT NULL,
+  `diameter` double NOT NULL,
+  `nmd` double NOT NULL,
+  `kendall` double NOT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`id_user`) REFERENCES users(`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS `graph_vertex` (
+  `id` int(3) NOT NULL AUTO_INCREMENT,
+  `id_graph` int(3) NOT NULL,
+  `source` varchar(255) NOT NULL,
+  `target` varchar(255) NOT NULL,
+  `weight` int(3) NOT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`id_graph`) REFERENCES competitivity_graph(`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
