@@ -13,12 +13,12 @@
       <ul class="nav navbar-nav">
         <li>
           <a href="#">
-            <img src="http://statics.lfp.es/img/liga-bbva.png" aria-hidden="true">
+            <img src="img/liga-bbva.png" aria-hidden="true">
           </a>
         </li>
         <li>
           <a href="#">
-            <img src="http://statics.lfp.es/img/liga-adelante.png" aria-hidden="true">
+            <img src="img/liga-adelante.png" aria-hidden="true">
           </a>
         </li>
       </ul>
@@ -29,14 +29,22 @@
             <strong class="caret"></strong>
           </a>
           <ul class="dropdown-menu dropdown-menu-right">
-            <div class="input-group input-group-lg">
-              <form role="form">
-                <div class="form-group">
-                  <input type="email" class="form-control" placeholder="Usuario">
-                  <input type="password" class="form-control" placeholder="Contraseña">
+              <div class="panel panel-default">
+                <div class="panel-body">
+                  <form>
+                    <div class="form-group">
+                      <label for="username">Usuario</label>
+                      <input type="username" class="form-control" placeholder="Usuario" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="password">Contraseña</label>
+                      <input type="password" class="form-control" placeholder="Contraseña" required>
+                    </div>
+                    <button type="submit" class="btn btn-default pull-right">Iniciar sesión</button>
+                  </form>
                 </div>
-              </form>
-            </div>
+                <a href="register">Registrarse</a>
+              </div>
           </ul>
         </li>
       </ul>
