@@ -349,12 +349,69 @@ $app->get('/sport/:sportname/:league/team/:team', function ($sportname, $league,
               $sql_num_partidos_visitante->bindParam('name', $name, PDO::PARAM_STR);
               $sql_num_partidos_visitante->execute();
               $result_num_partidos_visitante = $sql_num_partidos_visitante->fetchAll(PDO::FETCH_ASSOC);
+
+              // Número de partidos por resultado como local
+              $sql_max_local = $dbh->prepare('select max(goles_local) as local, max(goles_visitante) as visitante from partidos where equipo_local = :name');
+              $sql_max_local->bindParam('name', $name, PDO::PARAM_STR);
+              $sql_max_local->execute();
+              $result_max_local = $sql_max_local->fetch(PDO::FETCH_ASSOC);
+              $goles_max_favor = $result_max_local['local'];
+              $goles_max_contra = $result_max_local['visitante'];
+
+              $results = array();
+              $local_results = array();
+              for($i = 0; $i <= $goles_max_favor; $i++){
+                for($j = 0; $j <= $goles_max_contra; $j++){
+                  // Cuenta el número de partidos con cada resultado
+                  $sql_cuenta_local = $dbh->prepare('select count(*) as total from partidos where equipo_local = :name and goles_local = :goles_local and goles_visitante = :goles_visitante');
+                  $sql_cuenta_local->bindParam('name', $name, PDO::PARAM_STR);
+                  $sql_cuenta_local->bindParam('goles_local', $i, PDO::PARAM_STR);
+                  $sql_cuenta_local->bindParam('goles_visitante', $j, PDO::PARAM_STR);
+                  $sql_cuenta_local->execute();
+                  $result_cuenta_local = $sql_cuenta_local->fetch(PDO::FETCH_ASSOC);
+                  if($result_cuenta_local['total'] != 0){
+                    $local_results[] = array("$i-$j" => $result_cuenta_local['total']);
+                  }
+                }
+              }
+
+              $results['local'] = $local_results;
+
+              // Número de partidos por resultado como visitante
+              $sql_max_visitante = $dbh->prepare('select max(goles_local) as local, max(goles_visitante) as visitante from partidos where equipo_visitante = :name');
+              $sql_max_visitante->bindParam('name', $name, PDO::PARAM_STR);
+              $sql_max_visitante->execute();
+              $result_max_visitante = $sql_max_visitante->fetch(PDO::FETCH_ASSOC);
+              $goles_max_favor = $result_max_local['visitante'];
+              $goles_max_contra = $result_max_local['local'];
+
+              $results = array();
+              $away_results = array();
+              for($i = 0; $i <= $goles_max_favor; $i++){
+                for($j = 0; $j <= $goles_max_contra; $j++){
+                  // Cuenta el número de partidos con cada resultado
+                  $sql_cuenta_visitante = $dbh->prepare('select count(*) as total from partidos where equipo_visitante = :name and goles_local = :goles_local and goles_visitante = :goles_visitante');
+                  $sql_cuenta_visitante->bindParam('name', $name, PDO::PARAM_STR);
+                  $sql_cuenta_visitante->bindParam('goles_local', $i, PDO::PARAM_STR);
+                  $sql_cuenta_visitante->bindParam('goles_visitante', $j, PDO::PARAM_STR);
+                  $sql_cuenta_visitante->execute();
+                  $result_cuenta_visitante = $sql_cuenta_visitante->fetch(PDO::FETCH_ASSOC);
+                  if($result_cuenta_visitante['total'] != 0){
+                    $local_results[] = array("$i-$j" => $result_cuenta_visitante['total']);
+                  }
+                }
+              }
+
+              $results['local'] = $local_results;
+              $results['away'] = $local_results;
+
+
           } catch (PDOException $e) {
               echo 'Error: ' + $e->getMessage();
           }
           $app->response->status(200);
           $app->contentType('application/json; charset=utf-8');
-          $app->response->body(json_encode(array('name' => $name, 'seasons' => $result_numero_temporadas[0]['temporadas'], 'local_goals_favor' => $result_goles_locales_favor[0]['goles_local_favor'], 'away_goals_favor' => $result_goles_visitantes_favor[0]['goles_visitante_favor'], 'local_goals_contra' => $result_goles_locales_contra[0]['goles_local_contra'], 'away_goals_contra' => $result_goles_visitantes_contra[0]['goles_visitante_contra'], 'local_win' => $result_num_victorias_local[0]['victorias_local'], 'away_win' => $result_num_victorias_visitante[0]['victorias_visitante'], 'local_draw' => $result_num_empates_local[0]['empates_local'], 'away_draw' => $result_num_empates_visitante[0]['empates_visitante'], 'local_defeat' => $result_num_derrotas_local[0]['derrotas_local'], 'away_defeat' => $result_num_derrotas_visitante[0]['derrotas_visitante'], 'local_total' => $result_num_partidos_local[0]['jugados_local'], 'away_total' => $result_num_partidos_visitante[0]['jugados_visitante'])));
+          $app->response->body(json_encode(array('name' => $name, 'seasons' => $result_numero_temporadas[0]['temporadas'], 'local_goals_favor' => $result_goles_locales_favor[0]['goles_local_favor'], 'away_goals_favor' => $result_goles_visitantes_favor[0]['goles_visitante_favor'], 'local_goals_contra' => $result_goles_locales_contra[0]['goles_local_contra'], 'away_goals_contra' => $result_goles_visitantes_contra[0]['goles_visitante_contra'], 'local_win' => $result_num_victorias_local[0]['victorias_local'], 'away_win' => $result_num_victorias_visitante[0]['victorias_visitante'], 'local_draw' => $result_num_empates_local[0]['empates_local'], 'away_draw' => $result_num_empates_visitante[0]['empates_visitante'], 'local_defeat' => $result_num_derrotas_local[0]['derrotas_local'], 'away_defeat' => $result_num_derrotas_visitante[0]['derrotas_visitante'], 'local_total' => $result_num_partidos_local[0]['jugados_local'], 'away_total' => $result_num_partidos_visitante[0]['jugados_visitante'], "results" => $results)));
       } else {
           $app->response->status(404);
           $app->response->body(json_encode(array('error' => 'Resource not found')));
