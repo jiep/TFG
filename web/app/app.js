@@ -22,6 +22,10 @@ app.config(function($routeProvider, RestangularProvider, $locationProvider) {
     controller: "TeamCtrl",
     templateUrl: 'templates/team.html'
   }).
+  when('/register', {
+    controller: "RegisterCtrl",
+    templateUrl: 'templates/register.html'
+  }).
   otherwise({
     redirectTo: '/'
   });
@@ -288,4 +292,8 @@ app.controller("GoalsAwayCtrl", function(Restangular, $location, $scope) {
       datasetFill: false
     };
   });
+});
+
+app.controller("RegisterCtrl", function($scope){
+  
 });
