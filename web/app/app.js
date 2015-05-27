@@ -34,6 +34,10 @@ app.config(function($routeProvider, RestangularProvider, $locationProvider) {
     controller: "NewCtrl",
     templateUrl: 'templates/new.html'
   }).
+  when('/view', {
+    controller: "ViewCtrl",
+    templateUrl: 'templates/view.html'
+  }).
   otherwise({
     redirectTo: '/'
   });
@@ -311,5 +315,9 @@ app.controller("RegisterCtrl", function($scope){
 });
 
 app.controller("NewCtrl", function($scope){
+
+});
+
+app.controller("ViewCtrl", function($scope){
 
 });
