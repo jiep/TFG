@@ -30,6 +30,10 @@ app.config(function($routeProvider, RestangularProvider, $locationProvider) {
     controller: "ProfileCtrl",
     templateUrl: 'templates/profile.html'
   }).
+  when('/new', {
+    controller: "NewCtrl",
+    templateUrl: 'templates/new.html'
+  }).
   otherwise({
     redirectTo: '/'
   });
@@ -303,5 +307,9 @@ app.controller("ProfileCtrl", function($scope){
 });
 
 app.controller("RegisterCtrl", function($scope){
+
+});
+
+app.controller("NewCtrl", function($scope){
 
 });
