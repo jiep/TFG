@@ -13,12 +13,12 @@
       <ul class="nav navbar-nav">
         <li>
           <a href="#">
-            <img src="http://statics.lfp.es/img/liga-bbva.png" aria-hidden="true">
+            <img src="img/liga-bbva.png" aria-hidden="true">
           </a>
         </li>
         <li>
           <a href="#">
-            <img src="http://statics.lfp.es/img/liga-adelante.png" aria-hidden="true">
+            <img src="img/liga-adelante.png" aria-hidden="true">
           </a>
         </li>
       </ul>
@@ -32,7 +32,7 @@
             <div class="input-group input-group-lg">
               <form role="form">
                 <div class="form-group">
-                  <input type="email" class="form-control" placeholder="Usuario">
+                  <input name="name" type="email" class="form-control" placeholder="Usuario">
                   <input type="password" class="form-control" placeholder="Contraseña">
                 </div>
               </form>
@@ -52,20 +52,20 @@
     <div class="panel panel-default">
       <div class="panel-heading">Registro</div>
       <div class="panel-body">
-        <form>
+        <form ng-submit="register(newuser)">
           <div class="form-group">
             <label for="username">Nombre de usuario</label>
-            <input type="username" class="form-control" placeholder="Nombre de usuario">
+            <input name="username" ng-model="newuser.username" type="username" class="form-control" placeholder="Nombre de usuario">
           </div>
           <div class="form-group">
             <label for="email">Correo electrónico</label>
-            <input type="email" class="form-control" placeholder="Correo electrónico">
+            <input type="email" ng-model="newuser.email" class="form-control" placeholder="Correo electrónico">
           </div>
           <div class="form-group">
-            <label for="exampleInputPassword1">Contraseña</label>
-            <input type="password" class="form-control" placeholder="Contraseña">
+            <label for="password">Contraseña</label>
+            <input type="password" ng-model="newuser.password" class="form-control" placeholder="Contraseña">
           </div>
-          <button type="submit" class="btn btn-default pull-right">Registrarse</button>
+          <button class="btn btn-default pull-right">Registrarse</button>
         </form>
       </div>
     </div>

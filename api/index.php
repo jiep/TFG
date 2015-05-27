@@ -51,12 +51,13 @@ function authenticate(\Slim\Route $route)
 }
 
 $app->post('/register', function () use ($app, $dbh) {
-  if ($app->request->post('username') && $app->request->post('password') && $app->request->post('email')) {
+  $body = json_decode($app->request->getBody());
+  if ($body->username && $body->password && $body->email) {
       include '../rankings/User.php';
 
-      $username = $app->request->post('username');
-      $password = $app->request->post('password');
-      $email = $app->request->post('email');
+      $username = $body->username;
+      $password = $body->password;
+      $email = $body->email;
 
       $username_valid = $dbh->prepare('select username from users where username = :username');
       $username_valid->bindParam('username', $username, PDO::PARAM_STR);

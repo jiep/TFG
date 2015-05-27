@@ -44,7 +44,7 @@ app.config(function($routeProvider, RestangularProvider, $locationProvider) {
 
   $locationProvider.html5Mode(true);
 
-  RestangularProvider.setBaseUrl('http://localhost/TFG/api/sport/football/bbva');
+  RestangularProvider.setBaseUrl('http://localhost/TFG/api');
 });
 
 app.controller("MainCtrl", function(Restangular, $scope, $routeParams) {
@@ -52,22 +52,22 @@ app.controller("MainCtrl", function(Restangular, $scope, $routeParams) {
   if ($routeParams.season) {
     season = $routeParams.season.replace('-', '/');
   }
-  var resource = Restangular.all("seasons");
+  var resource = Restangular.all("sport/football/bbva/seasons");
   resource.getList().then(function(seasons) {
     $scope.seasons = seasons;
   });
-  resource = Restangular.all("teams?season=" + season);
+  resource = Restangular.all("sport/football/bbva/teams?season=" + season);
   resource.getList().then(function(teams) {
     $scope.teams = teams;
   });
 
-  var clasification = Restangular.one("clasification?season=" + season);
+  var clasification = Restangular.one("sport/football/bbva/clasification?season=" + season);
   clasification.get().then(function(clasification_info) {
     $scope.number_teams = clasification_info.number;
     $scope.clasification = clasification_info.clasification;
   });
 
-  var competitivityGraph = Restangular.one("competitivity?season=" + season);
+  var competitivityGraph = Restangular.one("sport/football/bbva/competitivity?season=" + season);
   competitivityGraph.get().then(function(competitivityGraph) {
     $scope.competitivityGraph = competitivityGraph.data;
     $scope.style = competitivityGraph.style;
@@ -84,7 +84,7 @@ app.controller("MainCtrl", function(Restangular, $scope, $routeParams) {
     });
   });
 
-  var chartLine = Restangular.one("chartLine?season=" + season);
+  var chartLine = Restangular.one("sport/football/bbva/chartLine?season=" + season);
   chartLine.get().then(function(chartLine) {
     $scope.chartLine = chartLine;
 
@@ -166,7 +166,7 @@ app.controller('RadarCtrl', function($scope, Restangular, $routeParams) {
   if ($routeParams.season) {
     season = $routeParams.season.replace('-', '/');
   }
-  var measures = Restangular.one("measures?season=" + season);
+  var measures = Restangular.one("sport/football/bbva/measures?season=" + season);
   measures.get().then(function(measures) {
     $scope.measures = measures;
     $scope.labels = $scope.measures.labels;
@@ -179,7 +179,7 @@ app.controller('MeasureCtrl', function($scope, Restangular, $routeParams) {
   if ($routeParams.season) {
     season = $routeParams.season.replace('-', '/');
   }
-  var measures = Restangular.one("measures?season=" + season);
+  var measures = Restangular.one("sport/football/bbva/measures?season=" + season);
   measures.get().then(function(measures) {
     $scope.measuresp = measures;
     $scope.labels = $scope.measuresp.labels_array;
@@ -199,7 +199,7 @@ app.controller('MoreMeasureCtrl', function($scope, Restangular, $routeParams) {
   if ($routeParams.season) {
     season = $routeParams.season.replace('-', '/');
   }
-  var measures = Restangular.one("measures?season=" + season);
+  var measures = Restangular.one("sport/football/bbva/measures?season=" + season);
   measures.get().then(function(measures) {
     $scope.measuresp = measures;
     $scope.labels = $scope.measuresp.labels_array;
@@ -220,17 +220,17 @@ app.controller("TeamCtrl", function(Restangular, $scope, $routeParams, $rootScop
     team = $routeParams.team;
     $scope.team_id = team;
   }
-  var resource = Restangular.all("seasons");
+  var resource = Restangular.all("sport/football/bbva/seasons");
   resource.getList().then(function(seasons) {
     $scope.seasons = seasons;
   });
 
-  resource = Restangular.all("teams");
+  resource = Restangular.all("sport/football/bbva/teams");
   resource.getList().then(function(teams) {
     $scope.teams = teams;
   });
 
-  var team_stats = Restangular.one("team/" + team);
+  var team_stats = Restangular.one("sport/football/bbva/team/" + team);
   team_stats.get().then(function(stats) {
     $scope.team_stats = stats;
     $rootScope.team_stats = stats;
@@ -240,7 +240,7 @@ app.controller("TeamCtrl", function(Restangular, $scope, $routeParams, $rootScop
 app.controller("LocalCtrl", function(Restangular, $location, $scope) {
   var team = $location.url().split("/")[3];
 
-  var team_stats = Restangular.one("team/" + team);
+  var team_stats = Restangular.one("sport/football/bbva/team/" + team);
   team_stats.get().then(function(stats) {
     $scope.team_stats = stats;
     $scope.labels = ["Partidos ganados", "Partidos empatados", "Partidos perdidos"];
@@ -258,7 +258,7 @@ app.controller("LocalCtrl", function(Restangular, $location, $scope) {
 app.controller("AwayCtrl", function(Restangular, $location, $scope) {
   var team = $location.url().split("/")[3];
 
-  var team_stats = Restangular.one("team/" + team);
+  var team_stats = Restangular.one("sport/football/bbva/team/" + team);
   team_stats.get().then(function(stats) {
     $scope.team_stats = stats;
     $scope.labels = ["Partidos ganados", "Partidos empatados", "Partidos perdidos"];
@@ -275,7 +275,7 @@ app.controller("AwayCtrl", function(Restangular, $location, $scope) {
 app.controller("GoalsLocalCtrl", function(Restangular, $location, $scope) {
   var team = $location.url().split("/")[3];
 
-  var team_stats = Restangular.one("team/" + team);
+  var team_stats = Restangular.one("sport/football/bbva/team/" + team);
   team_stats.get().then(function(stats) {
     $scope.team_stats = stats;
     $scope.labels = ["Goles a favor", "Goles en contra"];
@@ -293,7 +293,7 @@ app.controller("GoalsLocalCtrl", function(Restangular, $location, $scope) {
 app.controller("GoalsAwayCtrl", function(Restangular, $location, $scope) {
   var team = $location.url().split("/")[3];
 
-  var team_stats = Restangular.one("team/" + team);
+  var team_stats = Restangular.one("sport/football/bbva/team/" + team);
   team_stats.get().then(function(stats) {
     $scope.team_stats = stats;
     $scope.labels = ["Goles a favor", "Goles en contra"];
@@ -310,8 +310,15 @@ app.controller("ProfileCtrl", function($scope){
 
 });
 
-app.controller("RegisterCtrl", function($scope){
-
+app.controller("RegisterCtrl", function($scope, Restangular, $location){
+  console.log("Estoy en el controlador");
+  $scope.register = function(newuser){
+    console.log(newuser);
+    var resource = Restangular.all("register");
+    resource.post(newuser).then(function(user){
+      $location.path("login");
+    });
+  }
 });
 
 app.controller("NewCtrl", function($scope){
