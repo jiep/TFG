@@ -30,6 +30,10 @@ app.config(function($routeProvider, RestangularProvider, $locationProvider) {
     controller: "ProfileCtrl",
     templateUrl: 'templates/profile.html'
   }).
+  when('/login', {
+    controller: "LoginCtrl",
+    templateUrl: 'templates/login.html'
+  }).
   when('/new', {
     controller: "NewCtrl",
     templateUrl: 'templates/new.html'
@@ -319,6 +323,10 @@ app.controller("RegisterCtrl", function($scope, Restangular, $location){
       $location.path("login");
     });
   }
+});
+
+app.controller("LoginCtrl", function($scope, Restangular){
+
 });
 
 app.controller("NewCtrl", function($scope){
