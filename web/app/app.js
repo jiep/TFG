@@ -1,4 +1,4 @@
-var app = angular.module('app', ['chieffancypants.loadingBar', 'restangular', 'ngRoute', 'chart.js']);
+var app = angular.module('app', ['chieffancypants.loadingBar', 'restangular', 'ngRoute', 'chart.js', 'ngFileUpload']);
 
 app.run(function($rootScope) {
   $rootScope.team_stats = [];
@@ -38,7 +38,7 @@ app.config(function($routeProvider, RestangularProvider, $locationProvider) {
     controller: "NewCtrl",
     templateUrl: 'templates/new.html'
   }).
-  when('/view', {
+  when('/view/:id', {
     controller: "ViewCtrl",
     templateUrl: 'templates/view.html'
   }).
@@ -51,7 +51,7 @@ app.config(function($routeProvider, RestangularProvider, $locationProvider) {
   RestangularProvider.setBaseUrl('http://localhost/TFG/api');
 });
 
-app.controller("MainCtrl", function(Restangular, $scope, $routeParams) {
+app.controller("MainCtrl", function(Restangular, $scope, $routeParams, Login, $rootScope, $location) {
   var season = '';
   if ($routeParams.season) {
     season = $routeParams.season.replace('-', '/');
@@ -163,6 +163,16 @@ app.controller("MainCtrl", function(Restangular, $scope, $routeParams) {
 
     pdfMake.createPdf(dd).open();
   };
+
+  $scope.login = function(user){
+    Login.all('login').post(user).then(function(response) {
+      if(response.status == 200){
+        $scope.user = response.data;
+        $rootScope.user = response.data;
+        $location.path("profile");
+      }
+    });
+  }
 });
 
 app.controller('RadarCtrl', function($scope, Restangular, $routeParams) {
@@ -310,14 +320,17 @@ app.controller("GoalsAwayCtrl", function(Restangular, $location, $scope) {
   });
 });
 
-app.controller("ProfileCtrl", function($scope){
+app.controller("ProfileCtrl", function($scope, $rootScope, Restangular){
+  var user_id = $rootScope.user.id;
 
+  var resource = Restangular.all("users/" + user_id + "/graphs");
+  resource.getList().then(function(graphs){
+    $scope.graphs = graphs;
+  });
 });
 
 app.controller("RegisterCtrl", function($scope, Restangular, $location){
-  console.log("Estoy en el controlador");
   $scope.register = function(newuser){
-    console.log(newuser);
     var resource = Restangular.all("register");
     resource.post(newuser).then(function(user){
       $location.path("login");
@@ -325,14 +338,53 @@ app.controller("RegisterCtrl", function($scope, Restangular, $location){
   }
 });
 
-app.controller("LoginCtrl", function($scope, Restangular){
-
+app.controller("LoginCtrl", function($scope, Restangular, $rootScope, Login, $location){
+  $scope.login = function(user){
+    Login.all('login').post(user).then(function(response) {
+      if(response.status == 200){
+        $scope.user = response.data;
+        $rootScope.user = response.data;
+        $location.path("profile");
+      }
+    });
+  }
 });
 
-app.controller("NewCtrl", function($scope){
+app.controller("NewCtrl", function($scope, $rootScope){
 
+  var user_id = $rootScope.user.id;
+
+  $scope.uploadData = function(){
+    var inputFileImage = document.getElementById("file");
+
+    var file = inputFileImage.files[0];
+
+    var data = new FormData();
+
+    data.append('archivo',file);
+
+
+    $.ajax({
+      url:'http://localhost/TFG/api/users/' + user_id + '/graphs',
+      type:'POST',
+      contentType:false,
+      data:data,
+      processData:false,
+      cache:false,
+      success: function(response) {
+        console.log(response);
+      }
+
+    });
+  };
 });
 
 app.controller("ViewCtrl", function($scope){
 
+});
+
+app.factory('Login', function(Restangular) {
+  return Restangular.withConfig(function(RestangularConfigurer) {
+    RestangularConfigurer.setFullResponse(true);
+  });
 });

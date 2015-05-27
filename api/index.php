@@ -94,9 +94,10 @@ $app->post('/login', function () use ($dbh, $app) {
   {
       return crypt($password, '$2a'.substr(sha1(mt_rand()), 0, 30));
   }
-  if ($app->request->post('username') && $app->request->post('password')) {
-      $username = $app->request->post('username');
-      $password = $app->request->post('password');
+  $body = json_decode($app->request->getBody());
+  if ($body->username && $body->password) {
+      $username = $body->username;
+      $password = $body->password;
 
       $login_valid = $dbh->prepare('select username, email, apiKey, id from users where username = :username and password = :password');
       $login_valid->bindParam('username', $username, PDO::PARAM_STR);
@@ -421,5 +422,108 @@ $app->get('/sport/:sportname/:league/team/:team', function ($sportname, $league,
       echo 'Error: ' + $e->getMessage();
   }
 });
+
+$app->get('/users/:id/graphs', function ($id) use ($dbh, $app) {
+  include '../parser/lineas.php';
+  try {
+          try {
+              $sql_graphs = $dbh->prepare('select * from competitivity_graph where id_user = :id');
+              $sql_graphs->bindParam('id', $id, PDO::PARAM_STR);
+              $sql_graphs->execute();
+              $result_graphs = $sql_graphs->fetchAll(PDO::FETCH_ASSOC);
+
+          } catch (PDOException $e) {
+              echo 'Error: ' + $e->getMessage();
+          }
+          $app->response->status(200);
+          $app->contentType('application/json; charset=utf-8');
+          $app->response->body(json_encode($result_graphs));
+  } catch (PDOException $e) {
+      echo 'Error: ' + $e->getMessage();
+  }
+});
+
+$app->post('/users/:id/graphs', function ($id) use ($dbh, $app) {
+  include '../rankings/Ranking.php';
+  include '../rankings/RankingCollection.php';
+  include '../rankings/Graph.php';
+  include '../rankings/EvolutiveCompetitivityGraph.php';
+  include '../rankings/CompetitivityGraph.php';
+
+
+  $file = $_FILES['archivo']['tmp_name'];
+  $handle = fopen($file,"r");
+
+  $line = fgets($handle);
+
+  $data = explode(',', $line);
+  $name = $data[0];
+  $teams = $data[1];
+  $fixtures = $data[2];
+  echo $name . $teams . $fixtures ."\n";
+
+  /*$rankings = array();
+
+  $first = true;
+  foreach(file($file) as $line) {
+    if($first){
+      $first = false;
+    }else{
+      $team_name = explode(',', $line);
+      $r = new Ranking();
+      for($team = 0; $team < $teams; $team++){
+        $r->add($team_name[$team]);
+      }
+      $rankings[] = $r;
+    }
+  }
+
+  $rc = new RankingCollection($rankings);*/
+
+  /*$nms =  2; //$rc->calculateEvolutiveCompetitivityGraph()->normalizedMeanStrength();
+  $efficiency = 3; // $rc->calculateCompetitivityGraph()->efficiency();
+  $cpl = 4; // $rc->calculateCompetitivityGraph()->characteristicPathLength();
+  $diameter = 5; // $rc->calculateCompetitivityGraph()->diameter();
+  $nmd = 6; // $rc->calculateEvolutiveCompetitivityGraph()->normalizedMeanDegree();
+  $kendall = 7; // $rc->calculateEvolutiveCompetitivityGraph()->generalizedKendallsTau();
+
+  $graph = $rc->calculateEvolutiveCompetitivityGraph()->exportAsCytoscapeJSON();
+
+  //$ret = array($nms, $efficiency, $cpl, $diameter, $nmd, $kendall);*/
+
+  try {
+          try {
+              $sql_graphs = $dbh->prepare('insert into competitivity_graph (name, id_user, nms, efficiency, cpl, diameter, nmd, kendall) VALUES (:name, :id_user,:nms, :efficiency, :cpl, :diameter, :nmd, :kendall)');
+              $sql_graphs->bindParam('name', $name, PDO::PARAM_STR);
+              /*$sql_graphs->bindParam('id_user', $id);
+              $sql_graphs->bindParam('nms', $nms);
+              $sql_graphs->bindParam('efficiency', $efficiency);
+              $sql_graphs->bindParam('cpl', $cpl);
+              $sql_graphs->bindParam('diameter', $diameter);
+              $sql_graphs->bindParam('nmd', $nmd);
+              $sql_graphs->bindParam('kendall', $kendall);*/
+              $sql_graphs->bindParam('id_user', 1);
+              $sql_graphs->bindParam('nms', 2);
+              $sql_graphs->bindParam('efficiency', 3);
+              $sql_graphs->bindParam('cpl', 4);
+              $sql_graphs->bindParam('diameter', 5);
+              $sql_graphs->bindParam('nmd', 6);
+              $sql_graphs->bindParam('kendall', 7);
+              $sql_graphs->execute();
+              $result_graphs = $sql_graphs->fetch(PDO::FETCH_ASSOC);
+
+              echo "Funciona";
+
+          } catch (PDOException $e) {
+              echo 'Error: ' + $e->getMessage();
+          }
+          $app->response->status(200);
+          $app->contentType('application/json; charset=utf-8');
+          $app->response->body(json_encode($result_graphs));
+  } catch (PDOException $e) {
+      echo 'Error: ' + $e->getMessage();
+  }
+});
+
 
 $app->run();

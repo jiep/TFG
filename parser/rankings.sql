@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `competitivity_graph` (
   `nmd` double NOT NULL,
   `kendall` double NOT NULL,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`id_user`) REFERENCES users(`id`)
+  FOREIGN KEY (`id_user`) REFERENCES users(`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `graph_vertex` (
@@ -67,5 +67,5 @@ CREATE TABLE IF NOT EXISTS `graph_vertex` (
   `target` varchar(255) NOT NULL,
   `weight` int(3) NOT NULL,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`id_graph`) REFERENCES competitivity_graph(`id`)
+  FOREIGN KEY (`id_graph`) REFERENCES competitivity_graph(`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

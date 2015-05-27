@@ -58,7 +58,7 @@
 
 <div class="row">
   <div class="col-md-12 column">
-      <button class="btn btn-default pull-right"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+      <a href="new"><button class="btn btn-default pull-right"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button></a>
   </div>
 </div>
 
@@ -70,10 +70,12 @@
       <div class="panel-heading">Mis rankings</div>
       <div class="panel-body">
         <ul class="list-group">
-          <li class="list-group-item">Nombre
+
+          <li class="list-group-item" ng-repeat="graph in graphs">
+            {{graph.name}}
             <div class="btn-group pull-right" role="group">
-              <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-              <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+              <a href="view/{{graph.id}}"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
+              <a href="delete({{graph.id}})"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
             </div>
           </li>
         </ul>

@@ -62,24 +62,12 @@
     <div class="panel panel-default">
       <div class="panel-heading">Nuevo ranking</div>
       <div class="panel-body">
-        <form>
-          <div class="form-group">
-            <label for="name">Nombre</label>
-            <input type="text" class="form-control" placeholder="Nombre" required>
-          </div>
-          <div class="form-group">
-            <label for="teams">Número de equipos</label>
-            <input type="number" min="2" class="form-control" placeholder="Número de equipos" required>
-          </div>
-          <div class="form-group">
-            <label for="fixtures">Número de jornadas</label>
-            <input type="number" min="2" class="form-control" placeholder="Número de jornadas" required>
-          </div>
+        <form ng-submit="uploadData()">
           <div class="form-group">
             <label for="exampleInputFile">Fichero de entrada CSV</label>
-            <input type="file">
+            <input id="file" ng-file-select="uploadData($files)" type="file" requierd>
           </div>
-          <button type="submit" class="btn btn-default pull-right"><span class="glyphicon glyphicon-file" aria-hidden="true"></span> Guardar</button>
+          <button class="btn btn-default pull-right"><span class="glyphicon glyphicon-file" aria-hidden="true"></span> Guardar</button>
         </form>
       </div>
     </div>
