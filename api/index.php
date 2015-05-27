@@ -370,7 +370,7 @@ $app->get('/sport/:sportname/:league/team/:team', function ($sportname, $league,
                   $sql_cuenta_local->execute();
                   $result_cuenta_local = $sql_cuenta_local->fetch(PDO::FETCH_ASSOC);
                   if($result_cuenta_local['total'] != 0){
-                    $local_results[] = array("$i-$j" => $result_cuenta_local['total']);
+                    $local_results["$i-$j"] = $result_cuenta_local['total'];
                   }
                 }
               }
@@ -397,7 +397,7 @@ $app->get('/sport/:sportname/:league/team/:team', function ($sportname, $league,
                   $sql_cuenta_visitante->execute();
                   $result_cuenta_visitante = $sql_cuenta_visitante->fetch(PDO::FETCH_ASSOC);
                   if($result_cuenta_visitante['total'] != 0){
-                    $local_results[] = array("$i-$j" => $result_cuenta_visitante['total']);
+                    $local_results["$i-$j"] = $result_cuenta_visitante['total'];
                   }
                 }
               }
