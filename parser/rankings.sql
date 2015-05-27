@@ -48,6 +48,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 CREATE TABLE IF NOT EXISTS `competitivity_graph` (
   `id` int(3) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
   `id_user` int(3) NOT NULL,
   `nms` double NOT NULL,
   `eficiency` double NOT NULL,
