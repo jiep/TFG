@@ -75,7 +75,7 @@
             {{graph.name}}
             <div class="btn-group pull-right" role="group">
               <a href="view/{{graph.id}}"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
-              <a href="delete({{graph.id}})"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+              <a ng-click="deleteGraph(graph.id)"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
             </div>
           </li>
         </ul>

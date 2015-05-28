@@ -2,6 +2,7 @@ var app = angular.module('app', ['chieffancypants.loadingBar', 'restangular', 'n
 
 app.run(function($rootScope) {
   $rootScope.team_stats = [];
+  $rootScope.graphs = [];
 });
 
 app.config(function(cfpLoadingBarProvider) {
@@ -320,13 +321,24 @@ app.controller("GoalsAwayCtrl", function(Restangular, $location, $scope) {
   });
 });
 
-app.controller("ProfileCtrl", function($scope, $rootScope, Restangular){
+app.controller("ProfileCtrl", function($scope, $rootScope, Restangular, $location){
   var user_id = $rootScope.user.id;
 
   var resource = Restangular.all("users/" + user_id + "/graphs");
   resource.getList().then(function(graphs){
     $scope.graphs = graphs;
   });
+
+  $scope.deleteGraph = function(id){
+    var resource = Restangular.all("users/" + user_id + "/graphs/" + id);
+    resource.remove().then(function(graphs){
+      for(var i = 0; i < $scope.graphs.length; i++){
+        if($scope.graphs[i].id == id){
+          $scope.graphs.splice(i, 0);
+        }
+      }
+    });
+  }
 });
 
 app.controller("RegisterCtrl", function($scope, Restangular, $location){
@@ -350,7 +362,7 @@ app.controller("LoginCtrl", function($scope, Restangular, $rootScope, Login, $lo
   }
 });
 
-app.controller("NewCtrl", function($scope, $rootScope){
+app.controller("NewCtrl", function($scope, $rootScope, $location){
 
   var user_id = $rootScope.user.id;
 
@@ -363,7 +375,6 @@ app.controller("NewCtrl", function($scope, $rootScope){
 
     data.append('archivo',file);
 
-
     $.ajax({
       url:'http://localhost/TFG/api/users/' + user_id + '/graphs',
       type:'POST',
@@ -372,15 +383,46 @@ app.controller("NewCtrl", function($scope, $rootScope){
       processData:false,
       cache:false,
       success: function(response) {
-        console.log(response);
+        $location.path("profile");
       }
 
     });
   };
 });
 
-app.controller("ViewCtrl", function($scope){
+app.controller("ViewCtrl", function($scope, $routeParams, $location, $rootScope, Restangular){
+  if($routeParams.id){
 
+    var user_id = $rootScope.user.id;
+
+    var resource = Restangular.one("users/" + user_id + "/graphs/" + $routeParams.id);
+    console.log("users/" + user_id + "/graphs/" + $routeParams.id);
+    resource.get().then(function(response){
+      $scope.competitivityGraph = response.graph;
+      $scope.measures = response.measures;
+
+      $scope.cy = cytoscape({
+        container: $('#cy')[0],
+        elements: $scope.competitivityGraph.elements,
+        zoom: 1,
+        zoomingEnabled: false,
+        layout: {
+          name: 'circle'
+        },
+        style: [
+          {
+            selector: 'node',
+            css: {
+              'content': 'data(name)'
+            }
+          }
+        ]
+      });
+    });
+
+  }else{
+    $location.path("");
+  }
 });
 
 app.factory('Login', function(Restangular) {

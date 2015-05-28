@@ -16,6 +16,8 @@ try {
 
 $app = new \Slim\Slim();
 
+$app->config('debug', true);
+
 function authenticate(\Slim\Route $route)
 {
     $hostname = 'localhost';
@@ -443,6 +445,93 @@ $app->get('/users/:id/graphs', function ($id) use ($dbh, $app) {
   }
 });
 
+$app->get('/users/:id_user/graphs/:graph_id', function ($id_user, $graph_id) use ($dbh, $app) {
+  include '../parser/lineas.php';
+  try {
+          try {
+              $sql_graphs = $dbh->prepare('select * from competitivity_graph where id_user = :id and id = :graph_id');
+              $sql_graphs->bindParam('id', $id_user, PDO::PARAM_STR);
+              $sql_graphs->bindParam('graph_id', $graph_id, PDO::PARAM_STR);
+              $sql_graphs->execute();
+              $result_graphs = $sql_graphs->fetch(PDO::FETCH_ASSOC);
+
+              if($result_graphs){
+                $sql_matrix1 = $dbh->prepare('select * from graph_vertex where id_graph = :graph_id');
+                $sql_matrix1->bindParam('graph_id', $graph_id, PDO::PARAM_STR);
+                $sql_matrix1->execute();
+                $nodes1 = $sql_matrix1->fetchAll(PDO::FETCH_COLUMN, 2);
+
+                $sql_matrix2 = $dbh->prepare('select * from graph_vertex where id_graph = :graph_id');
+                $sql_matrix2->bindParam('graph_id', $graph_id, PDO::PARAM_STR);
+                $sql_matrix2->execute();
+                $nodes2 = $sql_matrix2->fetchAll(PDO::FETCH_COLUMN, 3);
+
+                $sql_matrix3 = $dbh->prepare('select * from graph_vertex where id_graph = :graph_id');
+                $sql_matrix3->bindParam('graph_id', $graph_id, PDO::PARAM_STR);
+                $sql_matrix3->execute();
+                $result_matrix = $sql_matrix3->fetchAll(PDO::FETCH_ASSOC);
+
+
+                $nodes = array_unique(array_merge($nodes1, $nodes2));
+                $nodes = array_values($nodes);
+
+                $nodes_json = array();
+
+                for($i = 0; $i < count($nodes); $i++){
+                  $nodes_json[$i] = array("data" => array("id" => "$i", "name"=>$nodes[$i]));
+                }
+
+                $edges = array();
+
+                $count = 0;
+                for($i = 0; $i < count($result_matrix); $i++){
+                  $edges[$count] = array("data" => array("source" => "" .array_search($result_matrix[$i]['source'], $nodes), "target" => "" .array_search($result_matrix[$i]['target'], $nodes), "weight" => $result_matrix[$i]['weight']));
+                  $count++;
+                }
+              }
+
+
+
+          } catch (PDOException $e) {
+              echo 'Error: ' + $e->getMessage();
+          }
+          $app->response->status(200);
+          $app->contentType('application/json; charset=utf-8');
+          $app->response->body(json_encode(array("measures" => $result_graphs, "graph" =>array("elements" => array("nodes" => $nodes_json, "edges" => $edges)))));
+  } catch (PDOException $e) {
+      echo 'Error: ' + $e->getMessage();
+  }
+});
+
+$app->delete('/users/:id_user/graphs/:graph_id', function ($id_user, $graph_id) use ($dbh, $app) {
+  include '../parser/lineas.php';
+  try {
+          try {
+              $sql_graphs = $dbh->prepare('select * from competitivity_graph where id_user = :id and id = :graph_id');
+              $sql_graphs->bindParam('id', $id_user, PDO::PARAM_STR);
+              $sql_graphs->bindParam('graph_id', $graph_id, PDO::PARAM_STR);
+              $sql_graphs->execute();
+              $result_graphs = $sql_graphs->fetch(PDO::FETCH_ASSOC);
+
+              if($result_graphs){
+                $sql_delete = $dbh->prepare('delete from competitivity_graph where id = :graph_id');
+                $sql_delete->bindParam('graph_id', $graph_id, PDO::PARAM_STR);
+                $sql_delete->execute();
+              }
+
+
+
+          } catch (PDOException $e) {
+              echo 'Error: ' + $e->getMessage();
+          }
+          $app->response->status(200);
+          $app->contentType('application/json; charset=utf-8');
+          $app->response->body(json_encode(array("message" => "Grafo borrado correctamente")));
+  } catch (PDOException $e) {
+      echo 'Error: ' + $e->getMessage();
+  }
+});
+
 $app->post('/users/:id/graphs', function ($id) use ($dbh, $app) {
   include '../rankings/Ranking.php';
   include '../rankings/RankingCollection.php';
@@ -460,9 +549,9 @@ $app->post('/users/:id/graphs', function ($id) use ($dbh, $app) {
   $name = $data[0];
   $teams = $data[1];
   $fixtures = $data[2];
-  echo $name . $teams . $fixtures ."\n";
+  //echo $name . $teams . $fixtures ."\n";
 
-  /*$rankings = array();
+  $rankings = array();
 
   $first = true;
   foreach(file($file) as $line) {
@@ -472,54 +561,77 @@ $app->post('/users/:id/graphs', function ($id) use ($dbh, $app) {
       $team_name = explode(',', $line);
       $r = new Ranking();
       for($team = 0; $team < $teams; $team++){
+        $team_name[$team] = str_replace("\n", "", $team_name[$team]);
         $r->add($team_name[$team]);
       }
       $rankings[] = $r;
     }
   }
 
-  $rc = new RankingCollection($rankings);*/
+  $rc = new RankingCollection($rankings);
 
-  /*$nms =  2; //$rc->calculateEvolutiveCompetitivityGraph()->normalizedMeanStrength();
-  $efficiency = 3; // $rc->calculateCompetitivityGraph()->efficiency();
-  $cpl = 4; // $rc->calculateCompetitivityGraph()->characteristicPathLength();
-  $diameter = 5; // $rc->calculateCompetitivityGraph()->diameter();
-  $nmd = 6; // $rc->calculateEvolutiveCompetitivityGraph()->normalizedMeanDegree();
-  $kendall = 7; // $rc->calculateEvolutiveCompetitivityGraph()->generalizedKendallsTau();
+  $nms =  $rc->calculateEvolutiveCompetitivityGraph()->normalizedMeanStrength();
+  $efficiency =  $rc->calculateCompetitivityGraph()->efficiency();
+  $cpl = $rc->calculateCompetitivityGraph()->characteristicPathLength();
+  $diameter = $rc->calculateCompetitivityGraph()->diameter();
+  $nmd = $rc->calculateEvolutiveCompetitivityGraph()->normalizedMeanDegree();
+  $kendall = $rc->calculateEvolutiveCompetitivityGraph()->generalizedKendallsTau();
 
   $graph = $rc->calculateEvolutiveCompetitivityGraph()->exportAsCytoscapeJSON();
 
-  //$ret = array($nms, $efficiency, $cpl, $diameter, $nmd, $kendall);*/
-
   try {
           try {
-              $sql_graphs = $dbh->prepare('insert into competitivity_graph (name, id_user, nms, efficiency, cpl, diameter, nmd, kendall) VALUES (:name, :id_user,:nms, :efficiency, :cpl, :diameter, :nmd, :kendall)');
+              $sql_graphs = $dbh->prepare('insert into competitivity_graph (name, id_user, nms, eficiency, cpl, diameter, nmd, kendall) VALUES (:name, :id_user,:nms, :efficiency, :cpl, :diameter, :nmd, :kendall)');
               $sql_graphs->bindParam('name', $name, PDO::PARAM_STR);
-              /*$sql_graphs->bindParam('id_user', $id);
+              $sql_graphs->bindParam('id_user', $id);
               $sql_graphs->bindParam('nms', $nms);
               $sql_graphs->bindParam('efficiency', $efficiency);
               $sql_graphs->bindParam('cpl', $cpl);
               $sql_graphs->bindParam('diameter', $diameter);
               $sql_graphs->bindParam('nmd', $nmd);
-              $sql_graphs->bindParam('kendall', $kendall);*/
-              $sql_graphs->bindParam('id_user', 1);
-              $sql_graphs->bindParam('nms', 2);
-              $sql_graphs->bindParam('efficiency', 3);
-              $sql_graphs->bindParam('cpl', 4);
-              $sql_graphs->bindParam('diameter', 5);
-              $sql_graphs->bindParam('nmd', 6);
-              $sql_graphs->bindParam('kendall', 7);
+              $sql_graphs->bindParam('kendall', $kendall);
               $sql_graphs->execute();
-              $result_graphs = $sql_graphs->fetch(PDO::FETCH_ASSOC);
+              $graph_id = $dbh->lastInsertId();
 
-              echo "Funciona";
+              $matrix = $rc->calculateEvolutiveCompetitivityGraph()->getAdjacencyMatrix();
+
+              $ranking = $rc->calculateEvolutiveCompetitivityGraph()->getElements()->ranking;
+
+              $n = count($rc->calculateEvolutiveCompetitivityGraph()->getElements()->ranking);
+
+              for($i = 0; $i < $n; $i++){
+                for($j = 0; $j < $i; $j++){
+                  if($matrix[$i][$j] != 0){
+                    $sql_matrix = $dbh->prepare('insert into graph_vertex (id_graph, source, target, weight) VALUES (:id_graph, :source, :target, :weight)');
+                    $sql_matrix->bindParam('id_graph', $graph_id);
+                    $sql_matrix->bindParam('source', $ranking[$i], PDO::PARAM_STR);
+                    $sql_matrix->bindParam('target', $ranking[$j], PDO::PARAM_STR);
+                    $sql_matrix->bindParam('weight', $matrix[$i][$j]);
+
+                    $sql_matrix->execute();
+                  }
+                }
+              }
+
+              //echo ("El id del grafo es: $graph_id");
 
           } catch (PDOException $e) {
               echo 'Error: ' + $e->getMessage();
           }
+
+          $ret = array(
+            "id" => $graph_id,
+            "nms" => $nms,
+            "efficiency" =>$efficiency,
+            "cpl" => $cpl,
+            "diamter" =>$diameter,
+            "nmd" =>$nmd,
+            "kendall" =>$kendall,
+            "graph" => json_decode($graph));
+
           $app->response->status(200);
           $app->contentType('application/json; charset=utf-8');
-          $app->response->body(json_encode($result_graphs));
+          $app->response->body(json_encode($ret));
   } catch (PDOException $e) {
       echo 'Error: ' + $e->getMessage();
   }
