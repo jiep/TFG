@@ -5,7 +5,6 @@ angular.module('app')
     var user_id = $rootScope.user.id;
 
     var resource = Restangular.one("users/" + user_id + "/graphs/" + $routeParams.id);
-    console.log("users/" + user_id + "/graphs/" + $routeParams.id);
     resource.get().then(function(response){
       $scope.competitivityGraph = response.graph;
       $scope.measures = response.measures;

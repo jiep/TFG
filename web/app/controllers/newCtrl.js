@@ -13,7 +13,7 @@ angular.module('app')
     data.append('archivo',file);
 
     $.ajax({
-      url:'http://localhost/TFG/api/users/' + user_id + '/graphs',
+      url:'api/users/' + user_id + '/graphs',
       type:'POST',
       contentType:false,
       data:data,

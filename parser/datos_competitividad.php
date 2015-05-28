@@ -1,10 +1,10 @@
 <?php
 
 include 'autoload.php';
-include '../rankings/Ranking.php';
-include '../rankings/RankingCollection.php';
-include '../rankings/Graph.php';
-include '../rankings/EvolutiveCompetitivityGraph.php';
+include '../../rankings/Ranking.php';
+include '../../rankings/RankingCollection.php';
+include '../../rankings/Graph.php';
+include '../../rankings/EvolutiveCompetitivityGraph.php';
 require_once 'connection.inc.php';
 
 //$temporada = $_POST["season"] ? $_POST["season"] : "2013/2014";

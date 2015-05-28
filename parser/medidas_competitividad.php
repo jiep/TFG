@@ -1,11 +1,11 @@
 <?php
 
 include 'autoload.php';
-include '../rankings/Ranking.php';
-include '../rankings/RankingCollection.php';
-include '../rankings/Graph.php';
-include '../rankings/EvolutiveCompetitivityGraph.php';
-include '../rankings/CompetitivityGraph.php';
+include '../../rankings/Ranking.php';
+include '../../rankings/RankingCollection.php';
+include '../../rankings/Graph.php';
+include '../../rankings/EvolutiveCompetitivityGraph.php';
+include '../../rankings/CompetitivityGraph.php';
 require_once 'connection.inc.php';
 
 function getLastSeason()
@@ -97,7 +97,7 @@ function medidas_competitividad($temporada = null)
     $labels_array = array();
 
     for($i=0;$i<=max($k,$w);$i++){
-        $labels_array[$i] = $i;        
+        $labels_array[$i] = $i;
     }
 
     for ($i = 0; $i <= $k; $i++) {

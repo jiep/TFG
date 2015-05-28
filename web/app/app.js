@@ -49,5 +49,5 @@ app.config(function($routeProvider, RestangularProvider, $locationProvider) {
 
   $locationProvider.html5Mode(true);
 
-  RestangularProvider.setBaseUrl('http://localhost/TFG/api');
+  RestangularProvider.setBaseUrl('api');
 });

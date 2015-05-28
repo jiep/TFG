@@ -55,7 +55,7 @@ function authenticate(\Slim\Route $route)
 $app->post('/register', function () use ($app, $dbh) {
   $body = json_decode($app->request->getBody());
   if ($body->username && $body->password && $body->email) {
-      include '../rankings/User.php';
+      include '../../rankings/User.php';
 
       $username = $body->username;
       $password = $body->password;
@@ -125,7 +125,7 @@ $app->post('/login', function () use ($dbh, $app) {
 });
 
 $app->get('/sport/:sportname/:league/teams', function ($sportname, $league) use ($dbh, $app) {
-  include '../parser/datos_competitividad.php';
+  include '../../parser/datos_competitividad.php';
   try {
       $season = $app->request()->get('season');
       if ($season) {
@@ -170,7 +170,7 @@ $app->get('/sport/:sportname/:league/seasons', function ($sportname, $league) us
 });
 
 $app->get('/sport/:sportname/:league/competitivity', function ($sportname, $league) use ($dbh, $app) {
-  include '../parser/datos_competitividad.php';
+  include '../../parser/datos_competitividad.php';
   $season = $app->request()->get('season');
   try {
       if ($season) {
@@ -186,7 +186,7 @@ $app->get('/sport/:sportname/:league/competitivity', function ($sportname, $leag
 });
 
 $app->get('/sport/:sportname/:league/measures', function ($sportname, $league) use ($dbh, $app) {
-  include '../parser/medidas_competitividad.php';
+  include '../../parser/medidas_competitividad.php';
   $season = $app->request()->get('season');
   try {
       if ($season) {
@@ -202,7 +202,7 @@ $app->get('/sport/:sportname/:league/measures', function ($sportname, $league) u
 });
 
 $app->get('/sport/:sportname/:league/clasification', function ($sportname, $league) use ($dbh, $app) {
-  include '../parser/medidas_competitividad.php';
+  include '../../parser/medidas_competitividad.php';
   try {
       $season = $app->request()->get('season');
       $fixture = $app->request()->get('fixture');
@@ -239,7 +239,7 @@ $app->get('/sport/:sportname/:league/clasification', function ($sportname, $leag
 });
 
 $app->get('/sport/:sportname/:league/chartLine', function ($sportname, $league) use ($dbh, $app) {
-  include '../parser/lineas.php';
+  include '../../parser/lineas.php';
   try {
       $season = $app->request()->get('season');
       if ($season == null) {
@@ -260,7 +260,7 @@ $app->get('/sport/:sportname/:league/chartLine', function ($sportname, $league) 
 });
 
 $app->get('/sport/:sportname/:league/team/:team', function ($sportname, $league, $team) use ($dbh, $app) {
-  include '../parser/lineas.php';
+  include '../../parser/lineas.php';
   try {
       $season = $app->request()->get('season');
 
@@ -426,7 +426,6 @@ $app->get('/sport/:sportname/:league/team/:team', function ($sportname, $league,
 });
 
 $app->get('/users/:id/graphs', function ($id) use ($dbh, $app) {
-  include '../parser/lineas.php';
   try {
           try {
               $sql_graphs = $dbh->prepare('select * from competitivity_graph where id_user = :id');
@@ -446,9 +445,8 @@ $app->get('/users/:id/graphs', function ($id) use ($dbh, $app) {
 });
 
 $app->get('/users/:id_user/graphs/:graph_id', function ($id_user, $graph_id) use ($dbh, $app) {
-  include '../parser/lineas.php';
   try {
-          try {
+
               $sql_graphs = $dbh->prepare('select * from competitivity_graph where id_user = :id and id = :graph_id');
               $sql_graphs->bindParam('id', $id_user, PDO::PARAM_STR);
               $sql_graphs->bindParam('graph_id', $graph_id, PDO::PARAM_STR);
@@ -488,23 +486,19 @@ $app->get('/users/:id_user/graphs/:graph_id', function ($id_user, $graph_id) use
                   $edges[$count] = array("data" => array("source" => "" .array_search($result_matrix[$i]['source'], $nodes), "target" => "" .array_search($result_matrix[$i]['target'], $nodes), "weight" => $result_matrix[$i]['weight']));
                   $count++;
                 }
+
+                $app->response->status(200);
+                $app->contentType('application/json; charset=utf-8');
+                $app->response->body(json_encode(array("measures" => $result_graphs, "graph" =>array("elements" => array("nodes" => $nodes_json, "edges" => $edges)))));
               }
 
-
-
-          } catch (PDOException $e) {
-              echo 'Error: ' + $e->getMessage();
-          }
-          $app->response->status(200);
-          $app->contentType('application/json; charset=utf-8');
-          $app->response->body(json_encode(array("measures" => $result_graphs, "graph" =>array("elements" => array("nodes" => $nodes_json, "edges" => $edges)))));
   } catch (PDOException $e) {
       echo 'Error: ' + $e->getMessage();
   }
 });
 
 $app->delete('/users/:id_user/graphs/:graph_id', function ($id_user, $graph_id) use ($dbh, $app) {
-  include '../parser/lineas.php';
+  include '../../parser/lineas.php';
   try {
           try {
               $sql_graphs = $dbh->prepare('select * from competitivity_graph where id_user = :id and id = :graph_id');
@@ -533,12 +527,11 @@ $app->delete('/users/:id_user/graphs/:graph_id', function ($id_user, $graph_id) 
 });
 
 $app->post('/users/:id/graphs', function ($id) use ($dbh, $app) {
-  include '../rankings/Ranking.php';
-  include '../rankings/RankingCollection.php';
-  include '../rankings/Graph.php';
-  include '../rankings/EvolutiveCompetitivityGraph.php';
-  include '../rankings/CompetitivityGraph.php';
-
+  include '../../rankings/Ranking.php';
+  include '../../rankings/RankingCollection.php';
+  include '../../rankings/Graph.php';
+  include '../../rankings/EvolutiveCompetitivityGraph.php';
+  include '../../rankings/CompetitivityGraph.php';
 
   $file = $_FILES['archivo']['tmp_name'];
   $handle = fopen($file,"r");
