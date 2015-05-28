@@ -366,7 +366,7 @@ w_i & = \dfrac{w_i - l_i}{2} + \dfrac{w_i + l_i}{2} \\
 &= \dfrac{w_i - l_i}{2} + \sum_{j=1}^{t_i} \dfrac{1}{2}
 \end{align}  
 
-donde $l_i$ son los partidos perdidos por el equipo $i$. La suma $\sum_{j=1}^{t_i} 1/2 $ es inicialmente igual a $\sum_{j \in O_i} r_j$ donde $O_i$ es el conjunto de oponentes del equipo $i$. A lo largo de la temporada el valor $\sum_{j=1}^{t_i} 1/2 $ no es igual a $\sum_{j \in O_i}$, pero puede ser aproximada por los rating acumulados de los oponentes de un equipo. Se obtiene que
+donde $l_i$ son los partidos perdidos por el equipo $i$. La suma $\sum_{j=1}^{t_i} 1/2 $ es inicialmente igual a $\sum_{j \in O_i} r_j$ donde $O_i$ es el conjunto de oponentes del equipo $i$. A lo largo de la temporada el valor $\sum_{j=1}^{t_i} 1/2 $ no es igual a $\sum_{j \in O_i} r_j$, pero puede ser aproximada por los rating acumulados de los oponentes de un equipo. Se obtiene que
 
 \begin{equation}
 w_i = \dfrac{w_i - l_i}{2} + \sum_{j \in O_i} r_j
@@ -527,21 +527,21 @@ El algoritmo para calcular este método es:
 
 \subsection{Método de Markov}
 
-El método de Markov hace uso de las cadenas de Markov, que inventó en 1906, para describir procesos estocásticos (ver Apéndice \ref{ap:markov}). Aquí las aplicaremos para crear rankings deportivos.\\
+El método de Markov hace uso de las cadenas de Markov, que éste inventó en 1906, para describir procesos estocásticos (ver Apéndice \ref{ap:markov}). Aquí las aplicaremos para crear rankings deportivos.\\
 
-Este método se basa en utilizar varios parámetros estadísticos como victorias y derrotas, diferencias de puntos entre dos equipos, etc para crear un rating. El objetivo es crear una matriz estocastica de todos los parámetros y calcular el punto fijo de la cadena de Markov, que será nuestro rating $\mathbf{r}$. Para cada uno de los parámetros, se crea una matriz $\mathbf{V}_i$. Necesitamos una matriz estocástica $\mathbf{S}_i$. Normalmente, esta matriz $\mathbf{V}_i$ no será estocástica, por lo que debemos normalizar cada fila, diviendo entre la suma de cada fila. Es posible que haciendo esto no se consiga una matriz estocástica, puesto que puede haber filas completamente llenas de ceros. Para tratar con ésto, se pueden seguir varias estrategias: una forma sencilla es sustituir la fila de ceros por una columna de unos y normalizar la fila como hemos comentado anteriormente. Esta forma resuelve el problema y crea una matriz estocástica, pero hay otras formas de resolver el problema que tienen más sentido en rankings deportivos: otra forma es sustituir el i-ésimo cero por un uno en la fila de ceros. Esto crea un nuevo problema, y es que la cadena no es necesarimente irreducible (lo que asegura la existencia y unicidad del punto fijo). Para conseguir esto creamos una matriz $\overline{\mathbf{S}}$, definida de la siguiente manera:
+Este método se basa en utilizar varios parámetros estadísticos como victorias y derrotas, diferencias de puntos entre dos equipos, etc para crear un rating. El objetivo es crear una matriz estocastica de todos los parámetros y calcular el punto fijo de la cadena de Markov, que será nuestro rating $\mathbf{r}$. Para cada uno de los parámetros, se crea una matriz $\mathbf{V}_i$. Necesitamos una matriz estocástica $\mathbf{S}_i$. Normalmente, esta matriz $\mathbf{V}_i$ no será estocástica, por lo que debemos normalizar cada fila, diviendo entre la suma de cada fila. Es posible que haciendo esto no se consiga una matriz estocástica, puesto que puede haber filas completamente llenas de ceros. Para tratar con ésto, se pueden seguir varias estrategias: una forma sencilla es sustituir la fila de ceros por una fila de unos y normalizar la fila como hemos comentado anteriormente. Esta forma resuelve el problema y crea una matriz estocástica, pero hay otras formas de resolver el problema que tienen más sentido en rankings deportivos: por ejemplo se puede sustituir el i-ésimo cero por un uno en la fila de ceros. Esto crea un nuevo problema, y es que la cadena no es necesarimente irreducible (lo que asegura la existencia y unicidad del punto fijo). Para conseguir esto creamos una matriz $\overline{\mathbf{S}}$, definida de la siguiente manera:
 
 \begin{equation}
 \overline{\mathbf{S}} = \beta \mathbf{S} + \dfrac{(1 - \beta)}{n} \mathbf{E}
 \end{equation}
 
 donde $\mathbf{E}$ es una matriz de unos, $n$ es el número de equipos y $\beta \in [0, 1]$. De esta manera $\overline{\mathbf{S}}$, el punto fijo existe y es único. El vector rating $\mathbf{r}$ depende de la elección del parámetro $\beta$. Generalmente, cuanto mayor es $\beta$, el modelo se aproxima más a los datos originales.  
-De esta forma se consigue que cada fila sea un vector de probabilidad. Para obtener la matriz estocástica que agrupe todos las estadísticas $\mathbf{S}_i$, creamos una nueva matriz estocástica $\mathbf{S}$ de la siguiente manera: 
+De esta forma se consigue que cada fila sea un vector de probabilidad. Para obtener la matriz estocástica que agrupe todas las estadísticas $\mathbf{S}_i$, creamos una nueva matriz estocástica $\mathbf{S}$ de la siguiente manera: 
 \begin{equation}
 \mathbf{S} = \sum_{i=1}^{k} \alpha_i \mathbf{S}_i
 \end{equation}
 
-donde $a_i \geq 0$ y $\sum_{i=1}^{k} \alpha_i = 1$. Esta combinación convexa de matrices estocástica es de nuevo una matriz estocástica.
+donde $a_i \geq 0$ y $\sum_{i=1}^{k} \alpha_i = 1$. Esta combinación convexa de matrices estocásticas es de nuevo una matriz estocástica.
 
 \begin{ejemplo}\label{ej:markov}
 Volvemos a considerar los datos de la Tabla \ref{tbl:massey} y \ref{tbl:colley}. Sólo consideraremos dos estadísticas: la de puntos y la de victorias.\\
@@ -677,7 +677,7 @@ donde $a_i \geq 0$ y $\sum_{i=1}^{k} \alpha_i = 1$.
 
 \subsubsection{Relación entre el método de Massey y de Colley}
 
-Estos dos métodos esán relacionados por la fórmula $\mathbf{C} = 2\mathbf{I} + \mathbf{M}$. El método de Massey $\mathbf{M r} = \mathbf{p}$ puede ser convertido puede ser Colleyzado como
+Estos dos métodos están relacionados por la fórmula $\mathbf{C} = 2\mathbf{I} + \mathbf{M}$. El método de Massey $\mathbf{M r} = \mathbf{p}$ puede ser ``Colleyzado'' como
 
 \[ (2\mathbf{I} + \mathbf{M})\mathbf{r} = \mathbf{p} \]
 
@@ -732,7 +732,7 @@ NYK &  3.4286      & 1       \\ \bottomrule
 
 
 
-De la misma forma, el método de Colley $\mathbf{C r} = \mathbf{b}$ puede ser Masseyizado con la relación anterior. De esta forma, se trata de resolver el sistema
+De la misma forma, el método de Colley $\mathbf{C r} = \mathbf{b}$ puede ser ``Masseyizado'' con la relación anterior. De esta forma, se trata de resolver el sistema
 
 \[ \mathbf{M r} = \mathbf{b} \]
 
@@ -804,7 +804,9 @@ NYK & -0.2      & 5       \\ \bottomrule
 
 \subsubsection{Relación entre el método de Markov y el de Massey}
 
-Aunque a primera vista ambos métodos parecen no tener poco o nada en común. Como apuntábamos anteriormente, el método de Markov permite tratar distintas estadísticas entre las que se encuentra la diferencia de puntos, en lo que está basado el método de Massey. Recordemos que la ecuación fundamental del método de Massey es
+Estos métodos parecen tener poco o nada en común, aunque recordemos que el método de Markov permite tratar cualquier estadística, en particular, la de diferencia de puntos, en la que está basada el método de Massey.\\
+
+Recordemos que la ecuación fundamental del método de Massey es
 
 \[ r_i - r_j = y_k \]
 

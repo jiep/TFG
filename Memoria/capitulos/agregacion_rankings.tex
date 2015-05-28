@@ -14,7 +14,7 @@ La idea de la agregación de rankings es que dados $k$ rankings obtenidos por di
 \section{Métodos de agregación de rankings}
 A continuación veremos una serie de métodos de agregación de rankings. Los métodos son el método de Borda, basado en un método de votación del siglo XVIII, el método del ranking promedio, que tiene en cuenta todas las posiciones de los rankings iniciales, el método de datos de partidos simulados que es un nuevo método propuesto en~\cite{langville2012s} que simula partidos para obtener el ranking agregado, y finalmente, el método óptimo basado en un problema de programación lineal.
 \subsection{Método de Borda}
-El método de Borda fue creado por Jean-Charles de Borda y data de 1770. Borda intentaba agregar rankings de listas de candidatos de unas elecciones políticas. Para cada lista de candidatos, cada candidato recibía una puntuación igual al número de candidatos que le superaban. La puntuación de cada lista es sumada para cada candidato para crear un solo ranking, que se llama recuento de Borda. Los candidatos son ordenados en orden descendente según este método. Este método puede manejar rankings de entrada con empates. Además, también puede producir un ranking de salida que contenga empates.  Aunque este método es muy sencillo, tiene un gran problema: que es fácil manipulable.
+El método de Borda fue creado por Jean-Charles de Borda y data de 1770. Borda intentaba agregar rankings de listas de candidatos de unas elecciones políticas. Para cada lista de candidatos, cada candidato recibía una puntuación igual al número de candidatos que le superaban. La puntuación de cada lista es sumada para cada candidato para crear un solo ranking, que se llama recuento de Borda. Los candidatos son ordenados en orden descendente según este método. Este método puede manejar rankings de entrada con empates. Además, también puede producir un ranking de salida que contenga empates.  Aunque este método es muy sencillo, tiene un gran problema: que es fácilmente manipulable.
 
 \begin{ejemplo}\label{ej:borda}
 Consideramos los rankings producidos por el método de Massey (Tabla \ref{tbl:massey_resultados}), de Colley (Tabla \ref{tbl:colley_resultados_sin_empates}) y de Markov (Tabla \ref{tbl:markov_resultados}).\\
@@ -43,7 +43,7 @@ Se producen dos empates que rompemos teniendo en cuenta su enfrentamiento direct
 
 \begin{ejemplo}[Ejemplo de manipulación que puede sufrir el método. Adaptado de \cite{burger2005heart}]\label{ej:borda_elecciones} 
 
-En un país de $76.2$ millones de habitantes, donde votan todos sus habitantes, se convocan elecciones para Presidente, Ministro y Alcalde, ordenados de mayor a menor responsabilidad. Se presentan a estos cargos tres candicatos A, B y C. Todo votante elige a cada candicato según sus preferencias, pero elegiendo a cada candidato en algún cargo. En la elecciones se aplica el método de Borda. Los resultados de las elecciones se muestran en la Tabla \ref{tbl:borda_elecciones}.\\
+En un país de $76.2$ millones de habitantes, donde votan todos sus habitantes, se convocan elecciones para Presidente, Ministro y Alcalde, ordenados de mayor a menor responsabilidad. Se presentan a estos cargos tres candicatos A, B y C. Todo votante elige a cada candicato según sus preferencias, pero eligiendo a cada candidato en algún cargo. En la elecciones se aplica el método de Borda. Los resultados de las elecciones se muestran en la Tabla \ref{tbl:borda_elecciones}.\\
  
 \begin{savenotes}
 \begin{table}[h]
@@ -90,7 +90,7 @@ NYK & $1$    & $1$    & $3$    & $1.67$           & $2$              \\ \bottomr
 
 \subsection{Método de datos de partidos simulados}
 
-El método de datos de partidos simulados\footnote{Simulated Game Data}, nace de una simple interpretación de un ranking. Si el equipo $A$ aparece por encima del equipo $B$ en un ranking, entonces en un emparejamiento directo entre estos dos equipos, $A$ debería batir al equipo $B$. Es más, si el equipo $A$ aparece en la parte de arriba del ranking y juega contra $B$, que aparece al final del ranking, esperaríamos que que $A$ gane a $B$ con un amplio margen de victoria. La idea es que un ranking da información implícita sobre los futuros resultados. Usamos rankings para generar los datos de partidos simulados, que usamos para agregar varios rankings en uno solo. Cada ranking de $n$ equipos proporciona datos para $\binom{n}{2}$ partidos simulados. Por tanto, si tenemos $k$ rankings de $n$ equipos tendremos $k \binom{n}{2}$. partidos simulados.\\
+El método de datos de partidos simulados\footnote{Simulated Game Data}, nace de una simple interpretación de un ranking. Si el equipo $A$ aparece por encima del equipo $B$ en un ranking, entonces en un emparejamiento directo entre estos dos equipos, $A$ debería batir al equipo $B$. Es más, si el equipo $A$ aparece en la parte de arriba del ranking y juega contra $B$, que aparece al final del ranking, esperaríamos que que $A$ gane a $B$ con un amplio margen de victoria. La idea es que un ranking da información implícita sobre los futuros resultados. Usamos rankings para generar los datos de partidos simulados, que usamos para agregar varios rankings en uno solo. Cada ranking de $n$ equipos proporciona datos para $\binom{n}{2}$ partidos simulados. Por tanto, si tenemos $k$ rankings de $n$ equipos tendremos $k \binom{n}{2}$ partidos simulados.\\
 
 La forma de generar los partidos simulados es, para cada ranking, asignar un punto de margen de victoria por cada posición de diferencia en el ranking. La ventaja de este método es que no es necesario tener rankings completos, es decir, que todos los rankings contengan todos los equipos. \\
 
@@ -201,7 +201,7 @@ NYK & 1.5385                                                           & 2      
 
 Hasta ahora sólo hemos visto métodos heurísticos, es decir, métodos no necesariamente óptimos. El método que veremos a continuación sí es óptimo, pero a costa de una mayor complejidad computacional y mayor tiempo de cómputo. Esta optimalidad puede ser necesaria cuando necesitamos una gran precisión al calcular un ranking agregado.\\
 
-El método fue creado por el Dr. Yoshitsugu Yamamoto, de la Universidad de Tsukuba, en Japón. Este método se basa en un programa de programación lineal que debe ser resuelto para calcular el ranking óptimo. Este método trata de medir la conformidad o el compromiso entre los rankings de entrada. Una forma de medir la conformidad definida en \cite{langville2012s} es
+El método fue creado por el Dr. Yoshitsugu Yamamoto, de la Universidad de Tsukuba, en Japón. Este método se basa en un problema de programación lineal que debe ser resuelto para calcular el ranking óptimo. Este método trata de medir la conformidad o el compromiso entre los rankings de entrada. Una forma de medir la conformidad definida en \cite{langville2012s} es
 
 \begin{multline} \label{eq:conformidad}
 c_{ij} = \text{número de rankings con $i$ por encima de $j$} \\ - \text{número de rankings con $i$ por debajo de $j$}
