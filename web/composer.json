@@ -1,0 +1,9 @@
+{
+    "name": "vendor/tfg",
+    "config": {
+        "vendor-dir": "api"
+    },
+    "require": {
+        "Slim/Slim": "^2.6"
+    }
+}
