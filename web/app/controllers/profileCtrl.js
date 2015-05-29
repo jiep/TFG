@@ -23,4 +23,14 @@ angular.module('app')
       }
     });
   }
+
+	$scope.gotoStart = function(){
+		$location.path("");
+	}
+
+$scope.cerrar = function(){
+$scope.user = undefined;
+$rootScope.user = undefined;
+$location.path("login");
+}
 });
