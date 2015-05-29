@@ -41,4 +41,8 @@ angular.module('app')
       }
     });
   }
+
+	$scope.gotoStart = function(){
+		$location.path("");
+	}
 });
