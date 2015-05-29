@@ -28,24 +28,41 @@
             <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Iniciar sesión
             <strong class="caret"></strong>
           </a>
-          <ul class="dropdown-menu dropdown-menu-right">
+                <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown" ng-if="!user">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Iniciar sesión
+            <strong class="caret"></strong>
+          </a>
+          <ul class="dropdown-menu">
+            <div class="input-group input-group-lg">
               <div class="panel panel-default">
                 <div class="panel-body">
-                  <form>
+                  <form ng-submit="login(user)">
                     <div class="form-group">
                       <label for="username">Usuario</label>
-                      <input type="username" class="form-control" placeholder="Usuario" required>
+                      <input ng-model="user.username" type="username" class="form-control" placeholder="Usuario" required>
                     </div>
                     <div class="form-group">
                       <label for="password">Contraseña</label>
-                      <input type="password" class="form-control" placeholder="Contraseña" required>
+                      <input ng-model="user.password" type="password" class="form-control" placeholder="Contraseña" required>
                     </div>
-                    <button type="submit" class="btn btn-default pull-right">Iniciar sesión</button>
+                    <button class="btn btn-default pull-right">Iniciar sesión</button>
                   </form>
                 </div>
-                <a href="register">Registrarse</a>
-              </div>
+                <a href="register">Registarse</a>
+            </div>
           </ul>
+        </li>
+	<li ng-if="user">
+	 <a href="profile" class="dropdown-toggle" data-toggle="dropdown">
+	 	{{user.username}}
+	 </a>
+	 </li>
+	      </ul>
+	    </div>
+	  </div>
+	</nav>
         </li>
       </ul>
     </div>

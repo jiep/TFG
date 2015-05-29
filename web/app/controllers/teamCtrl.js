@@ -20,4 +20,14 @@ angular.module('app')
     $scope.team_stats = stats;
     $rootScope.team_stats = stats;
   });
+
+  $scope.login = function(user){
+    Login.all('login').post(user).then(function(response) {
+      if(response.status == 200){
+        $scope.user = response.data;
+        $rootScope.user = response.data;
+        $location.path("profile");
+      }
+    });
+  }
 });
