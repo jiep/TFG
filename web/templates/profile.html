@@ -49,8 +49,8 @@
           </ul>
         </li>
 	<li ng-if="user">
-	 <a href="profile" class="dropdown-toggle" data-toggle="dropdown">
-	 	{{user.username}}
+	 <a href="profile" class="dropdown-toggle" data-toggle="dropdown" ng-click="cerrar()">
+	 	Cerrar Sesion
 	 </a>
 	 </li>
 	      </ul>
@@ -83,9 +83,8 @@
         <ul class="list-group">
 
           <li class="list-group-item" ng-repeat="graph in graphs">
-            {{graph.name}}
+            <a href="view/{{graph.id}}">{{graph.name}}</a>
             <div class="btn-group pull-right" role="group">
-              <a href="view/{{graph.id}}"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
               <a ng-click="deleteGraph(graph.id)"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
             </div>
           </li>
