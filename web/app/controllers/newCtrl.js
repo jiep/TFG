@@ -4,6 +4,7 @@ angular.module('app')
   var user_id = $rootScope.user.id;
 
   $scope.uploadData = function(){
+
     var inputFileImage = document.getElementById("file");
 
     var file = inputFileImage.files[0];
@@ -21,6 +22,7 @@ angular.module('app')
       cache:false,
       success: function(response) {
         $location.path("profile");
+	$scope.$apply();
       }
 
     });
