@@ -109,7 +109,7 @@ angular.module('app')
       ]
     }
 
-    pdfMake.createPdf(dd).open();
+    pdfMake.createPdf(dd).download();
   };
 
   $scope.login = function(user){
