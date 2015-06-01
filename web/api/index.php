@@ -1,7 +1,6 @@
 <?php
 
-require 'Slim/Slim.php';
-\Slim\Slim::registerAutoloader();
+require 'autoload.php';
 
 $hostname = 'localhost';
 $username = 'rankings';
