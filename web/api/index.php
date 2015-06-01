@@ -15,8 +15,6 @@ try {
 
 $app = new \Slim\Slim();
 
-$app->config('debug', true);
-
 function authenticate(\Slim\Route $route)
 {
     $hostname = 'localhost';
