@@ -28,9 +28,9 @@ angular.module('app')
 		$location.path("");
 	}
 
-$scope.cerrar = function(){
-$scope.user = undefined;
-$rootScope.user = undefined;
-$location.path("login");
-}
+  $scope.cerrar = function(){
+    $scope.user = undefined;
+    $rootScope.user = undefined;
+    $location.path("login");
+  }
 });
