@@ -1,1 +1,46 @@
 \chapter{Diseño de la API REST}
+
+\begin{longtable}[c]{@{}ccC{5cm}@{}}
+\toprule
+URL & Método & Descripción\tabularnewline
+\midrule
+\endhead
+/register & POST & Registra un nuevo usuario\tabularnewline
+\hline
+/login & POST & Inicio de sesión de un usuario\tabularnewline
+\hline
+/sport/:sportname/:league/teams & GET & Devuelve los equipos de la liga
+:league del deporte :sportname\tabularnewline
+\hline
+/sport/:sportname/:league/seasons & GET & Devuelve todas las temporadas
+de la liga :league del deporte :sportname\tabularnewline
+\hline
+/sport/:sportname/:league/competitivity & GET & Devuelve las medidas y
+el grafo de competitividad de la liga :league del deporte
+:sportname\tabularnewline
+\hline
+/sport/:sportname/:league/measures & GET & Devuelve las medidas de la
+liga :league del deporte :sportname\tabularnewline
+\hline
+/sport/:sportname/:league/clasification & GET & Devuelve la
+clasificación de la liga :league del deporte :sportname\tabularnewline
+\hline
+/sport/:sportname/:league/team/:team & GET & Devuelve información del
+equipo :team de la liga :league del deporte :sportname\tabularnewline
+\hline
+/users/:id/graphs & GET & Devuelve las medidas y el grafo de
+competitividad de los rankings subidos por el usuario :id\tabularnewline
+\hline
+/users/:id/graphs/:graph\_id & GET & Devuelve las medidas y el grafo de
+competitividad del ranking :graph\_id subidos por el usuario
+:id\tabularnewline
+\hline
+/users/:id/graphs/:graph\_id & DELETE & Borra las medidas y el grafo de
+competitividad del ranking :graph\_id subidos por el usuario
+:id\tabularnewline
+\hline
+/users/:id/graphs & POST & Añade un nuevo grafo con sus medidas al
+usuario :id\tabularnewline
+
+\bottomrule
+\end{longtable}
