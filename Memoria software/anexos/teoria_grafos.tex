@@ -1,0 +1,302 @@
+\chapter{Teoría de grafos} \label{teoria_grafos}
+
+\begin{defi}
+Un grafo (o grafo no dirigido) es un par $G = (V,E)$ de conjuntos que satisfacen que $E \subseteq V^2$ y $V \cap E = \emptyset$. Los elementos de $V$ se denominan vértices (o nodos) del grafo $G$ y los elementos de $E$ se denominan arcos (o aristas). Una arista entre los vértices $x, y \in V$ se denota como $xy$ o $yx \in E$.
+\end{defi}
+
+La forma usual de representar un grafo es dibujar un punto (o círculo) por cada vértice y unir dos de estos dos puntos (o círculos) con una línea para formar un arco. Cómo estén dibujados los vértices y los arcos es irrelevante. sólo importa qué pares de nodos forman una arista y cuáles no.
+
+\begin{ejemplo}
+
+La Figura \ref{fig:grafo} muestra la representación gráfica de un grafo. Matemáticamente, el grafo es el par $(V, E)$ donde
+
+\[ V = \{A, B, C, D\} \]
+\[ E = \{\{A,B\},\{A,C\},\{B,C\},\{C,D\} \} \]
+
+\begin{figure}[htb]
+\centering
+\ejemplografo
+\caption{Ejemplo de grafo}
+\label{fig:grafo}
+\end{figure}
+
+\end{ejemplo}
+
+\begin{defi}
+Se llama orden de un grafo $G$ al número de vértices de dicho grafo. Se denota como $|G|$.\\
+Un grafo $G$ se dice que es finito si $|G| < \infty$. Si $|G| = \infty$ se dice que el grafo $G$ es infinito.
+\end{defi}
+
+\begin{ejemplo}
+El grafo de la Figura \ref{fig:grafo} es un grafo finito, puesto que el número de vértices del grafo es $4$.
+\end{ejemplo}
+
+\begin{defi}
+Dos vértices $x,y \in V$ del grafo $G = (V,E)$ se dicen adyacentes si existe una arista entre $x$ e $y$ (o $xy \in E$).
+\end{defi}
+
+\begin{defi}
+Un grafo se dice completo si todos sus vértices son adyacentes.
+\end{defi}
+
+\begin{ejemplo}
+El grafo de la Figura \ref{fig:grafo_completo} es completo ya que todos sus vértices son adyacentes. En efecto, el vértice $A$ tiene una arista que lo une con los nodos $B$, $C$ y $D$. De la misma forma, se comprueba para los vértices $B$, $C$ y $D$.
+
+\begin{figure}[htb]
+\centering
+\ejemplografocompleto
+\caption{Ejemplo de grafo completo}
+\label{fig:grafo_completo}
+\end{figure}
+
+\end{ejemplo}
+
+\begin{defi}
+Sean $G = (V,E)$ y $G' = (V',E')$ dos grafos. Decimos que $G$ y $G'$ son isomorfos, y escribimos $G \simeq G'$, si existe una biyección $\phi : V \to V'$ tal que $xy \in E \iff \phi(x)\phi(y) \in E' \ \ \forall x,y \in V$. La aplicación $\phi$ recibe el nombre de isomorfismo. Si $G = G'$, $\phi$ se dice que es un automorfismo. 
+\end{defi}
+
+Podemos definir operaciones sobre grafos, como la unión o la intersección.
+
+\begin{defi}
+Sean $G = (V,E)$ y $G' = (V',E')$ dos grafos, se definen la unión y la intersección de grafos como
+
+\begin{eqnarray*}
+G \cup G' := (V \cup V', E \cup E')\\
+G \cap G' := (V \cap V', E \cap E')
+\end{eqnarray*}
+
+Si $G \cap G' = \emptyset$, entonces $G$ y $G'$ son disjuntos.
+\end{defi}
+
+\begin{ejemplo}
+La Figura \ref{fig:union_interseccion_grafo} muestra la unión e intersección de grafos. Si $G$ y $G'$ son respectivamente 
+
+\begin{eqnarray*}
+G = (\{A, B, C, D, E\}, \{ \{A,B\}, \{B,C\}, \{B,D\}, \{C,E\}, \{D, E\} \})\\
+G' = (\{C, D, E, F\}, \{ \{C,D\}, \{C,E\}, \{D,F\}, \{E,F\} \})
+\end{eqnarray*}
+
+Por definición,
+
+\begin{multline*}
+G \cup G' = (\{A, B, C, D, E, F\}, \{ \{A,B\}, \{B,C\}, \{B,D\}, \{C,E\}, \{D, E\}, \\
+\{C,D\}, \{D,F\},\{E,F\} \})
+\end{multline*}
+\[G \cap G' = (\{C, E\}, \{\{C,E\}\})\]
+
+
+\begin{figure}[htb]
+\centering
+\ejemplounionintersecciongrafo
+\caption{Ejemplo de unión de unión e intersección de grafos}
+\label{fig:union_interseccion_grafo}
+\end{figure}
+
+\end{ejemplo}
+
+\begin{defi}
+
+Sean $G = (V,E)$ y $G' = (V',E')$ dos grafos. Si $V' \subseteq V$ y $E' \subseteq E$, se dice que $G'$ es un subgrafo de $G$ (y $G$ es un supergrafo de $G'$).
+
+\end{defi}
+
+\begin{ejemplo}
+La figura \ref*{fig:subgrafo} muestra algunos de los subgrafos de $G= (V,E)$ donde
+
+\[ V  = \{A, B, C, D, E\}\]
+\[E = \{ \{A,B\}, \{A,C\}, \{A,E\}, \{B,D\}, \{B, E\},\{C,D\}, \{D,E\},\{C,E\} \} \]
+
+Del mismo modo, $G' = (V', E')$ y $G'' = (V'', E'')$ donde
+
+\[ V'  = \{A, B, C, D\}\]
+\[E' = \{ \{A,B\}, \{A,C\}, \{B,D\},\{C,D\} \} \]
+
+\[ V''  = \{A, B, C, D, E\}\]
+\[E'' = \{ \{A,B\}, \{A,C\}, \{B,D\},\{C,D\},\{B,E\} \} \]
+
+Se ve claramente que $V' \subseteq V$ y $E' \subseteq E$, por lo que $G'$ es un subgrafo de $G$ (o $G$ es un supergrafo de $G'$). Análogo para $G''$.
+
+
+\begin{figure}[htb]
+\centering
+\ejemplosubgrafo
+\caption[Ejemplo de subgrafos de un grafo]{Ejemplo de subgrafos de un grafo $G$}
+\label{fig:subgrafo}
+\end{figure}
+
+\end{ejemplo}
+
+\begin{defi}
+Sea $G = (V,E)$ un grafo (no vacío). El grado de un vértice $v \in V$, denotado por $d_G(v) = d(v)$, se define como el número de vértices adyacentes a $v$.\\
+
+Si todos los vértices de $G$ tienen el mismo grado $k$, el grafo $G$ es regular.
+\end{defi}
+
+\begin{defi}
+Se define el grado medio de un grafo $G = (V,E)$ como el número
+
+\begin{equation}
+d(G) = \dfrac{1}{|V|} \sum_{v \in V} d(v)
+\end{equation}
+\end{defi}
+
+\begin{defi}
+Un camino es un grafo no vacío $P = (V, E)$ de la forma
+
+\begin{equation*}
+V = \{ x_0,x_1,\dots,x_k\} \quad \quad E = \{ x_0 x_1, x_1 x_2, \dots, x_{k-1}x_k \}
+\end{equation*}
+
+donde $x_i \neq x_j \ \forall i \neq j$.\\
+
+Los vértices $x_0$ y $x_k$ se denominan final del camino $P$. Los vértices $x_1, \dots, x_k$ se denominan vértices interiores del camino $P$.\\
+
+El número de aristas del camino se denomina longitud del camino.
+\end{defi}
+
+\begin{defi}
+Un grafo no vacío $G$ se dice conexo si cualquier par de vértices están unidos por un camino de $G$.
+\end{defi}
+
+\begin{defi}
+Sea $G = (V,E)$ un grafo. Un subgrafo conexo maximal de $G$ se llama componente conexa de $G$.
+\end{defi}
+
+\begin{defi}
+Un clique es un conjunto de nodos mutuamente conectados entre sí.
+\end{defi}
+
+\begin{ejemplo}
+Un triángulo es un clique formado por tres nodos.
+\end{ejemplo}
+
+\begin{defi}
+Un grafo dirigido (o digrafo) es un par $(V,E)$ de conjuntos disjuntos (de vértices y de aristas) junto con dos funciones $\mathrm{init} : E \to V$ y $\mathrm{ter} : E \to V$ que asigna a cada arista $e$ un vértice inicial $\mathrm{init}(e)$ y un vértice terminal $\mathrm{ter}(e)$.\\
+
+La arista $e$ se dice dirigida desde $\mathrm{init}(e)$ hasta $\mathrm{ter}(e)$.\\
+
+Si $\mathrm{init}(e) = \mathrm{ter}(e)$, la arista $e$ se dice que es un bucle.
+\end{defi}
+
+\begin{ejemplo}
+La Figura \ref*{fig:grafo_dirigido} muestra la representación gráfica un grafo dirigido. Matemáticamente, es el par $(V,E)$ donde
+
+\[V  = \{A, B, C, D\}\]
+\[E = \{ \{A,B\}, \{A,C\}, \{C,C\},\{B,C\}, \{C,D\} \} \]
+
+junto con las funciones $\mathrm{init} : E \to V $ y $\mathrm{ter} : E \to V$ definidas de la siguiente manera:
+
+\begin{center}
+\begin{tabular}{l|r}
+\begin{tabular}{r c c c}
+$\mathrm{init}:$ & $E$ & $\to$ & $V$\\
+			     & $\{A,B\}$ & $\mapsto$ & $A$\\
+			     & $\{A,C\}$ & $\mapsto$ & $A$\\
+			     & $\{C,C\}$ & $\mapsto$ & $C$\\
+			     & $\{B,C\}$ & $\mapsto$ & $B$\\
+			     & $\{C,D\}$ & $\mapsto$ & $C$\\
+			      
+\end{tabular} &
+\begin{tabular}{r c c c}
+$\mathrm{ter}:$ & $E$ & $\to$ & $V$\\
+			     & $\{A,B\}$ & $\mapsto$ & $B$\\
+			     & $\{A,C\}$ & $\mapsto$ & $C$\\
+			     & $\{C,C\}$ & $\mapsto$ & $C$\\
+			     & $\{B,C\}$ & $\mapsto$ & $C$\\
+			     & $\{C,D\}$ & $\mapsto$ & $D$\\
+			      
+\end{tabular} 
+\end{tabular}
+\end{center}
+
+Además la arista $\{C,C\}$ es un bucle porque $\mathrm{init}(\{C,C\}) = \mathrm{ter}(\{C,C\}) = C$.
+
+\begin{figure}[h]
+\centering
+\ejemplografodirigido
+\caption{Ejemplo de grafo dirigido con bucle}
+\label{fig:grafo_dirigido}
+\end{figure}
+
+\end{ejemplo}
+
+\begin{defi}\label{def:orientacion}
+Un grafo dirigido $D = (V', E')$ es una orientación de un grafo (no dirgido) $G = (V,E)$ si $V = V'$ y $E = E'$ y $\{\mathrm{init}(e), \mathrm{ter}(e) \} = \{x,y\} \ \forall e = xy \in E$.
+\end{defi}
+
+\section{Algunos tipos de grafos}
+
+\begin{defi}
+Un grafo ponderado es un grafo con una función $\mathrm{w} : E \to \R$, es decir, que $\mathrm{w}$ asocia un número real a cada arista. Esta función recibe el nombre de función peso.
+\end{defi}
+
+\begin{ejemplo}
+El grafo $G = (V,E)$ con 
+
+\begin{eqnarray}
+V = \{A, B, C\}\\
+E = \{ \{A,B\}, \{A,C\}, \{B,C\} \}
+\end{eqnarray} 
+
+es un grafo. Si le añadimos la función $\mathrm{w} : E \to \R$ definida de la siguiente forma, $G$ es un grafo ponderado (ver Figura \ref{fig:grafo_ponderado}).
+
+\begin{equation*}
+\begin{tabular}{r c c c}
+$\mathrm{w}:$ & $E$ & $\to$ & $\R$\\
+			     & $\{A,B\}$ & $\mapsto$ & $e$\\
+			     & $\{A,C\}$ & $\mapsto$ & $5$\\
+			     & $\{B,C\}$ & $\mapsto$ & $\pi$
+			      
+\end{tabular}
+\end{equation*}
+\begin{figure}[htb]
+\centering
+\ejemplografoponderado
+\caption{Ejemplo de grafo ponderado}
+\label{fig:grafo_ponderado}
+\end{figure} 
+\end{ejemplo}
+
+\begin{defi}
+Dado un grafo ponderado $G = (V,E)$ y $\mathrm{w} : E \to \R$, decimos que una arista $e \in E$ incide en el vértice $v \in V$, si $\mathrm{ter}(e) = v$. 
+\end{defi}
+
+\begin{defi}
+La fuerza de un vértice en un grafo ponderado se define como la suma de todos los pesos de sus aristas incidentes.
+\end{defi}
+
+\begin{defi} \label{def:dominancia}
+Un grafo de dominancia $G=(V,E)$ es un grafo dirigido tal que para todo $x,y \in V$ se cumple una de las dos condiciones siguientes, pero no ambas simultáneamente:
+
+\begin{itemize}
+\item $\mathrm{init}(xy) = x$ \quad y \quad $\mathrm{ter}(xy) = y$
+\item $\mathrm{init}(xy) = y$ \quad y \quad $\mathrm{ter}(xy) = x$ 
+\end{itemize}
+\end{defi}
+
+\begin{ejemplo}
+Si consideramos el grafo de la Figura \ref{fig:grafo_dominancia}, vemos que para todo vértice $x,y \in \{A, B, C, D\}$ se cumple alguna de las dos condiciones anteriores, pero no ambas simultáneamente. Por ejemplo, para los vértices $A, D$ se cumple que $\mathrm{init}(\{A,D\}) = A$ y $\mathrm{ter}(\{A,D\}) = D$, pero no se cumple la otra condición. De la misma se comprueban los vértices restantes.   
+
+\begin{figure}[h]
+\centering
+\ejemplografodominancia
+\caption{Ejemplo de grafo de dominancia}
+\label{fig:grafo_dominancia}
+\end{figure}
+\end{ejemplo}
+
+\begin{defi}
+Llamamos grafo complementario de $G = (V,E)$, y lo denotamos como $\overline{G}$ al grafo que tiene como conjunto de vértices $V$ y como conjunto de aristas, las aristas que no están unidas de $G$.
+\end{defi}
+
+\begin{ejemplo}
+
+La Figura~\ref{fig:grafo_complementario} muestra un grafo $G$ y su correspondiente grafo complementario $\overline{G}$. Las aristas que no están unidas en $G$, sí lo están en $\overline{G}$.
+
+\begin{figure}[h]
+\centering
+\ejemplografocomplementario
+\caption{Ejemplo de grafo complementario}
+\label{fig:grafo_complementario}
+\end{figure}
+\end{ejemplo}
