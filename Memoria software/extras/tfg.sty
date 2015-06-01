@@ -1,0 +1,174 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{tfg}[2015/01/10 Paquete Trabajo Fin de Grado (TFG)]
+
+% Paquetes necesarios
+\RequirePackage{amsmath, amssymb, amsthm}
+\RequirePackage[explicit]{titlesec}
+\RequirePackage{emptypage}
+\RequirePackage{fancyhdr}
+\RequirePackage{nameref}
+\RequirePackage{etoolbox}
+\RequirePackage[titles,subfigure]{tocloft}
+\RequirePackage[font={sf}]{caption}
+\RequirePackage[svgnames]{xcolor}
+\RequirePackage{tikz}
+
+% Personalizamos las secciones: chapter, secction,
+% subsection, etc.
+
+% Capítulo
+% Extraído de 
+% http://www.texample.net/tikz/examples/fancy-chapter-headings/
+\newcommand*\chapterlabel{}
+\titleformat{\chapter}
+{\gdef\chapterlabel{}
+\normalfont\sffamily\Huge\bfseries\scshape}
+{\gdef\chapterlabel{\thechapter\ }}{0pt}
+{\begin{tikzpicture}[remember picture,overlay]
+\node[yshift=-3cm] at (current page.north west)
+	{\begin{tikzpicture}[remember picture, overlay]
+	\filldraw[fill=LightSkyBlue, draw=LightSkyBlue] (0,0) rectangle
+	(\paperwidth,3cm);
+	\node[anchor=east,xshift=.9\paperwidth,rectangle,
+		rounded corners=20pt,inner sep=11pt,
+		fill=MidnightBlue, draw=LightSkyBlue]
+		{\color{white}\chapterlabel#1};
+	\end{tikzpicture}
+	};
+\end{tikzpicture}
+}
+
+% Espacio del capítulo
+\titlespacing*{\chapter}{0pt}{50pt}{-60pt}
+
+% Capítulo
+%\titleformat{\chapter}
+%	{\gdef\chapterlabel{}
+%	\normalfont\bfseries\sffamily\Huge}
+%	{\gdef\chapterlabel{\thechapter\ }}{0pt}
+%	{\chapterlabel #1}
+
+% Sección
+\titleformat{\section}
+	{\gdef\setionlabel{}
+	\normalfont\sffamily\bfseries\Large}
+	{\gdef\sectionlabel{\thesection\ }}{0pt}
+	{\sectionlabel #1}
+
+% Subsección
+\titleformat{\subsection}
+	{\gdef\subsectionlabel{}
+	\normalfont\sffamily\bfseries\large}
+	{\gdef\subsectionlabel{\thesubsection\ }}{0pt}
+	{\subsectionlabel #1}
+
+% Subsubsección
+\titleformat{\subsubsection}
+	{\gdef\subsubsectionlabel{}
+	\normalfont\sffamily\bfseries\normalsize}
+	{\gdef\subsubsectionlabel{\thesubsubsection\ }}{0pt}
+	{\subsubsectionlabel #1}
+
+% Parágrafo
+\titleformat{\paragraph}
+	{\gdef\paragraphlabel{}
+	\normalfont\sffamily\bfseries\normalsize}
+	{\gdef\paragraphlabel{\theparagraph\ }}{0pt}
+	{\paragraphlabel #1}
+
+% Subparágrafo
+\titleformat{\subparagraph}
+	{\gdef\subparagraphlabel{}
+	\normalfont\sffamily\bfseries\normalsize}
+	{\gdef\subparagraphlabel{\thesubparagraph\ }}{0pt}
+	{\subparagraphlabel #1}
+
+% Seleccionar el nombre de la sección actual
+% Extraído de 
+% http://tex.stackexchange.com/questions/75168/get-current-section-name-without-label
+\makeatletter
+\newcommand*{\currentname}{\@currentlabelname}
+\makeatother
+
+% Seleccionar el nombre del capítulo actual
+% Extráido de
+% http://tex.stackexchange.com/questions/75168/get-current-section-name-without-label
+\makeatletter
+\apptocmd{\@chapter}{\gdef\currentchapter{#2}}{}{}
+\def\currentchapter{?}
+\makeatother
+
+% Personalizamos el encabezado y el pie de página
+\pagestyle{fancy}{
+\fancyhead[LO]{}
+\fancyhead[RO]{\sffamily\large{\nouppercase{\rightmark}}  \ \ \ \ \normalfont\sffamily\large\Large\bfseries\scshape{\thepage}}
+\fancyhead[RE]{}
+\fancyhead[LE]{{\normalfont\sffamily\Large\bfseries\scshape{\thepage}} \ \ \ \ \sffamily\large{\nouppercase{\leftmark}}}
+\fancyfoot[CO,CE]{}
+
+
+
+}
+
+% Personalizamos la primera hoja del capítulo
+\fancypagestyle{plain}{
+\fancyhead[L]{}
+\fancyhead[C]{}
+\fancyhead[R]{}
+\fancyfoot[L]{}
+\fancyfoot[C]{\normalfont\sffamily\Large\bfseries{\thepage}}
+\fancyfoot[R]{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+}
+
+% Personalizamos los niveles de los itemizes
+\renewcommand{\labelitemi}{\textcolor{blue}{$\blacktriangleright$}}
+\renewcommand{\labelitemii}{\textcolor{blue}{$\bullet$}}
+\renewcommand{\labelitemiii}{\textcolor{blue}{$\bullet$}}
+
+% Cambiamos el estilo de los teoremas
+\theoremstyle{definition}
+
+% Personalizamos la fuentes de los títulos en el índice
+
+% Capítulo
+\renewcommand{\cftchapfont}
+	{\normalfont\sffamily\normalsize}
+	
+% Sección
+\renewcommand{\cftsecfont} 
+	{\normalfont\sffamily\normalsize}
+
+% Subsección
+\renewcommand{\cftsubsecfont}
+	{\normalfont\sffamily\normalsize}
+
+% Subsubsección
+\renewcommand{\cftsubsubsecfont} 
+	{\normalfont\sffamily\normalsize}
+
+% Parágrafo
+\renewcommand{\cftparafont}
+	{\normalfont\sffamily\normalsize}
+
+% Subparágrafo
+\renewcommand{\cftsubparafont}
+	{\normalfont\sffamily\normalsize}
+
+% Personalizamos los títulos de las figuras y las tablas 
+% en sus respectivos índices
+
+% Figuras
+\renewcommand{\cftfigfont} 
+	{\normalfont\sffamily\normalsize}
+
+% Tablas
+\renewcommand{\cfttabfont}
+	{\normalfont\sffamily\normalsize}
+
+% Profundidad del índice
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{3}
+
+% Fin de archivo

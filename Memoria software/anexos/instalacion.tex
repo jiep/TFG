@@ -1,0 +1,141 @@
+\chapter{Manual de instalación}
+
+Para instalar la aplicación necesitaremos seguir los siguientes pasos\footnote{De ahora en adelante, supondremos que estamos en un entorno Linux (en particular, un entorno Ubuntu o derivados)}:
+
+\begin{enumerate}
+\item Instalar las dependencias con los siguientes comandos:
+
+\begin{minted}{bash}
+sudo apt-get install apache2
+sudo apt-get install php5 php5-cli php5-mysql
+sudo apt-get install php5-curl
+sudo apt-get install mysql-client mysql-server
+\end{minted}
+
+Durante la instalación de la última dependencia se nos pedirá la contraseña del usuario \emph{root} de la base de datos MySQL.
+
+\item Creación de un nuevo usuario para la base de datos. 
+
+Entramos en MySQL con como root con el comando
+
+\begin{minted}{bash}
+mysql -u root -p
+\end{minted}
+
+Nos pedirá la contraseña del usuario \emph{root} que hemos configurado durante el paso anterior.
+
+\begin{enumerate}
+\item Escribimos el siguiente comando para crear un nuevo usuario:
+
+\begin{minted}{sql}
+CREATE USER 'rankings'@'localhost' IDENTIFIED by '1234';
+\end{minted}
+
+donde \emph{1234} es la contraseña del usuario \emph{rankings}.
+\end{enumerate}
+
+\item Habilitar el módulo \emph{mod\_rewrite} de Apache.
+
+\begin{enumerate}
+\item Escribimos los siguientes comandos en la Terminal
+
+\begin{minted}{bash}
+sudo a2enmod rewrite
+sudo service apache2 restart
+\end{minted}
+
+
+\item Ejecutamos los comandos
+
+\begin{minted}{bash}
+sudo nano /etc/apache2/sites-available/default
+\end{minted}
+
+y buscamos en el archivo \emph{<Directory /var/www/>}.
+
+\item Sustituimos el contenido de \emph{<Directory /var/www/>} por lo siguiente
+
+\begin{minted}{bash}
+<Directory /var/www/>
+      Options Indexes FollowSymLinks MultiViews
+      # changed from None to FileInfo
+      AllowOverride FileInfo
+      Order allow,deny
+      allow from all
+</Directory>
+\end{minted}
+
+\item Reiniciamos Apache con
+
+\begin{minted}{bash}
+sudo service apache2 restart
+\end{minted}
+
+\end{enumerate}
+
+\item Instalación de Bower
+
+\begin{enumerate}
+\item Descargar node desde su página oficial \url{https://nodejs.org}
+\item Instalar npm (si no viene instalado junto a node)
+\item Ejecutar el comando 
+
+\begin{minted}{bash}
+npm install -g bower
+\end{minted}
+
+\item Para comprobar que tenemos instalado Bower ejecutar 
+
+\begin{minted}{bash}
+bower -v
+\end{minted} 
+
+Si nos aparece el número de versión, está instalado.
+
+\item Ir a la carpeta web y ejecutar el comando 
+
+\begin{minted}{bash}
+bower install
+\end{minted} 
+
+Nos instalará todas las dependencias necesarias.
+\end{enumerate}
+
+\item Instalación de Composer
+
+\begin{enumerate}
+\item Ejecutar los siguientes comandos
+
+\begin{minted}{bash}
+curl -sS https://getcomposer.org/installer | php
+mv composer.phar /usr/local/bin/composer
+\end{minted} 
+
+\item Ir a la carpeta \emph{web} y ejecutar el comando 
+
+\begin{minted}{bash}
+composer install
+\end{minted}
+
+Nos instalará todas las dependencias necesarias.
+
+\end{enumerate}
+
+\item Creación de las tablas de la base de datos y carga de los datos
+
+\begin{enumerate}
+\item Vamos a la carpeta \emph{parser} y escribimos
+
+\begin{minted}{bash}
+mysql -u rankings -p
+source rankings.sql
+source datos.sql
+\end{minted}
+
+\end{enumerate}
+
+\item Movemos la carpeta de la aplicación hacia la carpeta \emph{var/www/html} del servidor Apache.
+
+\item Abrimos un navegador y escribimos \emph{localhost}. Si todo ha ido bien, tendremos la aplicación funcionando.
+
+\end{enumerate}

@@ -1,0 +1,64 @@
+\documentclass[12pt,a4paper,twoside,openright,titlepage,final]{book}
+\usepackage{fontspec}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{makeidx}
+\usepackage{graphicx}
+\usepackage{minted}
+\usepackage[hidelinks,unicode=true]{hyperref}
+\usepackage[spanish,es-nodecimaldot,es-lcroman,es-tabla,es-noshorthands]{babel}
+\usepackage[left=3cm,right=2cm, bottom=4cm]{geometry}
+\usepackage{natbib}
+\usepackage{microtype}
+\usepackage{extras/tfg}
+\usepackage{ifdraft}
+\usepackage[obeyDraft]{todonotes}
+\ifdraft{
+	\usepackage{draftwatermark}
+	\SetWatermarkText{BORRADOR}
+	\SetWatermarkScale{0.7}
+	\SetWatermarkColor{red}
+}{}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{calc}
+\usepackage{array}
+\usepackage{caption}
+\usepackage{subfigure}
+\usepackage{footnote}
+\usepackage{url}
+\setsansfont[Ligatures=TeX]{texgyreadventor}
+\setmainfont[Ligatures=TeX]{texgyrepagella}
+
+
+\author{José Ignacio Escribano}
+
+\input{extras/comandos}
+\input{extras/portada}
+\input{extras/figuras}
+
+\setlength{\parindent}{0pt}
+
+\begin{document}
+\frontmatter
+\portada{TFG Software}{Título}{ \ }{José Ignacio Escribano}{Móstoles}
+\tableofcontents
+\listoffigures
+\listoftables
+\listoftodos
+
+\mainmatter
+\input{capitulos/introduccion}
+
+\appendix
+\input{anexos/api-rest}
+\input{anexos/instalacion}
+
+
+\backmatter
+\nocite{*}
+\bibliographystyle{bibliografia/apalike-es}
+\bibliography{bibliografia/bibliografia}
+
+\end{document}
