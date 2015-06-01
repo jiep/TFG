@@ -31,7 +31,7 @@ Para instalar la aplicación necesitaremos seguir los siguientes pasos [1]:
       
       donde `1234` es la contraseña del usuario `rankings`.
       
-  3. Habilitar el módulo `mod_rewrite` de Apache [2]
+  3. Habilitar el módulo `mod_rewrite` de Apache[2]
       
       3.1. Escribimos los siguientes comandos
 
@@ -105,4 +105,4 @@ Para instalar la aplicación necesitaremos seguir los siguientes pasos [1]:
 
 
 [1]: De ahora en adelante, supondremos que estamos en un entorno Linux (en particular un entorno Ubuntu o derivados) y que se dispone de un gestor de paquetes.
-[2]: http://askubuntu.com/questions/48362/how-to-enable-mod-rewrite-in-apache
+[^apache]: http://askubuntu.com/questions/48362/how-to-enable-mod-rewrite-in-apache
