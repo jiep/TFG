@@ -1,6 +1,10 @@
-\chapter{Diseño e implementación de la aplicación}
+\chapter{Diseño de la aplicación}
+
+En este capítulo veremos el diseño de la aplicación y qué tecnologías se han utilizado para su implementación. 
 
 \section{Arquitectura de la aplicación}
+
+La arquitectura de la aplicación se puede ver en la Figura~\ref{fig:arquitectura}. Se puede observar que se trata de una arquitectura cliente-servidor. En la parte del servidor o backend, se encuentra el módulo de extracción de datos (parser) y la API REST. El primero de ellos, se encarga de extraer datos de la página oficial de Liga de Fútbol Profesional y los guarda en la base de datos MySQL; y el segundo, es una API REST que permite extraer y obtener datos de la base de datos y comunicarse con el lado del cliente o frontend. En la parte del frontend, se encuentra la aplicación AngularJS, que se encarga de dar al usuario una interfaz gráfica con la que intercambiar datos a través de la API REST.  
 
 \begin{figure}[htb]
 \centering
@@ -11,6 +15,172 @@
 
 \section{Tecnologías utilizadas}
 
-\subsection{Backend}
+Para implementar la aplicación anterior, se han utilizado distintas tecnologías, tanto en el lado del cliente como del servidor. A continuación, detallamos cada una de ellas distinguiendo si se han utilizado en un lado o en otro.
 
-\subsection{Frontend}
+\subsection{Tecnologías del lado del servidor}
+
+En el lado del servidor se han utilizado las siguientes tecnologías:
+
+\begin{itemize}
+\item Servidor HTTP Apache
+\item MySQL
+\item PHP
+\item Composer
+\item Slim Framework
+\end{itemize}
+
+\subsubsection*{Servidor HTTP Apache}
+
+Apache~\cite{apache} es un servidor web HTTP de código libre disponible para todas las plataformas (Windows, Mac y Linux). Algunas de sus ventajas frente a sus competidores es su modularidad, su facilidad de uso y la gran comunidad de la que dispone por lo que existe una gran cantidad de información y documentación sobre este servidor. Además, es el servidor web más usado del mundo.
+
+\begin{figure}[tbh]
+\centering
+\label{fig:apache}
+\includegraphics[width=0.5\textwidth]{imagenes/apache}
+\caption{Servidor HTTP Apache}
+\end{figure}
+
+\subsubsection*{MySQL}
+
+MySQL~\cite{mysql} es un sistema de gestión de base de datos relacional. Se caracteriza por soportar un gran subconjunto del lenguaje SQL, es multiplataforma y permite la utilización de una gran cantidad de motores en cada tabla, tales como MyISAM, InnoDB, MySQL Cluster, etc.
+
+\begin{figure}[tbh]
+\centering
+\label{fig:mysql}
+\includegraphics[width=0.5\textwidth]{imagenes/MySQL}
+\caption{MySQL}
+\end{figure}
+
+\subsubsection*{PHP}
+
+PHP~\cite{php} es un lenguaje de programación de código abierto que puede ser usado tanto como lenguaje de scripting como lenguaje para el desarrollo web. PHP tiene tipado dinámico, es multiplataforma y permite trabajar con gran cantidad de sistemas de bases de datos como MySQL, Oracle, PosgreSQL, etc.
+
+\begin{figure}[tbh]
+\centering
+\label{fig:php}
+\includegraphics[width=0.5\textwidth]{imagenes/PHP}
+\caption{PHP}
+\end{figure}
+
+\subsubsection*{Composer}
+
+Composer~\cite{composer} es un sistema de gestión de paquetes PHP que permite descargar los proyectos y las dependencias de un proyecto, sin saber de cuáles se trata específicamente. 
+
+\begin{figure}[tbh]
+\centering
+\label{fig:composer}
+\includegraphics[width=0.2\textwidth]{imagenes/composer}
+\caption{Composer}
+\end{figure}
+
+\subsubsection*{Slim Framework}
+
+Slim Framework~\cite{slim} es un micro framework de PHP que permite realizar aplicaciones web y APIs REST de una forma muy sencilla. Slim permite trabajar con rutas, sesiones y tiene soporte para HTTP, por lo que es capaz de manipular estados de las peticiones y respuestas, cabeceras, URIs, entre otros. 
+
+\begin{figure}[tbh]
+\centering
+\label{fig:slim}
+\includegraphics[width=0.2\textwidth]{imagenes/slim}
+\caption{Slim Framework}
+\end{figure}
+
+\subsection{Tecnologías del lado del cliente}
+
+En el lado del cliente se han utilizado las siguientes tecnologías:
+
+\begin{itemize}
+\item HTML5
+\item CSS3
+\item JavaScript
+\item Bower
+\item Bootstrap
+\item AngularJS
+\item Cytoscape.js
+\end{itemize}
+
+\subsubsection*{HTML5}
+
+HTML~\cite{html5} es un lenguaje de marcas que permite la construcción de páginas web. Su última versión, la versión 5, tiene importantes novedades con respecto a las versiones anteriores:
+
+\begin{itemize}
+\item Introducción de elementos semánticos
+\item Introducción de atributos de control como números, fechas, calendarios, rangos, horas, ...
+\item Introducción de elementos gráficos
+\item Introducción de nuevas APIs como la de geolocalización, la de arrastrar y soltar, almacenamiento local, ...
+\end{itemize}   
+
+\begin{figure}[tbh]
+\centering
+\label{fig:html5}
+\includegraphics[width=0.2\textwidth]{imagenes/html5}
+\caption{HTML5}
+\end{figure}
+
+\subsubsection*{CSS3}
+CSS~\cite{css3} es un lenguaje usado para crear la vista de presentación de una página web, típicamente HTML o XML. La idea detrás de CSS es la de permitir separar la estructura de una página web de su presentación. Actualmente, se encuentra en la versión 3, llamada CSS3, aunque todavía no se encuentra finalizada en sus totalidad.
+
+\begin{figure}[tbh]
+\centering
+\label{fig:css3}
+\includegraphics[width=0.2\textwidth]{imagenes/css3}
+\caption{CSS3}
+\end{figure}
+
+\subsubsection*{JavaScript}
+Javascript~\cite{javascript} es un lenguaje de programación que permite dotar al HTML de animaciones, interactividad y efectos visuales dinámicos. También se puede usar en el lado del servidor. Es un lenguaje imperativo, débilmente tipado y dinámico y basado en prototipos.
+
+\begin{figure}[tbh]
+\centering
+\label{fig:javascript}
+\includegraphics[width=0.2\textwidth]{imagenes/javascript}
+\caption{JavaScript}
+\end{figure}
+
+\subsubsection*{Bower}
+Bower~\cite{bower} es un gestor de paquetes JavaScript. Se encarga de manejar las dependencias de un determinado paquete, descargándolas de forma transparente para el desarrollador. Es el análogo a Composer, pero para paquetes escritos en JavaScript. 
+
+\begin{figure}[tbh]
+\centering
+\label{fig:bower}
+\includegraphics[width=0.3\textwidth]{imagenes/bower}
+\caption{Bower}
+\end{figure}
+
+\subsubsection*{Bootstrap}
+Bootstrap~\cite{bootstrap} es un framework CSS que permite desarrollar de forma fácil una aplicación web. Cuenta con multitud de componentes gráficos ya predefinidos como iconos, botones, barras de navegación, etiquetas, barras de progreso, barras de paginación, etc.
+
+\begin{figure}[tbh]
+\centering
+\label{fig:bootstrap}
+\includegraphics[width=0.7\textwidth]{imagenes/bootstrap}
+\caption{Bootstrap}
+\end{figure}
+
+\subsubsection*{AngularJS}
+AngularJS~\cite{angular} es un framework JavaScript para la creación de aplicaciones web SPA, mantenido y desarrollado por Google. Una aplicación SPA (Single-Page Application) es una aplicación web que ``simula'' ser una aplicación de escritorio, es decir, con sola una página.
+
+\begin{figure}[tbh]
+\centering
+\label{fig:angular}
+\includegraphics[width=0.3\textwidth]{imagenes/angular}
+\caption{AngularJS}
+\end{figure}
+
+\subsubsection*{Cytoscape.js}
+
+Cytoscape.js~\cite{cytoscape} es una librería JavaScript para el análisis y visualización de grafos.
+
+\begin{figure}[tbh]
+\centering
+\label{fig:cytoscape}
+\includegraphics[width=0.3\textwidth]{imagenes/cytoscape}
+\caption{Cytoscape.js}
+\end{figure}
+
+\section{Backend}
+
+\subsection*{Parser}
+
+\subsection*{API REST}
+
+\section{Frontend}
