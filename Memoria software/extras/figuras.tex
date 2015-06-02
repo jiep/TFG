@@ -296,3 +296,60 @@
   \path (BAR)   edge                node {1} (RMA);
   
 \end{tikzpicture}}
+
+\newcommand{\arquitectura}{
+\begin{tikzpicture}[database/.style={
+      cylinder,
+      cylinder uses custom fill,
+      cylinder body fill=white,
+      cylinder end fill=white,
+      shape border rotate=90,
+      aspect=0.25,
+      draw
+    }]
+ 
+ 	% Base de datos
+    \node[database, scale=2] at (5,2.25) (mysql) {MySQL};
+    
+    % Parser
+    \draw (1,1.5) rectangle (3,3.5) node[midway] {PARSER};
+       
+    % API REST
+    \draw (7,1.5) rectangle (9,3.5) node[midway] {API REST};
+     
+    % APP Angular
+    \draw (5,-2.5) rectangle (9,-4.5) node[midway] {Aplicación AngularJS};
+    
+    % Nube
+    \node[cloud, cloud puffs=15, cloud ignores aspect, minimum width=3cm, minimum height=2cm, align=center, draw] (cloud) at (-3, 2.5) {lfp.es};
+     
+    % Backend
+    \draw (0,0) rectangle (10,5);
+     
+    % Frontend
+    \draw (0,-6) rectangle (10,-1);
+    
+    % Flechas
+    
+    % Nube - Parser 
+    \draw [->] (1, 2.25) -- node {}                  (-1.6, 2.25);
+    \draw [<-] (1, 3) -- node[anchor=south] {HTTP}    (-1.75, 3);
+    
+    % Parser - MySQL
+    \draw [->] (3, 2.50)   -- node {}  (3.60,2.50);
+    
+    % API REST - MySQL
+    \draw [->] (6.4, 2.25)   -- node {}  (7.00,2.25);
+    \draw [<-] (6.4, 2.75)   -- node {}  (7.00,2.75);
+    
+    % API REST - AngularJS
+    \draw [->] (7.5, 1.5)   -- node {}      (7.5,-2.5);
+    \draw [<-] (8.5, 1.5)   -- node[anchor=west] {REST}  (8.5,-2.5);
+     
+   	% Backend
+ 	\node at (1.25,4.75) {\textbf{BACKEND}};
+ 	
+	% Frontend
+ 	\node at (1.25,-1.25) {\textbf{FRONTEND}};
+ 
+\end{tikzpicture}}
