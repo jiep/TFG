@@ -3,6 +3,9 @@
 \usetikzlibrary{arrows,automata,fit}
 \usetikzlibrary{calc,positioning,shapes.geometric}
 \usetikzlibrary{shapes}
+\usetikzlibrary{er}
+
+\newcommand { \key }[1]{ \underline {#1}}
 
 \newcommand{\ejemplografo}{
 \begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=3cm,semithick]
@@ -354,4 +357,116 @@
 	% Frontend
  	\node at (1.25,-1.25) {\textbf{FRONTEND}};
  
+\end{tikzpicture}}
+
+\newcommand{\erparser}{
+\begin{tikzpicture}[node distance=4cm]
+
+% Partidos
+\node [entity] (partidos) at (0,0) {Partidos};
+
+\node [attribute] (goles_visitante) [above left of = partidos] { goles\_visitante } edge (partidos);
+
+\node [attribute] (dif_goles) [right of = goles_visitante] { dif\_goles } edge (partidos);
+
+\node [attribute] (p_id) [right of = dif_goles] { \key{id} } edge (partidos);
+
+\node [attribute] (temporada) [right of = p_id] {temporada} edge (partidos);
+
+\node [attribute] (jornada) [right of = partidos] { jornada } edge (partidos);
+
+\node [attribute] (equipo_visitante) [below right of = partidos] { equipo\_visitante } edge (partidos);
+
+\node [attribute] (equipo_local) [below left of = partidos] { equipo\_local } edge (partidos);
+
+\node [attribute] (goles_local) [left of = partidos] { goles\_local } edge (partidos);
+
+% Rankings
+\node [entity] (rankings) at (0,-8) {Rankings};
+
+\node [attribute] (diferencias_goles) [above left of = rankings] { diferencia\_goles } edge (rankings);
+
+\node [attribute] (goles_contra_rankings) [right of = diferencias_goles] { goles\_contra } edge (rankings);
+
+\node [attribute] (r_id) [right of = goles_contra_rankings] { \key{id} } edge (rankings);
+
+\node [attribute] (equipo) [right of = r_id] { equipo } edge (rankings);
+
+\node [attribute] (posicion) [right of = rankings] { posicion } edge (rankings);
+
+\node [attribute] (partidos_ganados) [below right of = rankings] { partidos\_ganados } edge (rankings);
+
+\node [attribute] (partidos_empatados) [below left of = rankings] { partidos\_empatados } edge (rankings);
+
+\node [attribute] (partidos_perdidos) [left of = rankings] { partidos\_perdidos } edge (rankings);
+
+\node [attribute] (goles_favor_rankings) [below right of = posicion] { goles\_favor } edge (rankings);
+
+\node [attribute] (temporada_rankings) [below of = rankings] { temporada } edge (rankings);
+
+\node [attribute] (jornada_rankings) [above of = posicion] { jornada } edge (rankings);
+
+% Equipos
+
+\node [entity] (equipos) at (0,-14) {Equipos};
+
+\node [attribute] (nombre) [left of = equipos] {nombre} edge (equipos);
+
+\node [attribute] (e_id) [right of = equipos] { \key{id} } edge (equipos);
+
+\end{tikzpicture}}
+
+\newcommand{\erapi}{
+\begin{tikzpicture}[node distance=3.5cm]
+
+% User
+\node [entity] (user) at (0,0) {User};
+
+\node [attribute] (name) [above left of = user] { name } edge (user);
+
+\node [attribute] (email) [right of = name] { email } edge (user);
+
+\node [attribute] (u_id) [right of = email] { \key{id} } edge (user);
+
+\node [attribute] (password) [right of = u_id] {password} edge (user);
+
+\node [attribute] (apiKey) [right of = user] { apiKey } edge (user);
+
+\node [relationship] (crea) [below of = user] { Crea } edge (user);
+
+% Competitivity graph
+\node [entity] (competitivity) [below of = crea, text width=3cm, align=center] {Competitivity\_graph} edge (crea);
+
+\node [attribute] (nms) [above left of = competitivity] { nms } edge (competitivity);
+
+\node [attribute] (nmd) [right of = nms] { nmd } edge (competitivity);
+
+\node [attribute] (c_id) [right of = nmd] { \key{id} } edge (competitivity);
+
+\node [attribute] (kendall) [right of = c_id] {kendall} edge (competitivity);
+
+\node [attribute] (cpl) [below of = competitivity] { cpl } edge (competitivity);
+
+\node [attribute] (diameter) [below right of = competitivity] { diameter } edge (competitivity);
+
+\node [attribute] (efficiency) [below left of = competitivity] { efficiency } edge (competitivity);
+
+\node [attribute] (name) [left of = competitivity] {name} edge (competitivity);
+
+\node [relationship] (compuesto) [right of = competitivity] {Compuesto} edge (competitivity);
+
+
+% Graph vertex
+
+\node [entity] (vertex) [right of = compuesto, text width=3cm, align=center] {Graph\_vertex} edge (compuesto);
+
+\node [attribute] (source) [below left of = vertex] {source} edge (vertex);
+
+\node [attribute] (v_id) [right of = vertex] { \key{id} } edge (vertex);
+
+
+\node [attribute] (target) [below right of = v_id] { target } edge (vertex);
+
+\node [attribute] (weight) [below of = vertex] { weight } edge (vertex);
+
 \end{tikzpicture}}
