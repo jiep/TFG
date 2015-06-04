@@ -451,7 +451,7 @@ Ver Teorema 3.16 de \cite{journals/corr/CriadoGPR13a}.
 
 \section{Cálculo de las componentes conexas}
 
-En el Ejemplo \ref{ej:grafo_competitividad} vimos que el grafo de competitividad puede tener más de una componente conexa. Estas componentes conexas indican los equipos que han competido entre sí. Veremos un algoritmo que permite calcular las componentes conexas del grafo de competitividad sin calcularlo explíctitamente a partir de los llamados \textcolor{red}{competidores eventuales}.
+En el Ejemplo \ref{ej:grafo_competitividad} vimos que el grafo de competitividad puede tener más de una componente conexa. Estas componentes conexas indican los equipos que han competido entre sí. Veremos un algoritmo que permite calcular las componentes conexas del grafo de competitividad sin calcularlo explícitamente a partir de los llamados \textcolor{red}{competidores eventuales}.
 
 \begin{defi}
 Si tenemos una familia de rankings $\mathcal{R} = \{c_1,\dots,c_r\}$ de nodos $\mathcal{N} = \{1,\dots,n\}$, decimos que un par de nodos $(i,j) \in \mathcal{N} \times \mathcal{N}$ compiten eventualmente si existe $k \in \N$ y nodos $i_i,\dots,i_k \in \mathcal{N}$ tal que $(i,i_1)$ compiten, $(i_1,i_2)$ compiten,\dots, y $(i_k,j)$ compiten. 
