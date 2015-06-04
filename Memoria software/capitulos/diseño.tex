@@ -11,12 +11,12 @@ Alguna de las características de la aplicación son:
 
 \item Visualización de estadísticas de todas las temporadas de la Liga BBVA, desde la temporada 1928-1929, de la competitividad (grafo evolutivo y medidas de competitividad).
 
-\item Posibilidad de subir tus propios rankings para que pueda ser visualizado como un grafo de competitividad y calcular las medidas de competitividad asociados esos rankings subidos por el usuario.   
+\item Posibilidad de subir tus propios rankings para que pueda ser visualizado como un grafo de competitividad y calcular las medidas de competitividad asociados esos rankings subidos por el usuario.
 \end{itemize}
 
 \section{Arquitectura de la aplicación}
 
-La arquitectura de la aplicación se puede ver en la Figura~\ref{fig:arquitectura}. Se puede observar que se trata de una arquitectura cliente-servidor. En la parte del servidor o backend, se encuentra el módulo de extracción de datos (parser) y la API REST. El primero de ellos, se encarga de extraer datos de la página oficial de Liga de Fútbol Profesional~\cite{lfp} y los guarda en la base de datos MySQL; y el segundo, es una API REST que permite extraer y obtener datos de la base de datos y comunicarse con el lado del cliente o frontend. En la parte del frontend, se encuentra la aplicación AngularJS, que se encarga de dar al usuario una interfaz gráfica con la que intercambiar datos a través de la API REST.  
+La arquitectura de la aplicación se puede ver en la Figura~\ref{fig:arquitectura}. Se puede observar que se trata de una arquitectura cliente-servidor. En la parte del servidor o backend, se encuentra el módulo de extracción de datos (parser) y la API REST. El primero de ellos, se encarga de extraer datos de la página oficial de Liga de Fútbol Profesional~\cite{lfp} y los guarda en la base de datos MySQL; y el segundo, es una API REST que permite extraer y obtener datos de la base de datos y comunicarse con el lado del cliente o frontend. En la parte del frontend, se encuentra la aplicación AngularJS, que se encarga de dar al usuario una interfaz gráfica con la que intercambiar datos a través de la API REST.
 
 \begin{figure}[htb]
 \centering
@@ -76,7 +76,7 @@ PHP~\cite{php} es un lenguaje de programación de código abierto que puede ser 
 
 \subsubsection*{Composer}
 
-Composer~\cite{composer} es un sistema de gestión de paquetes PHP que permite descargar los proyectos y las dependencias de un proyecto, sin saber de cuáles se trata específicamente. 
+Composer~\cite{composer} es un sistema de gestión de paquetes PHP que permite descargar los proyectos y las dependencias de un proyecto, sin saber de cuáles se trata específicamente.
 
 \begin{figure}[tbh]
 \centering
@@ -87,7 +87,7 @@ Composer~\cite{composer} es un sistema de gestión de paquetes PHP que permite d
 
 \subsubsection*{Slim Framework}
 
-Slim Framework~\cite{slim} es un micro framework de PHP que permite realizar aplicaciones web y APIs REST de una forma muy sencilla. Slim permite trabajar con rutas, sesiones y tiene soporte para HTTP, por lo que es capaz de manipular estados de las peticiones y respuestas, cabeceras, URIs, entre otros. 
+Slim Framework~\cite{slim} es un micro framework de PHP que permite realizar aplicaciones web y APIs REST de una forma muy sencilla. Slim permite trabajar con rutas, sesiones y tiene soporte para HTTP, por lo que es capaz de manipular estados de las peticiones y respuestas, cabeceras, URIs, entre otros.
 
 \begin{figure}[tbh]
 \centering
@@ -119,7 +119,7 @@ HTML~\cite{html5} es un lenguaje de marcas que permite la construcción de pági
 \item Introducción de atributos de control como números, fechas, calendarios, rangos, horas, ...
 \item Introducción de elementos gráficos
 \item Introducción de nuevas APIs como la de geolocalización, la de arrastrar y soltar, almacenamiento local, ...
-\end{itemize}   
+\end{itemize}
 
 \begin{figure}[tbh]
 \centering
@@ -149,7 +149,7 @@ Javascript~\cite{javascript} es un lenguaje de programación que permite dotar a
 \end{figure}
 
 \subsubsection*{Bower}
-Bower~\cite{bower} es un gestor de paquetes JavaScript. Se encarga de manejar las dependencias de un determinado paquete, descargándolas de forma transparente para el desarrollador. Es el análogo a Composer, pero para paquetes escritos en JavaScript. 
+Bower~\cite{bower} es un gestor de paquetes JavaScript. Se encarga de manejar las dependencias de un determinado paquete, descargándolas de forma transparente para el desarrollador. Es el análogo a Composer, pero para paquetes escritos en JavaScript.
 
 \begin{figure}[tbh]
 \centering
@@ -191,7 +191,7 @@ Cytoscape.js~\cite{cytoscape} es una librería JavaScript para el análisis y vi
 
 \section{Backend}
 
-En la Figura~\ref{fig:arquitectura} se puede observar que el backend está compuesto por una API REST y un parser para obtener los datos necesarios. Todos los datos se guardan en una base de datos relacional MySQL. 
+En la Figura~\ref{fig:arquitectura} se puede observar que el backend está compuesto por una API REST y un parser para obtener los datos necesarios. Todos los datos se guardan en una base de datos relacional MySQL.
 
 \subsection*{Parser}
 
@@ -220,7 +220,7 @@ Todos los datos recogidos por los scripts anteriores, se guardan en tres tablas 
 
 \item \textbf{Rankings}: tabla donde se guardan las clasificaciones de todas las jornadas. Se incluyen datos como posición del equipo, número de puntos, número de partidos jugados, empatados y perdidos, goles a favor y goles en contra, y diferencia de goles.
 
-\item \textbf{Equipos}: tabla donde se guardan los equipos junto a su nombre. 
+\item \textbf{Equipos}: tabla donde se guardan los equipos junto a su nombre.
 \end{itemize}
 
 La Figura~\ref{fig:er-parser} muestra el diagrama Entidad-Relación completo del parser.
@@ -297,7 +297,7 @@ La aplicación depende de una serie de módulos Angular que permite una mayor in
 \item \textbf{Angular-chart}: módulo que permite la representación de gráficos. Los tipos de gráficos que soporta son: gráfico de líneas, de radar, de barras y de sectores.
 
 \item \textbf{Cytoscape.js}: módulo que permite representar y analizar grafos.
-\end{itemize} 
+\end{itemize}
 
 \subsection{Vista de la aplicación}
 
@@ -323,14 +323,14 @@ El histórico de posiciones (Figura~\ref) muestra, mediante un gráfico de líne
 \label{fig:inicio-historico}
 \end{figure}
 
-Las medidas de competitividad (Figura~\ref{fig:medidas}) se muestran en dos gráficos distintos: el primero de ellos, muestra un gráfico de radar con seis medidas de competitividad (fuerza  y grado medio normalizado, eficiencia, diámetro, longitud del camino característico y tau de Kendall generalizada); en el segundo se muestran las distribuciones acumuladas de la fuerza y del grado normalizado.\\  
+Las medidas de competitividad (Figura~\ref{fig:medidas}) se muestran en dos gráficos distintos: el primero de ellos, muestra un gráfico de radar con seis medidas de competitividad (fuerza  y grado medio normalizado, eficiencia, diámetro, longitud del camino característico y tau de Kendall generalizada); en el segundo se muestran las distribuciones acumuladas de la fuerza y del grado normalizado.\\
 
 \begin{figure}[htbp]
 \centering
 \subfigure[Medidas de competitividad en un gráfico de radar]{\includegraphics[width=0.45\textwidth]{imagenes/pantallazos-aplicacion/inicio-medidas1}}
 \subfigure[Medidas de competitividad en un gráfico de líneas]{\includegraphics[width=0.45\textwidth]{imagenes/pantallazos-aplicacion/inicio-medidas2}}
 \caption{Gráficos con las medidas de competitividad} \label{fig:medidas}
-\end{figure} 
+\end{figure}
 
 Por último, en la pantalla de inicio/temporada, se muestra el grafo de competitividad evolutivo (Figura~\ref{fig:inicio-grafo}). Se muestra el grafo junto con los nombres de los equipos, y sus respectivos escudos.\\
 
@@ -351,10 +351,10 @@ Las primeras estadísticas que se muestran son las relativas al histórico, como
 \includegraphics[width=0.9\textwidth]{imagenes/pantallazos-aplicacion/inicio-estadisticas}
 \caption{Estadísticas globales de un equipo}
 \label{fig:equipo-estadisticas}
-\end{figure} 
+\end{figure}
 
 Otras estadísticas que se muestran son los porcentajes de victorias, derrotas y empates tanto como de local como de visitante (Figura~\ref{fig:equipo-local}) en forma de gráfico circular. También se pueden ver los mismos gráficos, pero para goles (a favor y en contra) tanto como local como para visitante.\\
- 
+
 \begin{figure}[htb]
 \centering
 \includegraphics[width=0.9\textwidth]{imagenes/pantallazos-aplicacion/equipo-local}
@@ -371,7 +371,7 @@ Por último, se muestran las estadísticas por resultados, es decir, se muestran
 \label{fig:equipo-resultados}
 \end{figure}
 
-A parte de ver los resultados de la Liga, también se puede ver el gráfico de competitividad y las medidas para unos rankings de lo que disponga el usuario. Para ello, lo primero que deberá hacer el usuario será registrarse. Para hacerlo, debe ir a \emph{Iniciar Sesión} en la parte superior de la pantalla y pulsar sobre \emph{Registrarse}. Se mostrará un formulario de registro, en el que se deberán rellenar el nombre de usuario, la contraseña y el correo electrónico (Figura~\ref{fig:registro}).\\  
+A parte de ver los resultados de la Liga, también se puede ver el gráfico de competitividad y las medidas para unos rankings de lo que disponga el usuario. Para ello, lo primero que deberá hacer el usuario será registrarse. Para hacerlo, debe ir a \emph{Iniciar Sesión} en la parte superior de la pantalla y pulsar sobre \emph{Registrarse}. Se mostrará un formulario de registro, en el que se deberán rellenar el nombre de usuario, la contraseña y el correo electrónico (Figura~\ref{fig:registro}).\\
 
 \begin{figure}[htb]
 \centering
@@ -380,7 +380,7 @@ A parte de ver los resultados de la Liga, también se puede ver el gráfico de c
 \label{fig:registro}
 \end{figure}
 
-Una vez rellenos estos datos, nos redirigirá a una nueva página desde la que podremos iniciar sesión. Esta vez sólo nos pedirá el usuario y la contraseña (Figura~\ref{fig:inicio-sesion}). Una vez introducidos los datos de forma correcta, nos llevará a la página de perfil del usuario, en la que se indican todos los rankings que hemos subido. 
+Una vez rellenos estos datos, nos redirigirá a una nueva página desde la que podremos iniciar sesión. Esta vez sólo nos pedirá el usuario y la contraseña (Figura~\ref{fig:inicio-sesion}). Una vez introducidos los datos de forma correcta, nos llevará a la página de perfil del usuario, en la que se indican todos los rankings que hemos subido.
 
 \begin{figure}[htb]
 \centering
@@ -398,24 +398,24 @@ Para añadir un nuevo ranking, deberemos hacer click sobre el botón \emph{+} qu
 \label{fig:nuevo-ranking}
 \end{figure}
 
-El fichero que se suba debe tener el siguiente formato: 
+El fichero que se suba debe tener el siguiente formato:
 
 \begin{minted}{bash}
 Nombre del grafo,4,4
 RMA,BAR,SEV,VAL
-BAR,SEV,VAL,RMA 
+BAR,SEV,VAL,RMA
 RMA,BAR,VAL,SEV
 RMA,VAL,BAR,SEV
 \end{minted}
 
 En la primera línea del archivo, se deben indicar el nombre que llevará ese grafo, el número de equipos y el número de jornadas. Todo ello separado por comas. A partir de la segunda línea hasta el número de jornadas, se deben indicar los nombres de los equipos de izquierda a derecha, donde la izquierda indica mayor posición en el ranking, y la derecha menor posición en el ranking. También deben ir separados por comas.\\
 
-Una vez que se ha cargado el ranking, la aplicación volverá a la página de perfil, donde se mostrará el ranking que se acaba de insertar. Si pinchamos en el nombre de uno de los rankings que acabamos se subir se mostrará el grafo y las medidas de competitividad () . 
+Una vez que se ha cargado el ranking, la aplicación volverá a la página de perfil, donde se mostrará el ranking que se acaba de insertar. Si pinchamos en el nombre de uno de los rankings que acabamos se subir se mostrará el grafo y las medidas de competitividad (Figura~\ref{fig:grafo-medida}). 
 
 \begin{figure}[htbp]
 \centering
 \subfigure[Grafo de competitividad]{\includegraphics[width=0.9\textwidth]{imagenes/pantallazos-aplicacion/ver-grafo}}
 \subfigure[Medidas de competitividad]{\includegraphics[width=0.9\textwidth]{imagenes/pantallazos-aplicacion/ver-medidas}}
-\caption{Grafo y medidas de competitividad} 
+\caption{Grafo y medidas de competitividad}
 \label{fig:grafo-medidas}
-\end{figure} 
+\end{figure}
