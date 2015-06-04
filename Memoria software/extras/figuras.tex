@@ -341,11 +341,11 @@
     \draw [<-] (1, 3) -- node[anchor=south] {HTTP}    (-1.75, 3);
     
     % Parser - MySQL
-    \draw [->] (3, 2.50)   -- node {}  (3.60,2.50);
+    \draw [->] (3, 2.50)   -- node {}  (3.3,2.50);
     
     % API REST - MySQL
-    \draw [->] (6.4, 2.25)   -- node {}  (7.00,2.25);
-    \draw [<-] (6.4, 2.75)   -- node {}  (7.00,2.75);
+    \draw [->] (6.7, 2.25)   -- node {}  (7.00,2.25);
+    \draw [<-] (6.7, 2.75)   -- node {}  (7.00,2.75);
     
     % API REST - AngularJS
     \draw [->] (7.5, 1.5)   -- node {}      (7.5,-2.5);
@@ -443,7 +443,7 @@
 
 \node [attribute] (c_id) [right of = nmd] { \key{id} } edge (competitivity);
 
-\node [attribute] (kendall) [right of = c_id] {kendall} edge (competitivity);
+\node [attribute] (kendall) [above of = c_id] {kendall} edge (competitivity);
 
 \node [attribute] (cpl) [below of = competitivity] { cpl } edge (competitivity);
 
@@ -465,7 +465,7 @@
 \node [attribute] (v_id) [right of = vertex] { \key{id} } edge (vertex);
 
 
-\node [attribute] (target) [below right of = v_id] { target } edge (vertex);
+\node [attribute] (target) [below of = v_id] { target } edge (vertex);
 
 \node [attribute] (weight) [below of = vertex] { weight } edge (vertex);
 

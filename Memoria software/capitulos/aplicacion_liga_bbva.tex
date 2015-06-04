@@ -9,8 +9,8 @@ El grafo de competitividad y el histórico de posiciones de la temporada 2011-20
 
 \begin{figure}[htbp]
 \centering
-\subfigure[Grafo de competitividad]{\includegraphics[width=0.6\textwidth]{imagenes/pantallazos-competitividad/2011-2012/grafo}}
-\subfigure[Histórico de posiciones]{\includegraphics[width=0.6\textwidth]{imagenes/pantallazos-competitividad/2011-2012/historico}}
+\subfigure[Grafo de competitividad]{\includegraphics[width=0.5\textwidth]{imagenes/pantallazos-competitividad/2011-2012/grafo}}
+\subfigure[Histórico de posiciones]{\includegraphics[width=0.5\textwidth]{imagenes/pantallazos-competitividad/2011-2012/historico}}
 \caption[Competitividad de la temporada 2011-2012]{Grafo de competitividad e histórico de posiciones de la temporada 2011-2012} \label{fig:grafo-2011-2012}
 \end{figure}
 
@@ -22,8 +22,8 @@ El grafo de competitividad y el histórico de posiciones de la temporada 2012-20
 
 \begin{figure}[htbp]
 \centering
-\subfigure[Grafo de competitividad]{\includegraphics[width=0.6\textwidth]{imagenes/pantallazos-competitividad/2012-2013/grafo}}
-\subfigure[Histórico de posiciones]{\includegraphics[width=0.6\textwidth]{imagenes/pantallazos-competitividad/2012-2013/historico}}
+\subfigure[Grafo de competitividad]{\includegraphics[width=0.5\textwidth]{imagenes/pantallazos-competitividad/2012-2013/grafo}}
+\subfigure[Histórico de posiciones]{\includegraphics[width=0.5\textwidth]{imagenes/pantallazos-competitividad/2012-2013/historico}}
 \caption[Competitividad de la temporada 2012-2013]{Grafo de competitividad e histórico de posiciones de la temporada 2012-2013} \label{fig:grafo-2012-2013}
 \end{figure}
 
@@ -35,8 +35,8 @@ El grafo de competitividad y el histórico de posiciones de la temporada 2013-20
 
 \begin{figure}[htbp]
 \centering
-\subfigure[Grafo de competitividad]{\includegraphics[width=0.6\textwidth]{imagenes/pantallazos-competitividad/2013-2014/grafo}}
-\subfigure[Histórico de posiciones]{\includegraphics[width=0.6\textwidth]{imagenes/pantallazos-competitividad/2013-2014/historico}}
+\subfigure[Grafo de competitividad]{\includegraphics[width=0.5\textwidth]{imagenes/pantallazos-competitividad/2013-2014/grafo}}
+\subfigure[Histórico de posiciones]{\includegraphics[width=0.5\textwidth]{imagenes/pantallazos-competitividad/2013-2014/historico}}
 \caption[Competitividad de la temporada 2013-2014]{Grafo de competitividad e histórico de posiciones de la temporada 2013-2014} \label{fig:grafo-2013-2014}
 \end{figure}
 
@@ -48,27 +48,30 @@ El grafo de competitividad y el histórico de posiciones de la temporada 2014-20
 
 \begin{figure}[htbp]
 \centering
-\subfigure[Grafo de competitividad]{\includegraphics[width=0.6\textwidth]{imagenes/pantallazos-competitividad/2014-2015/grafo}}
-\subfigure[Histórico de posiciones]{\includegraphics[width=0.6\textwidth]{imagenes/pantallazos-competitividad/2014-2015/historico}}
+\subfigure[Grafo de competitividad]{\includegraphics[width=0.5\textwidth]{imagenes/pantallazos-competitividad/2014-2015/grafo}}
+\subfigure[Histórico de posiciones]{\includegraphics[width=0.5\textwidth]{imagenes/pantallazos-competitividad/2014-2015/historico}}
 \caption[Competitividad de la temporada 2014-2015]{Grafo de competitividad e histórico de posiciones de la temporada 2014-2015} \label{fig:grafo-2014-2015}
 \end{figure}
+
+\clearpage
 
 \section{Estudio de la competitividad}
 
 Los gráficos anteriores no nos dan muchas información de qué temporadas son las más competitivas, por lo que debemos emplear las medidas de competitividad para poder comparar la competitividad. La Tabla~\ref{tbl:medidas} muestra las medidas de competitividad de cada una de las temporadas.
 
 \begin{table}[h]
-\caption[Medidas de competitividad]{Medidas de competitividad de las temporadas 2011-2012, 2012-2013, 2013-2014 y 2014-2015 de la Liga BBVA}
+\centering
+\caption[Medidas de competitividad]{Medidas de competitividad de las temporadas 2011-2012, 2012-2013, 2013-2014 y 2014-2015 de la Liga BBVA. Las medidas son fuerza media normalizada (NMS), el diámetro, la tau de Kendall, el grado medio normalizado (NMD), la longitud del camino característico (CPL) y la eficienncia.}
 \label{tbl:medidas}
-\begin{tabular}{@{}cC{2.5cm}cC{2.5cm}C{2.5}C{3cm}c@{}}
+\begin{tabular}{@{}ccccccc@{}}
 \toprule
-Temporada & Fuerza media normalizada & Diámetro & Tau de Kendall & Grado medio normalizado & Longitud del camino característico & Eficiencia \\ \midrule
-2014-2015 & 0.642 & 3 & 0.054 & 0.891 & 2.768 & 1.633 \\
-2013-2014 & 0.594 & 3 & 0.059 & 0.880 & 2.9368 & 1.573 \\
-2012-2013 & 0.673 & $\infty$ & 0.061 & 0.876 & $\infty$ & 1.574 \\
-2011-2012 & 0.636 & 3 & 0.066 & 0.867 & 2.789 & 1.626 \\ \bottomrule
+Temporada & NMS & Diámetro & Tau de Kendall & NMD & CPL & Eficiencia \\ \midrule
+2014-2015 & 0.642                    & 3        & 0.054          & 0.891                   & 2.768                              & 1.633      \\
+2013-2014 & 0.594                    & 3        & 0.059          & 0.880                   & 2.9368                             & 1.573      \\
+2012-2013 & 0.673                    & $\infty$ & 0.061          & 0.876                   & $\infty$                           & 1.574      \\
+2011-2012 & 0.636                    & 3        & 0.066          & 0.867                   & 2.789                              & 1.626      \\ \bottomrule
 \end{tabular}
-\end{table}  
+\end{table}
 
 Con respecto al diámetro del grafo de competitividad evolutivo, vemos que las temporadas 2014-2015, 2013-2014 y 2011-2012 tienen el mismo diámetro, 3, mientras que la temporada 2012-2013 tiene diámetro infinito. Esto se debe a que existen dos componentes conexas en el grafo de competitividad.\\
 Por tanto, las temporadas 2014-2015, 2013-2014 y 2011-2012 son más competitivas que la temporada 2012-2013 con respecto al diámetro del grafo de competitividad evolutivo.\\
