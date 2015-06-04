@@ -1,0 +1,198 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
+\HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldcontentsline\contentsline
+\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
+\global\let\oldnewlabel\newlabel
+\gdef\newlabel#1#2{\newlabelxx{#1}#2}
+\gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
+\AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\contentsline\oldcontentsline
+\let\newlabel\oldnewlabel
+\fi}
+\fi}
+\global\let\hyper@last\relax 
+\gdef\HyperFirstAtBeginDocument#1{#1}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\select@language{spanish}
+\@writefile{toc}{\select@language{spanish}}
+\@writefile{lof}{\select@language{spanish}}
+\@writefile{lot}{\select@language{spanish}}
+\pgfsyspdfmark {pgfid2}{0}{49786951}
+\pgfsyspdfmark {pgfid1}{5594039}{42705892}
+\pgfsyspdfmark {pgfid4}{0}{49786951}
+\pgfsyspdfmark {pgfid3}{5594039}{42702650}
+\pgfsyspdfmark {pgfid6}{0}{49786951}
+\pgfsyspdfmark {pgfid5}{5594039}{42705892}
+\@writefile{toc}{\contentsline {chapter}{\numberline {1}Introducción}{1}{chapter.1}}
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\pgfsyspdfmark {pgfid8}{0}{49786951}
+\pgfsyspdfmark {pgfid7}{5594039}{42705892}
+\@writefile{toc}{\contentsline {chapter}{\numberline {2}Conceptos básicos de rankings}{3}{chapter.2}}
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\pgfsyspdfmark {pgfid10}{0}{49786951}
+\pgfsyspdfmark {pgfid9}{5594039}{42705892}
+\newlabel{chp:conceptos_basicos}{{2}{3}{Conceptos básicos de rankings}{chapter.2}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {2.1}{\ignorespaces Goles, partidos jugados de los máximos goleadores de la Champions}}{3}{table.caption.4}}
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{tbl:goles_champions}{{2.1}{3}{Goles, partidos jugados de los máximos goleadores de la Champions}{table.caption.4}{}}
+\newlabel{def:ranking}{{1}{3}{}{defi.1}{}}
+\citation{langville2012s}
+\@writefile{toc}{\contentsline {section}{\numberline {2.1}Competitividad en rankings}{4}{section.2.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.1}Grafo de competitividad}{5}{subsection.2.1.1}}
+\newlabel{ej:grafo_competitividad}{{3}{5}{}{ejemplo.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.1}{\ignorespaces Grafo de competitividad}}{6}{figure.caption.5}}
+\newlabel{fig:grafo_competitividad}{{2.1}{6}{Grafo de competitividad}{figure.caption.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.2}{\ignorespaces Grafo de competitividad evolutivo}}{6}{figure.caption.6}}
+\newlabel{fig:grafo_competitividad_evolutivo}{{2.2}{6}{Grafo de competitividad evolutivo}{figure.caption.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.2}Medidas de competitividad}{6}{section.2.2}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.3}{\ignorespaces Grafo de competitividad de $\mathcal  {S}$\relax }}{7}{figure.caption.7}}
+\newlabel{fig:grado_medio}{{2.3}{7}{Grafo de competitividad de $\mathcal {S}$\relax }{figure.caption.7}{}}
+\citation{lfp}
+\@writefile{toc}{\contentsline {chapter}{\numberline {3}Diseño de la aplicación}{13}{chapter.3}}
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\pgfsyspdfmark {pgfid15}{0}{49786951}
+\pgfsyspdfmark {pgfid14}{5594039}{42653979}
+\@writefile{toc}{\contentsline {section}{\numberline {3.1}Arquitectura de la aplicación}{13}{section.3.1}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.2}Tecnologías utilizadas}{13}{section.3.2}}
+\citation{apache}
+\citation{mysql}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces Arquitectura de la aplicación\relax }}{14}{figure.caption.8}}
+\newlabel{fig:arquitectura}{{3.1}{14}{Arquitectura de la aplicación\relax }{figure.caption.8}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}Tecnologías del lado del servidor}{14}{subsection.3.2.1}}
+\citation{php}
+\citation{composer}
+\citation{slim}
+\newlabel{fig:apache}{{\caption@xref {fig:apache}{ on input line 50}}{15}{}{figure.caption.9}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces Servidor HTTP Apache\relax }}{15}{figure.caption.9}}
+\newlabel{fig:mysql}{{\caption@xref {fig:mysql}{ on input line 61}}{15}{}{figure.caption.10}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces MySQL\relax }}{15}{figure.caption.10}}
+\newlabel{fig:php}{{\caption@xref {fig:php}{ on input line 72}}{16}{}{figure.caption.11}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.4}{\ignorespaces PHP\relax }}{16}{figure.caption.11}}
+\newlabel{fig:composer}{{\caption@xref {fig:composer}{ on input line 83}}{16}{}{figure.caption.12}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.5}{\ignorespaces Composer\relax }}{16}{figure.caption.12}}
+\newlabel{fig:slim}{{\caption@xref {fig:slim}{ on input line 94}}{16}{}{figure.caption.13}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.6}{\ignorespaces Slim Framework\relax }}{16}{figure.caption.13}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.2}Tecnologías del lado del cliente}{16}{subsection.3.2.2}}
+\citation{html5}
+\citation{css3}
+\citation{javascript}
+\citation{bower}
+\newlabel{fig:html5}{{\caption@xref {fig:html5}{ on input line 126}}{17}{}{figure.caption.14}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.7}{\ignorespaces HTML5\relax }}{17}{figure.caption.14}}
+\citation{bootstrap}
+\citation{angular}
+\newlabel{fig:css3}{{\caption@xref {fig:css3}{ on input line 136}}{18}{}{figure.caption.15}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.8}{\ignorespaces CSS3\relax }}{18}{figure.caption.15}}
+\newlabel{fig:javascript}{{\caption@xref {fig:javascript}{ on input line 146}}{18}{}{figure.caption.16}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.9}{\ignorespaces JavaScript\relax }}{18}{figure.caption.16}}
+\newlabel{fig:bower}{{\caption@xref {fig:bower}{ on input line 156}}{18}{}{figure.caption.17}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.10}{\ignorespaces Bower\relax }}{18}{figure.caption.17}}
+\citation{cytoscape}
+\newlabel{fig:bootstrap}{{\caption@xref {fig:bootstrap}{ on input line 166}}{19}{}{figure.caption.18}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.11}{\ignorespaces Bootstrap\relax }}{19}{figure.caption.18}}
+\newlabel{fig:angular}{{\caption@xref {fig:angular}{ on input line 176}}{19}{}{figure.caption.19}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.12}{\ignorespaces AngularJS\relax }}{19}{figure.caption.19}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.3}Backend}{19}{section.3.3}}
+\newlabel{fig:cytoscape}{{\caption@xref {fig:cytoscape}{ on input line 187}}{20}{}{figure.caption.20}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.13}{\ignorespaces Cytoscape.js\relax }}{20}{figure.caption.20}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.14}{\ignorespaces Diagrama E-R asociado al parser\relax }}{22}{figure.caption.21}}
+\newlabel{fig:er-parser}{{3.14}{22}{Diagrama E-R asociado al parser\relax }{figure.caption.21}{}}
+\citation{richardson}
+\citation{http-status}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.15}{\ignorespaces Niveles de madurez de una API REST\relax }}{23}{figure.caption.22}}
+\newlabel{fig:niveles-api-rest}{{3.15}{23}{Niveles de madurez de una API REST\relax }{figure.caption.22}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.4}Frontend}{24}{section.3.4}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.16}{\ignorespaces Diagrama E-R asociado a la API REST\relax }}{25}{figure.caption.23}}
+\newlabel{fig:er-api}{{3.16}{25}{Diagrama E-R asociado a la API REST\relax }{figure.caption.23}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4.1}Vista de la aplicación}{25}{subsection.3.4.1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.17}{\ignorespaces Inicio de la aplicación\relax }}{26}{figure.caption.24}}
+\newlabel{fig:inicio-aplicacion}{{3.17}{26}{Inicio de la aplicación\relax }{figure.caption.24}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.18}{\ignorespaces Histórico de posiciones durante la temporada\relax }}{27}{figure.caption.25}}
+\newlabel{fig:inicio-historico}{{3.18}{27}{Histórico de posiciones durante la temporada\relax }{figure.caption.25}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.19}{\ignorespaces Gráficos con las medidas de competitividad\relax }}{28}{figure.caption.26}}
+\newlabel{fig:medidas}{{3.19}{28}{Gráficos con las medidas de competitividad\relax }{figure.caption.26}{}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Medidas de competitividad en un gráfico de radar}}}{28}{figure.caption.26}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Medidas de competitividad en un gráfico de líneas}}}{28}{figure.caption.26}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.20}{\ignorespaces Grafo de competitividad en la aplicación\relax }}{29}{figure.caption.27}}
+\newlabel{fig:inicio-grafo}{{3.20}{29}{Grafo de competitividad en la aplicación\relax }{figure.caption.27}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.21}{\ignorespaces Estadísticas globales de un equipo\relax }}{30}{figure.caption.28}}
+\newlabel{fig:equipo-estadisticas}{{3.21}{30}{Estadísticas globales de un equipo\relax }{figure.caption.28}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.22}{\ignorespaces Estadísticas de resultados de un equipo\relax }}{30}{figure.caption.29}}
+\newlabel{fig:equipo-local}{{3.22}{30}{Estadísticas de resultados de un equipo\relax }{figure.caption.29}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.23}{\ignorespaces Estadísticas por resultados de un equipo\relax }}{31}{figure.caption.30}}
+\newlabel{fig:equipo-resultados}{{3.23}{31}{Estadísticas por resultados de un equipo\relax }{figure.caption.30}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.24}{\ignorespaces Formulario de registro\relax }}{31}{figure.caption.31}}
+\newlabel{fig:registro}{{3.24}{31}{Formulario de registro\relax }{figure.caption.31}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.25}{\ignorespaces Formulario para iniciar sesión\relax }}{31}{figure.caption.32}}
+\newlabel{fig:inicio-sesion}{{3.25}{31}{Formulario para iniciar sesión\relax }{figure.caption.32}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.26}{\ignorespaces Formulario para añadir un nuevo ranking\relax }}{32}{figure.caption.33}}
+\newlabel{fig:nuevo-ranking}{{3.26}{32}{Formulario para añadir un nuevo ranking\relax }{figure.caption.33}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.27}{\ignorespaces Grafo y medidas de competitividad\relax }}{32}{figure.caption.34}}
+\newlabel{fig:grafo-medidas}{{3.27}{32}{Grafo y medidas de competitividad\relax }{figure.caption.34}{}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Grafo de competitividad}}}{32}{figure.caption.34}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Medidas de competitividad}}}{32}{figure.caption.34}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {4}Competitividad en las últimas temporadas}{33}{chapter.4}}
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\pgfsyspdfmark {pgfid20}{0}{49786951}
+\pgfsyspdfmark {pgfid19}{5594039}{42705892}
+\@writefile{toc}{\contentsline {section}{\numberline {4.1}Temporada 2011-2012}{33}{section.4.1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces Competitividad de la temporada 2011-2012}}{33}{figure.caption.35}}
+\newlabel{fig:grafo-2011-2012}{{4.1}{33}{Competitividad de la temporada 2011-2012}{figure.caption.35}{}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Grafo de competitividad}}}{33}{figure.caption.35}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Histórico de posiciones}}}{33}{figure.caption.35}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.2}Temporada 2012-2013}{34}{section.4.2}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.2}{\ignorespaces Competitividad de la temporada 2012-2013}}{34}{figure.caption.36}}
+\newlabel{fig:grafo-2012-2013}{{4.2}{34}{Competitividad de la temporada 2012-2013}{figure.caption.36}{}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Grafo de competitividad}}}{34}{figure.caption.36}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Histórico de posiciones}}}{34}{figure.caption.36}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.3}Temporada 2013-2014}{35}{section.4.3}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.3}{\ignorespaces Competitividad de la temporada 2013-2014}}{35}{figure.caption.37}}
+\newlabel{fig:grafo-2013-2014}{{4.3}{35}{Competitividad de la temporada 2013-2014}{figure.caption.37}{}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Grafo de competitividad}}}{35}{figure.caption.37}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Histórico de posiciones}}}{35}{figure.caption.37}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.4}Temporada 2014-2015}{36}{section.4.4}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.4}{\ignorespaces Competitividad de la temporada 2014-2015}}{36}{figure.caption.38}}
+\newlabel{fig:grafo-2014-2015}{{4.4}{36}{Competitividad de la temporada 2014-2015}{figure.caption.38}{}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Grafo de competitividad}}}{36}{figure.caption.38}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Histórico de posiciones}}}{36}{figure.caption.38}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.5}Estudio de la competitividad}{37}{section.4.5}}
+\@writefile{lot}{\contentsline {table}{\numberline {4.1}{\ignorespaces Medidas de competitividad}}{37}{table.caption.39}}
+\newlabel{tbl:medidas}{{4.1}{37}{Medidas de competitividad}{table.caption.39}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {5}Conclusiones}{39}{chapter.5}}
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\pgfsyspdfmark {pgfid22}{0}{49786951}
+\pgfsyspdfmark {pgfid21}{5594039}{42705892}
+\@writefile{toc}{\contentsline {section}{\numberline {5.1}Mejoras y futuro trabajo}{39}{section.5.1}}
+\gdef \LT@i {\LT@entry 
+    {3}{231.18005pt}\LT@entry 
+    {3}{57.972pt}\LT@entry 
+    {1}{148.26378pt}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {A}Diseño de la API REST}{41}{appendix.Alph1}}
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\pgfsyspdfmark {pgfid24}{0}{49786951}
+\pgfsyspdfmark {pgfid23}{5594039}{42705892}
+\newlabel{app:api-rest}{{A}{41}{Diseño de la API REST}{appendix.Alph1}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {A.1}{\ignorespaces Métodos de la API REST}}{41}{table.Alph1.1}}
+\@writefile{lot}{\contentsline {table}{\numberline {A.1}{\ignorespaces Métodos de la API REST (continuación)}}{42}{table.Alph1.1}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {B}Teoría de grafos}{43}{appendix.Alph2}}
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\pgfsyspdfmark {pgfid26}{0}{49786951}
+\pgfsyspdfmark {pgfid25}{5594039}{42705892}
+\newlabel{teoria_grafos}{{B}{43}{Teoría de grafos}{appendix.Alph2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {B.1}{\ignorespaces Ejemplo de grafo\relax }}{43}{figure.caption.40}}
+\newlabel{fig:grafo}{{B.1}{43}{Ejemplo de grafo\relax }{figure.caption.40}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {B.2}{\ignorespaces Ejemplo de grafo completo\relax }}{44}{figure.caption.41}}
+\newlabel{fig:grafo_completo}{{B.2}{44}{Ejemplo de grafo completo\relax }{figure.caption.41}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {B.3}{\ignorespaces Ejemplo de unión de unión e intersección de grafos\relax }}{45}{figure.caption.42}}
+\newlabel{fig:union_interseccion_grafo}{{B.3}{45}{Ejemplo de unión de unión e intersección de grafos\relax }{figure.caption.42}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {B.4}{\ignorespaces Ejemplo de subgraf
