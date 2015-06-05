@@ -27,6 +27,8 @@ Para instalar la aplicación necesitaremos seguir los siguientes pasos [1]:
       
       ```sql
       CREATE USER 'rankings'@'localhost' IDENTIFIED by '1234';
+      GRANT ALL PRIVILEGES ON * . * TO 'rankings'@'localhost';
+      FLUSH PRIVILEGES;
       ```
       
       donde `1234` es la contraseña del usuario `rankings`.
