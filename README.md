@@ -45,7 +45,7 @@ Para instalar la aplicación necesitaremos seguir los siguientes pasos [1]:
       3.2. Ejecutamos los comandos
       
       ```bash
-     sudo nano /etc/apache2/sites-available/default
+     sudo nano /etc/apache2/apache2.conf
       ```
       
       y buscamos en el archivo `<Directory /var/www/>`.
@@ -54,11 +54,9 @@ Para instalar la aplicación necesitaremos seguir los siguientes pasos [1]:
     
       ```
         <Directory /var/www/>
-              Options Indexes FollowSymLinks MultiViews
-              # changed from None to FileInfo
-              AllowOverride FileInfo
-              Order allow,deny
-              allow from all
+          Options Indexes FollowSymLinks
+          AllowOverride All
+          Require all granted
         </Directory>
       ```
       
