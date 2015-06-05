@@ -50,7 +50,7 @@ sudo service apache2 restart
 \item Ejecutamos los comandos
 
 \begin{minted}{bash}
-sudo nano /etc/apache2/sites-available/default
+sudo nano /etc/apache2/apache2.conf
 \end{minted}
 
 y buscamos en el archivo \emph{<Directory /var/www/>}.
@@ -59,11 +59,9 @@ y buscamos en el archivo \emph{<Directory /var/www/>}.
 
 \begin{minted}{bash}
 <Directory /var/www/>
-      Options Indexes FollowSymLinks MultiViews
-      # changed from None to FileInfo
-      AllowOverride FileInfo
-      Order allow,deny
-      allow from all
+	Options Indexes FollowSymLinks
+	AllowOverride All
+	Require all granted
 </Directory>
 \end{minted}
 

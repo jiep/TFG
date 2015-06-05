@@ -451,18 +451,18 @@ Ver Teorema 3.16 de \cite{journals/corr/CriadoGPR13a}.
 
 \section{Cálculo de las componentes conexas}
 
-En el Ejemplo \ref{ej:grafo_competitividad} vimos que el grafo de competitividad puede tener más de una componente conexa. Estas componentes conexas indican los equipos que han competido entre sí. Veremos un algoritmo que permite calcular las componentes conexas del grafo de competitividad sin calcularlo explícitamente a partir de los llamados \textcolor{red}{competidores eventuales}.
+En el Ejemplo \ref{ej:grafo_competitividad} vimos que el grafo de competitividad puede tener más de una componente conexa. Estas componentes conexas indican los equipos que han competido entre sí. Veremos un algoritmo que permite calcular las componentes conexas del grafo de competitividad sin calcularlo explícitamente a partir de los llamados posible competidores.
 
 \begin{defi}
 Si tenemos una familia de rankings $\mathcal{R} = \{c_1,\dots,c_r\}$ de nodos $\mathcal{N} = \{1,\dots,n\}$, decimos que un par de nodos $(i,j) \in \mathcal{N} \times \mathcal{N}$ compiten eventualmente si existe $k \in \N$ y nodos $i_i,\dots,i_k \in \mathcal{N}$ tal que $(i,i_1)$ compiten, $(i_1,i_2)$ compiten,\dots, y $(i_k,j)$ compiten. 
 \end{defi}
 
 \begin{defi}
-Un conjunto $D \subseteq \mathcal{N}$ se llama conjunto de \textcolor{red}{competidores eventuales} si es un conjunto maximal con respecto a la propiedad de competición eventual entre sus elementos.
+Un conjunto $D \subseteq \mathcal{N}$ se llama conjunto de posibles competidores si es un conjunto maximal con respecto a la propiedad de competición eventual entre sus elementos.
 \end{defi}
 
 \begin{teo}
-Dado un conjunto finito $\mathcal{R} = \{ c_1, \dots, c_r \}$ de rankings de nodos $\mathcal{N} = \{1,\dots, n\}$ el conjunto de \textcolor{red}{competidores eventuales} puede ser identificado con los intervalos cerrados de números naturales $[p,q]$ en el siguiente sentido:
+Dado un conjunto finito $\mathcal{R} = \{ c_1, \dots, c_r \}$ de rankings de nodos $\mathcal{N} = \{1,\dots, n\}$ el conjunto de posibles competidores puede ser identificado con los intervalos cerrados de números naturales $[p,q]$ en el siguiente sentido:
 
 \begin{equation*}
 D_{[p,q]} = \{ x \in \mathcal{N} \mid c_s^{-1} \in [p,q] \text{ para algún } c_s \in \mathcal{R} \}
@@ -475,7 +475,7 @@ Además, $p$ y $q$ son la primera y la última posición de los elementos de $D_
 Ver el Teorema 4.3 de \cite{journals/corr/CriadoGPR13a}.
 \end{proof}
 
-La prueba de este teorema da un algoritmo para calcular los conjuntos de \textcolor{red}{competidores eventuales} del grafo de competitividad, que coinciden con las componentes conexas de dicho grafo.
+La prueba de este teorema da un algoritmo para calcular los conjuntos de posibles competidores del grafo de competitividad, que coinciden con las componentes conexas de dicho grafo.
 
 \begin{algorithm}\label{algoritmo}
 \SetKwInOut{Input}{Entrada}\SetKwInOut{Output}{Salida}
@@ -506,7 +506,7 @@ La prueba de este teorema da un algoritmo para calcular los conjuntos de \textco
  
  }
  
- \Output{ \ Conjuntos de \textcolor{red}{competidores eventuales} $D_1, \dots, D_k$}
+ \Output{ \ Conjuntos de poisbles competidores $D_1, \dots, D_k$}
  
  \end{algorithm}
 
