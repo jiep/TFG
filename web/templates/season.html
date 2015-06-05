@@ -29,7 +29,6 @@
                         <strong class="caret"></strong>
                     </a>
                     <ul class="dropdown-menu">
-
                         <div class="input-group input-group-lg" style="padding: 20px">
                             <form ng-submit="login(user)">
                                 <div class="form-group">
@@ -49,13 +48,10 @@
                             </form>
                             <a href="register">Registarse</a>
                         </div>
-
                     </ul>
                 </li>
                 <li ng-if="user">
-                    <a href="profile" class="dropdown-toggle" data-toggle="dropdown">
-      	 	{{user.username}}
-      	 </a>
+                    <a href="profile" class="dropdown-toggle" data-toggle="dropdown">{{user.username}}</a>
                 </li>
             </ul>
         </div>

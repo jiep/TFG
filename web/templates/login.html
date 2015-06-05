@@ -1,52 +1,52 @@
 <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" ng-click="gotoStart()" style="cursor:pointer">Rankings</a>
-    </div>
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        <li>
-          <a ng-click="gotoStart()" style="cursor:pointer">
-            <img src="img/liga-bbva.png" aria-hidden="true">
-          </a>
-        </li>
-        <!--<li>
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" ng-click="gotoStart()" style="cursor:pointer">Rankings</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a ng-click="gotoStart()" style="cursor:pointer">
+                        <img src="img/liga-bbva.png" aria-hidden="true">
+                    </a>
+                </li>
+                <!--<li>
           <a href="#">
             <img src="img/liga-adelante.png" aria-hidden="true">
           </a>
         </li>-->
-      </ul>
+            </ul>
+        </div>
     </div>
-  </div>
 </nav>
 
-  <!----------------------------------------- -->
+<!----------------------------------------- -->
 
 <div class="row">
 
-  <div class="col-md-12 column">
-    <div class="panel panel-default">
-      <div class="panel-heading">Iniciar Sesión</div>
-      <div class="panel-body">
-        <form ng-submit="login(user2)">
-          <div class="form-group">
-            <label for="username">Nombre de usuario</label>
-            <input name="username" ng-model="user2.username" type="username" class="form-control" placeholder="Nombre de usuario">
-          </div>
-          <div class="form-group">
-            <label for="password">Contraseña</label>
-            <input type="password" ng-model="user2.password" class="form-control" placeholder="Contraseña">
-          </div>
-          <a href="register">Registrarse</a>
-          <button class="btn btn-default pull-right">Iniciar Sesión</button>
-        </form>
-      </div>
+    <div class="col-md-12 column">
+        <div class="panel panel-default">
+            <div class="panel-heading">Iniciar Sesión</div>
+            <div class="panel-body">
+                <form ng-submit="login(user2)">
+                    <div class="form-group">
+                        <label for="username">Nombre de usuario</label>
+                        <input name="username" ng-model="user2.username" type="username" class="form-control" placeholder="Nombre de usuario">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Contraseña</label>
+                        <input type="password" ng-model="user2.password" class="form-control" placeholder="Contraseña">
+                    </div>
+                    <a href="register">Registrarse</a>
+                    <button class="btn btn-default pull-right">Iniciar Sesión</button>
+                </form>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
