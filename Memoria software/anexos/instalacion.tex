@@ -29,6 +29,8 @@ Nos pedirá la contraseña del usuario \emph{root} que hemos configurado durante
 
 \begin{minted}{sql}
 CREATE USER 'rankings'@'localhost' IDENTIFIED by '1234';
+GRANT ALL PRIVILEGES ON * . * TO 'rankings'@'localhost';
+FLUSH PRIVILEGES;
 \end{minted}
 
 donde \emph{1234} es la contraseña del usuario \emph{rankings}.
