@@ -1,189 +1,192 @@
 <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" ng-click="gotoStart()" style="cursor:pointer">Rankings</a>
-    </div>
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        <li>
-          <a ng-click="gotoStart()" style="cursor:pointer">
-            <img src="img/liga-bbva.png" aria-hidden="true">
-          </a>
-        </li>
-        <!--<li>
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" ng-click="gotoStart()" style="cursor:pointer">Rankings</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a ng-click="gotoStart()" style="cursor:pointer">
+                        <img src="img/liga-bbva.png" aria-hidden="true">
+                    </a>
+                </li>
+                <!--<li>
           <a href="#">
             <img src="img/liga-adelante.png" aria-hidden="true">
           </a>
         </li>-->
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown" ng-if="!user">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Iniciar sesión
-            <strong class="caret"></strong>
-          </a>
-          <ul class="dropdown-menu">
-            <div class="panel panel-default">
-              <div class="panel-body">
-                <div class="input-group input-group-lg">
-                  <form ng-submit="login(user)">
-                    <div class="form-group">
-                      <label for="username">Usuario</label>
-                      <input ng-model="user.username" type="username" class="form-control" placeholder="Usuario" required>
-                    </div>
-                    <div class="form-group">
-                      <label for="password">Contraseña</label>
-                      <input ng-model="user.password" type="password" class="form-control" placeholder="Contraseña" required>
-                    </div>
-                    <div class="form-group">
-                      <label></label>
-                      <button class="btn btn-default pull-right">Iniciar sesión</button>
-                    </div>
-                  </form>
-                  <a href="register">Registarse</a>
-                </div>
-            </div>
-          </ul>
-        </li>
-      	<li ng-if="user">
-      	 <a href="profile" class="dropdown-toggle" data-toggle="dropdown">
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown" ng-if="!user">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Iniciar sesión
+                        <strong class="caret"></strong>
+                    </a>
+                    <ul class="dropdown-menu">
+
+                        <div class="input-group input-group-lg" style="padding: 20px">
+                            <form ng-submit="login(user)">
+                                <div class="form-group">
+                                    <label for="username">Usuario</label>
+                                    <input ng-model="user.username" type="username" class="form-control" placeholder="Usuario" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">Contraseña</label>
+                                    <input ng-model="user.password" type="password" class="form-control" placeholder="Contraseña" required>
+                                </div>
+                                <div class="form-group">
+                                    <label></label>
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-default pull-right" style="margin-bottom: 20px">Iniciar sesión</button>
+                                </div>
+                            </form>
+                            <a href="register">Registarse</a>
+                        </div>
+
+                    </ul>
+                </li>
+                <li ng-if="user">
+                    <a href="profile" class="dropdown-toggle" data-toggle="dropdown">
       	 	{{user.username}}
       	 </a>
-      	 </li>
-	      </ul>
-	    </div>
-	  </div>
-	</nav>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
 <div class="row">
-  <div class="col-md-2 column">
-    <ul class="nav nav-pills nav-stacked">
-      <li class="active">
-        <a href="#temporadas">
-          <span class="glyphicon glyphicon-home"></span> Temporadas</a>
-      </li>
-      <ul>
-        <li ng-repeat="season in seasons"><a href="bbva/{{season.season.replace('/','-')}}">{{season.season}}</a></li>
-      </ul>
+    <div class="col-md-2 column">
+        <ul class="nav nav-pills nav-stacked">
+            <li class="active">
+                <a href="#temporadas">
+                    <span class="glyphicon glyphicon-home"></span> Temporadas</a>
+            </li>
+            <ul>
+                <li ng-repeat="season in seasons"><a href="bbva/{{season.season.replace('/','-')}}">{{season.season}}</a>
+                </li>
+            </ul>
 
-      <li>
-        <a href="#equipos">
-          <span class="glyphicon glyphicon-film"></span> Equipos</a>
-      </li>
-      <ul>
-        <li ng-repeat="team in teams"><a href="bbva/team/{{team.id}}">{{team.nombre}}</a></li>
-      </ul>
+            <li>
+                <a href="#equipos">
+                    <span class="glyphicon glyphicon-film"></span> Equipos</a>
+            </li>
+            <ul>
+                <li ng-repeat="team in teams"><a href="bbva/team/{{team.id}}">{{team.nombre}}</a>
+                </li>
+            </ul>
 
-      <li>
-        <a href="#competitividad">
-          <span class="glyphicon glyphicon-cloud"></span> Estadísticas</a>
-      </li>
-      <ul>
-        <li>Estadística</li>
-      </ul>
-      <li>
-        <a href="#">
-          <span class="glyphicon glyphicon-signal"></span> Predicción</a>
-      </li>
-    </ul>
-  </div>
+            <li>
+                <a href="#competitividad">
+                    <span class="glyphicon glyphicon-cloud"></span> Estadísticas</a>
+            </li>
+            <ul>
+                <li>Estadística</li>
+            </ul>
+            <li>
+                <a href="#">
+                    <span class="glyphicon glyphicon-signal"></span> Predicción</a>
+            </li>
+        </ul>
+    </div>
 
-  <!----------------------------------------- -->
+    <!----------------------------------------- -->
 
-  <div class="col-md-10 column">
+    <div class="col-md-10 column">
 
-    <div class="panel panel-default" id="clasificacion">
-      <div class="panel-heading">
-        <span class="glyphicon glyphicon-th"></span> Clasificación</div>
-      <div class="panel-body">
+        <div class="panel panel-default" id="clasificacion">
+            <div class="panel-heading">
+                <span class="glyphicon glyphicon-th"></span> Clasificación</div>
+            <div class="panel-body">
 
-        <div class="table-responsible">
-          <table class="table">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Equipo</th>
-                <th>Partidos ganados</th>
-                <th>Partidos empatados</th>
-                <th>Partidos perdidos</th>
-                <th>Goles a favor</th>
-                <th>Goles en contra</th>
-                <th>Puntos</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr ng-repeat="row in clasification">
-                <td>{{row.posicion}}</td>
-                <td>{{row.equipo}}</td>
-                <td>{{row.partidos_ganados}}</td>
-                <td>{{row.partidos_empatados}}</td>
-                <td>{{row.partidos_perdidos}}</td>
-                <td>{{row.goles_favor}}</td>
-                <td>{{row.goles_contra}}</td>
-                <td>{{row.puntos}}</td>
-              </tr>
-            </tbody>
-          </table>
+                <div class="table-responsible">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Equipo</th>
+                                <th>Partidos ganados</th>
+                                <th>Partidos empatados</th>
+                                <th>Partidos perdidos</th>
+                                <th>Goles a favor</th>
+                                <th>Goles en contra</th>
+                                <th>Puntos</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="row in clasification">
+                                <td>{{row.posicion}}</td>
+                                <td>{{row.equipo}}</td>
+                                <td>{{row.partidos_ganados}}</td>
+                                <td>{{row.partidos_empatados}}</td>
+                                <td>{{row.partidos_perdidos}}</td>
+                                <td>{{row.goles_favor}}</td>
+                                <td>{{row.goles_contra}}</td>
+                                <td>{{row.puntos}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
 
-    <div class="panel panel-default" id="historico">
-      <div class="panel-heading">
-        <span class="glyphicon glyphicon-th"></span> Histórico</div>
-      <div class="panel-body" id="panel-historico">
-        <canvas id="canvas2" class="chart chart-line" data="data" labels="labels" legend="true" series="series" options="options"></canvas>
-      </div>
-    </div>
-    <!--<div class="panel panel-default" id="grado">
+        <div class="panel panel-default" id="historico">
+            <div class="panel-heading">
+                <span class="glyphicon glyphicon-th"></span> Histórico</div>
+            <div class="panel-body" id="panel-historico">
+                <canvas id="canvas2" class="chart chart-line" data="data" labels="labels" legend="true" series="series" options="options"></canvas>
+            </div>
+        </div>
+        <!--<div class="panel panel-default" id="grado">
       <div class="panel-heading">
         <span class="glyphicon glyphicon-th"></span> Grado medio normalizado vs distribución acumulada</div>
       <div class="panel-body" id="panel-grado">
         <canvas></canvas>
       </div>
     </div>-->
-    <div class="panel panel-default" ng-controller="RadarCtrl" id="radar">
-      <div class="panel-heading">
-        <span class="glyphicon glyphicon-th"></span> Medidas de competitividad</div>
-      <div class="panel-body" id="panel-radar">
-        <canvas id="canvas3" class="chart chart-radar" data="data" labels="labels"></canvas>
-      </div>
+        <div class="panel panel-default" ng-controller="RadarCtrl" id="radar">
+            <div class="panel-heading">
+                <span class="glyphicon glyphicon-th"></span> Medidas de competitividad</div>
+            <div class="panel-body" id="panel-radar">
+                <canvas id="canvas3" class="chart chart-radar" data="data" labels="labels"></canvas>
+            </div>
+        </div>
+
+        <div class="panel panel-default" ng-controller="MeasureCtrl" id="measure">
+            <div class="panel-heading">
+                <span class="glyphicon glyphicon-th"></span> Medidas de competitividad 2</div>
+            <div class="panel-body" id="panel-measure">
+                <canvas id="canvas4" class="chart chart-line" data="data" options="options" labels="labels" legend="true" series="series"></canvas>
+            </div>
+        </div>
+
+        <div class="panel panel-default" ng-controller="MoreMeasureCtrl" id="measure">
+            <div class="panel-heading">
+                <span class="glyphicon glyphicon-th"></span> Medidas de competitividad acumuladas</div>
+            <div class="panel-body" id="panel-measure">
+                <canvas id="canvas4" class="chart chart-line" data="data" options="options" labels="labels" legend="true" series="series"></canvas>
+            </div>
+        </div>
+
+        <div class="panel panel-default" id="competitividad">
+            <div class="panel-heading">
+                <span class="glyphicon glyphicon-th"></span> Grafo de competitividad
+            </div>
+            <div class="panel-body">
+                <div id="cy"></div>
+            </div>
+        </div>
     </div>
 
-    <div class="panel panel-default" ng-controller="MeasureCtrl" id="measure">
-      <div class="panel-heading">
-        <span class="glyphicon glyphicon-th"></span> Medidas de competitividad 2</div>
-      <div class="panel-body" id="panel-measure">
-        <canvas id="canvas4" class="chart chart-line" data="data" options="options" labels="labels" legend="true" series="series"></canvas>
-      </div>
+    <div>
+        <button class="btn btn-default pull-right" ng-click="downloadPDF()">Descargar como PDF</button>
     </div>
-
-    <div class="panel panel-default" ng-controller="MoreMeasureCtrl" id="measure">
-      <div class="panel-heading">
-        <span class="glyphicon glyphicon-th"></span> Medidas de competitividad acumuladas</div>
-      <div class="panel-body" id="panel-measure">
-        <canvas id="canvas4" class="chart chart-line" data="data" options="options" labels="labels" legend="true" series="series"></canvas>
-      </div>
-    </div>
-
-    <div class="panel panel-default" id="competitividad">
-      <div class="panel-heading">
-        <span class="glyphicon glyphicon-th"></span> Grafo de competitividad
-      </div>
-      <div class="panel-body">
-        <div id="cy"></div>
-      </div>
-    </div>
-  </div>
-
-  <div>
-    <button class="btn btn-default pull-right" ng-click="downloadPDF()">Descargar como PDF</button>
-  </div>
 
 </div>
