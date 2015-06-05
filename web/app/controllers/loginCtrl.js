@@ -8,4 +8,9 @@ angular.module('app').controller("LoginCtrl", function($scope, Restangular, $roo
       }
     });
   }
+
+  $scope.gotoStart = function(){
+		$location.path("");
+	}
+  
 });

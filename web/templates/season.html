@@ -7,20 +7,20 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Rankings</a>
+      <a class="navbar-brand" ng-click="gotoStart()" style="cursor:pointer">Rankings</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-          <a href="#">
+          <a ng-click="gotoStart()" style="cursor:pointer">
             <img src="img/liga-bbva.png" aria-hidden="true">
           </a>
         </li>
-        <li>
+        <!--<li>
           <a href="#">
             <img src="img/liga-adelante.png" aria-hidden="true">
           </a>
-        </li>
+        </li>-->
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown" ng-if="!user">
@@ -29,9 +29,9 @@
             <strong class="caret"></strong>
           </a>
           <ul class="dropdown-menu">
-            <div class="input-group input-group-lg">
-              <div class="panel panel-default">
-                <div class="panel-body">
+            <div class="panel panel-default">
+              <div class="panel-body">
+                <div class="input-group input-group-lg">
                   <form ng-submit="login(user)">
                     <div class="form-group">
                       <label for="username">Usuario</label>
@@ -41,18 +41,21 @@
                       <label for="password">Contraseña</label>
                       <input ng-model="user.password" type="password" class="form-control" placeholder="Contraseña" required>
                     </div>
-                    <button class="btn btn-default pull-right">Iniciar sesión</button>
+                    <div class="form-group">
+                      <label></label>
+                      <button class="btn btn-default pull-right">Iniciar sesión</button>
+                    </div>
                   </form>
+                  <a href="register">Registarse</a>
                 </div>
-                <a href="register">Registarse</a>
             </div>
           </ul>
         </li>
-	<li ng-if="user">
-	 <a href="profile" class="dropdown-toggle" data-toggle="dropdown">
-	 	{{user.username}}
-	 </a>
-	 </li>
+      	<li ng-if="user">
+      	 <a href="profile" class="dropdown-toggle" data-toggle="dropdown">
+      	 	{{user.username}}
+      	 </a>
+      	 </li>
 	      </ul>
 	    </div>
 	  </div>

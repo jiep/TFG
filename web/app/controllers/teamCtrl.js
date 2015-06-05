@@ -1,5 +1,5 @@
 angular.module('app')
-.controller("TeamCtrl", function(Restangular, $scope, $routeParams, $rootScope) {
+.controller("TeamCtrl", function(Restangular, $scope, $routeParams, $rootScope, Login, $location) {
   var team;
   if ($routeParams.team) {
     team = $routeParams.team;
@@ -30,4 +30,9 @@ angular.module('app')
       }
     });
   }
+
+  $scope.gotoStart = function(){
+		$location.path("");
+	}
+
 });
