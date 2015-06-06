@@ -80,7 +80,20 @@ angular.module('app')
     var hist = document.getElementById("canvas2").toDataURL("image/png", 1);
 
     var dd = {
-      content: [{
+      content: [
+        {
+          columns: [{
+            width: '*',
+            text: ''
+          }, {
+            text: "Clasificación y grafo de competitividad\n\n",
+            style: 'header'
+          }, {
+            width: '*',
+            text: ''
+          }, ]
+        },
+        {
           columns: [{
             width: '*',
             text: ''
@@ -96,17 +109,48 @@ angular.module('app')
             text: ''
           }, ]
         },
-        'Cambios de posición', {
-          image: hist,
-          width: 300,
-          height: 300,
+        {
+          columns: [{
+            width: '*',
+            text: ''
+          }, {
+            text: "\nGrafo de competitividad",
+            style: 'subheader'
+          }, {
+            width: '*',
+            text: ''
+          }, ]
         },
-        'Grafo de competitividad', {
-          image: $scope.cy.png(),
-          width: 300,
-          height: 300,
+        {
+          columns: [{
+            width: '*',
+            text: ''
+          }, {
+            image: $scope.cy.png(),
+            height: 250,
+            width: 250
+          }, {
+            width: '*',
+            text: ''
+          }, ]
         }
-      ]
+      ],
+      styles: {
+    		header: {
+    			fontSize: 18,
+    			bold: true
+    		},
+    		subheader: {
+    			fontSize: 15,
+    			bold: true
+    		},
+    		quote: {
+    			italics: true
+    		},
+    		small: {
+    			fontSize: 8
+  		  }
+	    }
     }
 
     pdfMake.createPdf(dd).download();

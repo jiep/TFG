@@ -77,19 +77,20 @@
             <ul>
                 <li ng-repeat="team in teams"><a href="bbva/team/{{team.id}}">{{team.nombre}}</a>
                 </li>
+
             </ul>
 
             <li>
                 <a href="#competitividad">
                     <span class="glyphicon glyphicon-cloud"></span> Estadísticas</a>
             </li>
-            <ul>
+            <!--<ul>
                 <li>Estadística</li>
             </ul>
             <li>
                 <a href="#">
                     <span class="glyphicon glyphicon-signal"></span> Predicción</a>
-            </li>
+            </li>-->
         </ul>
     </div>
 
@@ -182,7 +183,7 @@
     </div>
 
     <div>
-        <button class="btn btn-default pull-right" ng-click="downloadPDF()">Descargar como PDF</button>
+        <button class="btn btn-default pull-right" ng-click="downloadPDF()" style="margin-bottom: 50px">Descargar como PDF</button>
     </div>
 
 </div>
