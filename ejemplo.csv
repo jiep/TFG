@@ -1,0 +1,5 @@
+Grafo de competitividad de prueba,4,4
+RMA,BAR,SEV,VAL
+BAR,SEV,VAL,RMA 
+RMA,BAR,VAL,SEV
+RMA,VAL,BAR,SEV
