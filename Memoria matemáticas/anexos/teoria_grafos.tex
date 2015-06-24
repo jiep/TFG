@@ -1,5 +1,9 @@
 \chapter{Teoría de grafos}
 
+La teoría de grafos es la rama de las matemáticas que estudia los grafos, objetos matemáticos que constan de dos elementos: los nodos o vértices y las aristas.\\
+
+A continuación, introduciremos el concepto de grafo, algunas operaciones que se pueden realizar con ellos y algunos de los tipos de grafos que utilizaremos a lo largo de la memoria.
+
 \begin{defi}
 Un grafo (o grafo no dirigido) es un par $G = (V,E)$ de conjuntos que satisfacen que $E \subseteq V^2$ y $V \cap E = \emptyset$. Los elementos de $V$ se denominan vértices (o nodos) del grafo $G$ y los elementos de $E$ se denominan arcos (o aristas). Una arista entre los véctices $x, y \in V$ se denota como $xy$ o $yx \in E$.
 \end{defi}
@@ -221,10 +225,8 @@ Además la arista $\{C,C\}$ es un bucle porque $\mathrm{init}(\{C,C\}) = \mathrm
 \end{ejemplo}
 
 \begin{defi}\label{def:orientacion}
-Un grafo dirigido $D = (V', E')$ es una orientación de un grafo (no dirgido) $G = (V,E)$ si $V = V'$ y $E = E'$ y $\{\mathrm{init}(e), \mathrm{ter}(e) \} = \{x,y\} \ \forall e = xy \in E$.
+Un grafo dirigido $D = (V', E')$ es una orientación de un grafo (no dirigido) $G = (V,E)$ si $V = V'$ y $E = E'$ y $\{\mathrm{init}(e), \mathrm{ter}(e) \} = \{x,y\} \ \forall e = xy \in E$.
 \end{defi}
-
-\section{Algunos tipos de grafos}
 
 \begin{defi}
 Un grafo ponderado es un grafo con una función $\mathrm{w} : E \to \R$, es decir, que $\mathrm{w}$ asocia un número real a cada arista. Esta función recibe el nombre de función peso.

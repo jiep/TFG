@@ -108,7 +108,8 @@ Uno de los aspectos más interesantes de los rankings, es la competitividad. Cua
 Empezamos definiendo la competitividad entre una familia de rankings.
 
 \begin{defi}
-Dada una familia $\mathcal{R} = \{c_1, c_2, \dots, c_r\}$ de rankings, decimos que los nodos $(i,j) \in \mathcal{N} \times \mathcal{N}$ compiten si existe $t \in \{1,2,\dots, r-1\}$ tal que $i$ y $j$ intercambian sus posiciones relativas entre rankings consecutivos $c_t$ y $c_{t+1}$.
+Dada una familia $\mathcal{R} = \{c_1, c_2, \dots, c_r\}$ de rankings, 
+ $(i,j) \in \mathcal{N} \times \mathcal{N}$ compiten si existe $t \in \{1,2,\dots, r-1\}$ tal que $i$ y $j$ intercambian sus posiciones relativas entre rankings consecutivos $c_t$ y $c_{t+1}$.
 \end{defi}
 
 \begin{ejemplo}
@@ -177,14 +178,14 @@ La Figura~\ref{fig:grafo_competitividad} muestra el grafo de competitividad de l
 \begin{figure}[htb]
 \centering
 \ejemplografocompetitividad
-\caption[Grafo de competitividad]{Grafo de competitividad evolutivo de $\mathcal{R}$}
+\caption[Grafo de competitividad]{Grafo de competitividad de $\mathcal{R}$}
 \label{fig:grafo_competitividad}
 \end{figure}
 
 \end{ejemplo}
 
 \begin{defi}
-Decimos que los nodos $i$, $j$ compiten $k$ veces si $k$ es el número de veces máximo de rankings donde $i$ y $j$ compiten.
+Decimos que los nodos $i$, $j$ compiten $k$ veces si $k$ es el número máximo de veces de rankings que $i$ y $j$ compiten.
 \end{defi}
 
 \begin{defi}
@@ -242,13 +243,13 @@ El grado medio de las dos familias son:
 \mathrm{ND}(\mathcal{S}) = \dfrac{1}{4\cdot 3} (2 + 3 + 1 + 2) = \dfrac{8}{12} = \dfrac{2}{3}
 \end{eqnarray*}
 
-Puesto que $\mathrm{ND}(\mathcal{S}) > \mathrm{ND}(\mathcal{R})$, la familia $\mathcal{S}$ es más competitiva que la familia $\mathcal{R}$.
+Puesto que $\mathrm{ND}(\mathcal{S}) > \mathrm{ND}(\mathcal{R})$, la familia $\mathcal{S}$ es más competitiva que la familia $\mathcal{R}$ con respecto al grado medio normalizado.
 \end{ejemplo}
 
 \subsection*{Fuerza media normalizada}
 
 \begin{defi}
-Se define la fuerza media normalizada de una familia de rankings $\mathcal{R}$ como la suma de todos pesos de las aristas del grafo de competitividad evolutivo $G_c^e(\mathcal{R})$ dividido entre la suma de todas las posibles aristas con sus posibles pesos. Esto es,
+Se define la fuerza media normalizada de una familia de rankings $\mathcal{R}$ como la suma de todos pesos de las aristas del grafo de competitividad evolutivo $G_c^e(\mathcal{R})$ dividido entre la suma de todas las posibles aristas con sus máximos pesos posibles. Esto es,
 
 \begin{equation}
 \mathrm{NS}(\mathcal{R}) = \dfrac{w(E_\mathcal{R}^e)}{\binom{n}{2} (r-1)}
@@ -306,7 +307,7 @@ Se define tau de Kendall evolutiva de la familia de rankings $\mathcal{R}$ con $
 \tau_e(\mathcal{R}) = 1 - \dfrac{2 w(E_\mathcal{R}^e)}{\binom{n}{2}(r-1)}
 \end{equation} 
 
-donde $w(E_\mathcal{R}^e)$ denota la suma de todos los pesos de las aristas del grafo de competitividad evolutivo.
+donde $w(E_\mathcal{R}^e)$ denota la suma sobre todos las aristas de sus pesos máximos posibles del grafo de competitividad evolutivo.
 \end{defi}
 
 \begin{defi}
@@ -328,7 +329,7 @@ De la misma forma para la familia $\mathcal{S}$,
 \tau_e(\mathcal{S}) = 1 - \dfrac{8}{9} = \dfrac{1}{9}
 \end{eqnarray}
 
-Como $\tau_e(\mathcal{S}) < \tau_e(\mathcal{R})$ se tiene que la familia $\mathcal{S}$ es más competitiva que la familia $\mathcal{S}$.
+Como $\tau_e(\mathcal{S}) < \tau_e(\mathcal{R})$ se tiene que la familia $\mathcal{S}$ es más competitiva que la familia $\mathcal{S}$ con respecto a la tau de Kendall.
 
 \end{ejemplo}
 
@@ -355,14 +356,19 @@ Necesitamos calcular la distancia entre todos los pares de vértices y coger el 
 
 En el caso de la familia $\mathcal{R}$ de rankings, obtenemos que la matriz de distancias tras la ejecución del algoritmo, es:
 
+
 \begin{equation*}
-\left(\begin{array}{cccc}
-0 & \infty & \infty & \infty\\
-\infty & 0 & 3 & 2\\
-\infty & 3 & 0 & 1\\
-\infty & 2 & 1 & 0 
-\end{array}\right)
+\bordermatrix{
+	& \text{RMA} & \text{BAR} & \text{VAL} & \text{SEV} \cr
+	\text{RMA} &	0 & \infty & \infty & \infty \cr
+	\text{BAR} & \infty & 0 & 3 & 2 \cr
+	\text{VAL} & \infty & 3 & 0 & 1 \cr
+	\text{SEV} & \infty & 2 & 1 & 0 \cr
+}
 \end{equation*}
+
+
+donde, por convenio, $\infty$ significa que no existe un camino que permita llegar a esos dos nodos.\\
 
 Por lo tanto,
 
@@ -373,12 +379,13 @@ Por lo tanto,
 Para la familia $\mathcal{S}$ de rankings, tenemos que la matriz de distancias es la siguiente:
 
 \begin{equation*}
-\left(\begin{array}{cccc}
-0 & 1 & 2 & 2\\
-1 & 0 & 1 & 1\\
-2 & 1 & 0 & 2\\
-2 & 1 & 2 & 0 
-\end{array}\right)
+\bordermatrix{
+	& \text{RMA} & \text{BAR} & \text{VAL} & \text{SEV} \cr
+	\text{RMA} & 0 & 1 & 2 & 2 \cr
+	\text{BAR} & 1 & 0 & 1 & 1 \cr
+	\text{VAL} & 2 & 1 & 0 & 2 \cr
+	\text{SEV} & 2 & 1 & 2 & 0 \cr
+}
 \end{equation*}
 
 Por tanto, 
@@ -387,7 +394,7 @@ Por tanto,
 \mathrm{diam}(\mathcal{S}) = 2
 \end{equation*}
 
-Como $\mathrm{diam}(\mathcal{S}) < \mathrm{diam}(\mathcal{R})$, la familia $\mathcal{S}$ es más competitiva que la familia $\mathcal{R}$.
+Como $\mathrm{diam}(\mathcal{S}) < \mathrm{diam}(\mathcal{R})$, la familia $\mathcal{S}$ es más competitiva que la familia $\mathcal{R}$ con respecto al diámetro del grafo de competitividad evolutivo.
 
 \end{ejemplo}
 
@@ -402,6 +409,8 @@ Se define eficiencia del grafo de competitividad evolutivo de la familia de rank
 
 donde $d(i,j)$ es la distancia entre el nodo $i$ y el nodo $j$.
 \end{defi}
+
+La eficiencia es la media armónica de todos los caminos del grafo de competitividad.
 
 \begin{defi}
 Diremos que la familia de rankings $\mathcal{R}$ es más competitiva que la familia de rankings $\mathcal{S}$ con respecto a la eficiencia del grafo de competitividad evolutivo si $\mathrm{E}(\mathcal{R}) > \mathrm{E}(\mathcal{S})$.
@@ -438,27 +447,29 @@ Se define longitud del camino característico\footnote{Traducción de characteri
 donde $d(i,j)$ es la distancia entre el nodo $i$ y el nodo $j$.
 \end{defi}
 
+La longitud del camino característico es la media aritmética de todos los caminos del grafo de competitividad evolutivo.
+
 \begin{defi}
-Diremos que la familia de rankings $\mathcal{R}$ es más competitiva que la familia de rankings $\mathcal{S}$ con respecto a la eficiencia del grafo de competitividad evolutivo si $\mathrm{L}(\mathcal{R}) < \mathrm{L}(\mathcal{S})$.
+Diremos que la familia de rankings $\mathcal{R}$ es más competitiva que la familia de rankings $\mathcal{S}$ con respecto a la longitud del camino característico del grafo de competitividad evolutivo si $\mathrm{L}(\mathcal{R}) < \mathrm{L}(\mathcal{S})$.
 \end{defi}
 
 \begin{ejemplo}
-Consideremos los grafos evolutivos de las Figuras~\ref{fig:grafo_competitividad_evolutivo}~y~\ref{fig:grado_medio}. Calculemos la eficiencia para la familia de rankings $\mathcal{R}$ y la familia $\mathcal{S}$.\\
+Consideremos los grafos evolutivos de las Figuras~\ref{fig:grafo_competitividad_evolutivo}~y~\ref{fig:grado_medio}. Calculemos la longitud del camino característico para la familia de rankings $\mathcal{R}$ y la familia $\mathcal{S}$.\\
 
 En el ejemplo anterior ya calculamos la matriz de distancias de cada una de las familias, por lo que no es necesario volver a calcularlas.\\
 
-Por tanto la eficiencia de la familia $\mathcal{R}$ es:
+Por tanto la longitud del camino característico de la familia $\mathcal{R}$ es:
 
 \begin{equation*}
 \mathrm{L}(\mathcal{R}) = \dfrac{1}{\binom{4}{2}} \left( \infty + \infty + \infty + \infty + 3 + 2 + \infty + 3 + 2 + \infty + 3 + 1 + \infty + 2 + 1 \right) = \infty
 \end{equation*}
 
-De forma análoga, se obtiene que la eficiencia de la familia $\mathcal{S}$ es:
+De forma análoga, se obtiene que la longitud del camino característico de la familia $\mathcal{S}$ es:
 
 \begin{equation*}
 \mathrm{L}(\mathcal{S}) = \dfrac{1}{\binom{4}{2}} \left( 1 + 2 + 2 + 1 + 1 + 1 + 2 + 1  + 2 + 2 + 1 + 2  \right) =  \dfrac{17}{6} 
 \end{equation*}
 
-Puesto que $\mathrm{L}(\mathcal{S}) < \mathrm{L}(\mathcal{R})$, la familia de rankings $\mathcal{S}$ es más competitiva que la familia de rankings $\mathcal{R}$.
+Puesto que $\mathrm{L}(\mathcal{S}) < \mathrm{L}(\mathcal{R})$, la familia de rankings $\mathcal{S}$ es más competitiva que la familia de rankings $\mathcal{R}$ con respecto a la longitud del camino característico.
 
 \end{ejemplo}

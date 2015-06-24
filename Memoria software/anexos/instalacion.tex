@@ -81,7 +81,7 @@ sudo service apache2 restart
 \item Ejecutar el comando 
 
 \begin{minted}{bash}
-npm install -g bower
+sudo npm install -g bower
 \end{minted}
 
 \item Para comprobar que tenemos instalado Bower ejecutar 
@@ -108,7 +108,7 @@ Nos instalará todas las dependencias necesarias.
 
 \begin{minted}{bash}
 curl -sS https://getcomposer.org/installer | php
-mv composer.phar /usr/local/bin/composer
+sudo mv composer.phar /usr/local/bin/composer
 \end{minted} 
 
 \item Ir a la carpeta \emph{web} y ejecutar el comando 
@@ -136,6 +136,6 @@ source datos.sql
 
 \item Movemos la carpeta de la aplicación hacia la carpeta \emph{var/www/html} del servidor Apache.
 
-\item Abrimos un navegador y escribimos \emph{localhost}. Si todo ha ido bien, tendremos la aplicación funcionando.
+\item Abrimos un navegador y escribimos \emph{localhost} en barra de direcciones. Si todo ha ido bien, tendremos la aplicación funcionando.
 
 \end{enumerate}

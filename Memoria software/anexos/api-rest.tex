@@ -1,5 +1,7 @@
 \chapter{Diseño de la API REST} \label{app:api-rest}
 
+A continuación se detallan todos los métodos implementados de la API REST: 
+
 \begin{longtable}[c]{@{}ccC{5cm}@{}}
 \caption{Métodos de la API REST}\\
 \toprule
@@ -42,11 +44,11 @@ competitividad de los rankings subidos por el usuario :id\tabularnewline
 /users/:id/graphs/:graph\_id & GET & Devuelve las medidas y el grafo de
 competitividad del ranking :graph\_id subidos por el usuario
 :id\tabularnewline
-\hline
+%\hline
 /users/:id/graphs/:graph\_id & DELETE & Borra las medidas y el grafo de
 competitividad del ranking :graph\_id subidos por el usuario
 :id\tabularnewline
-
+\hline
 /users/:id/graphs & POST & Añade un nuevo grafo con sus medidas al
 usuario :id\tabularnewline
 
