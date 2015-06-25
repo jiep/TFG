@@ -16,7 +16,8 @@
 % #2 : Subtítulo
 % #3 : Subsubtítulo
 % #4 : Autor(es)
-% #5 : Lugar
+% #5 : Tutor(es)
+% #6 : Lugar
 %
 
 \newcommand*{\portada}[5]{
@@ -30,11 +31,13 @@
 {\Large \textbf{#2}}\\[\baselineskip]
 {\Large \scshape #3}\\[\baselineskip]
 \vspace*{0.3cm}
-{\large \textit{#4}}\\[0.5\drop]
 \includegraphics[scale=0.35]{./imagenes/logoURJC.jpg}
+{Autor: \\ \large \textit{#4}}\\[0.5\drop]
+\vspace*{1.5cm}
+{Tutores: \\ \large \textit{#5}}\\[0.5\drop]
 \vspace*{1.5cm}
 
-{\large \scshape #5, \today} \par
+{\large \scshape #6, \today} \par
 \begin{center}
 \end{center}
 \vfill\null

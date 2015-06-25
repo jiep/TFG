@@ -205,11 +205,11 @@
 \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=4cm,semithick]
   \tikzstyle{every state}=[draw=black,text=black]
 
-  \node[state]         (A)                         {DEN};
-  \node[state]         (B)      [below left of=A]  {LAL};
-  \node[state]         (C)      [below of=B]       {SAS};
-  \node[state]         (D)      [below right of=A] {CHI};
-  \node[state]         (E)      [below of=D]       {NYK};
+  \node[state]         (A)                         {5};
+  \node[state]         (B)      [below left of=A]  {4};
+  \node[state]         (C)      [below of=B]       {2};
+  \node[state]         (D)      [below right of=A] {3};
+  \node[state]         (E)      [below of=D]       {1};
   
   \path (A) edge                node {$5$}   (C)
             edge                node {$28$}  (D)
@@ -228,11 +228,11 @@
 \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=4cm,semithick]
   \tikzstyle{every state}=[draw=black,text=black]
 
-  \node[state]         (A)                         {DEN};
-  \node[state]         (B)      [below left of=A]  {LAL};
-  \node[state]         (C)      [below of=B]       {SAS};
-  \node[state]         (D)      [below right of=A] {CHI};
-  \node[state]         (E)      [below of=D]       {NYK};
+  \node[state]         (A)                         {5};
+  \node[state]         (B)      [below left of=A]  {4};
+  \node[state]         (C)      [below of=B]       {2};
+  \node[state]         (D)      [below right of=A] {3};
+  \node[state]         (E)      [below of=D]       {1};
   
   \path (C) edge   node {$5$}   (A)
         (D) edge   node {$28$}  (A)
@@ -360,11 +360,11 @@
   \tikzstyle{every state}=[draw=black,text=black]
  
   
-  \node[state] (nyk)                {NYK};
-  \node[state] (sas) [right of=nyk] {SAS};
-  \node[state] (chi) [right of=sas] {CHI};
-  \node[state] (lal) [right of=chi] {LAL};
-  \node[state] (den) [right of=lal] {DEN};  
+  \node[state] (nyk)                {1};
+  \node[state] (sas) [right of=nyk] {2};
+  \node[state] (chi) [right of=sas] {3};
+  \node[state] (lal) [right of=chi] {4};
+  \node[state] (den) [right of=lal] {5};  
   
   \path (nyk)   edge [bend right]  node {} (chi);
   \path (nyk)   edge [bend right]  node {} (lal);
@@ -384,11 +384,11 @@
   \tikzstyle{every state}=[draw=black,text=black]
  
   
-  \node[state] (por)                      {POR};
-  \node[state] (ock) [below right of=por] {OCK};
-  \node[state] (den) [below       of=ock] {DEN};
-  \node[state] (min) [below left  of=por] {MIN};
-  \node[state] (uta) [below       of=min] {UTA};  
+  \node[state] (por)                      {2};
+  \node[state] (ock) [below right of=por] {3};
+  \node[state] (den) [below       of=ock] {1};
+  \node[state] (min) [below left  of=por] {5};
+  \node[state] (uta) [below       of=min] {4};  
   
   \path (por)   edge                node {} (ock);
   \path (por)   edge [bend right]   node {} (den);  
@@ -419,11 +419,11 @@
   \tikzstyle{every state}=[draw=black,text=black]
  
   
-  \node[state] (por)                      {POR};
-  \node[state] (ock) [below right of=por] {OCK};
-  \node[state] (den) [below       of=ock] {DEN};
-  \node[state] (min) [below left  of=por] {MIN};
-  \node[state] (uta) [below       of=min] {UTA};  
+  \node[state] (por)                      {2};
+  \node[state] (ock) [below right of=por] {3};
+  \node[state] (den) [below       of=ock] {1};
+  \node[state] (min) [below left  of=por] {5};
+  \node[state] (uta) [below       of=min] {4};  
   
   \path (por)   edge                node {$1$} (ock);
   \path (por)   edge [bend right]   node {$1$} (den);  

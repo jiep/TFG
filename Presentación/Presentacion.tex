@@ -1,13 +1,15 @@
-\documentclass[11pt]{beamer}
-\usetheme{default}
+\documentclass[10pt]{beamer}
+\usetheme{Madrid}
 
 \usepackage{fontspec}
-\usepackage[spanish, es-nodecimaldot]{babel}
+\usepackage[spanish, es-nodecimaldot, es-tabla]{babel}
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{graphicx}
 \usepackage{url}
+\usepackage{booktabs}
+\usepackage{adjustbox}
 
 \input{extras/comandos}
 \input{extras/figuras}
@@ -16,7 +18,7 @@
 \title{Diseño e implementación de una aplicación SPA para el estudio de la competitividad de la liga BBVA}
 %\subtitle{}
 %\logo{}
-\institute{URJC}
+\institute{Universidad Rey Juan Carlos}
 \date{}
 %\subject{}
 \setbeamercovered{transparent}
@@ -37,6 +39,12 @@
 	
 	
 	\section{Introducción}
+	
+	\begin{frame}
+		\begin{center}
+			\Huge\textbf{\textsf{\textcolor{blue}{Introducción}}}
+		\end{center}
+	\end{frame}
 	
 	\begin{frame}{Introducción}
 		Vivimos rodeados de rankings
@@ -120,6 +128,12 @@
 		\end{ejemplo}
 	\end{frame}
 	
+	\begin{frame}
+		\begin{center}
+			\Huge\textbf{\textsf{\textcolor{blue}{Métodos para obtener ratings (y rankings)}}}
+		\end{center}
+	\end{frame}
+	
 	\section{Métodos para obtener ratings (y rankings)}
 	
 	\begin{frame}{Métodos para obtener ratings (y rankings)}
@@ -132,42 +146,331 @@
 		\end{itemize}
 	\end{frame}
 	
+	\begin{frame}
+		\begin{center}
+			\Huge\textbf{\textsf{\textcolor{blue}{Método de Massey}}}
+		\end{center}
+	\end{frame}
+	
+	
 	\subsection{Método de Massey}
 	
 	\begin{frame}{Método de Massey}
-		Basado en la siguiente ecuación idealizada:
 		
-		\begin{equation}
-		r_i - r_j = y_k
-		\end{equation} 
+		El método de Massey consiste en resolver el sistema $\mathbf{M r} = \mathbf{p}$
+		donde 
 		
-		donde $y_k$ es el margen de victoria para el partido $k$, y $r_i$ y $r_j$ son los ratings de los equipos $i$ y $j$, respectivamente. En otras palabras, la diferencia de los ratings $r_i$ y $r_j$ de dos equipos predice idealmente el margen de victoria en un enfrentamiento entre estos dos equipos.
+		\[ m_{ij} = \begin{cases}
+		- \text{número de partidos jugados por } i \text{ y } j & \text{ si } i \neq j \\
+	      \text{número de partidos totales de } i & \text{ si } i = j 
+		
+		\end{cases}\]
+		
+		y $p_i$ es la suma de las diferencias de puntos del equipo $i$.\\
+		
+		La suma de las filas de la matriz $\mathbf{M}$ es cero, por lo que el sistema no tiene solución única. Esto se soluciona sustituyendo una fila de la matriz $\mathbf{M}$ por una fila de unos, y el elemento correspondiente de $\mathbf{p}$ se sustituye por un $0$.
 	
 	\end{frame}
 	
 	\begin{frame}{Método de Massey}
+	 
+		\begin{ejemplo}
+			\begin{table}[h]
+				\centering
+				\caption{Datos del método de Massey}
+				\label{tbl:massey}
+				 \begin{adjustbox}{max width=\textwidth} 
+				\begin{tabular}{ccccccc}
+					\cline{2-7}
+					& 1     & 2     & 3     & 4     & 5     & \begin{tabular}[c]{@{}c@{}}Diferencia\\ de puntos\end{tabular} \\ \hline
+					1 & ---     & 137-115 & 103-108 & 89-117  & 90-117  & \textcolor{red}{-38}                                        \\ \hline
+					2 & 115-137 & ---     & 113-100 & 100-102 & 103-110 & \textcolor{red}{-18}                                         \\ \hline
+					3 & 108-103 & 100-113 & ---     & 104-96  & 110-89  & \textcolor{green}{21}                                                            \\ \hline
+					4 & 117-89  & 102-100 & 96-104  & ---     & 89-100  & \textcolor{green}{11}                                         \\ \hline
+					5 & 117-90  & 110-103 & 89-110  & 100-89  & ---     & \textcolor{green}{24}                                        \\ \hline
+				\end{tabular}
+				\end{adjustbox}
+			\end{table}
+		\end{ejemplo}
+		
+	\end{frame}
 	
-		Se puede expresar de la forma 
+	\begin{frame}{Método de Massey}
 		
-		\[ \mathbf{M r} = \mathbf{p} \]
+		\begin{ejemplo}[continuación]
+			El sistema queda de la siguiente manera
+			
+			\begin{equation*}
+			\left(\begin{array}{r r r r r}
+			4  & -1 & -1 & -1 & -1\\
+			-1 &  4 & -1 & -1 & -1\\
+			-1 & -1 &  4 & -1 & -1\\
+			-1 & -1 & -1 &  4 & -1\\
+			1 &  1 &  1 &  1 &  1 
+			\end{array}\right)
+			\left(\begin{array}{c}
+			\mathbf{r}_1\\
+			\mathbf{r}_2\\
+			\mathbf{r}_3\\
+			\mathbf{r}_4\\
+			\mathbf{r}_5
+			\end{array}\right)
+			=
+			\left(\begin{array}{c}
+			-38\\
+			-18\\
+			21\\
+			11\\
+			0
+			\end{array}\right)
+			\end{equation*}
+					
+		\end{ejemplo}
 		
-		donde $\mathbf{M}$ es la matriz formada en la diagonal con 
-		
+	\end{frame}
+	
+		\begin{frame}{Método de Massey}
+			
+			\begin{ejemplo}[continuación]
+				Resolviendo el sistema
+				
+				\begin{table}[h]
+					\centering
+					\caption{Resultados del método de Massey}
+					\label{tbl:massey_resultados}
+					\begin{tabular}{@{}ccc@{}}
+						\cmidrule(l){2-3}
+						& $\mathbf{r}$ & Ranking \\ \cmidrule(l){2-3} 
+						1 & -7.6         & 5       \\ \midrule
+						2 & -3.6         & 4       \\ \midrule
+						3 & 4.2          & 2       \\ \midrule
+						4 & 2.2          & 3       \\ \midrule
+						5 & 4.8          & 1       \\ \bottomrule
+					\end{tabular}
+				\end{table}
+				
+				
+			\end{ejemplo}
+			
 	\end{frame}
 	
 	\subsection{Método de Colley}
 	
+	\begin{frame}
+		\begin{center}
+			\Huge\textbf{\textsf{\textcolor{blue}{Método de Colley}}}
+		\end{center}
+	\end{frame}
+	
 	\begin{frame}{Método de Colley}
-		Método de Colley
+		El método de Colley se basa, de nuevo, en resolver un sistema lineal. En este caso se trata de $\mathbf{Cr} = \mathbf{b}$ donde
+		
+		\[ c_{ij} = \begin{cases}
+		2 + t_i & \text{si } i = j \\
+		-n_{ij} & \text{si } i \neq j  
+		\end{cases} \]
+		
+		y 
+		
+		\[ b_i = \dfrac{1}{2}(w_i - l_i) \]
+		
+		con $w_i$ el número de victorias del equipo $i$, $l_i$ el número de derrotas del equipo $i$, $t_i = w_i + l_i$ y $n_{ij}$ es el número de partidos jugados entre $i$ y $j$.
+	\end{frame}
+	
+	\begin{frame}{Método de Colley}
+		\begin{ejemplo}
+			\begin{table}[h]
+				\centering
+				\caption{Datos del método de Colley}
+				\label{tbl:colley}
+				\begin{tabular}{@{}ccc@{}}
+					\cmidrule(l){2-3}
+					& Victorias & Derrotas \\ \midrule
+					1 & 1         & 3        \\
+					2 & 1         & 3        \\
+					3 & 3         & 1        \\
+					4 & 2         & 2        \\
+					5 & 3         & 1        \\ \bottomrule
+				\end{tabular}
+			\end{table}
+		\end{ejemplo}
+			
+	\end{frame}
+	
+	\begin{frame}{Método de Colley}
+		\begin{ejemplo}[continuación]
+			El sistema queda de la siguiente forma:
+			
+			\begin{equation*}
+			\left(\begin{array}{r r r r r}
+			6 & -1 & -1 & -1 & -1\\
+			-1 &  6 & -1 & -1 & -1\\
+			-1 & -1 &  6 & -1 & -1\\
+			-1 & -1 & -1 &  6 & -1\\
+			-1 & -1 & -1 & -1 &  6
+			\end{array}\right)
+			\left(\begin{array}{c}
+			\mathbf{r}_1\\
+			\mathbf{r}_2\\
+			\mathbf{r}_3\\
+			\mathbf{r}_4\\
+			\mathbf{r}_5
+			\end{array}\right)
+			=
+			\left(\begin{array}{c}
+			0\\
+			0\\
+			2\\
+			1\\
+			2
+			\end{array}\right)
+			\end{equation*}
+		\end{ejemplo}
+		
+	\end{frame}
+	
+	\begin{frame}{Método de Colley}
+		\begin{ejemplo}[continuación]
+			Resolviendo y ordenando descendentemente
+			
+			\begin{table}[h]
+				\centering
+				\caption{Resultados del método de Colley}
+				\label{tbl:colley_con_empates}
+				\begin{tabular}{@{}ccc@{}}
+					\cmidrule(l){2-3}
+					& $\mathbf{r}$ & Ranking \\ \midrule
+					1 & 0.3571       & 4       \\
+					2 & 0.3571       & 4       \\
+					3 & 0.6429       & 1       \\
+					4 & 0.5          & 3       \\
+					5 & 0.6429       & 1       \\ \bottomrule
+				\end{tabular}
+			\end{table}
+		\end{ejemplo}
+		
 	\end{frame}
 	
 	\subsection{Método de Markov}
 	
+	\begin{frame}
+		\begin{center}
+			\Huge\textbf{\textsf{\textcolor{blue}{Método de Markov}}}
+		\end{center}
+	\end{frame}
+	
 	\begin{frame}{Método de Markov}
-		Método de Markov
+		El método de Markov sigue los siguientes pasos:
+		
+		\begin{enumerate}
+			\item Formar $\mathbf{S}$ usando las matrices $\mathbf{V}_i$ para cada una de las $k$ estadísticas.
+			
+			\[ \mathbf{S} = \sum_{i=1}^{k} \alpha_i \mathbf{S}_i \]
+			
+			donde $a_i \geq 0$ y $\sum_{i=1}^{k} \alpha_i = 1$.
+			
+			\item Calcular $\mathbf{r}$, el punto fijo de la matriz de transición $\mathbf{S}$. Si $\mathbf{S}$ es reducible, usar la matriz irreducible $\overline{\mathbf{S}}$
+			
+			\[\overline{\mathbf{S}} = \beta \mathbf{S} + \dfrac{(1 - \beta)}{n} \mathbf{E}\]
+		\end{enumerate}
+	\end{frame}
+	
+	\begin{frame}{Método de Markov}
+		\begin{ejemplo}
+			Consideramos los datos de victorias y derrotas y, diferencia de puntos de los ejemplos anteriores. Formamos las matrices $\mathbf{V}_p$ y $\mathbf{V}_v$ que representan las estadísticas de puntos y de victorias, respectivamente.
+			
+			\[ \mathbf{V}_p = \left(\begin{array}{rrrrr}
+			0   & 115 & 108 & 117 & 117\\
+			137 & 0   & 100 & 102 & 110\\
+			103 & 113 & 0   & 96  & 89 \\
+			89  & 100 & 104 & 0   & 100\\
+			90  & 103 & 100 & 89  & 0
+			\end{array}\right); \quad 
+			\mathbf{V}_v = \left(\begin{array}{rrrrr}
+			0 & 0 & 1 & 1 & 1\\
+			1 & 0 & 0 & 1 & 1\\
+			0 & 1 & 0 & 0 & 0\\
+			0 & 0 & 1 & 0 & 1\\
+			0 & 0 & 1 & 0 & 0
+			\end{array}\right) \]
+		\end{ejemplo}
+	\end{frame}
+	
+	\begin{frame}{Método de Markov}
+		\begin{ejemplo}[continuación]
+			Creamos las matrices estocásticas $\mathbf{S}_p$ y $\mathbf{S}_v$, dividiendo cada fila entre la suma de la fila:
+			
+			\[ \mathbf{S}_p = \left(\begin{array}{rrrrr}
+			0      & 0.2516 & 0.2363 & 0.2560 & 0.2560 \\
+			0.3051 & 0      & 0.2227 & 0.2272 & 0.2450 \\
+			0.2569 & 0.2818 & 0      & 0.2394 & 0.2219 \\
+			0.2265 & 0.2545 & 0.2646 & 0      & 0.2545 \\
+			0.2356 & 0.2696 & 0.2618 & 0.2330 & 0
+			\end{array}\right) \] 
+			
+			\[ \mathbf{S}_v = \left(\begin{array}{rrrrr}
+			0     & 0   & 1/3 & 1/3 & 1/3\\
+			1/3   & 0   & 0   & 1/3 & 1/3\\
+			0     & 1   & 0   & 0   & 0  \\
+			0     & 0   & 1/2 & 0   & 1/2\\
+			0     & 0   & 1   & 0   & 0
+			\end{array}\right) \]
+			
+			
+		\end{ejemplo}
+	\end{frame}
+	
+	\begin{frame}{Método de Markov}
+		Creamos la matriz $\mathbf{S} = \alpha_1 \mathbf{S}_p + \alpha_2 \mathbf{S}_v$. Elegimos $\alpha_1 = 0.7$ y $\alpha_2 = 0.3$.\\
+		
+		La matriz $\mathbf{S}$ queda así:
+		
+		\[ \mathbf{S} = \left(\begin{array}{rrrrr}
+		0      & 0.0915 & 0.3104 & 0.3013 & 0.3040 \\
+		0.3088 & 0      & 0.0845 & 0.3097 & 0.3142 \\
+		0.0709 & 0.7668 & 0      & 0.0794 & 0.0785 \\
+		0.0768 & 0.0682 & 0.4218 & 0      & 0.4199 \\
+		0.0768 & 0.0735 & 0.7666 & 0.0763 & 0
+		
+		\end{array}\right) \]
+		
+		Necesitamos saber si $\mathbf{S}$ es irreducible. Para ello, aplicamos el siguiente resultado.
+	\end{frame}
+	
+	\begin{frame}{Método de Markov}
+	\begin{prop}
+		Sea $\mathbf{S}$ la matriz de transición de una cadena de Markov, cuyo autovalor $\lambda = 1$ corresponde con el autovector $\mathbf{r}$. Entonces, la cadena de Markov es irreducible si todos los elementos de $\mathbf{r}$ son no nulos.
+	\end{prop}
+	\end{frame}
+	
+	\begin{frame}{Método de Markov}
+		Los autovalores de $\mathbf{S}$ son $\lambda = 1, -0.2454 \pm 0.536i, -0.2549 \pm 0.0833i$.\\
+		El autovalor asociado a $\lambda = 1$ es $\mathbf{r} = (-0.2649, -0.5337, -0.5946, -0.3250, -0.4311)^T$. Como todas las componentes de $\mathbf{r}$ son no nulas, entonces $\mathbf{S}$ es irreducible. Sólo nos queda normalizar el vector $\mathbf{r}$. Los resultados se muestran a continuación. 
+		
+		\begin{table}[h]
+			\centering
+			\caption{Resultados del método de Markov}
+			\label{tbl:markov_resultados}
+			\begin{tabular}{@{}ccc@{}}
+				\cmidrule(l){2-3}
+				& $\mathbf{r}$ & Ranking \\ \midrule
+				1 & 0.1232       & 5       \\
+				2 & 0.2483       & 2       \\
+				3 & 0.2766       & 1       \\
+				4 & 0.1512       & 4       \\
+				5 & 0.2006       & 3       \\ \bottomrule
+			\end{tabular}
+		\end{table}
+		
 	\end{frame}
 	
 	\section{Agregación de rankings}
+	
+	\begin{frame}
+		\begin{center}
+			\Huge\textbf{\textsf{\textcolor{blue}{Agregación de rankings}}}
+		\end{center}
+	\end{frame}
 	
 	\begin{frame}{Agregación de rankings}
 		En la práctica, se tienen distintos rankings sobre un misma estadística con resultados totalmente distintos.\\
@@ -188,7 +491,19 @@
 	
 	\subsection{Métodos de agregación de rankings}
 	
+	\begin{frame}
+		\begin{center}
+			\Huge\textbf{\textsf{\textcolor{blue}{Métodos de agregación de rankings}}}
+		\end{center}
+	\end{frame}
+	
 	\subsubsection{Método de Borda}
+	
+	\begin{frame}
+		\begin{center}
+			\Huge\textbf{\textsf{\textcolor{blue}{Método de Borda}}}
+		\end{center}
+	\end{frame}
 	
 	\begin{frame}{Método de Borda}
 		
@@ -204,11 +519,68 @@
 	
 	\begin{frame}{Método de Borda}
 		
-		Ejemplo del método
+		\begin{ejemplo}
+			Consideremos la familia de rankings $\mathcal{R} = \{c_1, c_2, c_3\}$ donde
+			
+			\begin{equation*}
+			c_1 = \left( \begin{array}{c}
+			1\\
+			3\\
+			2\\
+			4\\
+			5
+			\end{array} \right), \quad
+			c_2 = \left( \begin{array}{c}
+			1\\
+			2\\
+			4\\
+			3\\
+			5
+			\end{array} \right), \quad
+			c_3 = \left( \begin{array}{c}
+			2\\
+			4\\
+			1\\
+			3\\
+			5
+			\end{array} \right)
+			\end{equation*}
+			 
+		\end{ejemplo}
+	
 		
 	\end{frame}
 	
+	\begin{frame}{Método de Borda}
+		\begin{ejemplo}[continuación]
+			
+			\begin{table}[h]
+				\centering
+				\caption{Resultados del método de Borda}
+				\label{tbl:borda_resultados}
+
+				\begin{tabular}{@{}ccc@{}}
+					\cmidrule(l){2-3}
+					& Recuento de Borda & Ranking agregado \\ \midrule
+					5 & $4 + 4 + 4 = 12$       & 5       \\
+					4 & $3 + 3 + 1 =  7$       & 3       \\
+					2 & $1 + 1 + 0 =  2$       & 1       \\
+					3 & $2 + 2 + 3 =  7$       & 3       \\
+					1 & $0 + 0 + 2 =  2$       & 1       \\ \bottomrule
+				\end{tabular}
+
+			\end{table}
+			
+		\end{ejemplo}
+	\end{frame}
+	
 	\subsubsection{Método del ranking promedio}
+	
+	\begin{frame}
+		\begin{center}
+			\Huge\textbf{\textsf{\textcolor{blue}{Método del ranking promedio}}}
+		\end{center}
+	\end{frame}
 	
 	\begin{frame}{Método del ranking promedio}
 		\begin{itemize}
@@ -219,30 +591,253 @@
 	\end{frame}
 	
 	\begin{frame}{Método del ranking promedio}
-		Ejemplo	Método del ranking promedio
+		\begin{ejemplo}
+			Consideremos los rankings del ejemplo anterior. Este método nos da el siguiente resultado:
+			
+			\begin{table}[h]
+				\centering
+				\caption{Resultados del método del ranking promedio}
+				\label{tbl:promedio_resultados}
+				\begin{tabular}{@{}cccccc@{}}
+					\cmidrule(l){2-6}
+					& $c_1$ & $c_2$ & $c_3$ & Ranking promedio & Ranking agregado \\ \midrule
+					5 & $5$    & $5$    & $5$    & $5$              & $5$              \\
+					4 & $4$    & $4$    & $2$    & $3.33$           & $3$              \\
+					2 & $2$    & $2$    & $1$    & $1.67$           & $1$              \\
+					3 & $3$    & $3$    & $4$    & $3.33$           & $3$              \\
+					1 & $1$    & $1$    & $3$    & $1.67$           & $1$              \\ \bottomrule
+				\end{tabular}
+			\end{table} 
+		\end{ejemplo}
 	\end{frame}
 	
 	\subsubsection{Método de datos de partidos simulados}
+	
+	\begin{frame}
+		\begin{center}
+			\Huge\textbf{\textsf{\textcolor{blue}{Método de datos de partidos simulados}}}
+		\end{center}
+	\end{frame}
 	
 	\begin{frame}{Método de datos de partidos simulados}
 		\begin{figure}
 			\centering
 			\resizebox{.6\linewidth}{!}{\partidossimulados}
-			
 			\caption{Método de datos de partidos simulados}
 			\label{fig:partidos_simulados}
 		\end{figure}
 	\end{frame}
 	
+	\begin{frame}{Método de datos de partidos simulados}
+		\begin{ejemplo}
+			Consideremos la familia de rankings $\mathcal{R} = \{c_1, c_2, c_3\}$ donde
+			
+			\begin{equation*}
+			c_1 = \left( \begin{array}{c}
+			1\\
+			3\\
+			2\\
+			4\\
+			5
+			\end{array} \right), \quad
+			c_2 = \left( \begin{array}{c}
+			1\\
+			2\\
+			4\\
+			3\\
+			5
+			\end{array} \right), \quad
+			c_3 = \left( \begin{array}{c}
+			2\\
+			4\\
+			1\\
+			3\\
+			5
+			\end{array} \right)
+			\end{equation*}
+			
+		\end{ejemplo}
+	\end{frame}
+	
+	\begin{frame}{Método de datos de partidos simulados}
+		\begin{ejemplo}[continuación]
+			\begin{table}[h]
+				\centering
+				\caption{Partidos simulados del ejemplo}
+				{\tiny
+				  	
+				\begin{tabular}{@{}cccccc@{}}
+					\cmidrule(l){2-6}
+					& 1                                                                 & 2                                                                 & 3                                                                 & 4                                                                 & 5                                                                 \\ \midrule
+					1 & ---                                                                 & \begin{tabular}[c]{@{}c@{}}100-101\\ 100-101\\ 100-103\end{tabular} & \begin{tabular}[c]{@{}c@{}}100-103\\ 100-103\\ 100-104\end{tabular} & \begin{tabular}[c]{@{}c@{}}100-102\\ 100-102\\ 100-101\end{tabular} & \begin{tabular}[c]{@{}c@{}}100-104\\ 100-104\\ 100-102\end{tabular} \\ \midrule
+					2 & \begin{tabular}[c]{@{}c@{}}101-100\\ 101-100\\ 103-100\end{tabular} & ---                                                                 & \begin{tabular}[c]{@{}c@{}}100-102\\ 100-102\\ 100-101\end{tabular} & \begin{tabular}[c]{@{}c@{}}100-101\\ 100-101\\ 102-100\end{tabular} & \begin{tabular}[c]{@{}c@{}}100-103\\ 100-103\\ 101-100\end{tabular} \\ \midrule
+					3 & \begin{tabular}[c]{@{}c@{}}103-100\\ 103-100\\ 104-100\end{tabular} & \begin{tabular}[c]{@{}c@{}}102-100\\ 102-100\\ 101-100\end{tabular} & ---                                                                 & \begin{tabular}[c]{@{}c@{}}101-100\\ 101-100\\ 103-100\end{tabular} & \begin{tabular}[c]{@{}c@{}}100-101\\ 100-101\\ 102-100\end{tabular} \\ \midrule
+					4 & \begin{tabular}[c]{@{}c@{}}102-100\\ 102-100\\ 101-100\end{tabular} & \begin{tabular}[c]{@{}c@{}}101-100\\ 101-100\\ 100-102\end{tabular} & \begin{tabular}[c]{@{}c@{}}100-101\\ 100-101\\ 100-103\end{tabular} & ---                                                                 & \begin{tabular}[c]{@{}c@{}}100-102\\ 100-102\\ 100-101\end{tabular} \\ \midrule
+					5 & \begin{tabular}[c]{@{}c@{}}104-100\\ 104-100\\ 102-100\end{tabular} & \begin{tabular}[c]{@{}c@{}}103-100\\ 103-100\\ 100-101\end{tabular} & \begin{tabular}[c]{@{}c@{}}101-100\\ 101-100\\ 100-102\end{tabular} & \begin{tabular}[c]{@{}c@{}}102-100\\ 102-100\\ 101-100\end{tabular} & ---                                                                 \\ \bottomrule
+				\end{tabular}}
+
+			\end{table}
+		\end{ejemplo}
+	\end{frame}
+	
+	\begin{frame}{Método de datos de partidos simulados}
+		\begin{ejemplo}[continuación]
+			Formando los sistemas con los métodos de Massey y Colley obtenemos lo siguiente
+			
+			\begin{table}[h]
+			\centering
+			\caption{Resultados del método de datos de partidos simulados}
+			\label{tbl:partidos_simulados_resultados}
+			\begin{tabular}{@{}ccccc@{}}
+				\cmidrule(l){2-5}
+				& \begin{tabular}[c]{@{}c@{}}$\mathbf{r}$\\ de Massey\end{tabular} & \begin{tabular}[c]{@{}c@{}}Ranking\\ agregado\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\mathbf{r}$\\ de Colley\end{tabular} & \begin{tabular}[c]{@{}c@{}}Ranking\\ agregado\end{tabular} \\ \midrule
+				1 & -2.3077                                                          & 5                                                          & 0.5000                                                           & 5                                                          \\
+				2 & -0.3846                                                          & 4                                                          & 0.7941                                                           & 4                                                          \\
+				3 & 1.5385                                                           & 1                                                          & 1.0882                                                           & 1                                                          \\
+				4 & -0.3846                                                          & 3                                                          & 1.0294                                                           & 3                                                          \\
+				5 & 1.5385                                                           & 2                                                          & 1.0884                                                           & 2                                                          \\ \bottomrule
+			\end{tabular}
+		\end{table}
+			
+		\end{ejemplo}
+	\end{frame}
+	
 	\subsubsection{Método óptimo de agregación de rankings}
 	
+	\begin{frame}
+		\begin{center}
+			\Huge\textbf{\textsf{\textcolor{blue}{Método óptimo de agregación de rankings}}}
+		\end{center}
+	\end{frame}
+	
 	\begin{frame}{Método óptimo de agregación de rankings}
-		Método de agregación de rankings
+		El método óptimo de agregación de rankings consiste en resolver el siguiente problema de programación lineal
+		
+		 \begin{equation}
+		 \begin{array}{rl}
+		 \max         & \sum\limits_{i=1}^{n} \sum\limits_{j=1}^{n} c_{ij} x_{ij}\\
+		 \mathrm{s.a} & x_{ij} + x_{ji} = 1\\
+		 & x_{ij} + x_{jk} + x_{ki} \leq 2\\
+		 & x_{ij} \geq 0
+		 \end{array}
+		 \end{equation}
+		 
+		 donde 
+		 
+		 \begin{multline} \label{eq:conformidad}
+		 c_{ij} = \text{número de rankings con $i$ por encima de $j$} \\ - \text{número de rankings con $i$ por debajo de $j$}
+		 \end{multline}
+		 
+		 y
+		 
+		 \begin{equation}
+		 x_{ij} = \begin{cases}
+		 1 & \text{ si el equipo $i$ está por encima de $j$ en el ranking}\\
+		 0 & \text{ en caso contrario}
+		 \end{cases}
+		 \end{equation}
+	\end{frame}
+	
+	\begin{frame}{Método óptimo de agregación de rankings}
+		\begin{ejemplo}
+			Consideremos la familia de rankings $\mathcal{R} = \{c_1, c_2, c_3\}$ donde
+			
+			\begin{equation*}
+			c_1 = \left( \begin{array}{c}
+			1\\
+			3\\
+			2\\
+			4\\
+			5
+			\end{array} \right), \quad
+			c_2 = \left( \begin{array}{c}
+			1\\
+			2\\
+			4\\
+			3\\
+			5
+			\end{array} \right), \quad
+			c_3 = \left( \begin{array}{c}
+			2\\
+			4\\
+			1\\
+			3\\
+			5
+			\end{array} \right)
+			\end{equation*}
+			
+		\end{ejemplo}
+	\end{frame}
+	
+	\begin{frame}{Método óptimo de agregación de rankings}
+		\begin{ejemplo}[continuación]
+			Primero debemos formar la matriz de conformidad $\mathbf{C}$ quedando de la siguiente manera:
+			
+			\begin{equation*}
+			\mathbf{C} = \left(\begin{array}{rrrrr}
+			0 & -3 & -3 & -3 & -3 \\
+			3 &  0 & -3 & -1 & -1 \\
+			3 &  3 &  0 &  3 & -1 \\
+			3 &  1 & -3 &  0 & -3 \\
+			3 &  1 &  1	&  3 &	0
+			\end{array}\right)
+			\end{equation*}
+			
+			Resolviendo el problema de programación la matriz $\mathbf{X}$ con las variables de decisión queda así:
+			
+			\begin{equation*}
+			\mathbf{X} = \left(\begin{array}{rrrrr}
+			0 & 0 & 0 & 0 & 0 \\
+			1 & 0 & 0 & 0 & 0 \\
+			1 & 1 & 0 & 1 & 0 \\
+			1 & 1 & 0 & 0 & 0 \\
+			1 & 1 & 1 & 1 &	0
+			\end{array}\right)
+			\end{equation*}
+			
+			
+		\end{ejemplo}
+	\end{frame}
+	
+	\begin{frame}{Método óptimo de agregación de rankings}
+		\begin{ejemplo}[continuación]
+			
+			El valor de la función objetivo es $24$. El ranking producido es el siguiente:
+			
+			\begin{table}[h]
+				\centering
+				\caption{Resultados del método óptimo}
+				\label{tbl:optimo_resultados}
+				\begin{tabular}{@{}cc@{}}
+					\cmidrule(l){2-2}
+					& Ranking \\ \midrule
+					1 & 5       \\
+					2 & 4       \\
+					3 & 2       \\
+					4 & 3       \\
+					5 & 1       \\ \bottomrule
+				\end{tabular}
+			\end{table}
+			
+			
+		\end{ejemplo}
 	\end{frame}
 	
 	\section{Métodos de comparación}
 	
+	\begin{frame}
+		\begin{center}
+			\Huge\textbf{\textsf{\textcolor{blue}{Métodos de comparación}}}
+		\end{center}
+	\end{frame}
+	
 	\subsection{Tau de Kendall}
+	
+	\begin{frame}
+		\begin{center}
+			\Huge\textbf{\textsf{\textcolor{blue}{Tau de Kendall}}}
+		\end{center}
+	\end{frame}
 	
 	\begin{frame}{Tau de Kendall}
 		\begin{defi}
@@ -261,10 +856,56 @@
 	\end{frame}
 	
 	\begin{frame}{Tau de Kendall}
-		Ejemplo de Tau de Kendall
+		\begin{ejemplo}
+			Consideremos los siguientes rankings:
+			
+			\begin{equation*}
+			c_1 = \left( \begin{array}{c}
+			3\\
+			2\\
+			1\\
+			4\\
+			5
+			\end{array} \right), \quad
+			c_2 = \left( \begin{array}{c}
+			3\\
+			2\\
+			1\\
+			4\\
+			5
+			\end{array} \right), \quad
+			c_3 = \left( \begin{array}{c}
+			5\\
+			4\\
+			1\\
+			2\\
+			3
+			\end{array} \right), \quad
+			c_4 = \left( \begin{array}{c}
+			2\\
+			1\\
+			4\\
+			5\\
+			3
+			\end{array} \right)
+			\end{equation*}
+			
+			\begin{align*}
+			\tau(c_1, c_2) & = \dfrac{10 - 0}{5 \cdot 4/2} = 1\\
+			\tau(c_1, c_3) & = \dfrac{0 - 10}{10} = -1\\
+			\tau(c_3, c_4) & = \dfrac{4 -  6}{10} = -\dfrac{2}{10} = - \dfrac{1}{5}
+			\end{align*}
+			
+		\end{ejemplo}		
 	\end{frame}
 	
 	\subsection{Ro de Spearman}
+	
+	\begin{frame}
+		\begin{center}
+			\Huge\textbf{\textsf{\textcolor{blue}{Ro de Spearman}}}
+		\end{center}
+	\end{frame}
 	
 	\begin{frame}{Ro de Spearman}
 		\begin{defi}
@@ -279,7 +920,59 @@
 	
 	\end{frame}
 	
+	\begin{frame}{Ro de Spearman}
+		\begin{ejemplo}
+			Consideremos los siguientes rankings:
+			
+			\begin{equation*}
+			c_1 = \left( \begin{array}{c}
+			2\\
+			3\\
+			4\\
+			1\\
+			5
+			\end{array} \right), \quad
+			c_2 = \left( \begin{array}{c}
+			5\\
+			4\\
+			1\\
+			3\\
+			2
+			\end{array} \right), \quad
+			c_3 = \left( \begin{array}{c}
+			1\\
+			2\\
+			3\\
+			4\\
+			5
+			\end{array} \right), \quad
+			c_4 = \left( \begin{array}{c}
+			2\\
+			3\\
+			4\\
+			1\\
+			5
+			\end{array} \right)
+			\end{equation*}
+			
+			\begin{align*}
+			\rho(c_1, c_3) & = 6\\
+			\rho(c_1, c_4) & = 0\\
+			\rho(c_2, c_3) & = 12\\
+			\rho(c_3, c_4) & = 6
+			\end{align*}  
+		\end{ejemplo}
+		
+	\end{frame}
+	
+	
 	\section{Competitividad en rankings}
+	
+	\begin{frame}
+		\begin{center}
+			\Huge\textbf{\textsf{\textcolor{blue}{Competitividad en rankings}}}
+		\end{center}
+	\end{frame}
 	
 	\begin{frame}{Competitividad en rankings}
 		\begin{defi}
@@ -314,6 +1007,12 @@
 	
 	\subsection{Grafo de competitividad}
 	
+	\begin{frame}
+		\begin{center}
+			\Huge\textbf{\textsf{\textcolor{blue}{Grafo de competitividad}}}
+		\end{center}
+	\end{frame}
+	
 	\begin{frame}{Grafo de competitividad}
 		\begin{defi}
 			Definimos grafo de competitividad de la familia de rankings $\mathcal{R}$, y lo denotaremos como $G_c(\mathcal{R}) = (\mathcal{N}, E_\mathcal{R})$, donde $\mathcal{N}$ es el conjunto de nodos $E_\mathcal{R}$ denota el conjunto de arcos dados por la siguiente regla: existe un arco entre $i$ y $j$ si el par $(i,j)$ compite.
@@ -327,31 +1026,31 @@
 			\begin{equation*}
 			%\resizebox{.8\linewidth}{!}{
 			c_1 = \left( \begin{array}{c}
-			\text{DEN}\\
-			\text{POR}\\
-			\text{OCK}\\
-			\text{UTA}\\
-			\text{MIN}
+			1 \\
+			2 \\
+			3 \\
+			4 \\
+			5
 			\end{array} \right), \quad
 			c_2 = \left( \begin{array}{c}
-			\text{POR}\\
-			\text{OCK}\\
-			\text{UTA}\\
-			\text{DEN}\\
-			\text{MIN}
+			2 \\
+			3 \\
+			4 \\
+			1 \\
+			5
 			\end{array} \right), \quad
 			c_3 = \left( \begin{array}{c}
-			\text{POR}\\
-			\text{OCK}\\
-			\text{DEN}\\
-			\text{UTA}\\
-			\text{MIN}
+			2 \\
+			3 \\
+			1 \\
+			4 \\
+			5
 			\end{array} \right), \quad
 			c_4 = \left( \begin{array}{c}
-			\text{OCK}\\
-			\text{UTA}\\
-			\text{POR}\\
-			\text{DEN}\\
+			3 \\
+			4 \\
+			2 \\
+			1 \\
 			\text{MIN}
 			\end{array} \right)
 			%}
@@ -398,7 +1097,19 @@
 	
 	\subsection{Medidas de competitividad}
 	
+	\begin{frame}
+		\begin{center}
+			\Huge\textbf{\textsf{\textcolor{blue}{Medidas de competitividad}}}
+		\end{center}
+	\end{frame}
+	
 	\subsubsection{Grado medio normalizado}
+	
+	\begin{frame}
+		\begin{center}
+			\Huge\textbf{\textsf{\textcolor{blue}{Grado medio normalizado}}}
+		\end{center}
+	\end{frame}
 	
 	\begin{frame}{Grado medio normalizado}
 		\begin{defi}
@@ -417,10 +1128,36 @@
 	\end{frame}
 	
 	\begin{frame}{Grado medio normalizado}
-		Ejemplo Grado medio normalizado
+		\begin{ejemplo}
+			\begin{columns}[t] % align columns
+				\begin{column}{.50\textwidth}
+					\begin{figure}
+						\centering
+						\resizebox{!}{0.3\textheight}{\ejemplografocompetitividad}
+						\caption{Grafo de competitividad de $\mathcal{R}$}
+					\end{figure}
+					\[ \mathrm{ND}(\mathcal{R}) = \dfrac{1}{5\cdot 4} (3 + 2 + 3 + 2 + 0) =  \dfrac{1}{2} \]
+				\end{column}%
+				\hfill%
+				\begin{column}{.50\textwidth}
+					\begin{figure}
+						\centering
+						\resizebox{!}{0.3\textheight}{\ejemplogradomedio}
+						\caption{Grafo de competitividad de $\mathcal{S}$}
+					\end{figure}
+					\[ \mathrm{ND}(\mathcal{S}) = \dfrac{1}{5\cdot 4} (2 + 4 + 2 + 3 + 3) =  \dfrac{7}{10} \]
+				\end{column}%
+			\end{columns}
+		\end{ejemplo}
 	\end{frame}
 	
 	\subsubsection{Fuerza media normalizada}
+	
+	\begin{frame}
+		\begin{center}
+			\Huge\textbf{\textsf{\textcolor{blue}{Fuerza media normalizada}}}
+		\end{center}
+	\end{frame}
 	
 	\begin{frame}{Fuerza media normalizada}
 		\begin{defi}
@@ -439,10 +1176,36 @@
 	\end{frame}
 	
 	\begin{frame}{Fuerza media normalizada}
-	Ejemplo	Fuerza media normalizada
+		\begin{ejemplo}
+			\begin{columns}[t] % align columns
+				\begin{column}{.50\textwidth}
+					\begin{figure}
+						\centering
+						\resizebox{!}{0.3\textheight}{\ejemplografocompetitividadevolutivo}
+						\caption{Grafo de competitividad de $\mathcal{R}$}
+					\end{figure}
+					\[ \mathrm{NS}(\mathcal{R}) = \dfrac{7}{10 \cdot 3} = \dfrac{7}{30} \]
+				\end{column}%
+				\hfill%
+				\begin{column}{.50\textwidth}
+					\begin{figure}
+						\centering
+						\resizebox{!}{0.3\textheight}{\ejemplofuerzamedia}
+						\caption{Grafo de competitividad de $\mathcal{S}$}
+					\end{figure}
+					\[ \mathrm{NS}(\mathcal{S}) = \dfrac{11}{10\cdot 4} = \dfrac{11}{40} \]
+				\end{column}%
+			\end{columns}
+		\end{ejemplo}
 	\end{frame}
 	
 	\subsubsection{Tau de Kendall generalizada}
+	
+	\begin{frame}
+		\begin{center}
+			\Huge\textbf{\textsf{\textcolor{blue}{Tau de Kendall generalizada}}}
+		\end{center}
+	\end{frame}
 	
 	\begin{frame}{Tau de Kendall}
 		\begin{defi}
@@ -486,10 +1249,36 @@
 	\end{frame}
 	
 	\begin{frame}{Tau de Kendall generalizada}
-		Ejemplo	Tau de Kendall generalizada
+		\begin{ejemplo}
+			\begin{columns}[t] % align columns
+				\begin{column}{.50\textwidth}
+					\begin{figure}
+						\centering
+						\resizebox{!}{0.3\textheight}{\ejemplografocompetitividadevolutivo}
+						\caption{Grafo de competitividad de $\mathcal{R}$}
+					\end{figure}
+					\[ \tau_e(\mathcal{R}) = 1 - \dfrac{4 \cdot 7}{5 \cdot 4} = -\dfrac{2}{5} \]
+				\end{column}%
+				\hfill%
+				\begin{column}{.50\textwidth}
+					\begin{figure}
+						\centering
+						\resizebox{!}{0.3\textheight}{\ejemplofuerzamedia}
+						\caption{Grafo de competitividad de $\mathcal{S}$}
+					\end{figure}
+					\[ \tau_e(\mathcal{S}) = 1 - \dfrac{11 \cdot 2}{10 \cdot 4} = -\dfrac{9}{20} \]
+				\end{column}%
+			\end{columns}
+		\end{ejemplo}
 	\end{frame}
 	
 	\subsubsection{Diámetro del grafo de competitividad evolutivo}
+	
+	\begin{frame}
+		\begin{center}
+			\Huge\textbf{\textsf{\textcolor{blue}{Diámetro del grafo de competitividad evolutivo}}}
+		\end{center}
+	\end{frame}
 	
 	\begin{frame}{Diámetro del grafo de competitividad evolutivo}
 		\begin{defi}
@@ -508,10 +1297,68 @@
 	\end{frame}
 	
 	\begin{frame}{Diámetro del grafo de competitividad evolutivo}
-		Ejemplo	Diámetro del grafo de competitividad
+		\begin{ejemplo}
+			\begin{columns}[t] % align columns
+				\begin{column}{.50\textwidth}
+					\begin{figure}
+						\centering
+						\resizebox{!}{0.4\textheight}{\ejemplografocompetitividadevolutivo}
+						\caption{Grafo de competitividad de $\mathcal{R}$}
+					\end{figure}
+				\end{column}%
+				\hfill%
+				\begin{column}{.50\textwidth}
+					\begin{figure}
+						\centering
+						\resizebox{!}{0.4\textheight}{\ejemplofuerzamedia}
+						\caption{Grafo de competitividad de $\mathcal{S}$}
+					\end{figure}
+				\end{column}%
+			\end{columns}
+		\end{ejemplo}
+	\end{frame}
+	
+	\begin{frame}{Diámetro del grafo de competitividad evolutivo}
+		\begin{ejemplo}[continuación]
+			\begin{columns}[t] % align columns
+				\begin{column}{.50\textwidth}
+					\begin{equation*}
+					\bordermatrix{
+						& 1 & 2 & 3 & 4 & 5 \cr
+						1 &	0 & 0 & 1 & 1 & \infty \cr
+						2 & 1 & 0 & 1 & 2 & \infty \cr
+						3 & 1 & 1 & 0 & 2 & \infty \cr
+						4 & 1 & 2 & 2 & 0 & \infty \cr
+						5 & \infty & \infty & \infty & \infty  &  0  \cr
+					}
+					\end{equation*}
+					\[ \mathrm{diam}(\mathcal{R}) = \infty \]
+				\end{column}%
+				\hfill%
+				\begin{column}{.50\textwidth}
+					\begin{equation*}
+					\bordermatrix{
+						& 1 & 2 & 3 & 4 & 5 \cr
+						1 &	0 & 2 & 4 & 1 & 3 \cr
+						2 & 2 & 0 & 2 & 1 & 1 \cr
+						3 & 4 & 2 & 0 & 3 & 1 \cr
+						4 & 1 & 1 & 3 & 0 & 2 \cr
+						5 & 3 & 1 & 1 & 2 & 0  \cr
+					}
+					\end{equation*}
+					\[ \mathrm{diam}(\mathcal{S}) = 4 \]
+				\end{column}%
+			\end{columns}
+		\end{ejemplo}
 	\end{frame}
 	
 	\subsubsection{Longitud del camino característico}
+	
+	\begin{frame}
+		\begin{center}
+			\Huge\textbf{\textsf{\textcolor{blue}{Longitud del camino característico}}}
+		\end{center}
+	\end{frame}
 	
 	\begin{frame}{Longitud del camino característico}
 		\begin{defi}
@@ -530,10 +1377,68 @@
 	\end{frame}
 	
 	\begin{frame}{Longitud del camino característico}
-	Ejemplo	Longitud del camino característico
+	\begin{ejemplo}
+		\begin{columns}[t] % align columns
+			\begin{column}{.50\textwidth}
+				\begin{figure}
+					\centering
+					\resizebox{!}{0.4\textheight}{\ejemplografocompetitividadevolutivo}
+					\caption{Grafo de competitividad de $\mathcal{R}$}
+				\end{figure}
+			\end{column}%
+			\hfill%
+			\begin{column}{.50\textwidth}
+				\begin{figure}
+					\centering
+					\resizebox{!}{0.4\textheight}{\ejemplofuerzamedia}
+					\caption{Grafo de competitividad de $\mathcal{S}$}
+				\end{figure}
+			\end{column}%
+		\end{columns}
+	\end{ejemplo}
+	\end{frame}
+	
+	\begin{frame}{Longitud del camino característico}
+		\begin{ejemplo}[continuación]
+			\begin{columns}[t] % align columns
+				\begin{column}{.50\textwidth}
+					\begin{equation*}
+					\bordermatrix{
+						& 1 & 2 & 3 & 4 & 5 \cr
+						1 &	0 & 0 & 1 & 1 & \infty \cr
+						2 & 1 & 0 & 1 & 2 & \infty \cr
+						3 & 1 & 1 & 0 & 2 & \infty \cr
+						4 & 1 & 2 & 2 & 0 & \infty \cr
+						5 & \infty & \infty & \infty & \infty  &  0  \cr
+					}
+					\end{equation*}
+					\[ \mathrm{L}(\mathcal{R}) = \infty \]
+				\end{column}%
+				\hfill%
+				\begin{column}{.50\textwidth}
+					\begin{equation*}
+					\bordermatrix{
+						& 1 & 2 & 3 & 4 & 5 \cr
+						1 &	0 & 2 & 4 & 1 & 3 \cr
+						2 & 2 & 0 & 2 & 1 & 1 \cr
+						3 & 4 & 2 & 0 & 3 & 1 \cr
+						4 & 1 & 1 & 3 & 0 & 2 \cr
+						5 & 3 & 1 & 1 & 2 & 0  \cr
+					}
+					\end{equation*}
+					\[ \mathrm{L}(\mathcal{S}) = \dfrac{41}{10} \]
+				\end{column}%
+			\end{columns}
+		\end{ejemplo}
 	\end{frame}
 	
 	\subsubsection{Eficiencia del grafo de competitividad}
+	
+	\begin{frame}
+		\begin{center}
+			\Huge\textbf{\textsf{\textcolor{blue}{Eficiencia del grafo de competitividad}}}
+		\end{center}
+	\end{frame}
 	
 	\begin{frame}{Eficiencia del grafo de competitividad}
 		\begin{defi}
@@ -554,18 +1459,78 @@
 	\end{frame}
 	
 	\begin{frame}{Eficiencia del grafo de competitividad}
-		Ejemplo
+		\begin{ejemplo}
+			\begin{columns}[t] % align columns
+				\begin{column}{.50\textwidth}
+					\begin{figure}
+						\centering
+						\resizebox{!}{0.4\textheight}{\ejemplografocompetitividadevolutivo}
+						\caption{Grafo de competitividad de $\mathcal{R}$}
+					\end{figure}
+				\end{column}%
+				\hfill%
+				\begin{column}{.50\textwidth}
+					\begin{figure}
+						\centering
+						\resizebox{!}{0.4\textheight}{\ejemplofuerzamedia}
+						\caption{Grafo de competitividad de $\mathcal{S}$}
+					\end{figure}
+				\end{column}%
+			\end{columns}
+		\end{ejemplo}
 	\end{frame}
 	
-	\subsection{Relación con otros grafos}
-	
-	\begin{frame}{Relación con otros grafos}
-		Relación con otros grafos
+	\begin{frame}{Eficiencia del grafo de competitividad}
+		\begin{ejemplo}[continuación]
+			\begin{columns}[t] % align columns
+				\begin{column}{.50\textwidth}
+					\begin{equation*}
+					\bordermatrix{
+						& 1 & 2 & 3 & 4 & 5 \cr
+						1 &	0 & 0 & 1 & 1 & \infty \cr
+						2 & 1 & 0 & 1 & 2 & \infty \cr
+						3 & 1 & 1 & 0 & 2 & \infty \cr
+						4 & 1 & 2 & 2 & 0 & \infty \cr
+						5 & \infty & \infty & \infty & \infty  &  0  \cr
+					}
+					\end{equation*}
+					\[ \mathrm{E}(\mathcal{R}) = 1 \]
+				\end{column}%
+				\hfill%
+				\begin{column}{.50\textwidth}
+					\begin{equation*}
+					\bordermatrix{
+						& 1 & 2 & 3 & 4 & 5 \cr
+						1 &	0 & 2 & 4 & 1 & 3 \cr
+						2 & 2 & 0 & 2 & 1 & 1 \cr
+						3 & 4 & 2 & 0 & 3 & 1 \cr
+						4 & 1 & 1 & 3 & 0 & 2 \cr
+						5 & 3 & 1 & 1 & 2 & 0  \cr
+					}
+					\end{equation*}
+					\[ \mathrm{E}(\mathcal{S}) = 1.28 \]
+				\end{column}%
+			\end{columns}
+		\end{ejemplo}
 	\end{frame}
+	
+		\end{document}
 	
 	\section{Diseño de la aplicación}
 	
+	\begin{frame}
+		\begin{center}
+			\Huge\textbf{\textsf{\textcolor{blue}{Diseño de la aplicación}}}
+		\end{center}
+	\end{frame}
+	
 	\subsection{Arquitectura de la aplicación}
+	
+	\begin{frame}
+		\begin{center}
+			\Huge\textbf{\textsf{\textcolor{blue}{Arquitectura de la aplicación}}}
+		\end{center}
+	\end{frame}
 	
 	\begin{frame}{Arquitectura de la aplicación}
 		\begin{figure}
@@ -578,6 +1543,12 @@
 	
 	\subsection{Tecnología utilizada}
 	
+	\begin{frame}
+		\begin{center}
+			\Huge\textbf{\textsf{\textcolor{blue}{Tecnología utilizada}}}
+		\end{center}
+	\end{frame}
+	
 	\begin{frame}{Tecnología utilizada}
 		\begin{figure}
 			\centering
@@ -589,28 +1560,112 @@
 	
 	\subsection{Vista de la aplicación}
 	
-	\begin{frame}{Vista de la aplicación}
-		$[DEMO]$
+	\begin{frame}
+		\begin{center}
+			\Huge\textbf{\textsf{\textcolor{blue}{Vista de la aplicación}}}\\
+	
+			\Huge\textbf{\textsf{{[DEMO]}}
+		\end{center}
 	\end{frame}
 	
-	\subsection{Estudio de la competitividad de la Liga BBVA de las últimas cuatro temporadas}
+
+	\section{Estudio de la competitividad de la Liga BBVA de las últimas cuatro temporadas}
 	
-	\begin{frame}{Estudio de la competitividad de la Liga BBVA de las últimas cuatro temporadas}
-		Estudio de la competitividad de la Liga BBVA de las últimas cuatro temporadas
+	\begin{frame}
+		\begin{center}
+			\Huge\textbf{\textsf{\textcolor{blue}{Estudio de la competitividad de la Liga BBVA de las últimas cuatro temporadas}}}
+		\end{center}
+	\end{frame}	
+	
+	\begin{frame}{Estudio de la competitividad de la Liga BBVA de las últimas cuatro temporadas}	
+		\begin{figure}
+			\centering
+			\includegraphics[width=0.7\linewidth]{imagenes/pantallazos-competitividad/2011-2012/grafo}
+			\caption{Grafo de competitividad de la temporada 2011-2012}
+			\label{fig:2011-2012}
+		\end{figure}
 	\end{frame}
 	
-	\subsection{Conclusiones y futuro trabajo}
-	
-	\begin{frame}{Conclusiones y futuro trabajo}
-		Conclusiones y futuro trabajo
+	\begin{frame}{Estudio de la competitividad de la Liga BBVA de las últimas cuatro temporadas}	
+		\begin{figure}
+			\centering
+			\includegraphics[width=0.7\linewidth]{imagenes/pantallazos-competitividad/2012-2013/grafo}
+			\caption{Grafo de competitividad de la temporada 2012-2013}
+			\label{fig:2012-2013}
+		\end{figure}
 	\end{frame}
 	
-	\subsection{Bibliografía}
-	
-	\begin{frame}{Bibliografía}
-		Bibliografía
+	\begin{frame}{Estudio de la competitividad de la Liga BBVA de las últimas cuatro temporadas}	
+		\begin{figure}
+			\centering
+			\includegraphics[width=0.7\linewidth]{imagenes/pantallazos-competitividad/2013-2014/grafo}
+			\caption{Grafo de competitividad de la temporada 2013-2014}
+			\label{fig:2013-2014}
+		\end{figure}
 	\end{frame}
 	
+	\begin{frame}{Estudio de la competitividad de la Liga BBVA de las últimas cuatro temporadas}	
+		\begin{figure}
+			\centering
+			\includegraphics[width=0.7\linewidth]{imagenes/pantallazos-competitividad/2014-2015/grafo}
+			\caption{Grafo de competitividad de la temporada 2014-2015}
+			\label{fig:2014-2015}
+		\end{figure}
+	\end{frame}
+	
+	\begin{frame}{Estudio de la competitividad de la Liga BBVA de las últimas cuatro temporadas}	
+
+		\begin{table}[h]
+			\centering
+			\caption[Medidas de competitividad de las últimas cuatro temporadas]{Medidas de competitividad de las temporadas 2011-2012, 2012-2013, 2013-2014 y 2014-2015 de la Liga BBVA. Las medidas son fuerza media normalizada (NMS), el diámetro, la tau de Kendall, el grado medio normalizado (NMD), la longitud del camino característico (CPL) y la eficiencia.}
+			\label{tbl:medidas}
+			\begin{adjustbox}{max width=\textwidth}
+			\begin{tabular}{@{}ccccccc@{}}
+				\toprule
+				Temporada & NMS & Diámetro & Tau de Kendall & NMD & CPL & Eficiencia \\ \midrule
+				2014-2015 & 0.642                    & 3        & 0.054          & 0.891                   & 2.768                              & 1.633      \\
+				2013-2014 & 0.594                    & 3        & 0.059          & 0.880                   & 2.9368                             & 1.573      \\
+				2012-2013 & 0.673                    & $\infty$ & 0.061          & 0.876                   & $\infty$                           & 1.574      \\
+				2011-2012 & 0.636                    & 3        & 0.066          & 0.867                   & 2.789                              & 1.626      \\ \bottomrule
+			\end{tabular}
+			\end{adjustbox}
+		\end{table}
+		
+		La temporada 2014-2015 es la más competitiva de las cuatro estudiadas.
+		
+	\end{frame}
+	
+	\section{Futuras mejoras}
+	
+	\begin{frame}
+		\begin{center}
+			\Huge\textbf{\textsf{\textcolor{blue}{Futuras mejoras}}}
+		\end{center}
+	\end{frame}	
+	
+	\begin{frame}{Futuras mejoras}
+		\begin{itemize}
+			\item Añadir un modelo de predicción para ver cómo evolucionará la competitividad a lo largo del tiempo.
+			
+			\item Estudiar la competitividad por zonas del ranking, es decir, dividir cada ranking en distintas regiones y estudiar la competitividad en cada una de estas regiones. 
+			
+			\item Posibilidad de ver la competitividad a lo largo de las jornadas, es decir, ver las medidas y el grafo de competitividad en una jornada concreta durante la temporada.
+			
+			\item Posibilidad de implementar una aplicación web con el framework con Ionic Framework.
+			
+			\item Añadir un módulo de comparación, que permita comparar dos o más temporadas distintas.
+			
+		\end{itemize}
+	\end{frame}
+	
+	
+	\begin{frame}{¿Preguntas?}
+		\begin{figure}
+			\centering
+			\includegraphics[width=0.9\linewidth]{imagenes/preguntas}
+		\end{figure}
+
+	\end{frame}
 	
 	
 \end{document}
