@@ -94,15 +94,15 @@
 		\end{figure}
 	\end{frame}
 	
-	\subsection{¿Qué un rating? ¿Y un ranking?}
+	\subsection{¿Qué es un rating? ¿Y un ranking?}
 	
-	\begin{frame}{¿Qué un rating?}
+	\begin{frame}{¿Qué es un rating?}
 		\begin{defi}
 			Dado un conjunto $\mathcal{N} = \{1,\dots, n\}$ de nodos, decimos que es un rating si a cada $i \in \mathcal{N}$ se le asigna un valor real, es decir, una función $\mathrm{r} : \mathcal{N} \to \R$.
 		\end{defi}
 	\end{frame}
 	
-	\begin{frame}{¿Qué un ranking?}
+	\begin{frame}{¿Qué es un ranking?}
 		\begin{defi} \label{def:ranking}
 			Dado un conjunto $\mathcal{N} = \{1,\dots,n\}$ que llamamos nodos, definimos el ranking $c$ como cualquier biyección $c : \mathcal{N} \to \mathcal{N}$.
 		\end{defi}
@@ -138,7 +138,7 @@
 	\section{Métodos para obtener ratings (y rankings)}
 	
 	\begin{frame}{Métodos para obtener ratings (y rankings)}
-		Existen muchos métodos para obtener ratings. Sólo veremos tres métodos:
+		Existen muchos métodos para obtener ratings. A modo de ejemplo sólo veremos tres métodos, aunque existen multitud de ellos:
 		
 		\begin{itemize}
 			\item Método de Massey: basado en mínimos cuadrados
@@ -399,7 +399,7 @@
 	
 	\begin{frame}{Método de Markov}
 		\begin{ejemplo}[continuación]
-			Creamos las matrices estocásticas $\mathbf{S}_p$ y $\mathbf{S}_v$, dividiendo cada fila entre la suma de la fila:
+			Creamos las matrices estocásticas $\mathbf{S}_p$ y $\mathbf{S}_v$, dividiendo cada elemento de la fila entre la suma de su fila:
 			
 			\[ \mathbf{S}_p = \left(\begin{array}{rrrrr}
 			0      & 0.2516 & 0.2363 & 0.2560 & 0.2560 \\
@@ -532,16 +532,16 @@
 			\begin{equation*}
 			c_1 = \left( \begin{array}{c}
 			1\\
-			3\\
 			2\\
+			3\\
 			4\\
 			5
 			\end{array} \right), \quad
 			c_2 = \left( \begin{array}{c}
 			1\\
 			2\\
-			4\\
 			3\\
+			4\\
 			5
 			\end{array} \right), \quad
 			c_3 = \left( \begin{array}{c}
@@ -591,7 +591,7 @@
 	
 	\begin{frame}{Método del ranking promedio}
 		\begin{itemize}
-			\item Los números enteros que representan el orden en el ranking en los distintos rankings, se hace la media aritmética con éstos para crear el nuevo ranking agregado.
+			\item Para cada uno de los distintos números enteros que representan el orden de cada equipo en los distintos rankings, calculamos la media aritmética con éstos para crear el nuevo ranking agregado.
 			
 			\item Sólo es válido para rankings completos (rankings con el mismo número de elementos).
 		\end{itemize}
@@ -642,16 +642,16 @@
 			\begin{equation*}
 			c_1 = \left( \begin{array}{c}
 			1\\
-			3\\
 			2\\
+			3\\
 			4\\
 			5
 			\end{array} \right), \quad
 			c_2 = \left( \begin{array}{c}
 			1\\
 			2\\
-			4\\
 			3\\
+			4\\
 			5
 			\end{array} \right), \quad
 			c_3 = \left( \begin{array}{c}
@@ -752,16 +752,16 @@
 			\begin{equation*}
 			c_1 = \left( \begin{array}{c}
 			1\\
-			3\\
 			2\\
+			3\\
 			4\\
 			5
 			\end{array} \right), \quad
 			c_2 = \left( \begin{array}{c}
 			1\\
 			2\\
-			4\\
 			3\\
+			4\\
 			5
 			\end{array} \right), \quad
 			c_3 = \left( \begin{array}{c}
@@ -1023,7 +1023,7 @@
 	
 	\begin{frame}{Grafo de competitividad}
 		\begin{defi}
-			Definimos grafo de competitividad de la familia de rankings $\mathcal{R}$, y lo denotaremos como $G_c(\mathcal{R}) = (\mathcal{N}, E_\mathcal{R})$, donde $\mathcal{N}$ es el conjunto de nodos $E_\mathcal{R}$ denota el conjunto de arcos dados por la siguiente regla: existe un arco entre $i$ y $j$ si el par $(i,j)$ compite.
+			Definimos grafo de competitividad de la familia de rankings $\mathcal{R}$, y lo denotaremos como $G_c(\mathcal{R}) = (\mathcal{N}, E_\mathcal{R})$, donde $\mathcal{N}$ es el conjunto de nodos y $E_\mathcal{R}$ denota el conjunto de arcos dados por la siguiente regla: existe un arco entre $i$ y $j$ si el par $(i,j)$ compite.
 		\end{defi}
 	\end{frame}
 	
@@ -1569,6 +1569,11 @@
 	\begin{frame}
 		\begin{center}
 			\Huge\textbf{\textsf{\textcolor{blue}{Vista de la aplicación}}}\\
+			
+			\begin{figure}
+			\centering
+			\includegraphics[width=0.5\linewidth]{./imagenes/inicio}
+			\end{figure}
 	
 			\Huge\textbf{\textsf{{[DEMO]}}}
 		\end{center}
@@ -1657,7 +1662,7 @@
 			
 			\item Posibilidad de ver la competitividad a lo largo de las jornadas, es decir, ver las medidas y el grafo de competitividad en una jornada concreta durante la temporada.
 			
-			\item Posibilidad de implementar una aplicación web con el framework con Ionic Framework.
+			\item Posibilidad de implementar una aplicación móvil con el framework con Ionic Framework.
 			
 			\item Añadir un módulo de comparación, que permita comparar dos o más temporadas distintas.
 			
