@@ -14,30 +14,28 @@
 %
 % #1 : Título 
 % #2 : Subtítulo
-% #3 : Subsubtítulo
-% #4 : Autor(es)
-% #5 : Tutor(es)
-% #6 : Lugar
+% #3 : Autor(es)
+% #4 : Tutor(es)
+% #5 : Lugar
 %
 
 \newcommand*{\portada}[5]{
 \begin{titlepage}
 \begingroup
-\vspace*{1cm}
+%\vspace*{1cm}
 \drop = 0.2\txtheight
 \centering
 \vfill
 {\Huge \scshape #1}\\[\baselineskip]
 {\Large \textbf{#2}}\\[\baselineskip]
-{\Large \scshape #3}\\[\baselineskip]
 \vspace*{0.3cm}
-\includegraphics[scale=0.35]{./imagenes/logoURJC.jpg}
-{Autor: \\ \large \textit{#4}}\\[0.5\drop]
-\vspace*{1.5cm}
-{Tutores: \\ \large \textit{#5}}\\[0.5\drop]
-\vspace*{1.5cm}
-
-{\large \scshape #6, \today} \par
+\includegraphics[scale=0.3]{./imagenes/logoURJC.jpg}
+\vspace*{1cm}\\[0.5\drop]
+{Autor: \\ \large \textit{#3}}\\[0.5\drop]
+\vspace*{0.5cm}
+{Tutores: \\ \large \textit{#4}}\\[0.5\drop]
+\vspace*{0.5cm}
+{\large \scshape #5, \today} \par
 \begin{center}
 \end{center}
 \vfill\null
