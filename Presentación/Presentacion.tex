@@ -1,8 +1,9 @@
-\documentclass[10pt]{beamer}
+\documentclass[10pt,hyperref={unicode}]{beamer}
 \usetheme{Madrid}
 \setbeamertemplate{caption}[numbered]
 
 \usepackage{fontspec}
+%\usepackage[unicode=true]{hyperref}
 \usepackage[spanish, es-nodecimaldot, es-tabla]{babel}
 \usepackage{amsmath}
 \usepackage{amsfonts}
@@ -15,8 +16,9 @@
 \input{extras/comandos}
 \input{extras/figuras}
 
-\author{José Ignacio Escribano}
-\title{Diseño e implementación de una aplicación SPA para el estudio de la competitividad de la liga BBVA}
+\author[José Ignacio Escribano]{Trabajo Fin de Grado de Ingeniería del Software y Matemáticas \\ \vspace*{1em} José Ignacio Escribano}
+\title[Trabajo Fin de Grado]{Diseño e implementación de una aplicación SPA para el estudio de la competitividad de la liga BBVA}
+\date{16 de julio de 2015}
 %\subtitle{}
 %\logo{}
 \institute[URJC]{\includegraphics[width=0.1\linewidth]{imagenes/logoURJC.jpg}}
@@ -88,7 +90,7 @@
 	\begin{frame}{Introducción}
 		\begin{figure}
 			\centering
-			\includegraphics[width=0.7\linewidth]{imagenes/ranking_atp}
+			\includegraphics[width=0.65\linewidth]{imagenes/ranking_atp}
 			\caption{Ranking ATP \url{http://es.atpworldtour.com/Rankings/Singles.aspx}}
 			\label{fig:ranking_atp}
 		\end{figure}
@@ -373,6 +375,8 @@
 			\item Calcular $\mathbf{r}$, el punto fijo de la matriz de transición $\mathbf{S}$. Si $\mathbf{S}$ es reducible, usar la matriz irreducible $\overline{\mathbf{S}}$
 			
 			\[\overline{\mathbf{S}} = \beta \mathbf{S} + \dfrac{(1 - \beta)}{n} \mathbf{E}\]
+			
+			donde $\mathbf{E}$ es una matriz de unos, $n$ es el número de equipos y $\beta \in [0, 1]$.
 		\end{enumerate}
 	\end{frame}
 	

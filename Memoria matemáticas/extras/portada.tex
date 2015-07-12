@@ -1,7 +1,7 @@
 %*******************************************************
 %                 NO MODIFICAR
 \newcommand*{\FSfont}[1]{%
-  \fontencoding{T1}\fontfamily{#1}\selectfont}
+	\fontencoding{T1}\fontfamily{#1}\selectfont}
 
 \newlength{\tpheight}\setlength{\tpheight}{0.9\textheight}
 \newlength{\txtheight}\setlength{\txtheight}{0.9\tpheight}
@@ -20,27 +20,39 @@
 %
 
 \newcommand*{\portada}[5]{
-\begin{titlepage}
-\begingroup
-%\vspace*{1cm}
-\drop = 0.2\txtheight
-\centering
-\vfill
-{\Huge \scshape #1}\\[\baselineskip]
-{\Large \textbf{#2}}\\[\baselineskip]
-\vspace*{0.3cm}
-\includegraphics[scale=0.3]{./imagenes/logoURJC.jpg}
-\vspace*{1cm}\\[0.5\drop]
-{Autor: \\ \large \textit{#3}}\\[0.5\drop]
-\vspace*{0.5cm}
-{Tutores: \\ \large \textit{#4}}\\[0.5\drop]
-\vspace*{0.5cm}
-{\large \scshape #5, \today} \par
-\begin{center}
-\end{center}
-\vfill\null
-\endgroup
-\end{titlepage}
+	\begin{titlepage}
+		\begingroup
+		%\vspace*{1cm}
+		\drop = 0.2\txtheight
+		\centering
+		\vspace*{0.5cm}
+		\includegraphics[scale=0.8]{./imagenes/logo-urjc}
+		
+		\vspace*{1.5cm}
+		{\Huge  \textbf{#1}}\\[\baselineskip]
+		{\Large{Trabajo Fin de Grado}}\\[\baselineskip]
+		
+		{\large {Escuela Técnica Superior de Ingeniería Informática}}\\[\baselineskip]
+		
+		\vspace*{0.5cm}
+		
+		{\large \textbf{#2}}\\[\baselineskip]
+		
+		{\large{#3}}\\[\baselineskip]
+		
+		\vspace*{0.5cm}
+		
+		{\large \textit{#4}}\\[0.5\drop]
+		
+		\vspace*{0.5cm}
+		
+		{Tutores:} \\ 
+		{\large \textit{#5}}
+		\begin{center}
+		\end{center}
+		\vfill\null
+		\endgroup
+	\end{titlepage}
 }
- %*****************************************************
- 
+%*****************************************************
+
