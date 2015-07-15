@@ -126,6 +126,7 @@
 	\end{frame}
 	
 	
+	
 	\begin{frame}{Rating vs ranking}
 		Otra forma de ver los rankings y los ratings es en forma de vector. Si tenemos un ranking $c$, cada una de las posiciones del vector $c$, se corresponde con alguno de los nodos, y la posición en la aparezca en el vector es la posición que tiene en el ranking $c$. De igual forma para un rating.
 		
@@ -144,6 +145,16 @@
 			
 		\end{ejemplo}
 	\end{frame}
+	
+	\begin{frame}{Referencias}
+		\begin{itemize}
+		\item Criado, R., García, E., Pedroche F. y Romance M. (2013). Comparing rankings by means of competitivity graphs: structural properties and computation.
+		
+		\item Criado, R., García E., Pedroche F. y Romance M. (2013). A new method for comparing rankings though complex networks: Models and analysis of competitiveness of major european soccer leagues. Chaos: An interdisciplinary Journal of Nonlinear Science.
+		
+		\item Langville A. y Meyer C. (2012). Who's \#1?: The Science of Rating of Ranking. Princeton University Press.  
+		\end{itemize}
+		\end{frame}
 	
 	\begin{frame}{Algunos problemas de rankings}
 			\begin{itemize}
@@ -1313,7 +1324,11 @@
 	\end{frame}
 	
 	\begin{frame}{Conclusiones}
-	\textcolor{red}{Conclusiones}
+	\begin{itemize}
+		\item Existen multitud de métodos matemáticos para el estudio de rankings que resuelven los problemas clásicos de rankings (agregación de rankings, comparación de rankings, etc).
+		
+		\item Las medidas de competitividad dan información valiosa sobre el grafo de competitividad.
+	\end{itemize}
 	\end{frame}
 %	
 %	\begin{frame}{Tau de Kendall generalizada}
@@ -1688,24 +1703,72 @@
 	
 	\begin{frame}{Estudio de la competitividad de la Liga BBVA de las últimas cuatro temporadas}	
 
-		\begin{table}[h]
-			\centering
-			\caption[Medidas de competitividad de las últimas cuatro temporadas]{Medidas de competitividad de las temporadas 2011-2012, 2012-2013, 2013-2014 y 2014-2015 de la Liga BBVA. Las medidas son fuerza media normalizada (NMS), el diámetro, la tau de Kendall, el grado medio normalizado (NMD), la longitud del camino característico (CPL) y la eficiencia.}
-			\label{tbl:medidas}
-			\begin{adjustbox}{max width=\textwidth}
-			\begin{tabular}{@{}ccccccc@{}}
-				\toprule
-				Temporada & NMS & Diámetro & Tau de Kendall & NMD & CPL & Eficiencia \\ \midrule
-				2014-2015 & 0.642                    & 3        & 0.054          & 0.891                   & 2.768                              & 1.633      \\
-				2013-2014 & 0.594                    & 3        & 0.059          & 0.880                   & 2.9368                             & 1.573      \\
-				2012-2013 & 0.673                    & $\infty$ & 0.061          & 0.876                   & $\infty$                           & 1.574      \\
-				2011-2012 & 0.636                    & 3        & 0.066          & 0.867                   & 2.789                              & 1.626      \\ \bottomrule
-			\end{tabular}
-			\end{adjustbox}
-		\end{table}
+%		\begin{table}[h]
+%			\centering
+%			\caption[Medidas de competitividad de las últimas cuatro temporadas]{Medidas de competitividad de las temporadas 2011-2012, 2012-2013, 2013-2014 y 2014-2015 de la Liga BBVA. Las medidas son fuerza media normalizada (NMS), el diámetro, la tau de Kendall, el grado medio normalizado (NMD), la longitud del camino característico (CPL) y la eficiencia.}
+%			\label{tbl:medidas}
+%			\begin{adjustbox}{max width=\textwidth}
+%			\begin{tabular}{@{}ccccccc@{}}
+%				\toprule
+%				Temporada & NMS & Diámetro & Tau de Kendall & NMD & CPL & Eficiencia \\ \midrule
+%				2014-2015 & 0.642                    & 3        & 0.054          & 0.891                   & 2.768                              & 1.633      \\
+%				2013-2014 & 0.594                    & 3        & 0.059          & 0.880                   & 2.9368                             & 1.573      \\
+%				2012-2013 & 0.673                    & $\infty$ & 0.061          & 0.876                   & $\infty$                           & 1.574      \\
+%				2011-2012 & 0.636                    & 3        & 0.066          & 0.867                   & 2.789                              & 1.626      \\ \bottomrule
+%			\end{tabular}
+%			\end{adjustbox}
+%		\end{table}
+%		
+%		La temporada 2014-2015 es la más competitiva de las cuatro estudiadas.
+
+\begin{figure}
+\centering
+\subfloat[Diámetro]{
+	\includegraphics[width=0.3\linewidth]{./imagenes/pantallazos-competitividad/Medida1}
+}
+\subfloat[Tau de Kendall]{
+	\includegraphics[width=0.3\linewidth]{./imagenes/pantallazos-competitividad/Medida2}
+}
+\subfloat[NMS]{
+	\includegraphics[width=0.3\linewidth]{./imagenes/pantallazos-competitividad/Medida3}
+}
+\hspace{0mm}
+\subfloat[NMD]{
+	\includegraphics[width=0.3\linewidth]{./imagenes/pantallazos-competitividad/Medida4}
+}
+\subfloat[CPL]{
+	\includegraphics[width=0.3\linewidth]{./imagenes/pantallazos-competitividad/Medida5}
+}
+\subfloat[Eficiencia]{
+	\includegraphics[width=0.3\linewidth]{./imagenes/pantallazos-competitividad/Medida6}
+}
+
+
+\end{figure}
 		
-		La temporada 2014-2015 es la más competitiva de las cuatro estudiadas.
-		
+	\end{frame}
+	
+	\begin{frame}{Estudio de la competitividad de la Liga BBVA de las últimas cuatro temporadas}
+	
+	Haciendo agregación de rankings,
+	
+	\vspace*{2em}
+	
+	\begin{equation*}
+	c_a = \left( \begin{array}{c}
+					2014-2015 \\
+					2013-2014 \\
+					2011-2012 \\
+					2012-2013
+					\end{array} \right)
+	\end{equation*}
+	
+	\vspace*{2em}
+	
+	La temporada 2014-2015 es la más competitiva de las últimas cuatro.
+	
+	
+	
 	\end{frame}
 	
 	\section{Conclusiones}
@@ -1718,34 +1781,50 @@
 		
 		\begin{frame}{Conclusiones}
 				\begin{itemize}
-					\item \textcolor{red}{Conclusiones}
+					\item Las medidas de competitividad nos ayudan a entender propiedades del grafo de competitividad.
+					
+					\item Y junto con la aplicación web implementada permiten visualizar estas medidas de forma gráfica.
+					
+					\item La temporada 2014-2015 ha sido la más competitiva de las últimas cuatro en la liga BBVA.
 					
 				\end{itemize}
 			\end{frame}
 			
 	
-	\section{Futuras mejoras}
+	\section{Futuro trabajo}
 	
 	\begin{frame}
 		\begin{center}
-			\Huge\textbf{\textsf{\textcolor{blue}{Futuras mejoras}}}
+			\Huge\textbf{\textsf{\textcolor{blue}{Futuro trabajo}}}
 		\end{center}
 	\end{frame}	
 	
 	
-	\begin{frame}{Futuras mejoras}
+	\begin{frame}{Futuro trabajo}
+	
 		\begin{itemize}
-			\item Añadir un modelo de predicción para ver cómo evolucionará la competitividad a lo largo del tiempo.
-			
-			\item Estudiar la competitividad por zonas del ranking, es decir, dividir cada ranking en distintas regiones y estudiar la competitividad en cada una de estas regiones. 
-			
-			\item Posibilidad de ver la competitividad a lo largo de las jornadas, es decir, ver las medidas y el grafo de competitividad en una jornada concreta durante la temporada.
-			
-			\item Posibilidad de implementar una aplicación móvil con el framework con Ionic Framework.
-			
-			\item Añadir un módulo de comparación, que permita comparar dos o más temporadas distintas.
-			
+		\item TFG Matemáticas
+		
+		\begin{itemize}
+					\item Añadir un modelo de predicción para ver cómo evolucionará la competitividad a lo largo del tiempo.
+					
+					\item Estudiar la competitividad por zonas del ranking, es decir, dividir cada ranking en distintas regiones y estudiar la competitividad en cada una de estas regiones. 
+				\end{itemize}
+				
+		\item TFG Ingeniería del Software
+		
+			\begin{itemize}
+							\item Posibilidad de ver la competitividad a lo largo de las jornadas, es decir, ver las medidas y el grafo de competitividad en una jornada concreta durante la temporada.
+												
+							\item Posibilidad de implementar una aplicación móvil con el framework con Ionic Framework.
+							
+							\item Añadir un módulo de comparación, que permita comparar dos o más temporadas distintas.
+							
+						\end{itemize}
+		
 		\end{itemize}
+		
+		
 	\end{frame}
 	
 	
