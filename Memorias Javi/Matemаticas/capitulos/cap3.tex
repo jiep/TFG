@@ -1,0 +1,194 @@
+\chapter{Predicción de resultados}
+
+\section{Introducción}
+Lo que se pretende hacer en este capítulo es plantear modelos que nos permitan predecir como quedará el ranking al final de la jornada que aún no ha comenzado, para lo que hay que estimar las distintas probabilidades de que gane un equipo, el rival o empaten para cada partido que se va a disputar.\\
+
+Los modelos pueden ser de lo más variados y estar basados en todo tipo de factores y métodos que pueden ser usados para predecir los resultados finales del partido.\\
+
+En \cite{refpred1} podemos encontrar varios modelos que se aplican para predecir los resultados de la liga alemana en las temporadas 1999-2000, 2000-2001 y 2001-2002:\\
+Uno basado en los \textbf{mercados de predicción} en el que los precios nos ofrecen una visión agregada de la información pública y privada de la que disponen todos los participantes. El funcionamiento de los mercados de predicción se explica en \cite[Tabla II]{refpred1} y el modelo de cálculo de probabilidades se plantea en \cite[pág 62]{refpred1}.\\
+El otro modelo está basado en las \textbf{apuestas} en el que podemos realizar el cálculo de la probabilidades como se plantea en \cite[págs 62, 63]{refpred1} basándonos en las predicciones que realizan los corredores de apuestas para imponer los precios.\\
+Son dos métodos de predicción relativamente aceptables teniendo mayor exactitud que otros métodos como el de \textit{selección aleatoria} y el de \textit{victoria del equipo local} con los que se comparan en \cite[págs 64-66]{refpred1}, aunque la tasa de acierto entre los dos modelos propuestos, el de los mercados de predicción y el de las apuestas, son muy similares.\\
+Se puede aumentar la exactitud de las predicciones combinando ambos métodos, mediante ponderaciones del 50:50 o aplicando distintas reglas como \textit{solo predecir cuando las previsiones de ambos métodos coincidan} \cite[págs 66-67]{refpred1}.\\
+
+En \cite{refpred2} se aplica el uso de \textbf{redes neuronales} para la predicción. En \cite[Section 2.1.]{refpred2} se explica el diseño de la red BP, cada equipo tendrá tres tipos de redes BP que se corresponden con su fuerza y el problema de clasificación consiste en contrastar las fuerzas de los dos equipos: sí A es más fuerte que B, es concordante o es más débil \cite[Section 2.2.]{refpred2}. Todos los partidos jugados serán los datos usados para el entrenamiento \cite[Section 3.1.]{refpred2} y la capa de salida consta de tres neuronas que se corresponden con la probabilidad de ganar, empatar y perder \cite[Section 3.2.]{refpred2} de forma que se pueda predecir el resultado del enfrentamiento como se muestra en \cite[Section 3.4.]{refpred2}.
+
+En \cite{refpred3} se aplica un modelo autorregresivo integrado de media móvil o ARIMA que se usa en \textbf{series temporales} y que se basa en un conjunto de observaciones que se generan de forma secuencial. En \cite[Section E]{refpred3} se realiza la formulación matemática del modelo y en \cite[Section F]{refpred3} se muestran los resultados y el análisis de aplicarlo a tres equipos (uno de la zona alta, otro de la zona media y otro de la zona baja de la clasificación) de la liga india de críquet en el que se intenta predecir el resultado de los últimos 10 partidos de la temporada.\\
+
+\section{Modelo propuesto}
+En la sección anterior hemos visto algunos de los modelos que han sido propuestos para predecir los resultados de un partido que está por disputarse siguiendo distintos criterios, ahora vamos a proceder a plantear uno propio. \\
+
+Para hacer una predicción tenemos que calcular tres probabilidades:
+\begin{itemize}
+	\item La probabilidad de que $a$ gane a $b$: $P(a-b=1)$.
+	\item La probabilidad de que $a$ y $b$ empaten: $P(a-b=X)$.
+	\item La probabilidad de que $a$ pierda ante $b$: $P(a-b=2)$.
+\end{itemize}
+Para estimarlas proponemos tener en cuenta lo siguiente:
+\begin{itemize}
+	\item La posición relativa en la tabla.
+	\item La tendencia de cada equipo a lo largo de los últimos partidos.
+\end{itemize}
+
+\subsection*{Probabilidad basada en la posición relativa}
+El valor va a depender de $r(a)-r(b)$\footnote{Recordemos que $r(e)$ denota la posición que ocupa el elemento $e$ en el ranking.} cuyo valor pertenece al intervalo $[-(n-1),(n-1)] \backslash \{0\}$ dónde $n$ es el número de equipos que hay en el ranking. En nuestro caso aplicado a la Liga Española de fútbol, dado que participan un total de 20 equipos el intervalo en cuestión es $[-19,19]$.\\
+La idea es desarrollar un modelo lineal a trozos y optimizar sus parámetros usando el un histórico de resultados.\\
+
+Lo primero es re-escalar el intervalo $[-19,19]$ en el $[0,1]$ mediante alguna función como por ejemplo
+\begin{center}
+	$ \psi: [-19,19] \longrightarrow [0,1]$\\
+	$ t \longmapsto \dfrac{t+19}{38}$
+\end{center}
+
+Ahora debemos definir unos umbrales de victoria para el equipo local, empate y victoria visitante en tres escenarios muy distintos: \textit{el primero contra el último}, \textit{equipos en posiciones consecutivas} y \textit{el último contra el primero}. Gráficamente podemos resumirlo como se muestra en la figura \ref{fig:umbrales}.
+
+\begin{figure}[htb]
+		\centering
+		\includegraphics{images/umbrales.png}
+		\caption{Gráfico de umbrales de victoria local, empate y victoria visitante.} \label{fig:umbrales}
+\end{figure}
+
+Dónde los valores $X_{1},X_{2},Y_{1},Y_{2},Z_{1},Z_{2} \in [0,1]$ se identifican del siguiente modo:
+\begin{itemize}
+	\item Si $a$ es el primero de la clasificación y $b$ el último:\\
+	 $[0,X_{1}]$ mide la probabilidad de que gane $a$, $[X_{1},X_{2}]$ mide la probabilidad de que $a$ y $b$ empaten y $[X_{2},1]$ mide la probabilidad de que gane $b$.
+	 Es decir,\\
+	 
+	 $\begin{cases}
+	 	P_{r}(a-b=1)=X_{1}\\
+	 	P_{r}(a-b=X)=X_{2}-X_{1} \ \ \ \ \ \ \ \text{siendo} \ 0 \leq X_{1} \leq X_{2} \leq 1\\
+	 	P_{r}(a-b=2)=1-X_{2} 
+	 \end{cases}$\\
+	 
+	\item Análogamente, si $a$ y $b$ tienen puestos consecutivos en el ranking:\\
+	
+	$\begin{cases}
+	P_{r}(a-b=1)=Y_{1}\\
+	P_{r}(a-b=X)=Y_{2}-Y_{1} \ \ \ \ \ \ \ \text{siendo} \ 0 \leq Y_{1} \leq Y_{2} \leq 1\\
+	P_{r}(a-b=2)=1-Y_{2} 
+	\end{cases}$\\
+	
+	\item Finalmente, si $a$ es el último de la clasificación y $b$ el primero:\\
+	
+	$\begin{cases}
+	P_{r}(a-b=1)=Z_{1}\\
+	P_{r}(a-b=X)=Z_{2}-Z_{1} \ \ \ \ \ \ \ \text{siendo} \ 0 \leq Z_{1} \leq Z_{2} \leq 1\\
+	P_{r}(a-b=2)=1-Z_{2} 
+	\end{cases}$
+\end{itemize}
+
+Para el resto de escenarios tenemos que interpolar de forma lineal hallando 4 rectas (las que unen $X_{1}$ a $Y_{1}$, $Y_{1}$ a $Z_{1}$, $X_{2}$ a $Y_{2}$ y $Y_{2}$ a $Z_{2}$) tal y como se muestra en la figura \ref{fig:interpolar}.
+
+\begin{figure}[htb]
+	\centering
+	\includegraphics{images/interpolar.png}
+	\caption{Gráfica de las funciones resultantes tras realizar la interpolación.} \label{fig:interpolar}
+\end{figure}
+
+De esta forma tenemos dos funciones $f,g:[0,1] \longrightarrow [0,1]$ tal que\\
+$f(0)= X_{2}$ \ \ \ \ \ $f(1/2)= Y_{2}$ \ \ \ \ \ $f(1)= Z_{2}$ \ \ \ \ \ $f$ recta en $[0,1/2]$ y $[1/2,1]$\\
+$g(0)= X_{1}$ \ \ \ \ \ $g(1/2)= Y_{1}$ \ \ \ \ \ $g(1)= Z_{1}$ \ \ \ \ \ $g$ recta en $[0,1/2]$ y $[1/2,1]$\\
+
+De esta forma la predicción queda así\\
+
+$\begin{cases}
+	P_{r}(a-b=1)=g(\psi (r(a)-r(b)))\\
+	P_{r}(a-b=X)=f(\psi (r(a)-r(b)))-g(\psi (r(a)-r(b)))\\
+	P_{r}(a-b=2)=1-f(\psi (r(a)-r(b)))
+\end{cases}$
+\ \\
+\ \\
+Para estimar los valores de $X_{1},X_{2},Y_{1},Y_{2},Z_{1},Z_{2}$ hay que optimizarlos teniendo en cuenta las siguientes restricciones:
+\begin{itemize}
+	\item $X_{1},X_{2},Y_{1},Y_{2},Z_{1},Z_{2} \in [0,1]$
+	\item $X_{1} \leq X_{2}$, $Y_{1} \leq Y_{2}$, $Z_{1} \leq Z_{2}$
+	\item $X_{1} \geq Y_{1} \geq Z_{1}$ y $X_{2} \geq Y_{2} \geq Z_{2}$	
+\end{itemize}
+
+\subsection*{Probabilidad basada en la serie histórica de cada equipo}
+Para cada equipo trabajaremos con dos series históricas: una serie con los resultados en casa y otra serie con los resultados fuera de casa, ambos ponderados según una función memoria.\\
+
+Para cada equipo $a$ trabajaremos con secuencias de resultados del tipo:
+\begin{center}
+	\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+	\hline  & t=1 & t=2 & t=3 & t=4 & t=5 & t=6 & t=7 & t=8 & t=9 \\ 
+	\hline local (l)  & 1 & 1 & X & 1 & 2 & X & 1 & 1 & 1 \\ 
+	\hline visitante (v) & 2 & 2 & X & 2 & 1 & X & 2 & X & 2 \\ 
+	\hline 
+	\end{tabular} 
+\end{center}
+De forma que para la jornada siguiente (la t=10) la probabilidad de que el equipo en cuestión gane, empate o pierda como local:
+\begin{center}
+$P_{l}(a - \star=1)=\dfrac{m(1)+m(2)+m(4)+m(7)+m(8)+m(9)}{\sum_{t=1}^{9}m(t)}$\\
+$P_{l}(a - \star=X)=\dfrac{m(3)+m(6)}{\sum_{t=1}^{9}m(t)}$ \ \ \ \
+$P_{l}(a - \star=2)=\dfrac{m(5)}{\sum_{t=1}^{9}m(t)}$
+\end{center}
+donde $m$ es una función memoria típicamente creciente como la de la figura \ref{fig:memoria}.
+
+\begin{figure}[htb]
+	\centering
+	\includegraphics{images/memoria.png}
+	\caption{Gráfica de la función memoria.} \label{fig:memoria}
+\end{figure}
+Análogamente se calculan las probabilidades para el siguiente partido como visitante:
+\begin{center}
+	$P_{v}(\star - a=1)=\dfrac{m(5)}{\sum_{t=1}^{9}m(t)}$ \ \ \ \
+	$P_{v}(\star - a=X)=\dfrac{m(3)+m(6)+m(8)}{\sum_{t=1}^{9}m(t)}$\\
+	$P_{v}(\star - a=2)=\dfrac{m(1)+m(2)+m(4)+m(7)+m(9)}{\sum_{t=1}^{9}m(t)}$
+\end{center}
+
+Por tanto, para cada equipo tendremos dos probabilidades:\\
+$P_{l}(a - \star=1)$, $P_{l}(a - \star=X)$ y $P_{l}(a - \star=2)$ para los partidos como locales \\
+$P_{v}(\star - a=1)$, $P_{v}(\star - a=X)$ y $P_{v}(\star - a=2)$ para los partidos como visitantes\\
+
+Para pronosticar el resultado del enfrentamiento $a-b$ debemos conjuntar $P_{l}(a - \star)$ con $P_{v}(\star - b)$ usando la siguiente tabla:\\
+
+\begin{center}
+	\begin{tabular}{|c|c|c|c|}
+	\hline  & $P_{l}(a - \star=1)$ & $P_{l}(a - \star=X)$ & $P_{l}(a - \star=2)$ \\ 
+	\hline $P_{v}(\star - b=1)$ & $(1,0,0)$ & $(\frac{1}{2},\frac{1}{3},\frac{1}{6})$ & $(\frac{1}{4},\frac{1}{2},\frac{1}{4})$  \\ 
+	\hline $P_{v}(\star - b=X)$ & $(\frac{1}{2},\frac{1}{3},\frac{1}{6})$ & $(0,1,0)$ & $(\frac{1}{6},\frac{1}{2},\frac{1}{3})$ \\ 
+	\hline $P_{v}(\star - b=2)$ & $(\frac{1}{4},\frac{1}{2},\frac{1}{4})$ & $(\frac{1}{6},\frac{1}{2},\frac{1}{3})$ & $(0,0,1)$ \\ 
+	\hline 
+\end{tabular} 
+\end{center}
+
+En las tuplas de números de la tabla anterior, el primer número es el que usaremos para calcular $P_{s}(a-b=1)$, el segundo para $P_{s}(a-b=X)$ y el tercero para $P_{s}(a-b=2)$, dicho número es por el que hay que multiplicar el producto de las entradas.\\
+Por ejemplo, para calcular $P_{s}(a-b=1)$ la tabla que debemos usar es la compuesta por el primer elemento de cada tupla\\
+\[
+A_{1}= \left(\begin{array}{ccc}
+1 & 1/2 & 1/4\\
+1/2 & 0 & 1/6\\
+1/4 & 1/6 & 0
+\end{array} \right)
+\]
+de forma que
+	\begin{center}
+		$P_{s}(a-b=1)=$
+	\end{center}
+	$1\cdotp P_{l}(a - \star=1)P_{v}(\star - b=1) + \frac{1}{2}\cdotp P_{l}(a - \star=X)P_{v}(\star - b=1) + \frac{1}{4}\cdotp P_{l}(a - \star=2)P_{v}(\star - b=1)+$\\ 
+	$\frac{1}{2}\cdotp P_{l}(a - \star=1)P_{v}(\star - b=X) + 0\cdotp P_{l}(a - \star=X)P_{v}(\star - b=X) + \frac{1}{6}\cdotp P_{l}(a - \star=2)P_{v}(\star - b=X)+$\\
+	$\frac{1}{4}\cdotp P_{l}(a - \star=1)P_{v}(\star - b=2) + \frac{1}{6}\cdotp P_{l}(a - \star=X)P_{v}(\star - b=2) + 0\cdotp P_{l}(a - \star=2)P_{v}(\star - b=2)$ \\
+\ \\	
+Es decir, $P_{s}(a-b=1)= 
+\langle
+(P_{v}(\star - b=1),P_{v}(\star - b=X),P_{v}(\star - b=2)) A_{1}  
+\left(\begin{array}{c}
+P_{l}(a - \star=1)\\
+P_{l}(a - \star=X)\\
+P_{l}(a - \star=2)
+\end{array} \right)
+\rangle $\\
+
+Aplicaremos un razonamiento análogo para calcular $P_{s}(a-b=X)$ y $P_{s}(a-b=2)$.
+
+\subsection*{Combinación}
+Ahora contaremos con dos probabilidades: las probabilidades basadas en la posición relativa ($P_{r}(a-b=1) \ \ P_{r}(a-b=X) \ \ P_{r}(a-b=2)$) y las basadas en la serie histórica de cada equipo ($P_{s}(a-b=1) \ \ P_{s}(a-b=X) \ \ P_{s}(a-b=2)$).\\
+
+Para conjugarlas usaremos una combinación convexa, tomamos $\lambda \in (0,1)$ y tenemos
+\begin{center}
+	$ P(a-b=1) = \lambda P_{r}(a-b=1) + (1-\lambda) P_{s}(a-b=1)$\\
+	$ P(a-b=X) = \lambda P_{r}(a-b=X) + (1-\lambda) P_{s}(a-b=X)$\\
+	$ P(a-b=2) = \lambda P_{r}(a-b=2) + (1-\lambda) P_{s}(a-b=2)$
+\end{center}
+Debiendo optimizar $\lambda$ para obtener el mejor resultado posible entrenándolo sobre el histórico de datos.

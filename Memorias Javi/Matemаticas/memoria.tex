@@ -1,0 +1,121 @@
+\documentclass[12pt,a4paper,titlepage]{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-noquoting]{babel}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{lettrine}
+\usepackage{float}
+\usepackage{color}
+\usepackage[top=2cm,bottom=4cm,outer=2cm,inner=2cm]{geometry}
+\usepackage{pgf}
+\usepackage{emptypage} 
+\usepackage{chngcntr}
+\usepackage{etoolbox}
+\usepackage{listings}
+\usepackage{verbatimbox}
+\usepackage{rotating} 
+
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
+\usepackage[colorlinks=true,linkcolor=black,urlcolor=black,citecolor=black]{hyperref}
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
+
+\counterwithout{figure}{part}
+\renewcommand{\chaptername}{Unidad} 
+\setlength\parindent{0pt}
+
+
+\newcommand*{\autores}{
+	\begin{tabular}{r}
+		Javier Jiménez del Peso\\
+	\end{tabular}
+}
+
+
+% Incluye archivo para utilizar el comando \portada
+\include{portada}
+
+% Reinicia el contador a 1 en cada parte
+\makeatletter
+\@addtoreset{chapter}{part} 
+\makeatother
+
+\input{comandos}
+
+\begin{document}
+	
+	%\frontmatter % Incluye índice, portada, prefacio, ...
+	
+	% Portada
+	
+	\portada{TFG}{Matemáticas}{Modelos predictivos en rankings}{\autores}{Móstoles}
+	% Fin Portada
+	
+	\tableofcontents
+	\listoffigures
+	
+	\input{./capitulos/cap1}
+	\input{./capitulos/cap2}
+	\input{./capitulos/cap3}
+	\input{./capitulos/cap4}	
+	
+	\appendix
+	%\input{./anexos/anexo1}
+	%\input{./anexos/anexo2}
+	%\input{./anexos/anexo3}
+	
+	
+	\begin{thebibliography}{X}
+		\bibitem{cap1} \textsc{A. N. Langville, C. D. Meyer},
+		\textit{Who's \#1? The science of rating and ranking}, 
+		Princeton University Press, Princeton, 2012. Chapter 1: \textit{Introduction to Ranking}.
+		\bibitem{cap2} \textsc{A. N. Langville, C. D. Meyer},
+		\textit{Who's \#1? The science of rating and ranking}, 
+		Princeton University Press, Princeton, 2012. Chapter 2: \textit{Massey's Method}.
+		\bibitem{cap3} \textsc{A. N. Langville, C. D. Meyer},
+		\textit{Who's \#1? The science of rating and ranking}, 
+		Princeton University Press, Princeton, 2012. Chapter 3: \textit{Colley's Method}.
+		\bibitem{cap4} \textsc{A. N. Langville, C. D. Meyer},
+		\textit{Who's \#1? The science of rating and ranking}, 
+		Princeton University Press, Princeton, 2012. Chapter 4: \textit{Keener's Method}.
+		\bibitem{cap7} \textsc{A. N. Langville, C. D. Meyer},
+		\textit{Who's \#1? The science of rating and ranking}, 
+		Princeton University Press, Princeton, 2012. Chapter 7: \textit{The Offense-Defense Rating Method}.		
+		\bibitem{otros_met} \textsc{A. N. Langville, C. D. Meyer},
+		\textit{Who's \#1? The science of rating and ranking}, 
+		Princeton University Press, Princeton, 2012. Chapters 5, 6 \& 8.			
+		\bibitem{perron} \textsc{C.D. Meyer},
+		\textit{Matrix analysis and applied linear algebra}, 
+		SIAM, Philadelphia, 2000. Chapter 8: \textit{Perron-Frobenius Theory}.	
+		\bibitem{power_method}
+		Artículo sobre el método de la potencia en Wikipedia (Inglés). \url{https://en.wikipedia.org/wiki/Power_iteration}
+		\bibitem{cap13-14} \textsc{A. N. Langville, C. D. Meyer},
+		\textit{Who's \#1? The science of rating and ranking}, 
+		Princeton University Press, Princeton, 2012. Chapters 14 \& 15: \textit{Rank Aggregation parts 1 \& 2}.
+		\bibitem{refbilp} \textsc{K. E. Pedings, A. N. Langville, Yoshitsugu Yamamoto},
+		\textit{A Minimum Violations Ranking Method}, 
+		2009. Chapter 4: \textit{Theorem for the Relationship between the BILP and LP}.
+		\bibitem{cap16} \textsc{A. N. Langville, C. D. Meyer},
+		\textit{Who's \#1? The science of rating and ranking}, 
+		Princeton University Press, Princeton, 2012. Chapter 16: \textit{Methods of Comparison}.
+		\bibitem{refcomp} \textsc{R. Criado, E. García, F. Pedroche, M. Romance},
+		\textit{On graphs associated to sets of rankings}, 
+		2014. Chapter 2: \textit{Competitivity graphs}.
+		\bibitem{refpred1} \textsc{M. Spann, B. Skiera},
+		\textit{Sports forecasting: A comparison of the forecast accuracy of prediction markets, betting odds and tipsters}, 
+		John Wiley \& Sons, Ltd. 2008. 
+		\bibitem{refpred2} \textsc{T. Cheng, D. Cui, Z. Fan, J. Zhou, S. Lu},
+		\textit{A new model to forecast the results of matches based on hybrid neural networks in the soccer rating system}, 
+		2003. 
+		\bibitem{refpred3} \textsc{G. Hiranandani, J. Shitole, N. Kundu, N. Maurya, R. Grover},
+		\textit{Forecasting Indian Premier League Results Using Time Series Analysis}, 
+		2013. 
+	\end{thebibliography}
+
+	
+	
+\end{document}
