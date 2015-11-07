@@ -23,6 +23,10 @@ app.config(function($routeProvider, RestangularProvider, $locationProvider) {
     controller: "TeamCtrl",
     templateUrl: 'templates/team.html'
   }).
+  when('/bbva/prediction', {
+    controller: "PredictionCtrl",
+    templateUrl: 'templates/prediction.html'
+  }).
   when('/register', {
     controller: "RegisterCtrl",
     templateUrl: 'templates/register.html'
