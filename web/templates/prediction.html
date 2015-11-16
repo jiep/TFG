@@ -51,7 +51,9 @@
                     </ul>
                 </li>
                 <li ng-if="user">
-                    <a href="profile" class="dropdown-toggle" data-toggle="dropdown">{{user.username}}</a>
+                    <a href="profile" class="dropdown-toggle" data-toggle="dropdown">
+	 	{{user.username}}
+	 </a>
                 </li>
             </ul>
         </div>
@@ -81,7 +83,6 @@
             <ul>
                 <li ng-repeat="team in teams"><a href="bbva/team/{{team.id}}">{{team.nombre}}</a>
                 </li>
-
             </ul>
 
             <!--<li>
@@ -96,3 +97,168 @@
 
     <!----------------------------------------- -->
 
+
+    <div class="col-md-10 column">
+
+        <img src="img/escudos/{{team_id}}.png" class="img img-responsive center-block" />
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span class="glyphicon glyphicon-th"></span> Próxima jornada</div>
+            <div class="panel-body">
+                <table class="table">
+                    <thead>
+                        <th>Local</th>
+                        <th>Visitante</th>
+			<th>1</th>
+			<th>X</th>
+			<th>2</th>
+                    </thead>
+
+                    <tbody>
+                        <tr ng-repeat="x in prediction">
+                            <td>{{ x.local_team }}</td>
+                            <td>{{ x.visitor_team }}</td>
+                            <td>{{ x.local_win }}</td>
+                            <td>{{ x.tie }}</td>
+                            <td>{{ x.visitor_win }}</td>
+                        </tr>
+                    </tbody>
+                        <!--<tbody>
+                        <tr>
+                            <td>Levante UD</td>
+                            <td>Elche CF</td>
+			    <td> </td>
+			    <td> </td>
+			    <td> </td>
+                        </tr>
+                        <tr>
+                            <td>Athletic Club</td>
+                            <td>Villarreal CF</td>
+			    <td> </td>
+			    <td> </td>
+			    <td> </td>
+                        </tr>
+                        <tr>
+                            <td>FC Barcelona</td>
+                            <td>R.C. Deportivo</td>
+			    <td> </td>
+			    <td> </td>
+			    <td> </td>
+                        </tr>
+                        <tr>
+                            <td>Granada CF</td>
+                            <td>Atlético Madrid</td>
+			    <td> </td>
+			    <td> </td>
+			    <td> </td>
+                        </tr>
+                        <tr>
+                            <td>Rayo Vallecano</td>
+                            <td>Real Sociedad</td>
+			    <td> </td>
+			    <td> </td>
+			    <td> </td>
+                        </tr>
+                        <tr>
+                            <td>SD Eibar</td>
+                            <td>Córdoba C.F.</td>
+			    <td> </td>
+			    <td> </td>
+			    <td> </td>
+                        </tr>
+                        <tr>
+                            <td>RC Celta de Vigo</td>
+                            <td>RCD Espanyol</td>
+			    <td> </td>
+			    <td> </td>
+			    <td> </td>
+                        </tr>
+                        <tr>
+                            <td>UD Almería</td>
+                            <td>Valencia CF</td>
+			    <td> </td>
+			    <td> </td>
+			    <td> </td>
+                        </tr>
+                        </tr>
+                            <td>Málaga CF</td>
+                            <td>Sevilla FC</td>
+			    <td> </td>
+			    <td> </td>
+			    <td> </td>
+                        </tr>
+                        <tr>
+                            <td>Real Madrid CF</td>
+                            <td>Getafe CF</td>
+			    <td> </td>
+			    <td> </td>
+			    <td> </td>
+                        </tr>
+                    </tbody>-->
+
+                </table>
+            </div>
+        </div>
+    <!--    <div class="row">
+            <div class="col-md-6 column">
+                <div class="panel panel-default" ng-controller="LocalCtrl" id="local">
+                    <div class="panel-heading">
+                        <span class="glyphicon glyphicon-th"></span> Resultados como local</div>
+                    <div class="panel-body" id="panel-locales">
+                        <canvas id="doughnut" class="chart chart-doughnut" data="data" labels="labels" series="series" options="options" legend="true"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 column">
+                <div class="panel panel-default" ng-controller="AwayCtrl" id="away">
+                    <div class="panel-heading">
+                        <span class="glyphicon glyphicon-th"></span> Resultados como visitante</div>
+                    <div class="panel-body" id="panel-visitantes">
+                        <canvas id="doughnut" class="chart chart-doughnut" data="data" labels="labels" series="series" options="options" legend="true"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 column">
+                <div class="panel panel-default" ng-controller="GoalsLocalCtrl" id="local">
+                    <div class="panel-heading">
+                        <span class="glyphicon glyphicon-th"></span> Goles a favor y en contra como local</div>
+                    <div class="panel-body" id="panel-locales">
+                        <canvas id="doughnut" class="chart chart-doughnut" data="data" labels="labels" series="series" options="options" legend="true"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 column">
+                <div class="panel panel-default" ng-controller="GoalsAwayCtrl" id="away">
+                    <div class="panel-heading">
+                        <span class="glyphicon glyphicon-th"></span> Goles a favor y en contra como visitante</div>
+                    <div class="panel-body" id="panel-visitantes">
+                        <canvas id="doughnut" class="chart chart-doughnut" data="data" labels="labels" series="series" options="options" legend="true"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span class="glyphicon glyphicon-th"></span> Estadísticas por resultado</div>
+            <div class="panel-body">
+                <table class="table">
+                    <thead>
+                        <th>Resultado</th>
+                        <th>Número de veces</th>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="(key, value) in team_stats.results.local">
+                            <td>{{key}}</td>
+                            <td>{{value}}</td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>-->

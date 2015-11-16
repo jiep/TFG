@@ -422,6 +422,52 @@ $app->get('/sport/:sportname/:league/team/:team', function ($sportname, $league,
   }
 });
 
+//Javier
+$app->get('/sport/:sportname/:league/prediction', function ($sportname, $league) use ($dbh, $app){
+  include '../../parser/interpolation.php';
+  try {
+      $season = $app->request()->get('season');
+      $fixture = $app->request()->get('fixture');
+
+      if ($season) {
+          if ($fixture) {
+              $sql = $dbh->prepare("select * from partidos where temporada = \"$season\" and jornada = $fixture;");
+          } else {
+              $sql = $dbh->prepare("select * from partidos where temporada = \"$season\" and jornada = (SELECT max(jornada) from rankings where temporada = \"$season\");");
+          }
+      } else {
+          $season = getLastSeason();
+          if ($fixture) {
+              $sql = $dbh->prepare("select * from partidos where temporada = \"$season\" and jornada = $fixture;");
+          } else {
+              $sql = $dbh->prepare("select * from partidos where temporada = \"$season\" and jornada = (SELECT max(jornada) from rankings where temporada = \"$season\");");
+          }
+      }
+      $sql->execute();
+      $result = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+      $values = array();
+
+      for($i=0;$i<10;$i++){
+
+          $values[$i] = interpolation($result[$i]['equipo_local'],$result[$i]['equipo_visitante']);
+          $values[$i]["local_team"] = $result[$i]['equipo_local'];
+	        $values[$i]["visitor_team"] = $result[$i]['equipo_visitante'];
+      }
+
+      if ($result) {
+          $app->response->status(200);
+          $app->contentType('application/json; charset=utf-8');
+          $app->response->body(json_encode($values));
+      } else {
+          $app->response->status(404);
+          $app->response->body(json_encode(array('error' => 'Resource not found')));
+      }
+  } catch (PDOException $e) {
+      echo 'Error: ' + $e->getMessage();
+  }
+});
+
 $app->get('/users/:id/graphs', function ($id) use ($dbh, $app) {
   try {
           try {

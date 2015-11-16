@@ -15,6 +15,10 @@ app.config(function($routeProvider, RestangularProvider, $locationProvider) {
     controller: "MainCtrl",
     templateUrl: 'templates/season.html'
   }).
+  when('/bbva/prediction', {
+    controller: "predictionCtrl",
+    templateUrl: 'templates/prediction.html'
+  }).
   when('/bbva/:season', {
     controller: "MainCtrl",
     templateUrl: 'templates/season.html'
@@ -22,10 +26,6 @@ app.config(function($routeProvider, RestangularProvider, $locationProvider) {
   when('/bbva/team/:team', {
     controller: "TeamCtrl",
     templateUrl: 'templates/team.html'
-  }).
-  when('/bbva/prediction', {
-    controller: "PredictionCtrl",
-    templateUrl: 'templates/prediction.html'
   }).
   when('/register', {
     controller: "RegisterCtrl",
