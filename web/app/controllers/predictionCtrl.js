@@ -21,26 +21,4 @@ angular.module('app')
     $scope.prediction = prediction;
   });
 
-
-  /*function parsePrediction() {
-    var pred = Restangular.stripRestangular($scope.prediction);
-    var c = [];
-    var d = [];
-    var headers = ["Local", "Visitante", "1", "X", "2"];
-    d.push(headers);
-    for (var i = 0; i < 10; i++) {
-      c = [];
-      c.push(pred[i][3].local);
-      c.push(pred[i][4].visitante);
-      c.push(pred[i][0].uno);
-      c.push(pred[i][1].equis);
-      c.push(pred[i][2].dos);
-      0
-      d.push(c);
-    }
-    return d;
-  }
-
-  var d = new parsePrediction();*/
-
 });

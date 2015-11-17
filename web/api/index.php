@@ -422,9 +422,8 @@ $app->get('/sport/:sportname/:league/team/:team', function ($sportname, $league,
   }
 });
 
-//Javier
 $app->get('/sport/:sportname/:league/prediction', function ($sportname, $league) use ($dbh, $app){
-  include '../../parser/interpolation.php';
+  include '../../prediccion/interpolacion/interpolation.php';
   try {
       $season = $app->request()->get('season');
       $fixture = $app->request()->get('fixture');
