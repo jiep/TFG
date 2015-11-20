@@ -424,24 +424,15 @@ $app->get('/sport/:sportname/:league/team/:team', function ($sportname, $league,
 
 $app->get('/sport/:sportname/:league/prediction', function ($sportname, $league) use ($dbh, $app){
   include '../../prediccion/interpolacion/interpolation.php';
+  include '../../prediccion/interpolacion/calcularClasif.php';
   try {
       $season = $app->request()->get('season');
       $fixture = $app->request()->get('fixture');
 
-      if ($season) {
-          if ($fixture) {
-              $sql = $dbh->prepare("select * from partidos where temporada = \"$season\" and jornada = $fixture;");
-          } else {
-              $sql = $dbh->prepare("select * from partidos where temporada = \"$season\" and jornada = (SELECT max(jornada) from rankings where temporada = \"$season\");");
-          }
-      } else {
-          $season = getLastSeason();
-          if ($fixture) {
-              $sql = $dbh->prepare("select * from partidos where temporada = \"$season\" and jornada = $fixture;");
-          } else {
-              $sql = $dbh->prepare("select * from partidos where temporada = \"$season\" and jornada = (SELECT max(jornada) from rankings where temporada = \"$season\");");
-          }
-      }
+      if (! $season) { $season = getLastSeason(); }
+      if (! $fixture) { $fixture=38; }
+
+      $sql = $dbh->prepare("select * from partidos where temporada = \"$season\" and jornada = $fixture;");
       $sql->execute();
       $result = $sql->fetchAll(PDO::FETCH_ASSOC);
 
@@ -454,10 +445,12 @@ $app->get('/sport/:sportname/:league/prediction', function ($sportname, $league)
 	        $values[$i]["visitor_team"] = $result[$i]['equipo_visitante'];
       }
 
+      $rankingnew = calcularRanking($values,$season,$fixture-1);
+
       if ($result) {
           $app->response->status(200);
           $app->contentType('application/json; charset=utf-8');
-          $app->response->body(json_encode($values));
+          $app->response->body(json_encode(array('results' => $values, 'ranking' => $rankingnew)));
       } else {
           $app->response->status(404);
           $app->response->body(json_encode(array('error' => 'Resource not found')));
