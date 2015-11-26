@@ -11,8 +11,6 @@ define("X2",0.824);
 define("Y2",0.737);
 define("Z2",0.542);
 
-define("JOR",37);
-
 
 function getLastSeason(){
     try {
@@ -75,10 +73,10 @@ function interpolateg($value){
     return $res;
 }
 
-function interpolation($eq1,$eq2){
+function interpolation($eq1,$eq2,$jorn){
     $perc = array();
-    $pos1=getPosition(sintildes($eq1),JOR);
-    $pos2=getPosition(sintildes($eq2),JOR);
+    $pos1=getPosition(sintildes($eq1),$jorn-1);
+    $pos2=getPosition(sintildes($eq2),$jorn-1);
     $v2 = interpolatef(normalize($pos1,$pos2));
     $v1 = interpolateg(normalize($pos1,$pos2));
     $perc["local_win"] = $v1;

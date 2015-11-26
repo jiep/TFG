@@ -38,7 +38,7 @@ function comp(){
     $success=0;
     for ($i=0;$i<20;$i++){
 
-      if($result[$i]["equipo"]==$pred["ranking"][$i]["equipo"]){$success++;}
+      if($result[$i]["equipo"]==$pred["ranking1"][$i]["equipo"]){$success++;}
 
     }
 

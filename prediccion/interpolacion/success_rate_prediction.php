@@ -42,8 +42,8 @@ function comp(){
       else if($result[$i]["goles_local"] == $result[$i]["goles_visitante"]) {$winner=1;}
       else {$winner=2;}
 
-      if($pred["results"][$i]["local_win"]>$pred["results"][$i]["tie"] && $pred["results"][$i]["local_win"] > $pred["results"][$i]["visitor_win"]){$winner_p=0;}
-      else if($pred["results"][$i]["tie"]>$pred["results"][$i]["local_win"] && $pred["results"][$i]["tie"] > $pred["results"][$i]["visitor_win"]){$winner_p=1;}
+      if($pred["results1"][$i]["local_win"]>$pred["results1"][$i]["tie"] && $pred["results1"][$i]["local_win"] > $pred["results1"][$i]["visitor_win"]){$winner_p=0;}
+      else if($pred["results1"][$i]["tie"]>$pred["results1"][$i]["local_win"] && $pred["results1"][$i]["tie"] > $pred["results1"][$i]["visitor_win"]){$winner_p=1;}
       else {$winner_p=2;}
 
       if($winner==$winner_p){$success++;}
