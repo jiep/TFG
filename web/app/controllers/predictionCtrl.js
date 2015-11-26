@@ -18,7 +18,9 @@ angular.module('app')
 
   var prediction = Restangular.one("sport/football/bbva/prediction?season=" + season);
   prediction.get().then(function(prediction) {
-    $scope.prediction = prediction.results;
-    $scope.ranking = prediction.ranking;
+    $scope.prediction1 = prediction.results1;
+    $scope.ranking1 = prediction.ranking1;
+    $scope.prediction2 = prediction.results2;
+    $scope.ranking2 = prediction.ranking2;
   });
 });

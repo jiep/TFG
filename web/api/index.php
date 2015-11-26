@@ -425,7 +425,10 @@ $app->get('/sport/:sportname/:league/team/:team', function ($sportname, $league,
 $app->get('/sport/:sportname/:league/prediction', function ($sportname, $league) use ($dbh, $app){
   include '../../prediccion/interpolacion/interpolation.php';
   include '../../prediccion/interpolacion/calcularClasif.php';
+  include '../../prediccion/tendencia/tendencia.php';
+
   try {
+
       $season = $app->request()->get('season');
       $fixture = $app->request()->get('fixture');
 
@@ -439,18 +442,21 @@ $app->get('/sport/:sportname/:league/prediction', function ($sportname, $league)
       $values = array();
 
       for($i=0;$i<10;$i++){
-
-          $values[$i] = interpolation($result[$i]['equipo_local'],$result[$i]['equipo_visitante']);
+          $values[$i] = interpolation($result[$i]['equipo_local'],$result[$i]['equipo_visitante'],$fixture);
           $values[$i]["local_team"] = $result[$i]['equipo_local'];
 	        $values[$i]["visitor_team"] = $result[$i]['equipo_visitante'];
       }
 
       $rankingnew = calcularRanking($values,$season,$fixture-1);
 
+      $pred_tend = prob_match("",$fixture);
+
+      $rankingnew2 = calcularRanking($pred_tend,$season,$fixture-1);
+
       if ($result) {
           $app->response->status(200);
           $app->contentType('application/json; charset=utf-8');
-          $app->response->body(json_encode(array('results' => $values, 'ranking' => $rankingnew)));
+          $app->response->body(json_encode(array('results1' => $values, 'ranking1' => $rankingnew, 'results2' => $pred_tend, 'ranking2' => $rankingnew2)));
       } else {
           $app->response->status(404);
           $app->response->body(json_encode(array('error' => 'Resource not found')));
