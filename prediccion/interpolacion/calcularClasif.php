@@ -53,6 +53,11 @@ function calcularRanking($pred,$temp,$jornada){
   }
   array_multisort($puntos, SORT_DESC, $goles, SORT_DESC, $dif, SORT_DESC, $clasifAnt);
 
+
+  for($i=0;$i<20;$i++){
+    $clasifAnt[$i]["posicion"]=($i+1);
+  }
+
   return $clasifAnt;
 }
 
