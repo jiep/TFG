@@ -96,7 +96,9 @@ function probability($tend){
 
 function memory($position){
 
-  return 1;
+  //return 1;
+  //return 5-$position;
+  return pow(2,-$position);
 }
 
 function combine($prob_local,$prob_visitante){
@@ -167,5 +169,4 @@ function prob_match($temp,$jorn){
 //print_r(combine(probability(getLocal(" ",37,"Real Madrid CF")),probability(getVisitante(" ",37,"Getafe CF"))));
 
 //print_r(prob_match("",38));
-
 ?>

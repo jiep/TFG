@@ -22,5 +22,7 @@ angular.module('app')
     $scope.ranking1 = prediction.ranking1;
     $scope.prediction2 = prediction.results2;
     $scope.ranking2 = prediction.ranking2;
+    $scope.prediction3 = prediction.results3;
+    $scope.ranking3 = prediction.ranking3;
   });
 });

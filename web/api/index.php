@@ -426,6 +426,7 @@ $app->get('/sport/:sportname/:league/prediction', function ($sportname, $league)
   include '../../prediccion/interpolacion/interpolation.php';
   include '../../prediccion/interpolacion/calcularClasif.php';
   include '../../prediccion/tendencia/tendencia.php';
+  include '../../prediccion/combinacion/comb_convexa.php';
 
   try {
 
@@ -453,10 +454,14 @@ $app->get('/sport/:sportname/:league/prediction', function ($sportname, $league)
 
       $rankingnew2 = calcularRanking($pred_tend,$season,$fixture-1);
 
+      $pred_conj = conjugar($values,$pred_tend);
+
+      $rankingnew3 = calcularRanking($pred_conj,$season,$fixture-1);
+
       if ($result) {
           $app->response->status(200);
           $app->contentType('application/json; charset=utf-8');
-          $app->response->body(json_encode(array('results1' => $values, 'ranking1' => $rankingnew, 'results2' => $pred_tend, 'ranking2' => $rankingnew2)));
+          $app->response->body(json_encode(array('results1' => $values, 'ranking1' => $rankingnew, 'results2' => $pred_tend, 'ranking2' => $rankingnew2, 'results3' => $pred_conj, 'ranking3' => $rankingnew3)));
       } else {
           $app->response->status(404);
           $app->response->body(json_encode(array('error' => 'Resource not found')));

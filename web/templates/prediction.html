@@ -196,4 +196,57 @@
                 </div>
             </div>
         </div>
+
+        <div class="panel panel-default">
+                   <div class="panel-heading">
+                       <span class="glyphicon glyphicon-th"></span> Próxima jornada</div>
+                   <div class="panel-body">
+                       <table class="table">
+                           <thead>
+                               <th>Local</th>
+                               <th>Visitante</th>
+                               <th>1</th>
+                               <th>X</th>
+                               <th>2</th>
+                           </thead>
+
+                           <tbody>
+                               <tr ng-repeat="x in prediction3">
+                                 <td>{{ x.local_team }}</td>
+                                 <td>{{ x.visitor_team }}</td>
+                                 <td>{{ x.local_win }}</td>
+                                 <td>{{ x.tie }}</td>
+                                 <td>{{ x.visitor_win }}</td>
+                               </tr>
+                           </tbody>
+                       </table>
+                   </div>
+        </div>
+
+        <div class="panel panel-default" id="clasificacion">
+            <div class="panel-heading">
+                <span class="glyphicon glyphicon-th"></span> Clasificación</div>
+            <div class="panel-body">
+
+                <div class="table-responsible">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Equipo</th>
+                                <th>Puntos</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="row in ranking3">
+                                <td>{{row.posicion}}</td>
+                                <td>{{row.equipo}}</td>
+                                <td>{{row.puntos}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
 </div>
