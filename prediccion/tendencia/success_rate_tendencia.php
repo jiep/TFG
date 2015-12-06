@@ -54,6 +54,7 @@ function comp(){
   }
 
   print_r($success_rate);
+  echo array_sum($success_rate);
 
 }
 

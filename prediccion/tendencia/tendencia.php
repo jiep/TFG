@@ -97,8 +97,8 @@ function probability($tend){
 function memory($position){
 
   //return 1;
-  //return 5-$position;
-  return pow(2,-$position);
+  return 5-$position;
+  //return pow(2,-$position);
 }
 
 function combine($prob_local,$prob_visitante){

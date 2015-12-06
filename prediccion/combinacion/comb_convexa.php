@@ -1,7 +1,7 @@
 <?php
 require_once '../../parser/connection.inc.php';
 
-define("LAMBDA",1/5);
+define("LAMBDA",0.8);
 
 function conjugar($array_interp,$array_tend){
 
