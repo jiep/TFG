@@ -434,7 +434,7 @@ $app->get('/sport/:sportname/:league/prediction', function ($sportname, $league)
       $fixture = $app->request()->get('fixture');
 
       if (! $season) { $season = getLastSeason(); }
-      if (! $fixture) { $fixture=38; }
+      if (! $fixture) { $fixture = getLastFixture($season); }
 
       $sql = $dbh->prepare("select * from partidos where temporada = \"$season\" and jornada = $fixture;");
       $sql->execute();

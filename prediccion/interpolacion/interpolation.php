@@ -12,6 +12,14 @@ define("Y2",0.737);
 define("Z2",0.542);
 
 
+function sintildes($incoming_string){
+        $tofind = "ÀÁÂÄÅàáâäÒÓÔÖòóôöÈÉÊËèéêëÇçÌÍÎÏìíîïÙÚÛÜùúûüÿÑñ";
+        $replac = "AAAAAaaaaOOOOooooEEEEeeeeCcIIIIiiiiUUUUuuuuyNn";
+        return utf8_encode(strtr(utf8_decode($incoming_string),
+                                utf8_decode($tofind),
+                                $replac));
+}
+
 function getLastSeason(){
     try {
         $dbh = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME.';charset=utf8', DB_USERNAME, DB_PASSWORD);
@@ -24,6 +32,20 @@ function getLastSeason(){
     }
 
     return $result->temporada;
+}
+
+function getLastFixture($temp){
+    try {
+        $dbh = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME.';charset=utf8', DB_USERNAME, DB_PASSWORD);
+        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $sql = $dbh->prepare('SELECT DISTINCT jornada from rankings where temporada="2014/2015" order by jornada desc limit 1');
+        $sql->execute();
+        $result = $sql->fetch(PDO::FETCH_OBJ);
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+    }
+
+    return (int) $result->jornada;
 }
 
 function getPosition($team,$rank_prev){
@@ -86,13 +108,5 @@ function interpolation($eq1,$eq2,$jorn){
     return $perc;
 }
 
-
-function sintildes($incoming_string){
-        $tofind = "ÀÁÂÄÅàáâäÒÓÔÖòóôöÈÉÊËèéêëÇçÌÍÎÏìíîïÙÚÛÜùúûüÿÑñ";
-        $replac = "AAAAAaaaaOOOOooooEEEEeeeeCcIIIIiiiiUUUUuuuuyNn";
-        return utf8_encode(strtr(utf8_decode($incoming_string),
-                                utf8_decode($tofind),
-                                $replac));
-}
 
 ?>
