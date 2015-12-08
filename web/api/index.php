@@ -424,9 +424,9 @@ $app->get('/sport/:sportname/:league/team/:team', function ($sportname, $league,
 
 $app->get('/sport/:sportname/:league/prediction', function ($sportname, $league) use ($dbh, $app){
   include '../../prediccion/interpolacion/interpolation.php';
-  include '../../prediccion/interpolacion/calcularClasif.php';
   include '../../prediccion/tendencia/tendencia.php';
   include '../../prediccion/combinacion/comb_convexa.php';
+    include '../../prediccion/calcularClasif.php';
 
   try {
 
