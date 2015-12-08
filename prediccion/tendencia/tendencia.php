@@ -123,7 +123,7 @@ function combine($prob_local,$prob_visitante){
 
 }
 
-function prob_match($temp,$jorn){
+function prob_tendencia($temp,$jorn){
 
   $prob_jorn=array();
 

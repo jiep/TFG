@@ -426,7 +426,7 @@ $app->get('/sport/:sportname/:league/prediction', function ($sportname, $league)
   include '../../prediccion/interpolacion/interpolation.php';
   include '../../prediccion/tendencia/tendencia.php';
   include '../../prediccion/combinacion/comb_convexa.php';
-    include '../../prediccion/calcularClasif.php';
+  include '../../prediccion/calcularClasif.php';
 
   try {
 
@@ -441,22 +441,22 @@ $app->get('/sport/:sportname/:league/prediction', function ($sportname, $league)
       $result = $sql->fetchAll(PDO::FETCH_ASSOC);
 
 
-      $values = prob_interpolation(" ",$fixture);
+      $pred_int = prob_interpolation($season,$fixture);
 
-      $rankingnew = calcularRanking($values,$season,$fixture-1);
+      $rank_int = calcularRanking($pred_int,$season,$fixture-1);
 
-      $pred_tend = prob_match("",$fixture);
+      $pred_tend = prob_tendencia($season,$fixture);
 
-      $rankingnew2 = calcularRanking($pred_tend,$season,$fixture-1);
+      $rank_tend = calcularRanking($pred_tend,$season,$fixture-1);
 
-      $pred_conj = conjugar($values,$pred_tend);
+      $pred_conj = conjugar($pred_int,$pred_tend);
 
-      $rankingnew3 = calcularRanking($pred_conj,$season,$fixture-1);
+      $rank_conj = calcularRanking($pred_conj,$season,$fixture-1);
 
       if ($result) {
           $app->response->status(200);
           $app->contentType('application/json; charset=utf-8');
-          $app->response->body(json_encode(array('results1' => $values, 'ranking1' => $rankingnew, 'results2' => $pred_tend, 'ranking2' => $rankingnew2, 'results3' => $pred_conj, 'ranking3' => $rankingnew3)));
+          $app->response->body(json_encode(array('results1' => $pred_int, 'ranking1' => $rank_int, 'results2' => $pred_tend, 'ranking2' => $rank_tend, 'results3' => $pred_conj, 'ranking3' => $rank_conj)));
       } else {
           $app->response->status(404);
           $app->response->body(json_encode(array('error' => 'Resource not found')));
