@@ -108,5 +108,33 @@ function interpolation($eq1,$eq2,$jorn){
     return $perc;
 }
 
+function prob_interpolation($temp,$jorn){
+
+  $prob_jorn = array();
+
+  try {
+      $dbh = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME.';charset=utf8', DB_USERNAME, DB_PASSWORD);
+      $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+      $sql = $dbh->prepare("SELECT * FROM partidos WHERE temporada = \"2014/2015\" AND jornada = " . $jorn . ";");
+      $sql->execute();
+      $partidos = $sql->fetchAll(PDO::FETCH_ASSOC);
+  } catch (PDOException $e) {
+      echo $e->getMessage();
+  }
+
+  for($i=0;$i<10;$i++){
+      $prob_match=array();
+
+      $prob_match = interpolation($partidos[$i]['equipo_local'],$partidos[$i]['equipo_visitante'],$jorn);
+      $prob_match["local_team"] = $partidos[$i]['equipo_local'];
+      $prob_match["visitor_team"] = $partidos[$i]['equipo_visitante'];
+
+      $prob_jorn[$i]=$prob_match;
+
+  }
+
+  return $prob_jorn;
+
+}
 
 ?>

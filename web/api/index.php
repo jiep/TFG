@@ -440,13 +440,8 @@ $app->get('/sport/:sportname/:league/prediction', function ($sportname, $league)
       $sql->execute();
       $result = $sql->fetchAll(PDO::FETCH_ASSOC);
 
-      $values = array();
 
-      for($i=0;$i<10;$i++){
-          $values[$i] = interpolation($result[$i]['equipo_local'],$result[$i]['equipo_visitante'],$fixture);
-          $values[$i]["local_team"] = $result[$i]['equipo_local'];
-	        $values[$i]["visitor_team"] = $result[$i]['equipo_visitante'];
-      }
+      $values = prob_interpolation(" ",$fixture);
 
       $rankingnew = calcularRanking($values,$season,$fixture-1);
 
