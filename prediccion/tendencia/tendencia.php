@@ -18,7 +18,7 @@ function getLocal($temp,$jorn,$team){
     $cont = 0;
     do{
 
-        $query="SELECT * FROM partidos WHERE temporada = \"2014/2015\" AND jornada = " . $jorn . " AND equipo_local = \"" . $team . "\";";
+        $query="SELECT * FROM partidos WHERE temporada = \"$temp\" AND jornada = " . $jorn . " AND equipo_local = \"" . $team . "\";";
         $sql = $dbh->prepare($query);
         $sql->execute();
         $result = $sql->fetchAll(PDO::FETCH_ASSOC);
@@ -53,7 +53,7 @@ function getVisitante($temp,$jorn,$team){
 
     $cont = 0;
     do{
-        $query="SELECT * FROM partidos WHERE temporada = \"2014/2015\" AND jornada = " . $jorn . " AND equipo_visitante = \"" . $team . "\";";
+        $query="SELECT * FROM partidos WHERE temporada = \"$temp\" AND jornada = " . $jorn . " AND equipo_visitante = \"" . $team . "\";";
         $sql = $dbh->prepare($query);
         $sql->execute();
         $result = $sql->fetchAll(PDO::FETCH_ASSOC);
@@ -130,7 +130,7 @@ function prob_tendencia($temp,$jorn){
   try {
       $dbh = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME.';charset=utf8', DB_USERNAME, DB_PASSWORD);
       $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-      $sql = $dbh->prepare("SELECT * FROM partidos WHERE temporada = \"2014/2015\" AND jornada = " . $jorn . ";");
+      $sql = $dbh->prepare("SELECT * FROM partidos WHERE temporada = \"$temp\" AND jornada = " . $jorn . ";");
       $sql->execute();
       $partidos = $sql->fetchAll(PDO::FETCH_ASSOC);
   } catch (PDOException $e) {
@@ -164,9 +164,4 @@ function prob_tendencia($temp,$jorn){
 
 }
 
-//getVisitante(" ",38,"Real Madrid CF");
-//print_r(probability(getVisitante(" ",38,"Real Madrid CF")));
-//print_r(combine(probability(getLocal(" ",37,"Real Madrid CF")),probability(getVisitante(" ",37,"Getafe CF"))));
-
-//print_r(prob_match("",38));
 ?>

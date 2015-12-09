@@ -3,12 +3,12 @@
 include '../../parser/autoload.php';
 require_once '../../parser/connection.inc.php';
 
-
+define("SEASON","2014/2015");
 
 function comp(){
   $success_rate=array();
 
-  $season="2014/2015";
+  $season=SEASON;
 
   for($fixture=21;$fixture<39;$fixture++){
 
@@ -22,16 +22,13 @@ function comp(){
     } catch (PDOException $e) {
         echo $e->getMessage();
     }
-    //echo print_r($result);
 
     //Predicción
     $curl = curl_init("http://localhost/TFG/web/api/sport/football/bbva/prediction?season=".$season."&fixture=".$fixture);
     curl_setopt($curl,CURLOPT_RETURNTRANSFER,true);
     $response = curl_exec($curl);
     curl_close($curl);
-    //echo ($response);
     $pred = json_decode($response, true);
-    //print_r($pred);
 
 
     //Comparación

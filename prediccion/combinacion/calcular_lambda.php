@@ -2,14 +2,18 @@
 include '../../parser/autoload.php';
 include 'comb_convexa.php';
 require_once '../../parser/connection.inc.php';
+
+define("SEASON","2014/2015");
+
 function calcularLambda(){
+
+    $season=SEASON;
 
     $success_rate=array();
     for ($i=0;$i<=1;$i=$i+0.1){
 	     $success_rate[(string)$i]=0;
     }
 
-    $season="2014/2015";
 
     for($fixture=21;$fixture<39;$fixture++){
 	    //Resultados
@@ -52,6 +56,6 @@ function calcularLambda(){
     return $success_rate;
 }
 
-
 print_r(calcularLambda());
+
 ?>
