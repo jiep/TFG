@@ -18,7 +18,7 @@ function calcularRanking($pred,$temp,$jornada){
   try {
       $dbh = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME.';charset=utf8', DB_USERNAME, DB_PASSWORD);
       $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-      $query='SELECT * FROM rankings WHERE temporada = "2014/2015" AND jornada =' . $jornada;
+      $query="SELECT * FROM rankings WHERE temporada = \"$temp\" AND jornada =" . $jornada;
       $sql = $dbh->prepare($query);
       $sql->execute();
       $clasifAnt = $sql->fetchAll(PDO::FETCH_ASSOC);
