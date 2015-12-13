@@ -4,11 +4,29 @@ include '../../parser/autoload.php';
 require_once '../../parser/connection.inc.php';
 
 define("SEASON","2014/2015");
+define("MAX",20);
+
+
+function devolver($eq, $rank){
+  $n = -1;
+
+  for ($i = 0; $i < MAX ;$i++){
+    if($eq==$rank[$i]["equipo"])
+        $n = $i;
+  }
+
+  if($n==-1){echo "ERROR";}
+
+  return $n;
+
+}
 
 function comp(){
   $success_rate=array();
 
   $season=SEASON;
+
+  $n=MAX;
 
   for($fixture=21;$fixture<39;$fixture++){
 
@@ -31,15 +49,64 @@ function comp(){
     $pred = json_decode($response, true);
 
 
-    //Comparación
-    $success=0;
+    //Comparacion
+    /*$success=0;
     for ($i=0;$i<20;$i++){
 
       if($result[$i]["equipo"]==$pred["ranking2"][$i]["equipo"]){$success++;}
 
     }
 
-    $success_rate[$fixture] = $success;
+    $success_rate[$fixture] = $success;*/
+
+
+    //Tau de Kendall
+    /*$c = 0;
+    $d = 0;
+    $i = 0;
+    $j = 0;
+
+    while($i<$n-1){
+      $eq1=$result[$i]["equipo"];
+      $j=$i+1;
+
+      while($j<$n){
+        $eq2=$result[$j]["equipo"];
+        $pos11=devolver($eq1,$result);
+        $pos21=devolver($eq2,$result);
+        $pos12=devolver($eq1,$pred["ranking2"]);
+        $pos22=devolver($eq2,$pred["ranking2"]);
+
+        if((($pos11>$pos21)&&($pos12>$pos22))||(($pos11<$pos21)&&($pos12<$pos22))){$c++;}
+        else{$d++;}
+
+        $j++;
+
+      }
+
+      $i++;
+
+    }
+
+    $tau=(($c-$d))/(((1/2)*$n*($n-1)));
+
+    $success_rate[$fixture] = $tau;*/
+
+
+    //Rho de Spearman
+    $rho=0;
+    $i=0;
+
+    while($i<$n){
+        $eq=$result[$i]["equipo"];
+        $pos1=devolver($eq,$result)+1;
+        $pos2=devolver($eq,$pred["ranking2"])+1;
+        $rho=$rho+(abs($pos1-$pos2)/min($pos1,$pos2));
+        $i++;
+    }
+
+    $success_rate[$fixture] = $rho;
+
   }
 
   print_r($success_rate);
