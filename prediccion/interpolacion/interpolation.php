@@ -7,12 +7,12 @@ require_once '../../parser/connection.inc.php';
 define("MED", 20/38);
 
 //Desde 1990-2015
-define("X1",0.824);
-define("Y1",0.478);
-define("Z1",0.292);
-define("X2",0.824);
-define("Y2",0.737);
-define("Z2",0.542);
+define("X1",0.8235294117647058);
+define("Y1",0.4782608695652174);
+define("Z1",0.2916666666666667);
+define("X2",0.8235294117647058);
+define("Y2",0.736842105263158);
+define("Z2",0.5416666666666667);
 
 function sintildes($incoming_string){
         $tofind = "ÀÁÂÄÅàáâäÒÓÔÖòóôöÈÉÊËèéêëÇçÌÍÎÏìíîïÙÚÛÜùúûüÿÑñ";
