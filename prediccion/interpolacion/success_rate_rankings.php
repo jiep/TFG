@@ -61,7 +61,7 @@ function comp(){
 
 
     //Tau de Kendall
-    $c = 0;
+    /*$c = 0;
     $d = 0;
     $i = 0;
     $j = 0;
@@ -90,13 +90,22 @@ function comp(){
 
     $tau=(($c-$d))/(((1/2)*$n*($n-1)));
 
-    $success_rate[$fixture] = $tau;
+    $success_rate[$fixture] = $tau;*/
 
 
     //Rho de Spearman
-    /*
+    $rho=0;
+    $i=0;
 
-    */
+    while($i<$n){
+        $eq=$result[$i]["equipo"];
+        $pos1=devolver($eq,$result)+1;
+        $pos2=devolver($eq,$pred["ranking1"])+1;
+        $rho=$rho+(abs($pos1-$pos2)/min($pos1,$pos2));
+        $i++;
+    }
+
+    $success_rate[$fixture] = $rho;
 
   }
 
