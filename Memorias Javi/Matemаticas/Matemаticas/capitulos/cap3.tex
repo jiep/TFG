@@ -1,22 +1,23 @@
 \chapter{Predicción de resultados}
 
 \section{Introducción}
-Lo que se pretende hacer en este capítulo es plantear modelos que nos permitan predecir como quedará el ranking al final de la jornada que aún no ha comenzado, para lo que hay que estimar las distintas probabilidades de que gane un equipo, el rival o empaten para cada partido que se va a disputar.\\
+Lo que se pretende hacer en este capítulo es plantear modelos que nos permitan predecir cómo quedará el ranking al final de la jornada que aún no ha comenzado, para lo que hay que estimar las distintas probabilidades de que gane un equipo, el rival o empaten para cada partido que se va a disputar. Los modelos para predecir los resultados finales del partido pueden ser de lo más variado y estar basados en todo tipo de factores y métodos.\\
 
-Los modelos pueden ser de lo más variados y estar basados en todo tipo de factores y métodos que pueden ser usados para predecir los resultados finales del partido.\\
+En \cite{refpred1} podemos encontrar dos modelos que se aplican para predecir los resultados de la liga alemana en las temporadas 1999-2000, 2000-2001 y 2001-2002:
+\begin{itemize}
+	\item Uno basado en los \textbf{mercados de predicción} en el que los precios de mercado nos ofrecen una visión agregada de la información pública y privada de la que disponen todos los participantes. El funcionamiento de los mercados de predicción se explica en \cite[Tabla II]{refpred1} y el modelo de cálculo de probabilidades se plantea en \cite[pág 62]{refpred1}.
+	\item El otro modelo está basado en las \textbf{apuestas} en el que podemos realizar el cálculo de las probabilidades como se plantea en \cite[págs 62, 63]{refpred1} basándonos en las predicciones que realizan los corredores de apuestas para imponer los precios.
+\end{itemize}
 
-En \cite{refpred1} podemos encontrar varios modelos que se aplican para predecir los resultados de la liga alemana en las temporadas 1999-2000, 2000-2001 y 2001-2002:\\
-Uno basado en los \textbf{mercados de predicción} en el que los precios nos ofrecen una visión agregada de la información pública y privada de la que disponen todos los participantes. El funcionamiento de los mercados de predicción se explica en \cite[Tabla II]{refpred1} y el modelo de cálculo de probabilidades se plantea en \cite[pág 62]{refpred1}.\\
-El otro modelo está basado en las \textbf{apuestas} en el que podemos realizar el cálculo de la probabilidades como se plantea en \cite[págs 62, 63]{refpred1} basándonos en las predicciones que realizan los corredores de apuestas para imponer los precios.\\
 Son dos métodos de predicción relativamente aceptables teniendo mayor exactitud que otros métodos como el de \textit{selección aleatoria} y el de \textit{victoria del equipo local} con los que se comparan en \cite[págs 64-66]{refpred1}, aunque la tasa de acierto entre los dos modelos propuestos, el de los mercados de predicción y el de las apuestas, son muy similares.\\
 Se puede aumentar la exactitud de las predicciones combinando ambos métodos, mediante ponderaciones del 50:50 o aplicando distintas reglas como \textit{solo predecir cuando las previsiones de ambos métodos coincidan} \cite[págs 66-67]{refpred1}.\\
 
-En \cite{refpred2} se aplica el uso de \textbf{redes neuronales} para la predicción. En \cite[Section 2.1.]{refpred2} se explica el diseño de la red BP, cada equipo tendrá tres tipos de redes BP que se corresponden con su fuerza y el problema de clasificación consiste en contrastar las fuerzas de los dos equipos: sí A es más fuerte que B, es concordante o es más débil \cite[Section 2.2.]{refpred2}. Todos los partidos jugados serán los datos usados para el entrenamiento \cite[Section 3.1.]{refpred2} y la capa de salida consta de tres neuronas que se corresponden con la probabilidad de ganar, empatar y perder \cite[Section 3.2.]{refpred2} de forma que se pueda predecir el resultado del enfrentamiento como se muestra en \cite[Section 3.4.]{refpred2}.
+En \cite{refpred2} se aplica el uso de \textbf{redes neuronales} para la predicción. En \cite[Section 2.1.]{refpred2} se explica el diseño de la red BP\footnote{Back-Propagation.}. Cada equipo tendrá tres tipos de redes BP que se corresponden con su fuerza y el problema de clasificación consiste en contrastar las fuerzas de los dos equipos: sí A es más fuerte que B, es concordante o es más débil \cite[Section 2.2.]{refpred2}. Todos los partidos jugados serán los datos usados para el entrenamiento \cite[Section 3.1.]{refpred2} y la capa de salida consta de tres neuronas que se corresponden con la probabilidad de ganar, empatar y perder \cite[Section 3.2.]{refpred2} de forma que se pueda predecir el resultado del enfrentamiento como se muestra en \cite[Section 3.4.]{refpred2}.\\
 
 En \cite{refpred3} se aplica un modelo autorregresivo integrado de media móvil o ARIMA que se usa en \textbf{series temporales} y que se basa en un conjunto de observaciones que se generan de forma secuencial. En \cite[Section E]{refpred3} se realiza la formulación matemática del modelo y en \cite[Section F]{refpred3} se muestran los resultados y el análisis de aplicarlo a tres equipos (uno de la zona alta, otro de la zona media y otro de la zona baja de la clasificación) de la liga india de críquet en el que se intenta predecir el resultado de los últimos 10 partidos de la temporada.\\
 
 \section{Modelo propuesto}
-En la sección anterior hemos visto algunos de los modelos que han sido propuestos para predecir los resultados de un partido que está por disputarse siguiendo distintos criterios, ahora vamos a proceder a plantear uno propio. \\
+En la sección anterior hemos visto algunos de los modelos que han sido propuestos para predecir los resultados de un partido que está por disputarse siguiendo distintos criterios. Ahora vamos a proceder a plantear uno propio que podamos aplicar a la Liga Española de fútbol \\
 
 Para hacer una predicción tenemos que calcular tres probabilidades:
 \begin{itemize}
@@ -30,9 +31,12 @@ Para estimarlas proponemos tener en cuenta lo siguiente:
 	\item La tendencia de cada equipo a lo largo de los últimos partidos.
 \end{itemize}
 
-\subsection*{Probabilidad basada en la posición relativa}
-El valor va a depender de $r(a)-r(b)$\footnote{Recordemos que $r(e)$ denota la posición que ocupa el elemento $e$ en el ranking.} cuyo valor pertenece al intervalo $[-(n-1),(n-1)] \backslash \{0\}$ dónde $n$ es el número de equipos que hay en el ranking. En nuestro caso aplicado a la Liga Española de fútbol, dado que participan un total de 20 equipos el intervalo en cuestión es $[-19,19]$.\\
-La idea es desarrollar un modelo lineal a trozos y optimizar sus parámetros usando el un histórico de resultados.\\
+\subsection{Probabilidad basada en la posición relativa}
+El valor va a depender de $r(a)-r(b)$\footnote{Recordemos que $r(e)$ denota la posición que ocupa el elemento $e$ en el ranking $r$.} cuyo valor pertenece al intervalo $[-(n-1),(n-1)] \backslash \{0\}$ donde $n$ es el número de equipos que hay en el ranking. En nuestro caso aplicado a la Liga Española de fútbol, dado que participan un total de 20 equipos el intervalo en cuestión es $[-19,19]$.\\
+
+La idea es desarrollar un modelo lineal a trozos y optimizar sus parámetros usando un histórico de resultados.\\
+
+\newpage
 
 Lo primero es re-escalar el intervalo $[-19,19]$ en el $[0,1]$ mediante alguna función como por ejemplo
 \begin{center}
@@ -105,7 +109,7 @@ Para estimar los valores de $X_{1},X_{2},Y_{1},Y_{2},Z_{1},Z_{2}$ hay que optimi
 	\item $X_{1} \geq Y_{1} \geq Z_{1}$ y $X_{2} \geq Y_{2} \geq Z_{2}$	
 \end{itemize}
 
-\subsection*{Probabilidad basada en la serie histórica de cada equipo}
+\subsection{Probabilidad basada en la serie histórica de cada equipo}
 Para cada equipo trabajaremos con dos series históricas: una serie con los resultados en casa y otra serie con los resultados fuera de casa, ambos ponderados según una función memoria.\\
 
 Para cada equipo $a$ trabajaremos con secuencias de resultados del tipo:
@@ -117,7 +121,7 @@ Para cada equipo $a$ trabajaremos con secuencias de resultados del tipo:
 	\hline 
 	\end{tabular} 
 \end{center}
-De forma que para la jornada siguiente (la t=10) la probabilidad de que el equipo en cuestión gane, empate o pierda como local:
+De forma que para la jornada siguiente (la t=10) la probabilidad de que el equipo en cuestión gane, empate o pierda como local es:
 \begin{center}
 $P_{l}(a - \star=1)=\dfrac{m(1)+m(2)+m(4)+m(7)+m(8)+m(9)}{\sum_{t=1}^{9}m(t)}$\\
 $P_{l}(a - \star=X)=\dfrac{m(3)+m(6)}{\sum_{t=1}^{9}m(t)}$ \ \ \ \
@@ -127,7 +131,7 @@ donde $m$ es una función memoria típicamente creciente como la de la figura \r
 
 \begin{figure}[htb]
 	\centering
-	\includegraphics{images/memoria.png}
+	\includegraphics{images/memoria.jpg}
 	\caption{Gráfica de la función memoria.} \label{fig:memoria}
 \end{figure}
 Análogamente se calculan las probabilidades para el siguiente partido como visitante:
@@ -138,8 +142,10 @@ Análogamente se calculan las probabilidades para el siguiente partido como visi
 \end{center}
 
 Por tanto, para cada equipo tendremos dos probabilidades:\\
-$P_{l}(a - \star=1)$, $P_{l}(a - \star=X)$ y $P_{l}(a - \star=2)$ para los partidos como locales \\
-$P_{v}(\star - a=1)$, $P_{v}(\star - a=X)$ y $P_{v}(\star - a=2)$ para los partidos como visitantes\\
+$P_{l}(a - \star=1)$, $P_{l}(a - \star=X)$ y $P_{l}(a - \star=2)$ para los partidos como local \\
+$P_{v}(\star - a=1)$, $P_{v}(\star - a=X)$ y $P_{v}(\star - a=2)$ para los partidos como visitante\\
+
+\newpage
 
 Para pronosticar el resultado del enfrentamiento $a-b$ debemos conjuntar $P_{l}(a - \star)$ con $P_{v}(\star - b)$ usando la siguiente tabla:\\
 
@@ -153,7 +159,8 @@ Para pronosticar el resultado del enfrentamiento $a-b$ debemos conjuntar $P_{l}(
 \end{tabular} 
 \end{center}
 
-En las tuplas de números de la tabla anterior, el primer número es el que usaremos para calcular $P_{s}(a-b=1)$, el segundo para $P_{s}(a-b=X)$ y el tercero para $P_{s}(a-b=2)$, dicho número es por el que hay que multiplicar el producto de las entradas.\\
+En las tuplas de números de la tabla anterior, el primer número es el que usaremos para calcular $P_{s}(a-b=1)$, el segundo para $P_{s}(a-b=X)$ y el tercero para $P_{s}(a-b=2)$, dicho número es por el que tenemos que multiplicar el producto de las entradas.\\
+
 Por ejemplo, para calcular $P_{s}(a-b=1)$ la tabla que debemos usar es la compuesta por el primer elemento de cada tupla\\
 \[
 A_{1}= \left(\begin{array}{ccc}
@@ -182,7 +189,7 @@ P_{l}(a - \star=2)
 
 Aplicaremos un razonamiento análogo para calcular $P_{s}(a-b=X)$ y $P_{s}(a-b=2)$.
 
-\subsection*{Combinación}
+\subsection{Combinación}
 Ahora contaremos con dos probabilidades: las probabilidades basadas en la posición relativa ($P_{r}(a-b=1) \ \ P_{r}(a-b=X) \ \ P_{r}(a-b=2)$) y las basadas en la serie histórica de cada equipo ($P_{s}(a-b=1) \ \ P_{s}(a-b=X) \ \ P_{s}(a-b=2)$).\\
 
 Para conjugarlas usaremos una combinación convexa, tomamos $\lambda \in (0,1)$ y tenemos

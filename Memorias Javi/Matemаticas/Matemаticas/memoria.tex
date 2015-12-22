@@ -1,4 +1,4 @@
-\documentclass[12pt,a4paper,titlepage]{report}
+\documentclass[12pt,a4paper,titlepage]{book}
 
 \usepackage[utf8]{inputenc}
 \usepackage[spanish,es-noquoting]{babel}
@@ -10,7 +10,7 @@
 \usepackage{lettrine}
 \usepackage{float}
 \usepackage{color}
-\usepackage[top=2cm,bottom=4cm,outer=2cm,inner=2cm]{geometry}
+\usepackage[top=3cm,bottom=4cm,outer=2cm,inner=2cm]{geometry}
 \usepackage{pgf}
 \usepackage{emptypage} 
 \usepackage{chngcntr}
@@ -18,15 +18,19 @@
 \usepackage{listings}
 \usepackage{verbatimbox}
 \usepackage{rotating} 
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usepackage{tkz-graph}
+\usepackage{subfig}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{kbordermatrix}
 
+\setlength\parindent{0pt}
 
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
 \usepackage[colorlinks=true,linkcolor=black,urlcolor=black,citecolor=black]{hyperref}
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
-
-\counterwithout{figure}{part}
-\renewcommand{\chaptername}{Unidad} 
-\setlength\parindent{0pt}
 
 
 \newcommand*{\autores}{
@@ -40,35 +44,38 @@
 \include{portada}
 
 % Reinicia el contador a 1 en cada parte
-\makeatletter
-\@addtoreset{chapter}{part} 
-\makeatother
+%\makeatletter
+%\@addtoreset{chapter}{part} 
+%\makeatother
 
 \input{comandos}
 
 \begin{document}
 	
-	%\frontmatter % Incluye índice, portada, prefacio, ...
-	
+	\frontmatter
+		
 	% Portada
-	
 	\portada{TFG}{Matemáticas}{Modelos predictivos en rankings}{\autores}{Móstoles}
 	% Fin Portada
 	
 	\tableofcontents
 	\listoffigures
 	
+	
+	\mainmatter
 	\input{./capitulos/cap1}
 	\input{./capitulos/cap2}
 	\input{./capitulos/cap3}
 	\input{./capitulos/cap4}	
 	
 	\appendix
-	%\input{./anexos/anexo1}
-	%\input{./anexos/anexo2}
-	%\input{./anexos/anexo3}
+	\input{./anexos/grafos}
+	\input{./anexos/acb}
+	\input{./anexos/matlabcode}
+	\input{./anexos/javacode}	
 	
 	
+	\backmatter
 	\begin{thebibliography}{X}
 		\bibitem{cap1} \textsc{A. N. Langville, C. D. Meyer},
 		\textit{Who's \#1? The science of rating and ranking}, 
@@ -96,6 +103,9 @@
 		\bibitem{cap13-14} \textsc{A. N. Langville, C. D. Meyer},
 		\textit{Who's \#1? The science of rating and ranking}, 
 		Princeton University Press, Princeton, 2012. Chapters 14 \& 15: \textit{Rank Aggregation parts 1 \& 2}.
+		\bibitem{refborda} \textsc{E. B. Burger, M. Starbird},
+		\textit{The Heart of Mathematics. An invitation to effective thinking}, 
+		Third Edition, John Wiley \& Sons, 2010. Chapter Nine: \textit{Deciding wisely}.		
 		\bibitem{refbilp} \textsc{K. E. Pedings, A. N. Langville, Yoshitsugu Yamamoto},
 		\textit{A Minimum Violations Ranking Method}, 
 		2009. Chapter 4: \textit{Theorem for the Relationship between the BILP and LP}.
@@ -113,7 +123,12 @@
 		2003. 
 		\bibitem{refpred3} \textsc{G. Hiranandani, J. Shitole, N. Kundu, N. Maurya, R. Grover},
 		\textit{Forecasting Indian Premier League Results Using Time Series Analysis}, 
-		2013. 
+		2013. 	
+		\bibitem{refpuentes}
+		Artículo sobre el problema de los puentes de Königsberg en Wikipedia (Castellano). \url{https://es.wikipedia.org/wiki/Problema_de_los_puentes_de_Konigsberg}
+		\bibitem{librografos} \textsc{W. Kocay, D.L. Kreher},
+		\textit{Graphs, algorithms, and optimization}, 
+		Chapman and Hall/CRC, 2004.
 	\end{thebibliography}
 
 	

@@ -1,0 +1,86 @@
+\definecolor{mygreen}{RGB}{28,172,0} % color values Red, Green, Blue
+\definecolor{mylilas}{RGB}{170,55,241}
+
+\lstset{language=Matlab,%
+	%basicstyle=\color{red},
+	breaklines=true,%
+	morekeywords={matlab2tikz},
+	keywordstyle=\color{blue},%
+	morekeywords=[2]{1}, keywordstyle=[2]{\color{black}},
+	identifierstyle=\color{black},%
+	stringstyle=\color{mylilas},
+	commentstyle=\color{mygreen},%
+	showstringspaces=false,%without this there will be a symbol in the places where there is a space
+	%numbers=left,%
+	%numberstyle={\tiny \color{black}},% size of the numbers
+	%numbersep=9pt, % this defines how far the numbers are from the text    
+}
+
+\chapter{Código MATLAB}
+
+\section{Métodos para crear rankings}
+
+\subsection*{Método de Massey}
+\fbox{\parbox[b]{\linewidth}{
+		\lstinputlisting{../matlabcode/massey.m}			
+}}
+
+\newpage
+
+\subsection*{Método de Colley}
+
+\fbox{\parbox[b]{\linewidth}{
+		\lstinputlisting{../matlabcode/colley.m}			
+}}
+
+
+\subsection*{Método de Keener}
+
+\fbox{\parbox[b]{\linewidth}{
+		\lstinputlisting{../matlabcode/keener.m}			
+}}
+
+\subsection*{Método de Ataque-Defensa}
+
+\fbox{\parbox[b]{\linewidth}{
+		\lstinputlisting{../matlabcode/ataque.m}			
+}}
+\ \\
+
+\fbox{\parbox[b]{\linewidth}{
+		\lstinputlisting{../matlabcode/defensa.m}			
+}}
+
+\newpage
+
+\section{Parámetros de entrada para los ejemplos}
+
+\subsection*{Parámetros Massey}
+
+\fbox{\parbox[b]{\linewidth}{
+		\lstinputlisting{../matlabcode/entradas_massey.txt}			
+}}
+	
+\newpage	
+	
+\subsection*{Parámetros Colley}
+
+\fbox{\parbox[b]{\linewidth}{
+		\lstinputlisting{../matlabcode/entradas_colley.txt}			
+}}
+
+\newpage
+
+\subsection*{Parámetros Keener}
+
+\fbox{\parbox[b]{\linewidth}{
+		\lstinputlisting{../matlabcode/entradas_keener.txt}			
+}}
+
+\newpage
+
+\subsection*{Parámetros Ataque-Defensa}
+
+\fbox{\parbox[b]{\linewidth}{
+		\lstinputlisting{../matlabcode/entradas_od.txt}			
+}}
