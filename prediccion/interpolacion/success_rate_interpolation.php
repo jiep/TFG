@@ -30,7 +30,6 @@ function comp(){
     curl_close($curl);
     $pred = json_decode($response, true);
 
-
     //Comparación
     $success=0;
     for ($i=0;$i<10;$i++){
@@ -51,6 +50,7 @@ function comp(){
   }
 
   print_r($success_rate);
+  echo array_sum($success_rate);
 
 }
 

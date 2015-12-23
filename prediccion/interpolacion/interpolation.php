@@ -78,20 +78,30 @@ function normalize($pos1,$pos2){
 }
 
 function interpolatef($value){
+    //Interpolacion lineal
     if($value<=MED){
         $res = X2 + ($value * (Y2-X2)/MED);
     }else{
         $res = Y2 + ((($value-MED) * (Z2-Y2))/(1-MED));
     }
+
+    //Interpolacion cuadratica
+    //$res = X2 * ((($value-MED)*($value-1))/MED) + Y2 * ((($value)*($value-1))/((MED)*(MED-1))) + Z2 * ((($value)*($value-MED))/(1-MED));
+
     return $res;
 }
 
 function interpolateg($value){
+    //Interpolacion lineal
     if($value<=MED){
         $res = X1 + ($value * (Y1-X1)/MED);
     }else{
         $res = Y1 + ((($value-MED) * (Z1-Y1))/(1-MED));
     }
+
+    //Interpolacion cuadratica
+    //$res = X1 * ((($value-MED)*($value-1))/MED) + Y1 * ((($value)*($value-1))/((MED)*(MED-1))) + Z1 * ((($value)*($value-MED))/(1-MED));
+
     return $res;
 }
 
