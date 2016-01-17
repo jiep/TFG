@@ -1,0 +1,102 @@
+\documentclass[12pt,a4paper,titlepage]{book}
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-noquoting]{babel}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{lettrine}
+\usepackage{float}
+\usepackage{color}
+\usepackage[top=3cm,bottom=4cm,outer=2cm,inner=2cm]{geometry}
+\usepackage{pgf}
+\usepackage{emptypage} 
+\usepackage{chngcntr}
+\usepackage{etoolbox}
+\usepackage{listings}
+\usepackage{verbatimbox}
+\usepackage{rotating} 
+\usepackage{tikz}
+\usepackage{tkz-graph}
+\usepackage{subfig}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{kbordermatrix}
+\usepackage{color, colortbl}
+\usepackage{amssymb}
+\usepackage{pifont}
+\usepackage{pgf}
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata,fit}
+\usetikzlibrary{calc,positioning,shapes.geometric}
+\usetikzlibrary{shapes}
+\usetikzlibrary{er}
+
+
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+
+\setlength\parindent{0pt}
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
+\usepackage[colorlinks=true,linkcolor=black,urlcolor=black,citecolor=black]{hyperref}
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
+
+
+\newcommand*{\autores}{
+	\begin{tabular}{r}
+		Javier Jiménez del Peso\\
+	\end{tabular}
+}
+
+
+% Incluye archivo para utilizar el comando \portada
+\include{portada}
+
+% Reinicia el contador a 1 en cada parte
+%\makeatletter
+%\@addtoreset{chapter}{part} 
+%\makeatother
+
+\input{comandos}
+
+\begin{document}
+	
+	\frontmatter
+		
+	% Portada
+	\portada{TFG}{Informática}{Diseño e implementación de modelos de predicción para la Liga BBVA}{\autores}{Móstoles}
+	% Fin Portada
+	
+	\tableofcontents
+	\listoffigures
+	
+	
+	\mainmatter
+	\input{./capitulos/cap1}
+	\input{./capitulos/cap2}
+	\input{./capitulos/cap3}		
+	\input{./capitulos/cap4}
+	\input{./capitulos/cap5}
+	\input{./capitulos/cap6}	
+	\input{./capitulos/cap7}
+	
+	\backmatter
+	\begin{thebibliography}{X}
+		\bibitem{comparacion} \textsc{A. N. Langville, C. D. Meyer},
+		\textit{Who's \#1? The science of rating and ranking}, 
+		Princeton University Press, Princeton, 2012. Chapter 16: \textit{Methods of Comparison}.
+		\bibitem{tfgjose} \textsc{José Ignacio Escribano Pablos},
+		\textit{Diseño e implementación de una aplicación SPA para el estudio de la competitividad de la Liga BBVA}, 
+		Trabajo Fin de Grado de Ingeniería del Software, 2015.	
+		\bibitem{refapi1}
+		Conceptos sobre APIs REST (Castellano). \url{http://asiermarques.com/2013/conceptos-sobre-apis-rest/}
+		\bibitem{refapi2}
+		Richardson Maturity Model (Inglés). \url{http://martinfowler.com/articles/richardsonMaturityModel.html}		
+	\end{thebibliography}
+
+	
+	
+\end{document}

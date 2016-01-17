@@ -1,0 +1,33 @@
+\chapter{Conclusión}
+
+La idea del proyecto es realizar una predicción de los resultados de la próxima jornada de la Liga BBVA. El primer paso es obtener las probabilidades de que gane el equipo local, el equipo visitante o de que empaten y, a partir de ellos, obtener cómo quedará la clasificación al final de la jornada en cuestión.\\
+
+Comenzamos proponiendo varios modelos matemáticos para predecir los resultados de los partidos, uno basado en la posición relativa que ocupan los equipos en la clasificación de la jornada anterior, otro basado en la tendencia de los equipos en los últimos 5 partidos disputados (diferenciando si fue como local o como visitante) y finalmente una combinación de los dos anteriores, todos ellos planteados en el tercer capítulo de la memoria. Para calcular el ranking final simplemente tenemos que usar esos resultados y añadir 3 puntos al equipo ganador o 1 a ambos equipos en caso de empate.\\
+ 
+Posteriormente implementamos dichos modelos creando un módulo de predicción de resultados para nuestra aplicación. Todos los detalles relativos a la arquitectura, las tecnologías utilizadas y las implementaciones tanto del backend como del frontend se pueden encontrar en el cuarto capítulo.\\  
+
+En los últimos capítulos se hace un profundo análisis de todos los resultados obtenidos por la herramienta. El modelo de tendencias es el más flojo de los tres propuestos, mientras que el modelo más completo es el resultante de aplicar la combinación convexa. Con éste podemos llegar a predecir correctamente  en torno a la mitad de los partidos de cada jornada. Pero el fuerte de la herramienta está en la predicción del ranking final que suele concordar bastante con la clasificación real una vez disputada la jornada.\\
+
+\newpage
+
+\section{Mejoras}
+
+\subsubsection*{Mejoras de los modelos propuestos}
+En el tema de predicción se pueden crear innumerables modelos distintos cada uno de ellos con numerosas variantes de cálculo e implementación. \\
+
+En nuestro caso, el modelo basado en la posición relativa obtiene resultados bastantes aceptables, podríamos variar la forma de interpolar, sin embargo, no se producirían cambios significativos en las probabilidades como para obtener resultados distintos.\\
+
+El modelo de tendencias, como ya hemos mencionado, es el que menos aciertos obtiene y, por tanto, el que está sujeto a mejoras:
+\begin{itemize}
+	\item El modelo solo tiene en cuenta los últimos 5 enfrentamientos. Podríamos aumentar este número y analizar si se obtendrían mejores resultados. Aunque se debe tener en cuenta que se necesitan suficientes datos para la fase de entrenamiento, por ejemplo, si usamos funciones memoria que computen la tendencia de los últimos 10 partidos, necesitamos que se hayan disputado 10 partidos como local y 10 como visitante, lo que en la jornada número 21 no necesariamente tiene que haber sucedido (se podrían haber disputado 9 como local y 11 como visitante o viceversa).
+	\item Hemos usado una función memoria constante, una lineal y una exponencial. Se podrían buscar más funciones memoria alternativas y ver si incrementan el número de aciertos.
+	\item La variación más interesante a realizar sería la de los valores usados para combinar las probabilidades para los partidos como local del equipo 1 con las probabilidades como visitante del equipo 2, es decir, los valores de la tabla que aparece en la página 13 de esta memoria.
+\end{itemize}
+
+\subsubsection*{Diseño de nuevos modelos}
+Además de modificar los modelos propuestos, se podrían proponer otros, basados en criterios que influyan el resultado final de los partidos, como puede ser jugar como local en vez de como visitante, tener en cuenta el número de goles que suele marcar y encajar cada equipo, etc. 
+Aunque al ir añadiendo modelos progresivamente se complicaría considerablemente el diseño de su combinación, ya que habría que optimizar el peso que se le da a cada uno de ellos, cada vez iríamos aumentando más la tasa de aciertos.\\
+
+\subsubsection*{Comparación con casas de apuestas}
+Otro aspecto importante es que las comparaciones de nuestras predicciones las estamos realizando directamente con los resultados reales de los partidos una vez disputados. Sería interesante realizar la comparación con las predicciones que realizan las casas de apuestas antes de los partidos y ver cuanto difieren con ellas. Probablemente las predicciones serían más concordantes y aumentaría la tasa de aciertos.
+ 

@@ -1,0 +1,143 @@
+\chapter{Conceptos previos sobre rankings}
+En este capítulo vamos a comenzar explicando los conceptos matemáticos relativos a rankings que serán usados en el resto de la memoria y en el funcionamiento de la aplicación.
+
+\section{Rankings vs Ratings}
+
+\subsection*{Rankings}
+\begin{defi} 
+	Un \textbf{ranking} de tamaño n es una permutación de enteros desde 1 hasta n, es decir, se trata de una biyección $r: \xi \rightarrow \xi$ donde $\xi = \{1,...,n\}$ es el conjunto de elementos a ordenar.
+\end{defi}
+
+Se representan como un vector columna en el que cada posición del vector (que coincidirá con alguno de los elementos que queremos ordenar) se corresponderá con un número entero que indica la posición que ocupa dicho elemento en el ranking.  Si $e$ es un elemento del conjunto a ordenar, $r(e)$ es la posición que ocupa el elemento $e$ en el ranking $r$.\\
+ 
+\begin{ejem} \label{ejem1}
+Ejemplo de ranking.
+\end{ejem}
+\[
+\begin{array}{ccc}
+\begin{array}{c}
+\text{A}\\
+\text{B} \\
+\text{C} \\
+\text{D} \\
+\end{array} & \left(\begin{array}{c}
+2\\
+4\\
+1\\
+3
+\end{array} \right)
+\end{array}  
+\]
+\qed
+
+\subsection*{Ratings}
+\begin{defi} 
+	Un \textbf{rating} es una lista de puntuaciones numéricas, una por cada elemento, es decir, $\tilde{r}: \xi \rightarrow \mathbb{R}$ donde $\xi = \{1,...,n\}$ es el conjunto de todos los elementos.
+\end{defi}
+
+Se representan de forma análoga a los rankings, como un vector columna en el que cada elemento se corresponderá con una puntuación numérica (partidos ganados, perdidos, empatados, puntos a favor,...).
+
+\begin{ejem} \label{ejem2}
+Ejemplo de rating.
+\end{ejem}
+\[
+\begin{array}{ccc}
+\begin{array}{c}
+\text{A}\\
+\text{B} \\
+\text{C} \\
+\text{D} \\
+\end{array} & \left(\begin{array}{c}
+9\\
+3\\
+12\\
+7
+\end{array} \right)
+\end{array}  
+\]
+\qed
+\ \\
+
+Ordenando un rating, siempre se obtiene un ranking, pero no a la inversa. Por ejemplo, el ranking del ejemplo \ref{ejem1} es el obtenido a partir del rating del ejemplo \ref{ejem2}.
+
+\section{Comparación de rankings}
+
+\subsection{Tau de Kendall}
+
+\begin{defi} Diremos que un par $(i,j)$ es \textbf{concordante} si la posición relativa entre ambos en las dos listas es la misma, es decir, $i$ aparece por encima de $j$ o $j$ aparece por encima de $i$ en ambos rankings.
+\end{defi}
+
+El resultado, que oscila entre -1 y 1, nos da el grado en que un ranking coincide con el otro y lo podemos calcular como se muestra a continuación
+
+\begin{equation}
+\tau = \dfrac{n_{c} - n_{d}}{n(n-1)/2}
+\end{equation}
+donde $n_{c}$ es el número de pares concordantes, $n_{d}$ el de pares discordantes y $n$ número de ítems de los rankings. 
+
+\begin{ejem} Dados los dos rankings que se muestran a continuación vamos a calcular la Tau de Kendall:
+\end{ejem}
+\begin{center}
+\[
+\begin{array}{ccc}
+\begin{array}{c}
+\text{A}\\
+\text{B} \\
+\text{C} \\
+\text{D} \\
+\end{array} & \left(\begin{array}{c}
+2\\
+4\\
+1\\
+3
+\end{array} \right)& \left(\begin{array}{c}
+1\\
+4\\
+2\\
+3
+\end{array} \right)
+\end{array}  
+\]
+	
+$ \tau (r_{1},r_{2}) = \dfrac{5-1}{6}=0.6666667$
+\end{center}
+\qed
+
+\subsection{Rho de Spearman}
+La Rho de Spearman ($\rho$) es la distancia $L_{1}$ entre dos rankings completos $r_{1}$ y $r_{2}$ de tamaño $n$ \cite[Pág 206]{comparacion}. Pero como no es igual de importante la coincidencia de los rankings en las últimas posiciones de la lista como lo es en las primeras vamos a hacerle una pequeña modificación a la definición clásica de la Rho de Spearman (la renombramos como $\phi$) que se muestra en la ecuación (\ref{spearman}). Con esta nueva definición la penalización por las discordancias en los primeros puestos del ranking será mayor que en los puestos bajos de la lista \cite[Pág 207]{comparacion}. 
+
+\begin{equation} \label{spearman}
+	\phi = \sum_{i=1}^{n} \dfrac{|r_{1}(i) - r_{2}(i)|}{min\{r_{1}(i),r_{2}(i)\}}
+\end{equation}
+
+Cuanto menor es el valor de esta medida, es porque la diferencia de puestos en los rankings entre los equipos  es menor y, por tanto, más similares son los rankings.
+
+
+\begin{ejem} Dados los dos rankings que se muestran a continuación vamos a calcular la Rho de Spearman:
+\end{ejem}
+\begin{center}
+	\[
+	\begin{array}{ccc}
+	\begin{array}{c}
+	\text{A}\\
+	\text{B} \\
+	\text{C} \\
+	\text{D} \\
+	\end{array} & \left(\begin{array}{c}
+	2\\
+	4\\
+	1\\
+	3
+	\end{array} \right)& \left(\begin{array}{c}
+	1\\
+	4\\
+	2\\
+	3
+	\end{array} \right)
+	\end{array}  
+	\]
+	
+	$ \phi (r_{1},r_{2}) = \frac{|2-1|}{1} + 0 + \frac{|1-2|}{1} + 0 = 2$
+	
+\end{center}
+
+\qed
