@@ -10,7 +10,7 @@ function calcularLambda(){
     $season=SEASON;
 
     $success_rate=array();
-    for ($i=0;$i<=1;$i=$i+0.1){
+    for ($i=0;$i<=1;$i=$i+0.01){
 	     $success_rate[(string)$i]=0;
     }
 
@@ -48,7 +48,7 @@ function calcularLambda(){
 			      if($winner==$winner_p){$success++;}
 		    }
     		$success_rate[(string)$lambda]=$success_rate[(string)$lambda]+$success;
-    		$lambda = $lambda + 0.1;
+    		$lambda = $lambda + 0.01;
 	    }
 
     }

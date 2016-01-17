@@ -14,6 +14,7 @@ define("X2",0.8235294117647058);
 define("Y2",0.736842105263158);
 define("Z2",0.5416666666666667);
 
+
 function sintildes($incoming_string){
         $tofind = "ÀÁÂÄÅàáâäÒÓÔÖòóôöÈÉÊËèéêëÇçÌÍÎÏìíîïÙÚÛÜùúûüÿÑñ";
         $replac = "AAAAAaaaaOOOOooooEEEEeeeeCcIIIIiiiiUUUUuuuuyNn";

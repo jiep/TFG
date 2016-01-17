@@ -50,14 +50,14 @@ function comp(){
 
 
     //Comparacion
-    /*$success=0;
+    $success=0;
     for ($i=0;$i<20;$i++){
 
       if($result[$i]["equipo"]==$pred["ranking2"][$i]["equipo"]){$success++;}
 
     }
 
-    $success_rate[$fixture] = $success;*/
+    $success_rate[$fixture] = $success;
 
 
     //Tau de Kendall
@@ -94,7 +94,7 @@ function comp(){
 
 
     //Rho de Spearman
-    $rho=0;
+    /*$rho=0;
     $i=0;
 
     while($i<$n){
@@ -105,12 +105,12 @@ function comp(){
         $i++;
     }
 
-    $success_rate[$fixture] = $rho;
+    $success_rate[$fixture] = $rho;*/
 
   }
 
   print_r($success_rate);
-
+  echo array_sum($success_rate);
 }
 
 comp();

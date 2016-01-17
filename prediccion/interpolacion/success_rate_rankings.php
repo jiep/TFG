@@ -61,7 +61,7 @@ function comp(){
 
 
     //Tau de Kendall
-    /*$c = 0;
+    $c = 0;
     $d = 0;
     $i = 0;
     $j = 0;
@@ -90,11 +90,11 @@ function comp(){
 
     $tau=(($c-$d))/(((1/2)*$n*($n-1)));
 
-    $success_rate[$fixture] = $tau;*/
+    $success_rate[$fixture] = $tau;
 
 
     //Rho de Spearman
-    $rho=0;
+    /*$rho=0;
     $i=0;
 
     while($i<$n){
@@ -105,12 +105,12 @@ function comp(){
         $i++;
     }
 
-    $success_rate[$fixture] = $rho;
+    $success_rate[$fixture] = $rho;*/
 
   }
 
   print_r($success_rate);
-
+  echo array_sum($success_rate)/18;
 }
 
 comp();

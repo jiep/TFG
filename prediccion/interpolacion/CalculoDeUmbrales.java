@@ -11,8 +11,8 @@ import java.io.IOException;
 
 public class CalculoDeUmbrales {
 
-   public static final int TEMP_INI = 1990;//Jornada de inicio (antes de 1990 no había 20 equipos ni 38 jornadas)
-   public static final int TEMP_FIN = 2014;//Jornada de actual
+   public static final int TEMP_INI = 1990;//Temporada de inicio (antes de 1990 no había 20 equipos ni 38 jornadas)
+   public static final int TEMP_FIN = 2014;//Temporada actual
    public static final int JORNADA = 37;//Calcula las probabilidades hasta la jornada (Max 37)
    public static Connection conexion;
 
