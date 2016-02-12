@@ -33,17 +33,13 @@
 \usetikzlibrary{calc,positioning,shapes.geometric}
 \usetikzlibrary{shapes}
 \usetikzlibrary{er}
-
+\usepackage[colorlinks=true,linkcolor=black,urlcolor=black,citecolor=black]{hyperref}
 
 \newcommand{\cmark}{\ding{51}}%
 \newcommand{\xmark}{\ding{55}}%
 
 \setlength\parindent{0pt}
-
-% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
-\usepackage[colorlinks=true,linkcolor=black,urlcolor=black,citecolor=black]{hyperref}
-% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
-
+\def\labelitemi{$\diamondsuit$}
 
 \newcommand*{\autores}{
 	\begin{tabular}{r}
@@ -51,25 +47,13 @@
 	\end{tabular}
 }
 
-
-% Incluye archivo para utilizar el comando \portada
 \include{portada}
-
-% Reinicia el contador a 1 en cada parte
-%\makeatletter
-%\@addtoreset{chapter}{part} 
-%\makeatother
-
 \input{comandos}
 
 \begin{document}
 	
 	\frontmatter
-		
-	% Portada
-	\portada{TFG}{Informática}{Diseño e implementación de modelos de predicción para la Liga BBVA}{\autores}{Móstoles}
-	% Fin Portada
-	
+	\portada{Diseño e implementación de modelos de predicción para la Liga BBVA}{Trabajo Fin de Grado de Ingeniería Informática}{\autores}{Esther García González \\ Miguel Romance del Río}{Móstoles}
 	\tableofcontents
 	\listoffigures
 	
@@ -87,7 +71,7 @@
 	\begin{thebibliography}{X}
 		\bibitem{comparacion} \textsc{A. N. Langville, C. D. Meyer},
 		\textit{Who's \#1? The science of rating and ranking}, 
-		Princeton University Press, Princeton, 2012. Chapter 16: \textit{Methods of Comparison}.
+		Princeton University Press, Princeton, 2012.
 		\bibitem{tfgjose} \textsc{José Ignacio Escribano Pablos},
 		\textit{Diseño e implementación de una aplicación SPA para el estudio de la competitividad de la Liga BBVA}, 
 		Trabajo Fin de Grado de Ingeniería del Software, 2015.	

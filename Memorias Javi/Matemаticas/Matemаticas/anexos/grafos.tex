@@ -1,6 +1,7 @@
-\chapter{Grafos.}
+\chapter{Grafos}
 
-A lo largo de la memoria mencionamos varias veces la palabra grafo, en este anexo introduciremos todos los conceptos relacionados con grafos y algunos ejemplos de los tipos de grafos más conocidos. El primero en hablar de grafos fue Euler en el año 1736 cuando propuso una solución al problema matemático de los siete puentes de Königsberg (la formulación y solución al problema se puede encontrar en \cite{refpuentes}) que dio origen a la teoría de grafos.\\
+A lo largo de la memoria mencionamos varias veces la palabra grafo. En este anexo introduciremos todos los conceptos relacionados con grafos y algunos ejemplos de los tipos de grafos más conocidos. El primero en hablar de grafos fue Euler en el año 1736 cuando resolvió el problema matemático de los siete puentes de Königsberg (la formulación y solución al problema se puede encontrar en \cite{refpuentes}) que dio origen a la teoría de grafos.\\
+
 Pueden existir variantes de algunas de las definiciones que usaremos a continuación, la mayoría de las usadas han sido traducidas de \cite{librografos}.
 
 \section{Conceptos básicos}
@@ -13,7 +14,7 @@ Pueden existir variantes de algunas de las definiciones que usaremos a continuac
 	\end{itemize}
 \end{defi}
 
-Una arista que une dos nodos $v_{1},v_{2} \in V$ se denota como $v_{1}v_{2}$ o $v_{2}v_{1} \in E$. Cuando el nodo origen y el destino de una arista son el mismo estaremos hablando de bucles. Decimos que dos aristas son paraleleas cuando ambas aristas relacionan el mismo par de vértices. Dos aristas son adyacentes si tienen un vértice en común, y dos vértices son adyacentes si existe una arista los une.
+Una arista que une dos nodos $v_{1},v_{2} \in V$ se denota como $v_{1}v_{2}$ o $v_{2}v_{1} \in E$. Cuando el nodo origen y el destino de una arista son el mismo estaremos hablando de bucles. Decimos que dos aristas son paralelas cuando ambas aristas relacionan el mismo par de vértices. Dos aristas son adyacentes si tienen un vértice en común, y dos vértices son adyacentes si existe una arista que los une.
 
 \begin{defi} 
 	El orden de un grafo $G$ es el número de vértices de $G$, es decir, $|V|$.
@@ -28,7 +29,7 @@ Nos interesará estudiar los grafos finitos, cuando $|G|< \infty$, ya que muchos
 \newpage
 
 \begin{ejem} 
-	En la figura \ref{fig:graph} se muestra un grafo donde $ V = \{1,2,3\} \text{  y  } E = \{12,23\} $
+	En la figura \ref{fig:graph} se muestra un grafo donde $ V = \{1,2,3\} \text{  y  } E = \{12,23\} $.
 \end{ejem}
 
 \begin{figure}[H]
@@ -47,11 +48,11 @@ Nos interesará estudiar los grafos finitos, cuando $|G|< \infty$, ya que muchos
 \end{figure}
 
 El orden del grafo es 3. \\
-El grado de cada uno de los nodos es $$g(1)=g(3)=1$$  $$g(2)=2$$ .\\
+El grado de cada uno de los nodos es $$g(1)=g(3)=1$$  $$g(2)=2.$$\\
 \qed
 
 \begin{defi} 
-	El grafo complementario de $G$ se denota $\bar{G}$ y tiene el mismo conjunto de vértices que $G$, pero su conjunto de aristas son todas aquellas que no están unidas en $G$.
+	El grafo complementario de $G$ se denota $\bar{G}$ y tiene el mismo conjunto de vértices que $G$, pero su conjunto de aristas son todas aquellas que unen los vértices que no están unidos en $G$.
 \end{defi}
 
 \begin{ejem} 
@@ -68,19 +69,19 @@ El grado de cada uno de los nodos es $$g(1)=g(3)=1$$  $$g(2)=2$$ .\\
 	\node[node_style] (v3) at (3,-2) {3};
 	\draw[edge_style] (v1) edge (v3);
 	\end{tikzpicture}
-	\caption{Grafo complementario.}
+	\caption{Ejemplo de grafo complementario.}
 	\label{fig:graphcomplementario}
 \end{figure}
 
 \qed
 
 \begin{defi} 
-	Dado un grafo $G=(V,E)$. Un camino es una sucesión en la que aparecen de forma alternativa elementos $v_{i} \in V$ para $i=0,\dots,n$ y $e_{j} \in E$ para $j=1,\dots,n$ de la forma $v_{0},e_{1},v_{1},e_{2},v_{2},\dots,v_{n-1},e_{n},v_{n}$. Donde $v_{0}$ es el inicio del camino, $v_{n}$ es el fin del camino y la longitud del camino viene dada por el número de aristas de éste.
+	Dado un grafo $G=(V,E)$. Un camino de $v_{0}$ a $v_{n}$ es una sucesión de aristas $e_{1},e_{2},\dots,e_{n}$ de la forma $e_{1}=v_{0}v_{1}$, $e_{2}=v_{1}v_{2}$, $\dots$, $e_{n}=v_{n-1}v_{n}$, donde $v_{0}$ es el inicio del camino, $v_{n}$ es el fin del camino y la longitud del camino viene dada por el número de aristas de éste.
 \end{defi}
 
 \section{Tipos de grafos}
 
-Existen multitud de tipos de grafos diferentes, ya hemos mencionado algunos como los grafos no dirigidos, los grafos finitos y los infinitos, vamos a presentar algunos tipos más:
+Existen multitud de tipos de grafos diferentes. Ya hemos mencionado algunos como los grafos no dirigidos, los grafos finitos y los infinitos. Vamos a presentar algunos tipos más:
 \begin{itemize}
 	\item Grafo nulo: es un grafo cuyos vértices no tienen ninguna arista que los una.
 	
@@ -154,9 +155,9 @@ Existen multitud de tipos de grafos diferentes, ya hemos mencionado algunos como
 
 	\item Grafo regular: es un grafo en el que todos los nodos tienen el mismo grado. Por ejemplo el grafo de la figura \ref{fig:grafocompleto} es un grafo regular.
 
-	\item Grafo conexo: es un grafo que cumple que para cada par de nodos existe al menos un camino que los une. La mayoría de grafos vistos hasta ahora son conexos. El ejemplo del grafo de la figura \ref{fig:graphcomplementario} es un grafo no conexo ya que el vértice 2 no tiene ningún camino que lo una a 1 y 3.
+	\item Grafo conexo: es un grafo que cumple que para cada par de nodos existe al menos un camino que los une. La mayoría de grafos vistos hasta ahora son conexos. El grafo de la figura \ref{fig:graphcomplementario} es un grafo no conexo ya que el vértice 2 no tiene ningún camino que lo una a 1 y 3.
 	
-	\item  Árbol: son grafos que conectan todos los vértices utilizando el menor número posible de aristas, tienen $n$ nodos y $n-1$ aristas.
+	\item  Árbol: son grafos que conectan todos los vértices utilizando el menor número posible de aristas. Tienen $n$ nodos y $n-1$ aristas.
 	
 	\begin{figure}[H]
 		\centering
@@ -249,7 +250,7 @@ Además de la geométrica, existen diferentes formas de representar un grafo, va
 		B & 1 & 0 & 1 & 0\\
 		C & 0 & 1 & 0 & 1\\
 		D & 0 & 0 & 1 & 0
-	}
+	}.
 	\]
 	
 	\item Matriz de incidencia: el grafo está representado por una matriz $M_{mxn}$, donde $m$ es el número de vértices y $n$ el número de aristas del grafo. Si el vértice $v_{i}$ y la arista $e_{j}$ están conectados, entonces el elemento $m_{i,j}$ toma el valor 1, si no toma el valor 0.\\
@@ -262,7 +263,7 @@ Además de la geométrica, existen diferentes formas de representar un grafo, va
 		B & 1 & 1 & 0\\
 		C & 0 & 1 & 1\\
 		D & 0 & 0 & 1
-	}
+	}.
 	\]
 	
 \end{itemize}
@@ -273,7 +274,7 @@ Además de la geométrica, existen diferentes formas de representar un grafo, va
 
 \section{Teoría de grafos}
 
-Gracias a la teoría de grafos se pueden resolver problemas en áreas muy distintas.  Algunos de sus muchos usos son: modelización de trayectos en redes de transporte en las que nos interesa obtener caminos óptimos aplicando diversos algoritmos como puede ser el de Floyd, en administración de proyectos se utilizan técnicas como la de revisión y evaluación de programas (PERT) en las que se modela utilizando grafos y optimizando los tiempos, en redes sociales para estudiar la influencia de determinadas personas dentro de círculos de gente, en biología y ecología la aplicación a redes tróficas para estudiar como afectaría la extinción de algunas especies a todo el hábitat,...\\
+Gracias a la teoría de grafos se pueden resolver problemas en áreas muy distintas.  Algunos de sus muchos usos son: modelización de trayectos en redes de transporte en las que nos interesa obtener caminos óptimos aplicando diversos algoritmos como puede ser el de Floyd, en administración de proyectos se utilizan técnicas como la de revisión y evaluación de programas (PERT) en las que se modela utilizando grafos y optimizando los tiempos, en redes sociales para estudiar la influencia de determinadas personas dentro de círculos de gente, en biología y ecología se aplica a redes tróficas para estudiar como afectaría la extinción de algunas especies a todo el hábitat, etc.\\
 
 \begin{figure}[H]
 	\centering

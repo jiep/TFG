@@ -14,7 +14,7 @@ En la figura \ref{fig:clas37} se muestra el ranking correspondiente a la jornada
 	\begin{tabular}{|c|c|}
 	\hline \rowcolor{ao} Local & Visitante \\ 
 	\hline Levante UD & Elche CF \\ 
-	\hline Athletic Club & Villareal CF \\ 
+	\hline Athletic Club & Villarreal CF \\ 
 	\hline FC Barcelona & R.C. Deportivo \\ 
 	\hline Granada CF & Atlético de Madrid \\ 
 	\hline Rayo Vallecano & Real Sociedad \\ 
@@ -52,7 +52,7 @@ Ahora vamos a analizar cuál sería el porcentaje de aciertos si comparamos los 
 	\begin{tabular}{|c|c|c|c|c|}
 		\hline \rowcolor{ao} Local & Visitante & Predicción & Resultado & Acierto \\ 
 		\hline Levante UD & Elche CF & 1 & X & \begingroup\color{red}\xmark\endgroup \\ 
-		\hline Athletic Club & Villareal CF & 1 & 1 & \begingroup\color{green}\cmark\endgroup \\ 
+		\hline Athletic Club & Villarreal CF & 1 & 1 & \begingroup\color{green}\cmark\endgroup \\ 
 		\hline FC Barcelona & R.C. Deportivo & 1 & X & \begingroup\color{red}\xmark\endgroup \\ 
 		\hline Granada CF & Atlético de Madrid & 2 & X & \begingroup\color{red}\xmark\endgroup \\ 
 		\hline Rayo Vallecano & Real Sociedad & 1 & 2 & \begingroup\color{red}\xmark\endgroup \\ 
@@ -101,7 +101,7 @@ El problema de la Rho de Spearman, que se basa en hallar la distancia entre las 
 
 La medida que más información nos puede aportar en el estudio de la tasa de aciertos al comparar los dos rankings en cuestión es la Tau de Kendall. Esta medida analiza que la posición relativa para cada par de equipos (de los 190 pares totales) sea la misma en ambos rankings, superando el problema que surgía al hacer la comparación posición por posición. Cuanto más cercano a 1 sea el valor de la Tau de Kendall mayor será la cantidad de pares acertados y, por tanto, mejor será la tasa de aciertos. \\
 
-En nuestro caso, el $0.95789$ de la Tau de Kendall se obtiene de $186$ pares concordantes y solo $4$ discordantes, por lo que la tasa de aciertos en el cálculo del ranking para la jornada 38 se puede considerar bastante buena a pesar se haber acertado tan solo el resultado de la mitad de los partidos.
+En nuestro caso, el $0.95789$ de la Tau de Kendall se obtiene de $186$ pares concordantes y solo $4$ discordantes, por lo que la tasa de aciertos en el cálculo del ranking para la jornada 38 se puede considerar bastante buena a pesar de haber acertado tan solo el resultado de la mitad de los partidos.
 
 \section{Modelo basado en la tendencia de cada equipo}
 Vamos a calcular las probabilidades y clasificación para los mismos enfrentamientos de la jornada 38 usando las tres funciones memoria distintas propuestas en la sección 3.2.\\
@@ -133,7 +133,7 @@ Ahora vamos a analizar cuál sería el porcentaje de aciertos si comparamos los 
 	\begin{tabular}{|c|c|c|c|c|c|}
 		\hline \rowcolor{ao} Local & Visitante & Constante & Lineal & Exponencial & Resultado \\ 
 		\hline Levante UD & Elche CF & X & 1 & 1 & X \\ 
-		\hline Athletic Club & Villareal CF & X & X & X & 1 \\ 
+		\hline Athletic Club & Villarreal CF & X & X & X & 1 \\ 
 		\hline FC Barcelona & R.C. Deportivo & 1 & 1 & 1 & X \\ 
 		\hline Granada CF & Atlético de Madrid & X & X & X & X \\ 
 		\hline Rayo Vallecano & Real Sociedad & 1 & 1 & 1 & 2\\ 
@@ -170,7 +170,7 @@ Ahora calculamos la tasa de aciertos con el ranking de la figura \ref{fig:clas38
 \end{tabular} 
 \end{center}
 
-Como ya mencionamos, la medida de comparación de rankings más fiable es la Tau de Kendall, sin embargo, en este caso, es el mismo valor para las tres funciones memoria, con todos ellos se acertaría la posición relativa del mismo número de pares de equipos. Sin embargo, los otros dos valores nos indican que las funciones lineal y exponencial, a pesar de acertar un partido menos en la predicción de los resultados, tienen mejor porcentaje de aciertos a la hora de calcular la clasificación final.\\
+Como ya mencionamos, la medida de comparación de rankings más fiable es la Tau de Kendall, sin embargo, en este caso, es el mismo valor para las tres funciones memoria, con todos ellos se acertaría la posición relativa del mismo número de pares de equipos. Sin embargo, los otros dos valores nos indican que las funciones lineal y exponencial, a pesar de acertar un partido menos en la predicción de los resultados, tienen mejor porcentaje de aciertos al calcular la clasificación final.\\
 
 Con este método, la predicción de resultados de partidos es bastante mala, aunque a la hora de predecir la clasificación obtenemos unos resultados aceptables, pero claramente inferiores a los obtenidos por el modelo basado en la posición de los equipos. 
 
@@ -194,7 +194,7 @@ Ahora vamos a analizar cuál sería el porcentaje de aciertos si comparamos los 
 	\begin{tabular}{|c|c|c|c|c|}
 		\hline \rowcolor{ao} Local & Visitante & Predicción & Resultado & Acierto \\ 
 		\hline Levante UD & Elche CF & 1 & X & \begingroup\color{red}\xmark\endgroup \\ 
-		\hline Athletic Club & Villareal CF & 1 & 1 & \begingroup\color{green}\cmark\endgroup \\ 
+		\hline Athletic Club & Villarreal CF & 1 & 1 & \begingroup\color{green}\cmark\endgroup \\ 
 		\hline FC Barcelona & R.C. Deportivo & 1 & X & \begingroup\color{red}\xmark\endgroup \\ 
 		\hline Granada CF & Atlético de Madrid & 2 & X & \begingroup\color{red}\xmark\endgroup \\ 
 		\hline Rayo Vallecano & Real Sociedad & 1 & 2 & \begingroup\color{red}\xmark\endgroup \\ 
@@ -212,9 +212,9 @@ En este caso en concreto, los resultados son los mismos que los que obtuvimos ap
 \section{Resultados}
 Aplicando los distintos modelos a la jornada 38 de la temporada 2014/2015, hemos sacado las siguientes conclusiones:
 \begin{itemize}
-	\item El modelo basado en la tendencia de los equipos es algo inferior a los otros dos modelos propuestos.
-	\item En este caso, con el modelo basado en la posición relativa de los equipos y con el que combina los modelos se obtienen exactamente los mismos resultados. En el siguiente capítulo haremos un estudio más extenso que demostrará que el modelo combinatorio será el que acertará mayor número de resultados y rankings.
-	\item El porcentaje de aciertos en los resultados de los partidos no nos va a servir para hacernos millonarios echando la quiniela, sin embargo, es un porcentaje aceptable (un $50\%$ de aciertos usando el primer y tercer modelo) superiores a métodos como el de selección aleatoria ($33 \%$) o el método de elección de victoria local (en este caso sería de un $40\%$).
+	\item El modelo basado en la tendencia de los equipos es inferior a los otros dos modelos propuestos.
+	\item En este caso, con el modelo basado en la posición relativa de los equipos y con la combinación de modelos se obtienen exactamente los mismos resultados. En el siguiente capítulo haremos un estudio más extenso que demostrará que el modelo combinatorio será el que tendrá mayor tasa de acierto.
+	\item El porcentaje de aciertos en los resultados de los partidos no nos va a servir para hacernos millonarios echando la Quiniela, sin embargo, es un porcentaje aceptable (un $50\%$ de aciertos usando el primer y tercer modelo) superiores a métodos como el de selección aleatoria ($33 \%$) o el método de elección de victoria local (en este caso sería de un $40\%$).
 	\item Pero la tasa de aciertos aumenta considerablemente cuando comparamos el ranking calculado usando la predicción con el ranking al final de la jornada. La Tau de Kendall que nos indica el porcentaje de pares de equipos que tienen la misma posición relativa (en ambos el equipo A aparece por encima del equipo B o en ambos el equipo B aparece por encima del equipo A) aplicando nuestros modelos se encuentra por encima del $90\%$.
 \end{itemize}
  

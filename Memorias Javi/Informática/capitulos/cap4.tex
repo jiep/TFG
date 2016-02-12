@@ -1,6 +1,6 @@
 \chapter{Descripción informática}
 
-Vamos a implementar un módulo de predicción de resultados de la Liga BBVA de Fútbol en el que aplicaremos todos los modelos propuestos en el capítulo anterior. Este módulo estará integrado dentro de otra aplicación ya existente que detallaremos a continuación.
+Vamos a implementar un módulo de predicción de resultados de la Liga BBVA de fútbol en el que aplicaremos los modelos propuestos en el capítulo anterior. Este módulo estará integrado dentro de otra aplicación ya existente que detallaremos a continuación.
 
 \section{Descripción de la aplicación}
 \subsection{Arquitectura de la aplicación}
@@ -66,16 +66,16 @@ La aplicación está basada en la arquitectura cliente-servidor. Es en la parte 
 \end{figure}
 
 \subsection{Funcionalidades previas de la aplicación}
-Como ya hemos mencionado, nuestro módulo de predicción forma parte de una aplicación ya existente realizada como parte de otro Trabajo Fin de Grado del que se puede encontrar más información en \cite{tfgjose}. A continuación vamos a explicar brevemente las funcionalidades de las que constaba antes de añadir el correspondiente módulo de predicción:
+Como ya hemos mencionado, nuestro módulo de predicción forma parte de una aplicación ya existente realizada como parte de otro Trabajo Fin de Grado del que se puede encontrar más información en \cite{tfgjose}. A continuación vamos a mencionar brevemente las funcionalidades de las que constaba antes de añadir el módulo de predicción:
 
 \begin{itemize}
-	\item Se pueden consultar los resultados de cualquier temporada de la Primera División de la Liga Española de Fútbol (desde 1928/1929 hasta la actual con la excepción del parón sufrido por la Guerra Civil de 1936 a 1939). Por cada temporada se muestra: la clasificación, el histórico de posiciones en el ranking a lo largo de las distintas jornadas, varios gráficos con distintas medidas de competitividad (todas explicadas en \cite[Capítulo 2]{tfgjose}) y el grafo de competitividad.
+	\item Se pueden consultar los resultados de cualquier temporada de la Primera División de la Liga española de fútbol (desde la 1928/1929 hasta la actual con la excepción del parón sufrido por la Guerra Civil de 1936 a 1939). Por cada temporada se muestra: la clasificación, el histórico de posiciones en el ranking a lo largo de las distintas jornadas, varios gráficos con distintas medidas de competitividad (todas explicadas en \cite[Capítulo 2]{tfgjose}) y el grafo de competitividad.
 	\item Se pueden consultar todos los equipos que han jugado al menos en una ocasión en la Primera División de la Liga. De cada uno de ellos se puede consultar su escudo, el número de temporadas que estuvieron en la Primera División y diversas estadísticas sacadas de todos sus partidos disputados.
-	\item Se puede iniciar sesión en la aplicación y acceder a un módulo en el que el usuario puede subir como un archivo CSV con un formato concreto (que se puede consultar en \cite[Pág 27]{tfgjose}) una secuencia de rankings con el objetivo de crear el grafo de competitividad correspondiente y obtener diversas medidas de competitividad.
+	\item Se puede iniciar sesión en la aplicación y acceder a un módulo en el que el usuario puede subir como un archivo CSV con un formato concreto (que se puede consultar en \cite[pág 27]{tfgjose}) una secuencia de rankings con el objetivo de crear el grafo de competitividad correspondiente y obtener diversas medidas de competitividad.
 \end{itemize}
 
 \section{Herramientas empleadas}
-En el desarrollo web se emplea un conjunto muy amplio de tecnologías que se conectan entre sí, podemos crear una aplicación sencilla simplemente usando PHP y MySQL en el lado del servidor y HTML, CSS y JavaScript en el lado del cliente. Además, suelen aparecer otras herramientas asociadas a las anteriores que facilitan la creación de las aplicaciones web como por ejemplo los frameworks.\\
+En el desarrollo web se emplea un conjunto muy amplio de tecnologías que se conectan entre sí, podemos crear una aplicación sencilla simplemente usando PHP y MySQL en el lado del servidor y HTML, CSS y JavaScript en el lado del cliente. Además, suelen aparecer otras herramientas asociadas a las anteriores que facilitan la creación de las aplicaciones web, como por ejemplo los frameworks.\\
 
 Partiendo de esto, vamos a proceder a presentar todas las tecnologías usadas en el proyecto, que vamos a separar según las usemos en el lado del cliente o en el lado del servidor.
 
@@ -164,9 +164,10 @@ En esta parte se encuentran todas las tecnologías que definirán la interfaz de
 \subsubsection*{HTML}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.3]{images/html.png}
+	\includegraphics[scale=0.25]{images/html.png}
 	\caption{HTML.}
 \end{figure}
+
 \textit{HyperText Markup Language} o \textit{HMTL} es el lenguaje de marcado (estándar elaborado por la W3C\footnote{World Wide Web Consortium. Es un consorcio internacional que produce recomendaciones y estándares que aseguran el crecimiento de la World Wide Web.}) usado para la elaboración de páginas web. Define una estructura básica y un código para la definición de contenido de una página web, como texto, tablas, formularios, imágenes o vídeos. Actualmente se encuentra en su versión 5.\\  
 
 Para más información se puede acceder a su web desde el siguiente link:\\ \url{http://www.w3.org/TR/html5/}
@@ -174,7 +175,7 @@ Para más información se puede acceder a su web desde el siguiente link:\\ \url
 \subsubsection*{CSS}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.6]{images/css.png}
+	\includegraphics[scale=0.5]{images/css.png}
 	\caption{CSS.}
 \end{figure}
 \textit{Hoja de estilo en cascada} o \textit{CSS} es un lenguaje usado para definir y crear la presentación de un documento estructurado escrito en HTML. La especificación de CSS es también elaborada por la W3C. La idea es separar la estructura de un documento (dada en el HTML) de su presentación (definida por el CSS). En el momento de realización de este documento se encuentra en su versión 3.\\  
@@ -197,7 +198,7 @@ Para más información se puede acceder a su web desde el siguiente link:\\ \url
 	\includegraphics[scale=0.15]{images/bootstrap.png}
 	\caption{Bootstrap.}
 \end{figure}
-\textit{Bootstrap} es uno de los frameworks más populares para trabajar con HTML, CSS y JS en el diseño de sitios y aplicaciones web. La idea es realizar el diseño de una web de forma sencilla y visual en vez de mediante líneas de código.\\  
+\textit{Bootstrap} es uno de los frameworks más populares para trabajar con HTML, CSS y JS en el diseño de sitios y aplicaciones web. La idea es realizar el diseño de una web de forma sencilla mediante el uso de componentes predefinidos.\\
 
 Para más información se puede acceder a su web desde el siguiente link:\\ \url{http://getbootstrap.com/}
 
@@ -208,7 +209,7 @@ Para más información se puede acceder a su web desde el siguiente link:\\ \url
 	\caption{Bower.}
 \end{figure}
 \textit{Bower} es un gestor de paquetes JavaScript que se encarga de manejar las
-dependencias de paquetes y librerías en el frontend. Bower depende de npm, de Node.js y de git, que tendremos que tenerlos previamente instalados.\\  
+dependencias de paquetes y librerías en el frontend. Bower depende de npm, de Node.js y de git, que debemos de tener previamente instalados.\\  
 
 Para más información se puede acceder a su web desde el siguiente link:\\ \url{http://bower.io/}
 
@@ -227,11 +228,11 @@ Para más información se puede acceder a su web desde el siguiente link:\\ \url
 \section{Implementación}
 
 \subsection{Backend}
-El Backend de nuestra aplicación va a constar de dos partes, el parser que obtiene los datos y los almacena en una base de datos de MySQL y la API REST que será la encargada de interaccionar con el frontend y hará las peticiones a la base de datos.\\
+El Backend de nuestra aplicación va a constar de dos partes, el parser que obtiene los datos y los almacena en una base de datos de MySQL y la API REST que será la encargada de interaccionar con el frontend haciendo peticiones a la base de datos.\\
 
 
 \subsubsection{Parser}
-El parser es un módulo que consta de varios scripts implementados en PHP cuya función es conectarse a la página oficial de la Liga BBVA de Fútbol para descargar los datos jornada a jornada.\\
+El parser es un módulo que consta de varios scripts implementados en PHP cuya función es conectarse a la página oficial de la Liga BBVA de fútbol para descargar los datos jornada a jornada.\\
 
 Consta de:
 \begin{itemize}
@@ -248,7 +249,7 @@ Consta de:
 
 \newpage
 
-Los datos obtenidos por los scripts anteriores se irán almacenando en tres bases de datos MySQL distintas cuya estructura vamos a mostrar a continuación: 
+Los datos obtenidos por los scripts anteriores se irán almacenando en tres bases de datos MySQL distintas cuya estructura se muestra a continuación: 
 
 \begin{itemize}
 	\item Tabla de Equipos.
@@ -272,11 +273,11 @@ Los datos obtenidos por los scripts anteriores se irán almacenando en tres base
 \end{itemize}
 
 \subsubsection{API REST}
-REST (\textbf{RE}presentational \textbf{S}tate \textbf{T}ransfer) es un tipo de arquitectura de desarrollo web que se apoya totalmente en el estándar HTTP definida en el año 2000 por Roy Fielding (coautor también de la especificación HTTP). \\
+REST (\textbf{RE}presentational \textbf{S}tate \textbf{T}ransfer) es un tipo de arquitectura de desarrollo web definida en el año 2000 por Roy Fielding que se apoya en el estándar HTTP. \\
 
 Existen tres niveles de calidad a la hora de aplicar REST en el desarrollo de una API, que se recogen en el Modelo de Madurez de Richardson\cite{refapi1}\cite{refapi2}:
 \begin{itemize}
-	\item Nivel 0: consiste en el uso de HTTP como sistema de transporte sin usar otros mecanismos que permita la web.
+	\item Nivel 0: consiste en el uso de HTTP como sistema de transporte sin usar otros mecanismos que permite la web.
 	\item Nivel 1: vamos a trabajar con información que querremos consultar, modificar o borrar independientemente de su formato, es a lo que denominaremos ``recurso''. Estos recursos deben de tener una URL (Uniform Resource Locator) única que lo identifique y nos permita acceder a su ubicación.
 	\item Nivel 2: consiste en la incorporación de los métodos HTTP (GET para consultar, POST para crear, PUT y PATCH para editar y DELETE para eliminar) así como los distintos códigos de estado que devuelve HTTP.
 	\item Nivel 3: HATEOAS (Hypertext As The Engine Of Application State) consiste en conectar mediante hipervínculos las aplicaciones clientes con las APIs, permitiendo a dichos clientes despreocuparse por conocer de antemano del cómo acceder a los recursos.
@@ -290,7 +291,7 @@ Existen tres niveles de calidad a la hora de aplicar REST en el desarrollo de un
 
 La API implementada llega hasta el nivel 2 del Modelo de Madurez de Richardson. La herramienta que hemos empleado en su implementación es PHP con ayuda del micro framework Slim, que es de gran utilidad para la creación de APIs.\\
 
-En \cite[Anexo A]{tfgjose} se pueden encontrar todos los métodos de la API Rest que se encontraban previamente implementados en la aplicación. Para el intercambio de información entre cliente y servidor usaremos el formato JSON por su simplicidad. \\
+En \cite[Anexo A]{tfgjose} se pueden encontrar todos los métodos de la API REST que se encontraban previamente implementados en la aplicación. Para el intercambio de información entre cliente y servidor usaremos el formato JSON por su simplicidad. \\
 
 Al incluir el nuevo módulo de predicción hemos tenido que incorporar una nueva llamada a la API:
 {\small \begin{center}
@@ -312,6 +313,11 @@ La llamada anterior devuelve un JSON que consta de 6 elementos, en orden:
 	\item el ranking resultante usando la combinación de los dos modelos.
 \end{enumerate}
 
+\begin{figure}[H]
+	\centering
+		\includegraphics[scale=0.8]{images/json.png}
+	\caption{Ejemplo del JSON devuelto por la API.}
+\end{figure} 
 \ \\
 Para obtenerlos se hace uso de funciones implementadas en distintos scripts PHP que realizan los cálculos matemáticos explicados en el capítulo 3 de esta memoria. \\
 
@@ -322,7 +328,7 @@ Para realizar la predicción aplicando la combinación convexa de los dos modelo
 \subsection{Frontend}
 El frontend consta de la aplicación AngularJS que será la encargada de hacer peticiones a la API REST y mostrar los resultados devueltos.\\
 
-Tendremos que crear las vistas y controladores correspondientes al nuevo módulo de predicción añadido. En el controller se realizará la petición a la API REST y se guardará la respuesta obtenida en el scope para su posterior uso en el HTML correspondiente. También tendremos que modificar todas las demás vistas y controladores para poder acceder al nuevo módulo desde el resto de vistas ya existentes.\\
+Tendremos que crear las vistas y controladores correspondientes al nuevo módulo de predicción añadido. En el controller se realizará la petición a la API REST y se guardará la respuesta obtenida en el contexto para su posterior uso en el HTML correspondiente. También tendremos que modificar todas las demás vistas y controladores para poder acceder al nuevo módulo desde el resto de vistas ya existentes.\\
 
 Todos los aspectos relacionados con las vistas con las que ya contaba la aplicación anteriormente se pueden encontrar en \cite[sección 3.4.1.]{tfgjose}.\\
 

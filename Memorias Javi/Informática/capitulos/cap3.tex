@@ -1,27 +1,27 @@
 \chapter{Modelo de predicción}
-Queremos proponer un modelo, o mejor dicho, una combinación de modelos para poder predecir cómo acabará la clasificación al final de la próxima jornada (que aún no ha comenzado a disputarse) de la Liga Española de Fútbol. Para ello tendremos que estimar el resultado más probable para cada uno de los 10 partidos que se van a disputar y calcular el nuevo ranking usando esos resultados. Tendremos que calcular tres probabilidades para cada enfrentamiento:
+Queremos proponer un modelo, o mejor dicho, una combinación de modelos para poder predecir cómo acabará la clasificación al final de la próxima jornada (que aún no ha comenzado a disputarse) de la Liga española de fútbol. Para ello tendremos que estimar el resultado más probable para cada uno de los 10 partidos que se van a disputar y calcular el nuevo ranking usando esos resultados. \\
+
+Para hacer una predicción tenemos que calcular tres probabilidades:
 \begin{itemize}
-	\item La probabilidad de que $a$ gane a $b$: $P(a-b=1)$.
-	\item La probabilidad de que $a$ y $b$ empaten: $P(a-b=X)$.
-	\item La probabilidad de que $a$ pierda ante $b$: $P(a-b=2)$.
+	\item La probabilidad de que $a$ gane a $b$, que denotaremos como $P(a-b=1)$.
+	\item La probabilidad de que $a$ y $b$ empaten, que denotaremos como $P(a-b=X)$.
+	\item La probabilidad de que $a$ pierda ante $b$, que denotaremos como $P(a-b=2)$.
 \end{itemize}
-Para estimarlas proponemos tener en cuenta lo siguiente:
+Y para estimarlas, proponemos tener en cuenta:
 \begin{itemize}
-	\item La posición relativa en la tabla.
-	\item La tendencia de cada equipo a lo largo de los últimos partidos.
+	\item La posición relativa en la tabla, de donde obtendremos $P_{r}(a-b=1)$, $P_{r}(a-b=X)$ y $P_{r}(a-b=2)$.
+	\item La tendencia de cada equipo a lo largo de los últimos partidos, de donde obtendremos $P_{s}(a-b=1)$, $P_{s}(a-b=X)$ y $P_{s}(a-b=2)$.
 \end{itemize}
 
-El modelo de predicción necesita una fase inicial de ``entrenamiento'': unas primeras jornadas en las que no realizaremos predicciones sino que recogeremos datos de los resultados de los partidos disputados que luego usaremos en los distintos modelos de predicción. Comenzaremos a realizar predicciones a partir de la jornada número 21 de cada temporada, para asegurarnos que tenemos unos datos fiables que podamos usar tanto en el modelo de interpolación como en el de tendencia de los equipos. Además de que para entonces la clasificación se habrá estabilizado y no habrá cambios bruscos como los que se suelen dar al inicio de la temporada.
+El modelo de predicción necesita una fase inicial de ``entrenamiento'': unas primeras jornadas en las que no realizaremos predicciones sino que recogeremos datos de los resultados de los partidos disputados que luego usaremos en los distintos modelos de predicción. Comenzaremos a realizar predicciones a partir de la jornada número 21 de cada temporada, para asegurar que tenemos unos datos fiables que podamos usar tanto en el modelo de interpolación como en el de tendencia de los equipos. Además de que para entonces la clasificación se habrá estabilizado y no habrá cambios bruscos como los que se suelen dar al inicio de la temporada.
 
 \section{Probabilidad basada en la posición relativa}
 El valor va a depender de la diferencia entre las posiciones que ocupan los equipos en la clasificación, $r(a)-r(b)$, cuyo valor pertenece al intervalo $[-19,19] \backslash \{0\}$, dado que participan un total de 20 equipos.\\
 
-\newpage
-
 El primer paso es re-escalar el intervalo $[-19,19]$ en el $[0,1]$ mediante alguna función como:
 \begin{center}
 	$ \psi: [-19,19] \longrightarrow [0,1]$\\
-	$ t \longmapsto \dfrac{t+19}{38}$
+	$ t \longmapsto \dfrac{t+19}{38}$.
 \end{center}
 
 En los rankings con los que vamos a trabajar no se pueden producir empates, por tanto, nunca habrá dos equipos que tengan la misma posición, es decir, $r(a)-r(b)\neq 0$ y $\psi \neq \frac{1}{2}$.\\
@@ -30,7 +30,7 @@ El siguiente paso será definir unos umbrales de victoria para el equipo local, 
 \begin{itemize}
 	\item El primero de la clasificación contra el último: $\psi = 0$.
 	\item Equipos en posiciones consecutivas en la clasificación. \\
-	Se pueden dar dos casos, que el local esté un puesto por encima del visitante en la clasificación, donde $r(a)-r(b) = -1$ y $\psi = \frac{18}{38}$, o que sea el visitante el que está un puesto por encima del local, donde $r(a)-r(b)=1$ y $\psi = \frac{20}{38}$. En adelante, al referiremos a ``equipos consecutivos'' hacemos referencia al segundo caso, es decir, cuando $\psi=\frac{20}{38}$.
+	Se pueden dar dos casos, que el local esté un puesto por encima del visitante en la clasificación, donde $r(a)-r(b) = -1$ y $\psi = \frac{18}{38}$, o que sea el visitante el que está un puesto por encima del local, donde $r(a)-r(b)=1$ y $\psi = \frac{20}{38}$. En adelante, al hablar de ``equipos consecutivos'' haremos referencia al segundo caso, es decir, cuando $\psi=\frac{20}{38}$.
 	\item El último de la clasificación contra el primero: $\psi = 1$.
 \end{itemize}
 
@@ -38,19 +38,17 @@ Gráficamente podemos resumirlo como se muestra en la figura \ref{fig:umbrales}.
 
 \begin{figure}[H]
 		\centering
-		\includegraphics{images/umbrales.png}
+		\includegraphics[scale=0.7]{images/umbrales.png}
 		\caption{Umbrales de victoria local, empate y victoria visitante.} \label{fig:umbrales}
 \end{figure}
 
-Dónde los valores $X_{1},X_{2},Y_{1},Y_{2},Z_{1},Z_{2} \in [0,1]$ se identifican del siguiente modo:
+donde los valores $X_{1},X_{2},Y_{1},Y_{2},Z_{1},Z_{2} \in [0,1]$ se identifican del siguiente modo:
 \begin{itemize}
 	\item Si $a$ es el primero de la clasificación y $b$ el último:\\
-	 $[0,X_{1}]$ mide la probabilidad de que gane $a$, $[X_{1},X_{2}]$ mide la probabilidad de que $a$ y $b$ empaten y $[X_{2},1]$ mide la probabilidad de que gane $b$.
-	 Es decir,\\
 	 
 	 $\begin{cases}
 	 	P_{r}(a-b=1)=X_{1}\\
-	 	P_{r}(a-b=X)=X_{2}-X_{1} \ \ \ \ \ \ \ \text{siendo} \ 0 \leq X_{1} \leq X_{2} \leq 1\\
+	 	P_{r}(a-b=X)=X_{2}-X_{1} \ \ \ \ \ \ \ \text{siendo} \ 0 \leq X_{1} \leq X_{2} \leq 1.\\
 	 	P_{r}(a-b=2)=1-X_{2} 
 	 \end{cases}$\\
 	 
@@ -58,7 +56,7 @@ Dónde los valores $X_{1},X_{2},Y_{1},Y_{2},Z_{1},Z_{2} \in [0,1]$ se identifica
 	
 	$\begin{cases}
 	P_{r}(a-b=1)=Y_{1}\\
-	P_{r}(a-b=X)=Y_{2}-Y_{1} \ \ \ \ \ \ \ \text{siendo} \ 0 \leq Y_{1} \leq Y_{2} \leq 1\\
+	P_{r}(a-b=X)=Y_{2}-Y_{1} \ \ \ \ \ \ \ \text{siendo} \ 0 \leq Y_{1} \leq Y_{2} \leq 1.\\
 	P_{r}(a-b=2)=1-Y_{2} 
 	\end{cases}$\\
 	
@@ -66,7 +64,7 @@ Dónde los valores $X_{1},X_{2},Y_{1},Y_{2},Z_{1},Z_{2} \in [0,1]$ se identifica
 	
 	$\begin{cases}
 	P_{r}(a-b=1)=Z_{1}\\
-	P_{r}(a-b=X)=Z_{2}-Z_{1} \ \ \ \ \ \ \ \text{siendo} \ 0 \leq Z_{1} \leq Z_{2} \leq 1\\
+	P_{r}(a-b=X)=Z_{2}-Z_{1} \ \ \ \ \ \ \ \text{siendo} \ 0 \leq Z_{1} \leq Z_{2} \leq 1.\\
 	P_{r}(a-b=2)=1-Z_{2} 
 	\end{cases}$
 \end{itemize}
@@ -128,12 +126,12 @@ Usando los umbrales que obtenemos tras analizar los resultados de la temporada 1
 	\caption{Función de interpolación lineal.}
 \end{figure}
 
-También se han probado otras formas de interpolar, en concreto el uso del polinomio interpolador de Lagrange de grado 2 para obtener las funciones $f$ y $g$. Sin embargo la variación de las tres probabilidades a calcular es mínima y en ningún partido cambia el resultado final que predice la interpolación lineal. Por ello, no propondremos otros modelos de interpolación y en adelante solamente utilizaremos la interpolación lineal.  
+También se han probado otras formas de interpolar, en concreto el uso del polinomio interpolador de Lagrange de grado 2 para obtener las funciones $f$ y $g$. Sin embargo, la variación de las tres probabilidades a calcular es mínima y en ningún partido cambia el resultado final que predice la interpolación lineal. Por ello, no propondremos otros modelos de interpolación y en adelante solamente utilizaremos la interpolación lineal.  
 
 \section{Probabilidad basada en la tendencia del equipo}
-Para cada equipo trabajaremos con dos series históricas: una serie con los resultados en casa y otra serie con los resultados fuera de casa, ambos ponderados según una función memoria.\\
+Para cada equipo trabajaremos con dos series históricas: una serie con los resultados en casa y otra serie con los resultados fuera de casa, ambos ponderados según una función memoria. \\
 
-Para cada equipo $a$ trabajaremos con secuencias de resultados de sus últimos 5 partidos disputados como local y sus 5 últimos disputados como visitante. Almacenaremos la información cronológicamente del partido más reciente ($t=0$) al más antiguo que vamos a considerar ($t=4$). Por ejemplo:
+Para cada equipo $a$ trabajaremos con secuencias de resultados de sus últimos 5 partidos disputados como local y sus 5 últimos disputados como visitante. Almacenaremos la información cronológicamente, del partido más reciente ($t=0$) al más antiguo que vamos a considerar ($t=4$). Por ejemplo:
 \begin{center}
 	\begin{tabular}{|c|c|c|c|c|c|}
 	\hline  & t=0 & t=1 & t=2 & t=3 & t=4 \\ 
@@ -157,21 +155,21 @@ Análogamente se calculan las probabilidades para el siguiente partido como visi
 	$P_{v}(\star - a=2)=\dfrac{m(0)+m(1)}{\sum_{t=0}^{4}m(t)}$
 \end{center}
 
-La función memoria servirá para ponderar el resultado de cada equipo en función del tiempo que haya transcurrido desde el partido en cuestión. Por ejemplo, no tiene tanto valor la victoria de hace 5 partidos como tiene la derrota del último enfrentamiento.\\
+La función memoria servirá para ponderar el resultado de cada partido en función del tiempo que haya transcurrido desde que se disputó. Por ejemplo, no tiene tanto valor la victoria de hace 5 partidos como tiene la derrota del último enfrentamiento.\\
 
 Vamos a proponer tres funciones memoria distintas y en capítulos posteriores analizaremos cuál de las tres obtiene mejores resultados. 
 
 \newpage
 
 \begin{itemize}
-	\item Función constante: todos los resultados tienen el mismo valor. $Y=1$
+	\item Función constante: todos los resultados tienen el mismo valor, $Y=1$.
 	\begin{figure}[H]
 		\centering
 		\includegraphics[scale=0.7]{images/mem1.png}
 		\caption{Función memoria constante.} \label{fig:constante}
 	\end{figure}
 	
-	\item Función lineal: $Y=5-X$
+	\item Función lineal: $Y=5-X$.
 	\begin{figure}[H]
 		\centering
 		\includegraphics[scale=0.7]{images/mem2.png}
@@ -180,7 +178,7 @@ Vamos a proponer tres funciones memoria distintas y en capítulos posteriores an
 
 \newpage
 
-	\item Función exponencial: $Y=2^{-X}$
+	\item Función exponencial: $Y=2^{-X}$.
 	\begin{figure}[H]
 		\centering
 		\includegraphics[scale=0.7]{images/mem3.png}
@@ -188,9 +186,9 @@ Vamos a proponer tres funciones memoria distintas y en capítulos posteriores an
 	\end{figure}	
 \end{itemize}
 \ \\
-Para cada equipo tendremos dos probabilidades:\\
-$P_{l}(a - \star=1)$, $P_{l}(a - \star=X)$ y $P_{l}(a - \star=2)$ para los partidos como local \\
-$P_{v}(\star - a=1)$, $P_{v}(\star - a=X)$ y $P_{v}(\star - a=2)$ para los partidos como visitante\\
+Para cada equipo tendremos las siguientes probabilidades:\\
+$P_{l}(a - \star=1)$, $P_{l}(a - \star=X)$ y $P_{l}(a - \star=2)$ para los partidos como local, y \\
+$P_{v}(\star - a=1)$, $P_{v}(\star - a=X)$ y $P_{v}(\star - a=2)$ para los partidos como visitante.\\
 
 Para pronosticar el resultado del enfrentamiento $a-b$ debemos conjuntar $P_{l}(a - \star)$ con $P_{v}(\star - b)$ usando la siguiente tabla:
 
@@ -204,7 +202,7 @@ Para pronosticar el resultado del enfrentamiento $a-b$ debemos conjuntar $P_{l}(
 \end{tabular} 
 \end{center}
 
-En las tuplas de números de la tabla anterior, el primer número es el que usaremos para calcular $P_{s}(a-b=1)$, el segundo para $P_{s}(a-b=X)$ y el tercero para $P_{s}(a-b=2)$, dicho número es por el que tenemos que multiplicar el producto de las entradas.\\
+En las tuplas de números de la tabla anterior, el primer número es el que usaremos para calcular $P_{s}(a-b=1)$, el segundo para $P_{s}(a-b=X)$ y el tercero para $P_{s}(a-b=2)$. Dicho número es por el que tenemos que multiplicar el producto de las entradas.\\
 
 Por ejemplo, para calcular $P_{s}(a-b=1)$ la tabla que debemos usar es la compuesta por el primer elemento de cada tupla\\
 \[
@@ -219,18 +217,8 @@ de forma que
 	$P_{s}(a-b=1)=$\\
 	$1\cdotp P_{l}(a - \star=1)P_{v}(\star - b=1) + \frac{1}{2}\cdotp P_{l}(a - \star=X)P_{v}(\star - b=1) + \frac{1}{4}\cdotp P_{l}(a - \star=2)P_{v}(\star - b=1)+$\\ 
 	$\frac{1}{2}\cdotp P_{l}(a - \star=1)P_{v}(\star - b=X) + 0\cdotp P_{l}(a - \star=X)P_{v}(\star - b=X) + \frac{1}{6}\cdotp P_{l}(a - \star=2)P_{v}(\star - b=X)+$\\
-	$\frac{1}{4}\cdotp P_{l}(a - \star=1)P_{v}(\star - b=2) + \frac{1}{6}\cdotp P_{l}(a - \star=X)P_{v}(\star - b=2) + 0\cdotp P_{l}(a - \star=2)P_{v}(\star - b=2)\text{ } $ 
+	$\frac{1}{4}\cdotp P_{l}(a - \star=1)P_{v}(\star - b=2) + \frac{1}{6}\cdotp P_{l}(a - \star=X)P_{v}(\star - b=2) + 0\cdotp P_{l}(a - \star=2)P_{v}(\star - b=2)\text{ .} $ 
 \end{center}
-\ \\	
-Es decir, $P_{s}(a-b=1)= 
-\langle
-(P_{v}(\star - b=1),P_{v}(\star - b=X),P_{v}(\star - b=2)) A_{1}  
-\left(\begin{array}{c}
-P_{l}(a - \star=1)\\
-P_{l}(a - \star=X)\\
-P_{l}(a - \star=2)
-\end{array} \right)
-\rangle $\\
 
 Aplicaremos un razonamiento análogo para calcular $P_{s}(a-b=X)$ y $P_{s}(a-b=2)$.
 
@@ -243,4 +231,4 @@ Para conjugarlas usaremos una combinación convexa, tomamos $\lambda \in [0,1]$ 
 	$ P(a-b=X) = \lambda P_{r}(a-b=X) + (1-\lambda) P_{s}(a-b=X)$\\
 	$ P(a-b=2) = \lambda P_{r}(a-b=2) + (1-\lambda) P_{s}(a-b=2)$
 \end{center}
-Debiendo optimizar $\lambda$ para obtener el mejor resultado posible entrenándolo sobre el histórico de datos.
+debiendo optimizar $\lambda$ para obtener el mejor resultado posible entrenándolo sobre el histórico de datos.

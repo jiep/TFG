@@ -25,13 +25,11 @@
 \usepackage[T1]{fontenc}
 \usepackage{amsmath}
 \usepackage{kbordermatrix}
+\usepackage[colorlinks=true,linkcolor=black,urlcolor=black,citecolor=black]{hyperref}
 
 \setlength\parindent{0pt}
-
-% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
-\usepackage[colorlinks=true,linkcolor=black,urlcolor=black,citecolor=black]{hyperref}
-% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
-
+\def\labelitemi{$\diamondsuit$}
+\input{comandos}
 
 \newcommand*{\autores}{
 	\begin{tabular}{r}
@@ -39,25 +37,13 @@
 	\end{tabular}
 }
 
-
-% Incluye archivo para utilizar el comando \portada
 \include{portada}
 
-% Reinicia el contador a 1 en cada parte
-%\makeatletter
-%\@addtoreset{chapter}{part} 
-%\makeatother
-
-\input{comandos}
 
 \begin{document}
 	
 	\frontmatter
-		
-	% Portada
-	\portada{TFG}{Matemáticas}{Modelos predictivos en rankings}{\autores}{Móstoles}
-	% Fin Portada
-	
+	\portada{Modelos predictivos en rankings}{Trabajo Fin de Grado de Matemáticas}{\autores}{Esther García González \\ Miguel Romance del Río}{Móstoles}
 	\tableofcontents
 	\listoffigures
 	
@@ -77,56 +63,29 @@
 	
 	\backmatter
 	\begin{thebibliography}{X}
-		\bibitem{cap1} \textsc{A. N. Langville, C. D. Meyer},
+		\bibitem{libro_rankings} \textsc{A. N. Langville, C. D. Meyer},
 		\textit{Who's \#1? The science of rating and ranking}, 
-		Princeton University Press, Princeton, 2012. Chapter 1: \textit{Introduction to Ranking}.
-		\bibitem{cap2} \textsc{A. N. Langville, C. D. Meyer},
-		\textit{Who's \#1? The science of rating and ranking}, 
-		Princeton University Press, Princeton, 2012. Chapter 2: \textit{Massey's Method}.
-		\bibitem{cap3} \textsc{A. N. Langville, C. D. Meyer},
-		\textit{Who's \#1? The science of rating and ranking}, 
-		Princeton University Press, Princeton, 2012. Chapter 3: \textit{Colley's Method}.
-		\bibitem{cap4} \textsc{A. N. Langville, C. D. Meyer},
-		\textit{Who's \#1? The science of rating and ranking}, 
-		Princeton University Press, Princeton, 2012. Chapter 4: \textit{Keener's Method}.
-		\bibitem{cap7} \textsc{A. N. Langville, C. D. Meyer},
-		\textit{Who's \#1? The science of rating and ranking}, 
-		Princeton University Press, Princeton, 2012. Chapter 7: \textit{The Offense-Defense Rating Method}.		
-		\bibitem{otros_met} \textsc{A. N. Langville, C. D. Meyer},
-		\textit{Who's \#1? The science of rating and ranking}, 
-		Princeton University Press, Princeton, 2012. Chapters 5, 6 \& 8.			
-		\bibitem{perron} \textsc{C.D. Meyer},
+		Princeton University Press, Princeton, 2012.			
+		\bibitem{perron} \textsc{C. D. Meyer},
 		\textit{Matrix analysis and applied linear algebra}, 
-		SIAM, Philadelphia, 2000. Chapter 8: \textit{Perron-Frobenius Theory}.	
+		SIAM, Philadelphia, 2000. 
 		\bibitem{power_method}
 		Artículo sobre el método de la potencia en Wikipedia (Inglés). \url{https://en.wikipedia.org/wiki/Power_iteration}
-		\bibitem{cap13-14} \textsc{A. N. Langville, C. D. Meyer},
-		\textit{Who's \#1? The science of rating and ranking}, 
-		Princeton University Press, Princeton, 2012. Chapters 14 \& 15: \textit{Rank Aggregation parts 1 \& 2}.
 		\bibitem{refborda} \textsc{E. B. Burger, M. Starbird},
 		\textit{The Heart of Mathematics. An invitation to effective thinking}, 
-		Third Edition, John Wiley \& Sons, 2010. Chapter Nine: \textit{Deciding wisely}.		
-		\bibitem{refbilp} \textsc{K. E. Pedings, A. N. Langville, Yoshitsugu Yamamoto},
-		\textit{A Minimum Violations Ranking Method}, 
-		2009. Chapter 4: \textit{Theorem for the Relationship between the BILP and LP}.
-		\bibitem{cap16} \textsc{A. N. Langville, C. D. Meyer},
-		\textit{Who's \#1? The science of rating and ranking}, 
-		Princeton University Press, Princeton, 2012. Chapter 16: \textit{Methods of Comparison}.
-		\bibitem{refcomp} \textsc{R. Criado, E. García, F. Pedroche, M. Romance},
-		\textit{On graphs associated to sets of rankings}, 
-		2014. Chapter 2: \textit{Competitivity graphs}.
-		\bibitem{refpred1} \textsc{M. Spann, B. Skiera},
-		\textit{Sports forecasting: A comparison of the forecast accuracy of prediction markets, betting odds and tipsters}, 
-		John Wiley \& Sons, Ltd. 2008. 
-		\bibitem{refpred2} \textsc{T. Cheng, D. Cui, Z. Fan, J. Zhou, S. Lu},
-		\textit{A new model to forecast the results of matches based on hybrid neural networks in the soccer rating system}, 
-		2003. 
+		Third Edition, John Wiley \& Sons, 2010.		
+		\bibitem{refbilp} \textsc{K. E. Pedings, A. N. Langville, Y. Yamamoto}, ``A Minimum Violations Ranking Method'',
+		\textit{Optimization and Engineering}, Volume 13(2) (2012), 349-370.
+		\bibitem{refcomp} \textsc{R. Criado, E. García, F. Pedroche, M. Romance}, ``On graphs associated to sets of rankings'',
+		\textit{Journal of Computational and Applied Mathematics}, Volume 291 (2016), 497–508.
+		\bibitem{refpred1} \textsc{M. Spann, B. Skiera}, ``Sports forecasting: A comparison of the forecast accuracy of prediction markets, betting odds and tipsters'', \textit{Journal of Forecasting}, Volume 28 (2009), 55-72.
+		\bibitem{refpred2} \textsc{T. Cheng, D. Cui, Z. Fan, J. Zhou, S. Lu}, ``A new model to forecast the results of matches based on hybrid neural networks in the soccer rating system'', \textit{Computational Intelligence and Multimedia Applications} (2003), 308-313. 
 		\bibitem{refpred3} \textsc{G. Hiranandani, J. Shitole, N. Kundu, N. Maurya, R. Grover},
-		\textit{Forecasting Indian Premier League Results Using Time Series Analysis}, 
+		"Forecasting Indian Premier League Results Using Time Series Analysis", 
 		2013. 	
 		\bibitem{refpuentes}
 		Artículo sobre el problema de los puentes de Königsberg en Wikipedia (Castellano). \url{https://es.wikipedia.org/wiki/Problema_de_los_puentes_de_Konigsberg}
-		\bibitem{librografos} \textsc{W. Kocay, D.L. Kreher},
+		\bibitem{librografos} \textsc{W. Kocay, D. L. Kreher},
 		\textit{Graphs, algorithms, and optimization}, 
 		Chapman and Hall/CRC, 2004.
 	\end{thebibliography}
