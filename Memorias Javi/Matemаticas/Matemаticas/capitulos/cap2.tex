@@ -1,12 +1,12 @@
-\chapter{Conceptos sobre Rankings}
-En este capítulo explicaremos todos los conceptos y herramientas necesarios relativos a rankings. Comenzaremos diferenciando los dos conceptos alrededor de los cuales girará todo el capítulo: ranking y rating. Una vez explicado qué es un ranking y qué un rating, veremos cuatro métodos para poder generarlos a partir de diferentes estadísticas: el de Massey, el de Colley, el de Keener y el de ataque-defensa. Una vez que sepamos cómo crear varios rankings a partir de los métodos antes vistos, podemos combinarlos para generar super-rankings más robustos. Es lo que llamaremos agregación de rankings y veremos tres métodos distintos para hacerlo. En la cuarta parte del capítulo estudiaremos distintas herramientas para realizar comparaciones entre rankings y ver el grado de concordancia entre ellos. Para terminar el capítulo haremos un estudio de cómo los ítems van intercambiando sus posiciones en los rankings, introduciendo el término competitividad con su correspondiente representación en los grafos de competitividad. 
+\chapter{Conceptos sobre rankings}
+En este capítulo explicaremos algunos de los conceptos y herramientas matemáticas más importantes relativos a rankings. Comenzaremos diferenciando los dos conceptos alrededor de los cuales girará todo el capítulo: ranking y rating. Una vez explicado qué es un ranking y qué un rating, veremos cuatro métodos para poder generarlos a partir de diferentes estadísticas: el de Massey, el de Colley, el de Keener y el de ataque-defensa. Una vez que sepamos cómo crear varios rankings a partir de los métodos antes vistos, podemos combinarlos para generar super-rankings más robustos. Es lo que llamaremos agregación de rankings y veremos tres métodos distintos para hacerlo. En la cuarta parte del capítulo estudiaremos distintas herramientas para realizar comparaciones entre rankings y ver el grado de concordancia entre ellos. Para terminar el capítulo haremos un estudio de cómo los ítems van intercambiando sus posiciones en los rankings, introduciendo el término competitividad con su correspondiente representación en los grafos de competitividad. 
 
 \section{Rankings vs Ratings}
-A menudo se utilizan ambos términos de forma indistinta, sin embargo, hay claras diferencias entre ellos, \cite[Chapter 1]{libro_rankings}
+A menudo se utilizan ambos términos de forma indistinta, sin embargo, hay claras diferencias entre ellos \cite[Chapter 1]{libro_rankings}.
 
 \subsection{Rankings}
 \begin{defi} 
-	Un \textbf{ranking} de tamaño n es una permutación de números naturales desde 1 hasta n, es decir, se trata de una biyección $r: \xi \rightarrow \xi$ donde $\xi = \{1,...,n\}$ es el conjunto de elementos a ordenar.
+	Un \textbf{ranking} de tamaño n es una permutación de números naturales desde 1 hasta n, es decir, se trata de una biyección $r: \xi \rightarrow \xi$ donde $\xi = \{1,...,n\}$ con $n \in \mathbb{N}$ es el conjunto de elementos a ordenar.
 \end{defi}
 A partir de ahora los veremos representados como un vector columna en el que cada posición del vector (que coincidirá con alguno de los elementos que queremos ordenar) se corresponderá con un número natural que indica la posición que ocupa dicho elemento en el ranking. 
  
@@ -67,11 +67,11 @@ Si $e$ es un elemento del conjunto a ordenar, $r(e)$ es la posición que ocupa e
 
 \subsection{Ratings}
 \begin{defi} 
-	Un \textbf{rating} es una lista de puntuaciones numéricas, una por cada elemento, es decir, $\tilde{r}: \xi \rightarrow \mathbb{R}$ donde $\xi = \{1,...,n\}$ es el conjunto de todos los elementos.
+	Un \textbf{rating} es una lista de puntuaciones numéricas, una por cada elemento, es decir, $\tilde{r}: \xi \rightarrow \mathbb{R}$ donde $\xi = \{1,...,n\}$ con $n \in \mathbb{N}$ es el conjunto de todos los elementos.
 \end{defi}
 Se representan de forma análoga a los rankings, cada elemento se corresponderá con una puntuación (partidos ganados, perdidos o empatados, puntos a favor o en contra, porcentajes, etc).\\
 
-Ordenando un rating, siempre se obtiene un ranking, pero no a la inversa. Por ejemplo, el ranking del ejemplo \ref{ejem1} es el obtenido a partir del rating del ejemplo \ref{ejem2}.
+Ordenando un rating, siempre se obtiene un ranking, pero a partir de un ranking no podemos recuperar el rating original. Por ejemplo, el ranking del ejemplo \ref{ejem1} es el obtenido a partir del rating del ejemplo \ref{ejem2}.
 
 \newpage  
  
@@ -196,15 +196,15 @@ Este método fue propuesto por Kenneth Massey en 1997 y está basado en la teor�
 
 La idea principal se puede resumir en la siguiente ecuación: 
 \begin{equation}
-	r_{i}-r_{j} = y_{k}
+	r_{i}-r_{j} = y_{k},
 \end{equation}
-donde $y_{k}$ es el margen de victoria para el enfrentamiento entre los equipos $i$ y $j$, y $r_{i}$ y $r_{j}$ son los ratings del equipo $i$ y $j$ respectivamente. O lo que es lo mismo, la diferencia entre los ratings del equipo $i$ y $j$ nos permite predecir cuál será el margen de victoria en el enfrentamiento entre los equipos $i$ y $j$.\\
+donde $r_{i}$ y $r_{j}$ son los ratings de los equipos $i$ y $j$ respectivamente, que debemos calcular,  y donde $y_{k} =$ número de puntos del equipo $i$ - número de puntos del equipo $j$ para el enfrentamiento $k$.\\
 
-Para una liga de $n$ equipos en la que se han disputado $m$ partidos hasta la fecha, debemos hallar un rating $r_{i}$ para cada uno de los equipos. De cada partido conocemos quiénes se enfrentaron y cuál fue el margen de victoria, de forma que podemos generar un sistema lineal con $m$ ecuaciones y $n$ incógnitas 
+Para una liga de $n$ equipos en la que se han disputado $m$ partidos hasta la fecha, debemos hallar un rating $r_{i}$ para cada uno de los equipos. De cada partido conocemos quiénes se enfrentaron y cuál fue la diferencia de puntos, de forma que podemos generar un sistema lineal con $m$ ecuaciones y $n$ incógnitas 
 \begin{equation}\label{massey_ini}
-	Xr=y
+	Xr=y,
 \end{equation}
-donde las filas de la matriz $X$ son casi todas nulas con excepción de la posición $i$ que toma el valor $1$ y la $j$ que toma el $-1$, $r$ es el vector de ratings a calcular y $y$ es el vector con los márgenes de victoria de los partidos.\\
+donde las filas de la matriz $X$ son casi todas nulas con excepción de la posición $i$ que toma el valor $1$ y la $j$ que toma el $-1$, $r$ es el vector de ratings a calcular y $y$ es el vector con la diferencia de puntos de los partidos.\\
 
 Normalmente $m > > n$, por lo que el sistema (\ref{massey_ini}) es incompatible. Para hallar una solución podemos aplicar mínimos cuadrados y llegar al sistema $X^{T}Xr=X^{T}y$. Renombrando,\\ $M=X^{T}X$ y $p=X^{T}y$ llegamos al siguiente sistema:
 \begin{equation}
@@ -213,10 +213,11 @@ Normalmente $m > > n$, por lo que el sistema (\ref{massey_ini}) es incompatible.
 donde 
 \begin{center}
 	\begin{tabular}{ccc}
-	\hline $M_{nxn}$ & & $M_{ii}$ = nº de partidos jugados por el equipo $i$, \\
-	& & $M_{ij, i \neq j}$ = - nº de enfrentamientos entre los equipos $i$ y $j$,\\ 
-	\hline  $r_{nx1}$ & & vector de ratings a calcular, \\ 
-	\hline  $p_{nx1}$ & & vector con la suma de las diferencias de puntos.\\ 
+	\hline  $M_{n\times n}$ & & $M_{ij}=\begin{cases}
+		\text{nº de partidos jugados por el equipo $i$ si $i=j$,} \\ 
+		\text{- nº de enfrentamientos entre los equipos $i$ y $j$ si $i\neq j$,}\end{cases}$ \\
+	\hline  $r_{n\times1}$ & & vector de ratings a calcular, \\ 
+	\hline  $p_{n\times1}$ & & vector con la suma de las diferencias de puntos.\\ 
 	\hline 
 \end{tabular}
 \end{center} 
@@ -368,7 +369,7 @@ Existe una forma avanzada del método de Massey que consiste en crear dos nuevos
 \subsection{Método de Colley}
 Este método fue propuesto por Wesley Colley en 2001 y está basado en el porcentaje de victorias:\\
 \begin{equation} \label{eq_colley1}
-	r_{i} = \dfrac{w_{i}}{t_{i}}
+	r_{i} = \dfrac{w_{i}}{t_{i}},
 \end{equation}
 donde $w_{i}$ es el número de victorias y $t_{i}$ el número total de partidos disputados.\\
 \\
@@ -378,9 +379,9 @@ Los problemas de basarse en la ecuación (\ref{eq_colley1}) son:
 	\item Vencer a un equipo fuerte computa igual que vencer a un equipo débil.
 	\item Se pueden obtener resultados extraños como que todos los equipos tengan al principio porcentajes de $\frac{0}{0}$ o que tras la primera jornada haya equipos con un porcentaje de 0.  
 \end{itemize}
-Para superarlos, Colley propone la siguiente ecuación basada en la regla de sucesión de Laplace:
+Para superarlos, Colley propone la siguiente ecuación basada en la regla de sucesión de Laplace\cite{laplace}:
 \begin{equation} \label{eq2.5}
-	r_{i} = \dfrac{1+w_{i}}{2+t_{i}}
+	r_{i} = \dfrac{1+w_{i}}{2+t_{i}},
 \end{equation}
 de forma que todos los equipos comienzan con $r=\frac{1}{2}$ (que a medida que avanza la temporada irá variando por encima y por debajo de dicho valor) y los que pierdan el primer partido no tendrán un porcentaje de 0. Además, el rating de un equipo $i$ tendrá una conexión con los de sus oponentes. Cuando el porcentaje de un equipo suba el de otro debe bajar.\\
 
@@ -400,9 +401,9 @@ A medida que avanza la temporada $\sum\limits_{j=1}^{t_{i}} \frac{1}{2} $ no es 
 
 \newpage
 
-Si la insertamos en la ecuación (\ref{eq2.5}) obtenemos:
+Si insertamos esta aproximación en la ecuación (\ref{eq2.5}) obtenemos:
 \begin{equation}
-	r_{i} = \dfrac{1+\dfrac{w_{i}-l_{i}}{2} + \sum\limits_{j \in O_{i}} r_{j}}{2+t_{i}} \ .
+	r_{i} = \dfrac{1}{2+t_{i}} \left(1+\dfrac{w_{i}-l_{i}}{2} + \sum\limits_{j \in O_{i}} r_{j}\right) \ .
 \end{equation}
 
 Como podemos ver, el cálculo de $r_{i}$ depende de los $r_{j}$, es decir, Colley incorpora la fuerza de los oponentes para calcular los ratings de los equipos.\\
@@ -415,10 +416,11 @@ De forma matricial, la ecuación de Colley la podemos expresar como:
 donde
 \begin{center}
 	\begin{tabular}{ccc}
-		\hline $C_{nxn}$ & & $C_{ii} = 2 + t_{i}$,  \\
-		& & $C_{ij, i \neq j}$ = - nº de enfrentamientos entre los equipos $i$ y $j$,\\ 
-		\hline  $r_{nx1}$ & & vector de ratings a calcular, \\ 
-		\hline  $b_{nx1}$ & & vector definido por $b_{i}=1+\frac{1}{2}(w_{i}-l_{i})$.\\ 
+		\hline $C_{n\times n}$ & & $C_{ij}=\begin{cases}
+		2 + t_{i} \text{ si $i=j$,} \\ 
+		\text{- nº de enfrentamientos entre los equipos $i$ y $j$ si $i\neq j$,}\end{cases}$\\
+		\hline  $r_{n\times1}$ & & vector de ratings a calcular, \\ 
+		\hline  $b_{n\times1}$ & & vector definido por $b_{i}=1+\frac{1}{2}(w_{i}-l_{i})$.\\ 
 		\hline 
 	\end{tabular}
 \end{center} 
@@ -569,13 +571,14 @@ Esto lo podemos observar claramente comparando los resultados de los rankings ob
 James P. Keener lo propuso en 1993 y se basa en el uso de estadísticas no negativas de los resultados de enfrentamientos entre dos equipos para obtener un rating numérico de cada uno de ellos. El método se basa en las siguientes dos condiciones:
 \begin{itemize}
 	\item La fuerza de un equipo viene dada por la interacción con sus oponentes junto con la fuerza de cada uno de ellos. 
-	\item El rating de cada equipo debe ser uniformemente proporcional a la fuerza del equipo. Si $s_{i}$ y $r_{i}$ son respectivamente la fuerza y el rating del equipo $i$, debe existir una constante $\lambda$ tal que $s_{i}= \lambda r_{i}$ que tendrá el mismo valor para todos los equipos. 
+	\item El rating de cada equipo debe ser directamente proporcional a la fuerza del equipo. Si $s_{i}$ y $r_{i}$ son respectivamente la fuerza y el rating del equipo $i$, debe existir una constante $\lambda$ tal que $s_{i}= \lambda r_{i}$ que tendrá el mismo valor para todos los equipos. 
 \end{itemize}
+Para poder modelar matemáticamente estas condiciones, seguimos el siguiente procedimiento:
 
 \subsubsection*{\underline{Pasos previos}}
-Debemos comenzar eligiendo el atributo de la competición que consideremos que puede ser una buena base para hacer una comparación entre equipos, por ejemplo, número de veces que $i$ ha derrotado a $j$, puntos que $i$ ha marcado a $j$, número de triples marcados por $i$ a $j$, número de yardas que $i$ ha recorrido enfrentándose a $j$, etc. Se pueden crear varios esquemas teniendo en cuenta distintos criterios para la misma temporada y posteriormente agregarlos como explicaremos en la sección 3 de este capítulo.
+Debemos comenzar eligiendo el atributo de la competición que consideremos que puede ser una buena base para hacer una comparación entre equipos, por ejemplo, número de veces que $i$ ha derrotado a $j$, puntos que $i$ ha marcado a $j$, número de triples marcados por $i$ a $j$, número de yardas que $i$ ha recorrido enfrentándose a $j$, etc. Se pueden crear varios esquemas teniendo en cuenta distintos criterios para la misma temporada y posteriormente agregarlos como explicaremos en la sección 3 de este capítulo. De esta forma tenemos definido para los equipos $i$ y $j$ su valor $a_{ij} \in \mathbb{R}$ dado por 
 \begin{center}
-	$a_{ij} = \text{valor de la estadística elegida del equipo }i \text{ frente al equipo } j$
+	$a_{ij} = \text{valor de la estadística elegida del equipo }i \text{ frente al equipo } j$.
 \end{center}
 Los $a_{ij}$ siempre deben tener valores no negativos.\\
 
@@ -583,20 +586,20 @@ Imaginemos que elegimos como atributo $s_{ij}$, que es el número de puntos que 
 \begin{equation}
 a_{ij} = \dfrac{s_{ij}}{s_{ij}+s_{ji}} \ . 
 \end{equation}
-Podemos interpretar los $a_{ij}$ como la probabilidad de que $i$ derrote a $j$ en su próximo enfrentamiento y es poco realista que podamos obtener como resultado $a_{ij}=0$ y $a_{ji}=1$, ya que esto supondría que es imposible que $i$ derrote a $j$. Por ello vamos a aplicar la regla de sucesión de Laplace que ya usamos en el Método de Colley para pasar de (\ref{eq_colley1}) a (\ref{eq2.5}):
+Podemos interpretar los $a_{ij}$ como la probabilidad de que $i$ derrote a $j$ en su próximo enfrentamiento y es poco realista que podamos obtener como resultado $a_{ij}=0$ y $a_{ji}=1$, ya que esto supondría que es imposible que $i$ derrote a $j$. Por ello vamos a aplicar la regla de sucesión de Laplace \cite{laplace} que ya usamos en el Método de Colley para pasar de (\ref{eq_colley1}) a (\ref{eq2.5}):
 \begin{equation}
 a_{ij} = \dfrac{s_{ij}+1}{s_{ij}+s_{ji}+2} \ . \label{formejem6}
 \end{equation}
 A pesar de todo, la balanza podría seguir desequilibrada debido a que equipos fuertes aumentan sus puntuaciones frente a los más débiles. Por eso conviene utilizar funciones de skewing no lineales \cite[págs 31-32]{libro_rankings} como:
 \begin{equation}
-h(x) = \frac{1}{2} + \dfrac{sgn\{x-\frac{1}{2}\} \sqrt{|2x-1|}}{2} 
+h(x) = \frac{1}{2} + \dfrac{sgn\{x-\frac{1}{2}\} \sqrt{|2x-1|}}{2}, 
 \end{equation} 
 donde \textit{sgn(x)} es la función signo definida como:
 \begin{equation*}
 sgn(x) = \begin{cases}
-1 & \text{ si } x>0\\
-0 & \text{ si } x=0 \ .\\ 
--1 & \text{ si } x<0 
+1 & \text{ si } x>0,\\
+0 & \text{ si } x=0,\\ 
+-1 & \text{ si } x<0. 
 \end{cases}
 \end{equation*}
 
@@ -604,7 +607,7 @@ sgn(x) = \begin{cases}
 \begin{figure}[htb]
 	\centering
 	\includegraphics{images/funcion_keener.png}
-	\caption{Gráfico de la función $h(x)$.} \label{fig:func_skew}
+	\caption{Gráfico de la función de skewing no lineal.} \label{fig:func_skew}
 \end{figure}
 
 En el caso de que no todos los equipos hubieran jugado el mismo número de partidos habría que normalizar los datos.\\
@@ -613,7 +616,7 @@ Teniendo en cuenta todo lo anterior ya podemos crear la matriz $A$ compuesta por
 
 \subsubsection*{\underline{Planteamiento del problema de autovalores y autovectores}}
 \begin{defi} 
-	La \textbf{fuerza relativa} de un equipo $i$ comparada con $j$ viene dada por
+	Dado $r_{j}$ rating del equipo $j$, la \textbf{fuerza relativa} de un equipo $i$ comparada con $j$ viene dada por
 	\begin{equation}
 		s_{ij} = a_{ij}r_{j} \ .
 	\end{equation}
@@ -657,9 +660,8 @@ Ar= \lambda r.
 \end{equation}
 En términos de álgebra lineal el vector de ratings $r$ debe ser un autovector y la constante $\lambda$ debe ser el autovalor asociado. Resolver el problema de autovalores y autovectores puede parecer sencillo pero pueden surgir varios problemas:
 \begin{itemize}
-	\item Para una matriz $m$x$m$ podemos tener $m$ valores distintos para $\lambda$. ¿Cuál elegimos sabiendo que el valor elegido afectará a todo el rating?
-	\item Podemos obtener valores complejos de $\lambda$ que no podríamos comparar.
-	\item También podemos obtener valores negativos tanto de $\lambda$ como del vector $r$.
+	\item Para una matriz $m\times m$ podemos tener hasta $m$ valores distintos para $\lambda$. ¿Cuál elegimos sabiendo que el valor elegido afectará a todo el rating?
+	\item Podemos obtener valores negativos del vector $r$.
 	\item Calcular los autovalores y autovectores no es un problema sencillo computacionalmente y se necesita software especializado.
 \end{itemize}
 
@@ -681,26 +683,26 @@ Se puede forzar a que la matriz $A$ cumpla II y III haciendo unas pequeñas pert
 \begin{itemize}
 	\item Para forzar a que sea irreducible aplicamos la siguiente perturbación:
 	\begin{equation*}
-	A \leftarrow A + \epsilon e e^{T}
+	A \leftarrow A + \varepsilon e e^{T}
 	\end{equation*}
-	donde $e$ es una columna de todo 1s y $\epsilon>0$ es un valor relativamente pequeño respecto al valor más pequeño distinto de cero de la matriz original $A$.\\ 
+	donde $e$ es una columna de todo 1s y $\varepsilon>0$ es un valor relativamente pequeño respecto al valor más pequeño distinto de cero de la matriz original $A$.\\ 
 	\item Si la matriz ya es irreducible, para que sea primitiva aplicamos una perturbación similar a la anterior, simulando un enfrentamiento de un equipo consigo mismo, es decir, solo tenemos que perturbar la diagonal principal de $A$.
 	\begin{equation*}
-	A \leftarrow A + \epsilon e e^{T}
+	A \leftarrow A + \varepsilon e e^{T}
 	\end{equation*}
-	donde $e^{T} = \left( 0,0,...,0,1,0,...,0 \right) $ y $\epsilon>0$ es un valor relativamente pequeño respecto al valor más pequeño distinto de cero de la matriz original $A$.\\
+	donde $e^{T} = \left( 0,0,...,0,1,0,...,0 \right) $ y $\varepsilon>0$ es un valor relativamente pequeño respecto al valor más pequeño distinto de cero de la matriz original $A$.\\
 \end{itemize}
 
 \subsubsection*{\underline{Resolución del problema}}
 Imponiendo las restricciones I y II descritas antes, podemos usar la teoría de Perron-Frobenius \cite[pág 36]{libro_rankings} \cite[Chapter 8]{perron} para obtener un vector de ratings único para la ecuación (\ref{eqkeener2}).\\
 
-Vamos a explicar cómo se calcularía aplicando el método de la potencia, que se basa en el hecho de que cuando $k$ aumenta, las potencias $A^{k}$ de $A$ aplicada a cualquier vector positivo $x_{0}$ hace que el producto $A^{k} x_{0}$ tienda hacia el vector $r$.
+Vamos a explicar cómo se calcularía aplicando el \textbf{método de las potencias}, que se basa en el hecho de que cuando $k$ aumenta, las potencias $A^{k}$ de $A$ aplicada a cualquier vector positivo $x_{0}$ hace que el producto $A^{k} x_{0}$ tienda hacia el vector $r$.
 
 \begin{equation}
 r = \lim\limits_{k \rightarrow \infty}\dfrac{A^{k} x_{0}}{\sum_{i=1}^{m}A^{k} x_{0}} 
 \end{equation}
  
-El cálculo del vector $r$ por el método de la potencia se realiza de la siguiente manera.\\
+El cálculo del vector $r$ por el método de las potencias se realiza de la siguiente manera.\\
 Primero seleccionamos un vector $x_{0}$ inicial con el que comenzar el proceso. Por ejemplo,\\
 \begin{equation*}
 x_{0} = 
@@ -795,7 +797,7 @@ El esquema del algoritmo puede ser encontrado en \cite{power_method}.
 	
 	$\blacksquare $ La matriz es primitiva y, por tanto, irreducible, ya que tenemos resultados para todos los pares de equipos, por lo que no necesitamos aplicar ninguna perturbación.\\
 	
-	$\blacksquare $ Ya podemos aplicar el método de la potencia.\\
+	$\blacksquare $ Ya podemos aplicar el método de las potencias.\\
 	
 	
 	Seleccionamos el vector inicial.
@@ -921,7 +923,7 @@ El esquema del algoritmo puede ser encontrado en \cite{power_method}.
 	\end{array}
 	\end{equation*}
 	
-	Paramos el refinamiento en $x_{3}$. El valor de $\lambda = 8.5653$.
+	Paramos el refinamiento en $x_{3}$, el rating obtenido y el ranking resultante al ordenarlo son:
 	
 	\[r=
 	\begin{array}{ccc}
@@ -989,11 +991,11 @@ El esquema del algoritmo puede ser encontrado en \cite{power_method}.
 
 
 \subsection{Método de ataque-defensa}
-Al que también nos referiremos en adelante como el método ``O-D'' de la traducción del inglés ``Offense-Defense Method''. El objetivo es asignar a cada equipo un rating de ataque $ o_{i} $ y un rating de defensa $d_{i}$ a partir de las estadísticas acumuladas de los partidos. Para aplicarlo vamos a tener en cuenta las puntuaciones a favor y en contra de los enfrentamientos.\\
+Al que también nos referiremos en adelante como el método ``O-D'' de la traducción del inglés ``Offense-Defense Method''. El objetivo es asignar a cada equipo un rating de ataque $ o_{i} $ y un rating de defensa $d_{i}$ a partir de las estadísticas acumuladas de los partidos. Para aplicarlo vamos a tener en cuenta las puntuaciones a favor y en contra en los enfrentamientos.\\
 
 Un equipo será bueno atacando cuando marque muchos puntos a sus oponentes, en especial a los contrincantes con una buena defensa. Por el contrario, un equipo será bueno defensivamente cuando consiga que sus rivales, en especial los que son buenos en ataque, consigan puntuaciones bajas. Ambos conceptos están fuertemente entrelazados, es decir, existe una función $f$ que relaciona cada rating defensivo con todos los de ataque y una función $g$ que relaciona cada rating de ataque con todos los ratings defensivos.\\
 
-Vamos a construir nuestra matriz de resultados $A$ donde cada $a_{ij}$ es la puntuación que el equipo $j$ marca a su rival $i$. Esto se puede interpretar como un indicador de ataque para el equipo $j$ y como un indicador de defensa para el equipo $i$. De forma que, si tenemos $m$ equipos, las funciones $f$ y $g$ que relacionan ambos conceptos quedarían así definidas: 
+Vamos a construir nuestra matriz de resultados $A=(a_{ij})$ donde cada $a_{ij}$ es la puntuación que el equipo $j$ marca a su rival $i$. Esto se puede interpretar como un indicador de ataque para el equipo $j$ y como un indicador de defensa para el equipo $i$. De forma que, si tenemos $m$ equipos, las funciones $f$ y $g$ que relacionan ambos conceptos quedarían así definidas: 
 \begin{itemize}
 	\item El rating de ataque del equipo $j$ es:
 	\begin{equation}
@@ -1008,11 +1010,24 @@ Vamos a construir nuestra matriz de resultados $A$ donde cada $a_{ij}$ es la pun
 \end{itemize}
 
 Se tendrá un mejor ataque cuanto mayor sea $o_{j}$ y una mejor defensa cuanto menor sea $d_{i}$.\\
-Aplicando las fórmulas anteriores, conseguir muchos puntos frente a equipos con una baja defensa no aumentará de forma considerable el valor total del rating de ataque, pero si lo hace frente a un equipo con una buena defensa, el denominador es relativamente pequeño, lo que incrementará el valor final del rating de ataque. De forme similar ocurre con el rating defensivo, hacer que equipos buenos atacando consigan puntuaciones bajas tendrá mayor valor que contra equipos débiles en ataque.\\
+Aplicando las fórmulas anteriores, conseguir muchos puntos frente a equipos con una baja defensa no aumentará de forma considerable el valor total del rating de ataque, pero si lo hace frente a un equipo con una buena defensa, el denominador es relativamente pequeño, lo que incrementará el valor final del rating de ataque. De forma similar ocurre con el rating defensivo, hacer que equipos buenos atacando consigan puntuaciones bajas tendrá mayor valor que contra equipos débiles en ataque.\\
 
-Para calcular los ratings $o$ y $d$, debemos comenzar inicializando uno de ellos, por ejemplo, el defensivo con valores positivos arbitrarios
-
-\[d_{0}=
+Para calcular los ratings $O$ y $D$, donde
+\begin{center}
+	$O=\left(\begin{array}{c}
+o_{1}\\
+o_{2}\\
+\vdots \\
+o_{m}
+\end{array} \right)$ y $D=\left(\begin{array}{c}
+d_{1}\\
+d_{2}\\
+\vdots \\
+d_{m}
+\end{array} \right)$,
+\end{center}
+debemos comenzar inicializando uno de ellos, por ejemplo el defensivo, con valores positivos arbitrarios
+\[D_{0}=
 \left(\begin{array}{c}
 1\\
 1\\
@@ -1021,24 +1036,24 @@ Para calcular los ratings $o$ y $d$, debemos comenzar inicializando uno de ellos
 \end{array} \right).
 \]
 
-A partir de $d_{0}$ podemos calcular $o_{1}$ usando (\ref{ofens}). Posteriormente podemos usar los valores obtenidos de $o_{1}$ para calcular valores más exactos de la defensa y hallar $d_{1}$ aplicando (\ref{defens}).\\
-Repitiendo sucesivamente este proceso generamos dos secuencias de vectores $\{d_{0},d_{1},\dots\}$ y $\{o_{1},o_{2},\dots\}$. Si las secuencias convergen, tendremos los vectores de ratings de ataque y defensa para los $m$ equipos.
+A partir de $D_{0}$ podemos calcular $O_{1}$ usando (\ref{ofens}). Posteriormente podemos usar los valores obtenidos de $O_{1}$ para calcular valores más exactos de la defensa y hallar $D_{1}$ aplicando (\ref{defens}).\\
+Repitiendo sucesivamente este proceso generamos dos secuencias de vectores $\{D_{0},D_{1},\dots\}$ y $\{O_{1},O_{2},\dots\}$. Si las secuencias convergen, tendremos los vectores de ratings de ataque y defensa para los $m$ equipos.
  
 \begin{center}
 	$
-\lim\limits_{k \rightarrow \infty} d_{k} = d = \left(\begin{array}{c}
-d_{e1}\\
-d_{e2}\\
+\lim\limits_{k \rightarrow \infty} D_{k} = D = \left(\begin{array}{c}
+d_{1}\\
+d_{2}\\
 \vdots \\
-d_{em}
+d_{m}
 \end{array} \right)$      
 \ \ \ \ \ \ \ \ \ \ \ \ \
 $
-\lim\limits_{k \rightarrow \infty} o_{k} = o = \left(\begin{array}{c}
-o_{e1}\\
-o_{e2}\\
+\lim\limits_{k \rightarrow \infty} O_{k} = O = \left(\begin{array}{c}
+o_{1}\\
+o_{2}\\
 \vdots \\
-o_{em}
+o_{m}
 \end{array} \right)$
 \end{center}
  
@@ -1046,56 +1061,43 @@ o_{em}
 Matricialmente el problema a resolver queda
 
 \begin{equation}
-o_{k} = A^{T} d_{k-1}^{\div} \label{ataq}
+O_{k} = A^{T} D_{k-1}^{\div} \label{ataq}
 \end{equation}
 \begin{equation}
-d_{k} = A o_{k}^{\div} \label{defen}
+D_{k} = A O_{k}^{\div} \label{defen}
 \end{equation}
 para $k=1,2,3,\dots$ donde
 \begin{center}
 	\begin{tabular}{ccc}
-		\hline  $o_{n\text{x}1}$ & & vector de ratings de ataque a calcular, \\
-		\hline  $d_{n\text{x}1}$ & & vector de ratings de defensa a calcular, \\
-		\hline $A_{m\text{x}m}=[a_{ij}]$ & & $a_{ij}=\text{puntuación que marca } j \text{ a } i$,  \\ 
-		\hline  $o_{n\text{x}1}^{\div}$ & & vector de inversos de $o = 		\left(\begin{array}{c}
-		1/o_{e1}\\
-		1/o_{e2}\\
+		\hline  $O_{n\times1}$ & & vector de ratings de ataque a calcular, \\
+		\hline  $D_{n\times1}$ & & vector de ratings de defensa a calcular, \\
+		\hline $A_{m\times m}=(a_{ij})$ & & $a_{ij}=\text{puntuación que marca } j \text{ a } i$,  \\ 
+		\hline  $O_{n\times1}^{\div}$ & & vector de inversos de $O = 		\left(\begin{array}{c}
+		1/o_{1}\\
+		1/o_{2}\\
 		\vdots \\
-		1/o_{em}
+		1/o_{m}
 		\end{array} \right)$, \\
-		\hline  $d_{n\text{x}1}^{\div}$ & & vector de inversos de $d = 		\left(\begin{array}{c}
-		1/d_{e1}\\
-		1/d_{e2}\\
+		\hline  $D_{n\times1}^{\div}$ & & vector de inversos de $D = 		\left(\begin{array}{c}
+		1/d_{1}\\
+		1/d_{2}\\
 		\vdots \\
-		1/d_{em}
+		1/d_{m}
 		\end{array} \right)$, \\
 		\hline 
 	\end{tabular}
 \end{center} 
 
-empezando con
-$d_{0}=
-\left(\begin{array}{c}
-1\\
-1\\
-\vdots \\
-1
-\end{array} \right) $.
-\ \\
-\ \\
-\ \\
-\ \\
+inicializando con valores positivos arbitrarios alguno de ellos, por ejemplo, $D_{0}$.\\
+
 Una vez hemos obtenido $o$ y $d$ para cada equipo, podemos combinar ambos en un solo rating haciendo para cada $i$
 \begin{equation}
 r_{i}= \dfrac{o_{i}}{d_{i}} \label{ODr} \ .
 \end{equation}
 \ \\
+Hablaremos más detalladamente sobre cómo agregar rankings en la sección 2.3.\\
 
-Puede ocurrir que $o$ y $d$ no existan porque las secuencias no llegan a converger. En \cite[págs 87-90]{libro_rankings} podemos encontrar un análisis completo del teorema que nos va a decir cuando los vectores van a converger y cuando no basándose en el Teorema de Sinkhorn-Knopp.
-\begin{teo}
-	Las secuencias (\ref{ataq}) y (\ref{defen}) convergen a los vectores $o$ y $d$ respectivamente si y solo si todos los valores positivos de $A$ se encuentran en alguna diagonal positiva, es decir, si A tiene soporte total. 
-\end{teo}
-Podemos encontrar la demostración en \cite[págs 90-91]{libro_rankings}.\\
+Puede ocurrir que $O$ y $D$ no existan porque las secuencias no llegan a converger. En \cite[págs 87-91]{libro_rankings} podemos encontrar un análisis completo del teorema que nos va a decir cuando los vectores van a converger y cuando no basándose en el Teorema de Sinkhorn-Knopp.
     
 \begin{ejem} Vamos a aplicar el método de ataque-defensa a nuestro ejemplo.\\
 \end{ejem}	
@@ -1125,7 +1127,7 @@ Podemos encontrar la demostración en \cite[págs 90-91]{libro_rankings}.\\
 	
 	Seleccionamos el vector inicial:
 	\begin{equation*}
-		d_{0} = 
+		D_{0} = 
 		\left( \begin{array}{c}
 			1\\
 			1\\
@@ -1133,9 +1135,9 @@ Podemos encontrar la demostración en \cite[págs 90-91]{libro_rankings}.\\
 			1
 		\end{array}\right) 
 	\end{equation*}
-	Aplicando (\ref{ataq}) y (\ref{defen}), los vectores $o$ y $d$ no tardan en converger y aplicando solo 3 iteraciones del proceso hallamos los valores para los ratings:
+	Aplicando (\ref{ataq}) y (\ref{defen}), los vectores $O$ y $D$ no tardan en converger y aplicando solo 3 iteraciones del proceso hallamos los valores para los ratings:
 	
-	\[o=
+	\[O=
 	\begin{array}{ccc}
 	\left(\begin{array}{c}
 				1271.9\\
@@ -1199,7 +1201,7 @@ Podemos encontrar la demostración en \cite[págs 90-91]{libro_rankings}.\\
 	\]
 	
 	
-	\[d=
+	\[D=
 	\begin{array}{ccc}
 	\left(\begin{array}{c}
 	1.0406\\
@@ -1432,9 +1434,9 @@ A modo de resumen y de cara a las siguientes secciones vamos a mostrar todos los
 \end{equation*}
 
 \section{Agregación de rankings}
-En la sección 2.2.4. vimos cómo combinar dos ratings distintos, el de ataque $o$ y el de defensa $d$ mediante (\ref{ODr}) para obtener $r$. Es un ejemplo sencillo de agregación de rankings.\\
+En este capítulo hablaremos sobre la agregación de rankings, que consiste en usar distintos rankings, como los que pueden ser creados aplicando los métodos explicados en la sección anterior, para obtener un rating que ayude a crear un nuevo ranking más robusto \cite[Chapters 14 \& 15]{libro_rankings}.\\
 
-En este capítulo usaremos distintos rankings creados aplicando los métodos explicados en la sección anterior para crear una única lista más robusta \cite[Chapters 14 \& 15]{libro_rankings}. La calidad del ranking obtenido dependerá de lo buenos que sean los rankings usados. 
+En la sección 2.2.4. vimos cómo combinar dos ratings distintos, el de ataque $O$ y el de defensa $D$ mediante (\ref{ODr}) para obtener $r$. Es un ejemplo sencillo de agregación de rankings.\\
 
 \subsection{Ranking promedio}
 
@@ -1512,7 +1514,7 @@ Este método consiste en calcular la media de las posiciones que ocupa cada elem
 \subsection{Suma de Borda}
 Data de 1770 cuando Jean-Charles de Borda lo planteó como método para agregar rankings de candidatos tras unas elecciones.\\
 
-Por cada ranking, cada elemento recibe una puntuación igual al número de elementos que supera. Las puntuaciones de cada ranking que vamos a agregar se suman para cada elemento del conjunto y así obtener un número natural que denominaremos suma de Borda. Los rankings de entrada pueden contener empates.\\
+Por cada ranking de entrada (que puede contener empates), cada elemento recibe una puntuación igual al número de elementos que supera. A continuación, sumamos las puntuaciones para cada elemento del conjunto obteniendo un número natural que denominaremos suma de Borda. El rating resultante es la lista de los valores obtenidos al realizar la suma de Borda para cada elemento.\\
 
 Ordenando el rating obtenido obtendremos el ranking agregado. Sin embargo, se trata de un método fácilmente manipulable. Podemos ver un ejemplo en \cite[pág 854]{refborda}.
 
@@ -1596,16 +1598,16 @@ Y ordenando, obtenemos el ranking agregado:\\
 
 
 \subsection{Método óptimo de agregación de rankings}
-Los dos métodos antes vistos son métodos heurísticos, lo que no garantiza que la agregación de rankings sea óptima (aunque sí más rápida de calcular). El método de agregación de rankings que vamos a explicar a continuación fue propuesto por el Doctor Yoshitsugu Yamamoto y optimiza la concordancia entre los rankings de entrada.\\
+Los dos métodos antes vistos son métodos heurísticos, rápidos de calcular, aunque no se han obtenido como solución de ningún problema de optimización. El método de agregación de rankings que vamos a explicar a continuación fue propuesto por Yoshitsugu Yamamoto y optimiza la concordancia entre los rankings de entrada.\\
 
-Si tenemos $n$ ítems en $k$ rankings, definimos la matriz $C_{n \text{x} n}$, que representará las concordancias entre los distintos rankings, de la siguiente manera:
+Si tenemos $n$ ítems en $k$ rankings, definimos la matriz $C_{n \times n}$, que representará las concordancias entre los distintos rankings, de la siguiente manera:
 \begin{center}
 	$c_{ij} = \text{ nº de rankings con }i \text{ por encima de } j \text{ } -  \text{ nº de rankings con }j \text{ por encima de } i \text{ }$,
 \end{center}
 
 de forma que $C$ puede estar formada a partir de rankings con empates o de rankings parciales\footnote{Son aquellos rankings que no contienen todos los elementos a ordenar.}.\\
 
-Nuestro objetivo es crear un ranking que maximice las concordancias entre los rankings de entrada. Para resolver el problema de optimización necesitaremos variables de decisión que formarán la matriz $X_{n \text{x} n}$ y tomarán los siguientes valores
+Nuestro objetivo es crear un ranking que maximice las concordancias entre los rankings de entrada. Para resolver el problema de optimización necesitaremos variables de decisión que formarán la matriz $X_{n \times n}$ y tomarán los siguientes valores
 \begin{center}
 	$ x_{ij} =  \begin{cases}
 1 & \text{ si el ítem \textit{i} debe aparecer por encima del \textit{j} en el ranking, y} \\
@@ -1619,18 +1621,18 @@ El equipo $i$ y $j$ deben aparecer en el ranking de una de las siguientes altern
 Otra cosa a tener en cuenta es la transitividad. Si $i$ aparece encima de $j$ y $j$ se sitúa encima de $k$, entonces $k$ no puede estar por encima de $i$, tiene que aparecer necesariamente por debajo. Esta restricción la formulamos como la inecuación $x_{ij} + x_{jk} + x_{ki} \leq 2$.\\
 
 
-Por tanto, nuestro problema de optimización BILP\footnote{Binary Integer Linear Program.} a resolver es el siguiente:\\
+Por tanto, nuestro problema de optimización BILP\footnote{Programación lineal entera y binaria.} a resolver es el siguiente:\\
 
 \begin{equation} \label{optprob}
-	max \sum_{i=1}^{n} \sum_{j=1}^{n} c_{ij} x_{ij} \ \ \ \ \ \ \ \ \ \ x_{ij} \in \{0,1\} 
+	max \sum_{i=1}^{n} \sum_{j=1}^{n} c_{ij} x_{ij} \ \ \ \ \ \ \ \ \ \ x_{ij} \in \{0,1\} ,
 \end{equation}
 \begin{equation*}
-	x_{ij} + x_{ji} = 1 \ \ \ \ \ \ \ \ \forall (i,j)
+	x_{ij} + x_{ji} = 1 \ \ \ \ \ \ \ \ \forall (i,j),
 \end{equation*}
 \begin{equation*}
-	x_{ij} + x_{jk} + x_{ki} \leq 2 \ \ \ \forall (i,j,k)
+	x_{ij} + x_{jk} + x_{ki} \leq 2 \ \ \ \forall (i,j,k),
 \end{equation*}
-con $n(n-1)$ variables de decisión, $n(n-1)$ restricciones antisimétricas y con $n(n-1)(n-2)$ restricciones transitivas. Este $O(n^{3})$ de las restricciones transitivas limitan mucho el tamaño de los problemas a resolver (donde el tamaño viene dado por el número de ítems de los rankings), por lo que se deben buscar estrategias de relajación de restricciones (que trataremos al final de la sección).\\
+con $n(n-1)$ variables de decisión, $n(n-1)$ restricciones antisimétricas y con $n(n-1)(n-2)$ restricciones transitivas. Este orden de complejidad $O(n^{3})$ de las restricciones transitivas limitan mucho el tamaño de los problemas a resolver (donde el tamaño viene dado por el número de ítems de los rankings), por lo que se deben buscar estrategias de relajación de restricciones (que trataremos al final de la sección).\\
 
 Una vez resuelto el problema tendremos la matriz $X$ con 0s y 1s, donde cada 1 representa que el ítem $i$ debe aparecer por encima del elemento $j$, por tanto, el elemento con mayor número de 1s debe de ser el primero en el ranking. Es decir, para ordenar los elementos basta con obtener la suma de cada fila.\\   
  
@@ -1688,18 +1690,18 @@ La solución óptima podría no ser única. Para averiguar si existen varias sol
 
 La optimización discreta es más costosa que la optimización continua. Para resolver BILP grandes (con bastantes ítems a ordenar) es conveniente resolverlos como un problema de programación lineal relajado. Básicamente consiste en hacer que las variables $x_{ij}$ que obligábamos a ser binarias y discretas ahora las permitamos ser continuas. El problema a resolver es el siguiente:
 \begin{equation} \label{optprob2}
-	max \sum_{i=1}^{n} \sum_{j=1}^{n} c_{ij} x_{ij}
+	max \sum_{i=1}^{n} \sum_{j=1}^{n} c_{ij} x_{ij},
 \end{equation}
 \begin{equation*}
-	x_{ij} + x_{ji} = 1 \ \ \ \ \ \ \ \ \forall (i,j)
+	x_{ij} + x_{ji} = 1 \ \ \ \ \ \ \ \ \forall (i,j),
 \end{equation*}
 \begin{equation*}
-	x_{ij} + x_{jk} + x_{ki} \leq 2 \ \ \ \forall (i,j,k)
+	x_{ij} + x_{jk} + x_{ki} \leq 2 \ \ \ \forall (i,j,k),
 \end{equation*}
 \begin{equation*}
-	x_{ij} \geq 0
+	x_{ij} \geq 0.
 \end{equation*}
-Cuando la solución solo tiene valores binarios, la solución del problema LP\footnote{Linear Program.} relajado es también óptima para el BILP. Sin embargo, pueden aparecer unos pocos valores fraccionales que representarán la existencia de más de una solución óptima pudiendo intercambiar los equipos en cuestión. En \cite[Chapter 4]{refbilp} podemos encontrar en detalle las condiciones para identificar cuando la solución de un LP también es óptima para el BILP.\\
+Cuando la solución solo tiene valores binarios, la solución del problema LP\footnote{Programación lineal.} relajado es también óptima para el BILP. Sin embargo, pueden aparecer unos pocos valores no enteros que representarán la existencia de más de una solución óptima, pudiendo intercambiar los equipos en cuestión. En \cite[Chapter 4]{refbilp} podemos encontrar en detalle las condiciones para identificar cuando la solución de un LP también es óptima para el BILP.\\
 
 En nuestro ejemplo, resolviendo el problema como un LP relajado obtenemos una solución únicamente con valores binarios que coincide con la obtenida resolviendo el BILP. \\
 
@@ -1707,42 +1709,43 @@ Otra forma de reducir el coste computacional es mediante la relajación de las r
 
 
 \section{Comparación de rankings}
-Una vez que hemos visto varios métodos para crear rankings y formas para agregarlos creando super-rankings es natural que nos preguntemos: ¿Cuál de todos los rankings que tenemos es mejor? Vamos a ver dos formas distintas de comparar rankings. En el fondo el problema reside en estudiar la desviación entre dos rankings \cite[Chapter 16]{libro_rankings}.
+Una vez que hemos visto varios métodos para crear rankings y formas para agregarlos creando super-rankings es natural que nos preguntemos: ¿Son similares son los rankings obtenidos? Vamos a ver dos formas distintas de comparar rankings. En el fondo el problema reside en estudiar la desviación entre dos rankings \cite[Chapter 16]{libro_rankings}.
 
 \subsection{Tau de Kendall}
 Propuesta por el estadístico Maurice Kendall, se aplica a rankings completos que tienen el mismo número de elementos. \\
 
-\begin{defi} Diremos que un par $(i,j)$ es \textbf{concordante} si la posición relativa entre ambos en las dos listas es la misma, es decir, $i$ aparece por encima de $j$ o $j$ aparece por encima de $i$ en ambos rankings.
+Si tenemos dos rankings $r_{1}$ y $r_{2}$, diremos que el par de elementos $(i,j)$ es concordante si la posición relativa entre ambos en las dos listas es la misma, es decir, $i$ aparece por encima de $j$ o $j$ aparece por encima de $i$ en ambos rankings.
+
+\begin{defi} Dados dos rankings $r_{1}$ y $r_{2}$, el valor de la \textbf{Tau de Kendall} $\tau(r_{1},r_{2})$ se puede hallar como
+	\begin{equation}
+	\tau = \dfrac{n_{c} - n_{d}}{n(n-1)/2},
+	\end{equation}
+donde $n_{c}$ es el número de pares concordantes, $n_{d}$ el de pares discordantes y $n$ el número de ítems de los rankings. 
 \end{defi}
 
-El resultado, que oscila entre -1 y 1, nos da el grado en que un ranking coincide con el otro. Lo podemos calcular como se muestra a continuación
-
-\begin{equation}
-\tau = \dfrac{n_{c} - n_{d}}{n(n-1)/2}
-\end{equation}
-donde $n_{c}$ es el número de pares concordantes, $n_{d}$ el de pares discordantes y $n$ el número de ítems de los rankings. 
+El resultado, que oscila entre -1 y 1, nos da el grado en que un ranking coincide con el otro.
 
 \newpage
 
-\begin{ejem} Vamos a proceder a comparar los rankings obtenidos mediante los métodos de Massey\footnote{En el ranking de Massey se produce un empate en el puesto 11º entre dos equipos. Como de los dos enfrentamientos, cada equipo ganó uno, hemos procedido a desempatar en favor del equipo que sumó más puntos entre los dos encuentros.} ($r_{m}$), Keener ($r_{k}$) y OD ($r_{OD}$) (aparecen todos al final de la sección 2.2.).
+\begin{ejem} Vamos a proceder a comparar los rankings obtenidos mediante los métodos de Massey\footnote{En el ranking de Massey se produce un empate en el puesto 11º entre dos equipos. Como de los dos enfrentamientos cada equipo ganó uno, hemos procedido a desempatar en favor del equipo que sumó más puntos entre los dos encuentros.} ($r_{m}$), Keener ($r_{k}$) y OD ($r_{OD}$) (aparecen todos al final de la sección 2.2.).
 \end{ejem}
 \begin{center}
-$ \tau (r_{m},r_{k}) = \dfrac{131-22}{153} = 0.7124$\\
-$ \tau (r_{m},r_{OD}) = \dfrac{150-3}{153} = 0.9607$\\
-$ \tau (r_{k},r_{OD}) = \dfrac{134-19}{153} = 0.7516$
+$ \tau (r_{m},r_{k}) = \dfrac{131-22}{153} = 0.7124$,\\
+$ \tau (r_{m},r_{OD}) = \dfrac{150-3}{153} = 0.9607$,\\
+$ \tau (r_{k},r_{OD}) = \dfrac{134-19}{153} = 0.7516$.
 \end{center}
 	
 El ranking obtenido por Massey y el obtenido por el método de OD son los más similares, habiendo solo 3 pares de equipos intercambiados entre ellos.
 
 \qed
 
-Existe una adaptación de la Tau de Kendall para rankings parciales y rankings con distintos tamaños que se puede encontrar en \cite[págs 205-206]{libro_rankings}.
+Existe una adaptación de la Tau de Kendall para rankings parciales y rankings con distintos tamaños que se puede encontrar en \cite[págs 205-206]{libro_rankings}. Así como una versión para familias de más de dos rankings \cite{refcomp}.
 
 
 \subsection{Rho de Spearman}
-La Rho de Spearman es simplemente la distancia $L_{1}$ entre dos rankings completos $r_{1}$ y $r_{2}$ de tamaño $n$:
+La \textbf{Rho de Spearman} es simplemente la distancia $L_{1}$ entre dos rankings completos $r_{1}$ y $r_{2}$ de tamaño $n$:
 \begin{equation} \label{Spearman}
-	\rho = ||r_{1} - r_{2}||_{1}= \sum_{i=1}^{n} |r_{1}(i) - r_{2}(i)|
+	\rho = ||r_{1} - r_{2}||_{1}= \sum_{i=1}^{n} |r_{1}(i) - r_{2}(i)|,
 \end{equation}
 donde $r_{1}(i)$ es el puesto del equipo $i$ en el ranking $r_{1}$ y $r_{2}(i)$ es el puesto del equipo $i$ en el ranking $r_{2}$. \\
 
@@ -1750,9 +1753,9 @@ Cuanto menor es el valor de esta medida, es porque la diferencia de puestos entr
 \begin{ejem} Vamos a proceder a comparar los rankings obtenidos mediante los métodos de Massey ($r_{m}$), Keener ($r_{k}$) y OD ($r_{OD}$) (podemos encontrar todos al final de la sección 2.2.).
 \end{ejem}
 	\begin{center}
-		$ \rho (r_{m},r_{k}) = 38$\\
-		$ \rho (r_{m},r_{OD}) = 6$\\
-		$ \rho (r_{k},r_{OD}) = 32$
+		$ \rho (r_{m},r_{k}) = 38$,\\
+		$ \rho (r_{m},r_{OD}) = 6$,\\
+		$ \rho (r_{k},r_{OD}) = 32.$
 	\end{center}
 	
 	El ranking obtenido por Massey y el obtenido por el método de OD son los más similares.
@@ -1761,16 +1764,16 @@ Cuanto menor es el valor de esta medida, es porque la diferencia de puestos entr
 
 Sin embargo, no es igual de importante la coincidencia de los rankings en las últimas posiciones de la lista como lo es en las primeras. Esto con la Tau de Kendall no podíamos materializarlo, pero podemos redefinir la fórmula de Spearman (\ref{Spearman}) como 
 \begin{equation}
-	\phi = \sum_{i=1}^{n} \dfrac{|r_{1}(i) - r_{2}(i)|}{min\{r_{1}(i),r_{2}(i)\}}
+	\phi = \sum_{i=1}^{n} \dfrac{|r_{1}(i) - r_{2}(i)|}{min\{r_{1}(i),r_{2}(i)\}},
 \end{equation}
 de forma que la penalización por las discordancias en los primeros puestos del ranking será mayor que en los puestos bajos de la lista. 
 
 \begin{ejem} Calculamos los valores usando la nueva definición.
 \end{ejem}	
 	\begin{center}
-		$ \phi (r_{m},r_{k}) = 7,777$\\
-		$ \phi (r_{m},r_{OD}) = 0,856$\\
-		$ \phi (r_{k},r_{OD}) = 6,576$ 
+		$ \phi (r_{m},r_{k}) = 7,777$,\\
+		$ \phi (r_{m},r_{OD}) = 0,856$,\\
+		$ \phi (r_{k},r_{OD}) = 6,576$. 
 	\end{center}
 	
 	El ranking obtenido por Massey y el obtenido por el método de OD vuelven a ser los más similares.
@@ -1863,12 +1866,14 @@ Sin embargo (CAI Zaragoza, UCAM Murcia), (Unicaja Málaga, Montakit Fuenlabrada)
 \end{ejem}	
 	\begin{figure}[H]
 		\centering
-		\includegraphics[scale=0.6]{images/Grafo_competitividad.png}
+		\includegraphics[scale=0.57]{images/Grafo_competitividad.png}
 		\caption{Grafo de competitividad.} \label{fig:gcomp}
 	\end{figure}
 	
 \qed
-
 \ \\
-
-El coste computacional para construir el grafo de competitividad de un conjunto $R$ de $n$ rankings distintos donde los rankings constan de $m$ elementos cada uno es $nm^{2}$.
+El grafo de competitividad presenta propiedades interesantes que nos aportan información sobre los rankings \cite{refcomp}, por ejemplo:
+\begin{itemize}
+	\item El número de aristas está relacionado con la Tau de Kendall.
+	\item Las componentes conexas del grafo están relacionadas con los equipos que compiten entre sí.
+\end{itemize}

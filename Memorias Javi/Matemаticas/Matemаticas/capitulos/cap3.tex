@@ -1,7 +1,7 @@
 \chapter{Predicción de resultados}
 
 \section{Introducción}
-Lo que se pretende hacer en este capítulo es plantear modelos que nos permitan predecir cómo quedará el ranking al final de la jornada que aún no ha comenzado, para lo que hay que estimar las distintas probabilidades de que gane un equipo, el rival o empaten para cada partido que se va a disputar. Los modelos para predecir los resultados finales del partido pueden ser de lo más variado y estar basados en todo tipo de criterios.\\
+Lo que se pretende hacer en este capítulo es plantear modelos que nos permitan predecir cómo quedará el ranking al final de la jornada que aún no ha comenzado, teniendo en cuenta los resultados anteriores y la evolución en otras jornadas, para lo que hay que estimar las distintas probabilidades de que gane un equipo, el rival o empaten para cada partido que se va a disputar. Los modelos para predecir los resultados finales del partido pueden ser de lo más variado y estar basados en todo tipo de criterios.\\
 
 En \cite{refpred1} podemos encontrar dos modelos que se aplican para predecir los resultados de la liga alemana en las temporadas 1999/2000, 2000/2001 y 2001/2002:
 \begin{itemize}
@@ -14,12 +14,12 @@ Se puede aumentar la exactitud de las predicciones combinando ambos métodos, me
 
 En \cite{refpred2} se aplica el uso de \textbf{redes neuronales} para la predicción. En \cite[Section 2.1.]{refpred2} se explica el diseño de la red BP\footnote{Back-Propagation.}. Cada equipo tendrá tres tipos de redes BP que se corresponden con su fuerza y el problema de clasificación consiste en contrastar las fuerzas de los dos equipos: si A es más fuerte que B, es concordante o es más débil \cite[Section 2.2.]{refpred2}. Todos los partidos jugados serán los datos usados para el entrenamiento \cite[Section 3.1.]{refpred2} y la capa de salida consta de tres neuronas que se corresponden con la probabilidad de ganar, empatar y perder \cite[Section 3.2.]{refpred2} de forma que se pueda predecir el resultado del enfrentamiento como se muestra en \cite[Section 3.4.]{refpred2}.\\
 
-En \cite{refpred3} se aplica un modelo autorregresivo integrado de media móvil o ARIMA que se usa en \textbf{series temporales} y que se basa en un conjunto de observaciones que se generan de forma secuencial. En \cite[Section E]{refpred3} se realiza la formulación matemática del modelo y en \cite[Section F]{refpred3} se muestran los resultados y el análisis de aplicarlo a tres equipos (uno de la zona alta, otro de la zona media y otro de la zona baja de la clasificación) de la liga india de críquet en el que se intenta predecir el resultado de los últimos 10 partidos de la temporada.\\
+En \cite{refpred3} se aplica un modelo autorregresivo integrado de media móvil o ARIMA que se usa en \textbf{series temporales} y que se basa en un conjunto de observaciones que se generan de forma secuencial. En \cite[Section E]{refpred3} se realiza la formulación matemática del modelo y en \cite[Section F]{refpred3} se muestran los resultados y el análisis de aplicarlo a tres equipos (uno de la zona alta, otro de la zona media y otro de la zona baja de la clasificación) de la liga india de críquet en el que se intenta predecir el resultado de los últimos 10 partidos de la temporada.
 
 \section{Modelo propuesto}
 En la sección anterior hemos visto algunos de los modelos que han sido propuestos para predecir los resultados de un partido que está por disputarse siguiendo distintos criterios. Ahora vamos a plantear uno propio que podamos aplicar a la Liga española de fútbol.\\
 
-Para hacer una predicción tenemos que calcular tres probabilidades:
+Si tenemos dos equipos $a$ y $b$ que se van a enfrentar en la próxima jornada en el estadio de $a$, es decir, $a$ es el local y $b$ es el visitante, y queremos hacer una predicción para dicho partido, tenemos que calcular tres probabilidades:
 \begin{itemize}
 	\item La probabilidad de que $a$ gane a $b$, que denotaremos como $P(a-b=1)$.
 	\item La probabilidad de que $a$ y $b$ empaten, que denotaremos como $P(a-b=X)$.
@@ -27,22 +27,19 @@ Para hacer una predicción tenemos que calcular tres probabilidades:
 \end{itemize}
 Y para estimarlas, proponemos tener en cuenta:
 \begin{itemize}
-	\item La posición relativa en la tabla, de donde obtendremos $P_{r}(a-b=1)$, $P_{r}(a-b=X)$ y $P_{r}(a-b=2)$.
+	\item La posición relativa en la tabla entre $a$ y $b$, de donde obtendremos $P_{r}(a-b=1)$,\\ $P_{r}(a-b=X)$ y $P_{r}(a-b=2)$.
 	\item La tendencia de cada equipo a lo largo de los últimos partidos, de donde obtendremos $P_{s}(a-b=1)$, $P_{s}(a-b=X)$ y $P_{s}(a-b=2)$.
 \end{itemize}
-
 \subsection{Probabilidad basada en la posición relativa}
 El valor va a depender de $r(a)-r(b)$, que pertenece al intervalo $[-(n-1),(n-1)] \backslash \{0\}$ donde $n$ es el número de equipos que hay en el ranking\footnote{Recordemos que $r(e)$ denota la posición que ocupa el elemento $e$ en el ranking $r$.}. En nuestro caso, aplicado a la Liga española de fútbol, dado que participan un total de 20 equipos el intervalo en cuestión es $[-19,19]$.\\
 
 La idea es desarrollar un modelo lineal a trozos y optimizar sus parámetros usando un histórico de resultados.\\
 
-\newpage
-
 Lo primero es re-escalar el intervalo $[-19,19]$ en el $[0,1]$ mediante alguna función como por ejemplo
-\begin{center}
-	$ \psi: [-19,19] \longrightarrow [0,1]$\\
-	$ t \longmapsto \dfrac{t+19}{38}$ \ .
-\end{center}
+\begin{eqnarray*}
+	\psi: [-19,19] \longrightarrow [0,1] \\
+	t \longmapsto \dfrac{t+19}{38}.
+\end{eqnarray*}
 
 Ahora debemos definir unos umbrales de victoria para el equipo local, empate y victoria visitante en tres escenarios muy distintos: \textit{el primero contra el último}, \textit{equipos en posiciones consecutivas} y \textit{el último contra el primero}. Gráficamente podemos resumirlo como se muestra en la figura \ref{fig:umbrales}.
 
@@ -54,24 +51,19 @@ Ahora debemos definir unos umbrales de victoria para el equipo local, empate y v
 
 donde los valores $X_{1},X_{2},Y_{1},Y_{2},Z_{1},Z_{2} \in [0,1]$ se identifican del siguiente modo:
 \begin{itemize}
-	\item Si $a$ es el primero de la clasificación y $b$ el último:\\
-	 	 
+	\item Si $a$ es el primero de la clasificación y $b$ el último:\\	 
 	 $\begin{cases}
 	 	P_{r}(a-b=1)=X_{1}\\
 	 	P_{r}(a-b=X)=X_{2}-X_{1} \ \ \ \ \ \ \ \text{siendo} \ 0 \leq X_{1} \leq X_{2} \leq 1.\\
 	 	P_{r}(a-b=2)=1-X_{2} 
 	 \end{cases}$\\
-	 
 	\item Análogamente, si $a$ y $b$ tienen puestos consecutivos en el ranking:\\
-	
 	$\begin{cases}
 	P_{r}(a-b=1)=Y_{1}\\
 	P_{r}(a-b=X)=Y_{2}-Y_{1} \ \ \ \ \ \ \ \text{siendo} \ 0 \leq Y_{1} \leq Y_{2} \leq 1.\\
 	P_{r}(a-b=2)=1-Y_{2} 
 	\end{cases}$\\
-	
 	\item Finalmente, si $a$ es el último de la clasificación y $b$ el primero:\\
-	
 	$\begin{cases}
 	P_{r}(a-b=1)=Z_{1}\\
 	P_{r}(a-b=X)=Z_{2}-Z_{1} \ \ \ \ \ \ \ \text{siendo} \ 0 \leq Z_{1} \leq Z_{2} \leq 1.\\
@@ -100,7 +92,7 @@ $\begin{cases}
 \end{cases}$
 \ \\
 \ \\
-Para estimar los valores de $X_{1},X_{2},Y_{1},Y_{2},Z_{1},Z_{2}$ hay que optimizarlos teniendo en cuenta las siguientes restricciones:
+Para estimar los valores de $X_{1},X_{2},Y_{1},Y_{2},Z_{1},Z_{2}$ hay que optimizarlos usando un histórico de datos (como se explica en \cite[Capítulo 3]{tfgjavi}) teniendo en cuenta las siguientes restricciones:
 \begin{itemize}
 	\item $X_{1},X_{2},Y_{1},Y_{2},Z_{1},Z_{2} \in [0,1]$.
 	\item $X_{1} \leq X_{2}$, $Y_{1} \leq Y_{2}$, $Z_{1} \leq Z_{2}$.
@@ -133,8 +125,9 @@ donde $t=1$ es el partido (que se disputó como local) más antiguo que vamos a 
 \end{center}
 donde $t=1$ es el partido (disputado como visitante) más antiguo que vamos a considerar y $t=9$ el último partido que se disputó (como visitante).
 \end{itemize}
+\ \\
+De forma que para la jornada siguiente (la t=10) la probabilidad de que el equipo en cuestión gane, empate o pierda como local se debe hallar usando la primera tabla que se muestra al principio de esta página. En dicha tabla se puede observar que el equipo ganó casi todos los partidos que disputó como local ($t=1,2,4,7,8,9$), empató dos ($t=3$ y $t=6$) y solo perdió en una ocasión ($t=5$). Aplicamos estos resultados para hallar las probabilidades para el próximo partido que dispute como local:
 
-De forma que para la jornada siguiente (la t=10) la probabilidad de que el equipo en cuestión gane, empate o pierda como local es:
 \begin{center}
 	$P_{l}(a - \star=1)=\dfrac{m(1)+m(2)+m(4)+m(7)+m(8)+m(9)}{\sum_{t=1}^{9}m(t)}$\\
 	$P_{l}(a - \star=X)=\dfrac{m(3)+m(6)}{\sum_{t=1}^{9}m(t)}$ \ \ \ \
@@ -142,12 +135,13 @@ De forma que para la jornada siguiente (la t=10) la probabilidad de que el equip
 \end{center}
 donde $m(t)$ es una función memoria típicamente creciente, lo que da mayor peso a los resultados de los últimos partidos, como la que se muestra en la figura \ref{fig:memoria}.
 
-\begin{figure}[htb]
+\begin{figure}[H]
 	\centering
 	\includegraphics{images/memoria.jpg}
 	\caption{Gráfica de la función memoria.} \label{fig:memoria}
 \end{figure}
-Análogamente se calculan las probabilidades para el siguiente partido como visitante:
+\newpage
+Análogamente, usando la segunda tabla de la página anterior, se calculan las probabilidades para el siguiente partido como visitante:
 \begin{center}
 	$P_{v}(\star - a=1)=\dfrac{m(5)}{\sum_{t=1}^{9}m(t)}$ \ \ \ \
 	$P_{v}(\star - a=X)=\dfrac{m(3)+m(6)+m(8)}{\sum_{t=1}^{9}m(t)}$\\
@@ -158,39 +152,63 @@ Por tanto, para cada equipo tendremos las siguientes probabilidades:\\
 $P_{l}(a - \star=1)$, $P_{l}(a - \star=X)$ y $P_{l}(a - \star=2)$ para los partidos como local y\\
 $P_{v}(\star - a=1)$, $P_{v}(\star - a=X)$ y $P_{v}(\star - a=2)$ para los partidos como visitante.\\
 
-Para pronosticar el resultado del enfrentamiento $a-b$ debemos conjuntar $P_{l}(a - \star)$ con $P_{v}(\star - b)$ usando la siguiente tabla:
+Para pronosticar el resultado del enfrentamiento $a-b$ debemos conjuntar $P_{l}(a - \star)$ con $P_{v}(\star - b)$. Para ello proponemos usar las matrices de coeficientes que se muestran a continuación:
 
-\begin{center}
-	\begin{tabular}{|c|c|c|c|}
-	\hline  & $P_{l}(a - \star=1)$ & $P_{l}(a - \star=X)$ & $P_{l}(a - \star=2)$ \\ 
-	\hline $P_{v}(\star - b=1)$ & $(1,0,0)$ & $(\frac{1}{2},\frac{1}{3},\frac{1}{6})$ & $(\frac{1}{4},\frac{1}{2},\frac{1}{4})$  \\ 
-	\hline $P_{v}(\star - b=X)$ & $(\frac{1}{2},\frac{1}{3},\frac{1}{6})$ & $(0,1,0)$ & $(\frac{1}{6},\frac{1}{2},\frac{1}{3})$ \\ 
-	\hline $P_{v}(\star - b=2)$ & $(\frac{1}{4},\frac{1}{2},\frac{1}{4})$ & $(\frac{1}{6},\frac{1}{2},\frac{1}{3})$ & $(0,0,1)$ \\ 
-	\hline 
-\end{tabular} 
-\end{center}
-
-En las tuplas de números de la tabla anterior, el primer número es el que usaremos para calcular $P_{s}(a-b=1)$, el segundo para $P_{s}(a-b=X)$ y el tercero para $P_{s}(a-b=2)$. Dicho número es por el que tenemos que multiplicar el producto de las entradas.\\
-
-Por ejemplo, para calcular $P_{s}(a-b=1)$ la matriz que debemos usar es la compuesta por el primer elemento de cada tupla\\
-\[
-A_{1}= \left(\begin{array}{ccc}
+{\footnotesize $$P_{s}(a-b=1)=
+\left(\begin{array}{ccc}
+P_{l}(a - \star=1) & P_{l}(a - \star=X) & P_{l}(a - \star=2)
+\end{array} \right)
+\left(\begin{array}{ccc}
 1 & 1/2 & 1/4\\
 1/2 & 0 & 1/6\\
 1/4 & 1/6 & 0
 \end{array} \right)
-\]
-de forma que
-	\begin{center}
-		$P_{s}(a-b=1)=$
-	\end{center}
-	$1\cdotp P_{l}(a - \star=1)P_{v}(\star - b=1) + \frac{1}{2}\cdotp P_{l}(a - \star=X)P_{v}(\star - b=1) + \frac{1}{4}\cdotp P_{l}(a - \star=2)P_{v}(\star - b=1)+$\\ 
-	$\frac{1}{2}\cdotp P_{l}(a - \star=1)P_{v}(\star - b=X) + 0\cdotp P_{l}(a - \star=X)P_{v}(\star - b=X) + \frac{1}{6}\cdotp P_{l}(a - \star=2)P_{v}(\star - b=X)+$\\
-	$\frac{1}{4}\cdotp P_{l}(a - \star=1)P_{v}(\star - b=2) + \frac{1}{6}\cdotp P_{l}(a - \star=X)P_{v}(\star - b=2) + 0\cdotp P_{l}(a - \star=2)P_{v}(\star - b=2)$. \\	
+\left(\begin{array}{c}
+P_{v}(\star - b=1)\\
+P_{v}(\star - b=X)\\
+P_{v}(\star - b=2)
+\end{array} \right)
+$$
+%	\begin{center}
+%		$P_{s}(a-b=1)=$
+%	\end{center}
+%	$1\cdotp P_{l}(a - \star=1)P_{v}(\star - b=1) + \frac{1}{2}\cdotp P_{l}(a - \star=X)P_{v}(\star - b=1) + \frac{1}{4}\cdotp P_{l}(a - \star=2)P_{v}(\star - b=1)+$\\ 
+%	$\frac{1}{2}\cdotp P_{l}(a - \star=1)P_{v}(\star - b=X) + 0\cdotp P_{l}(a - \star=X)P_{v}(\star - b=X) + \frac{1}{6}\cdotp P_{l}(a - \star=2)P_{v}(\star - b=X)+$\\
+%	$\frac{1}{4}\cdotp P_{l}(a - \star=1)P_{v}(\star - b=2) + \frac{1}{6}\cdotp P_{l}(a - \star=X)P_{v}(\star - b=2) + 0\cdotp P_{l}(a - \star=2)P_{v}(\star - b=2)$. \\	
+$$P_{s}(a-b=X)=
+\left(\begin{array}{ccc}
+P_{l}(a - \star=1) & P_{l}(a - \star=X) & P_{l}(a - \star=2)
+\end{array} \right)
+\left(\begin{array}{ccc}
+0 & 1/3 & 1/2\\
+1/3 & 1 & 1/2\\
+1/2 & 1/2 & 0
+\end{array} \right)
+\left(\begin{array}{c}
+P_{v}(\star - b=1)\\
+P_{v}(\star - b=X)\\
+P_{v}(\star - b=2)
+\end{array} \right)
+$$
+$$P_{s}(a-b=2)=
+\left(\begin{array}{ccc}
+P_{l}(a - \star=1) & P_{l}(a - \star=X) & P_{l}(a - \star=2)
+\end{array} \right)
+\left(\begin{array}{ccc}
+0 & 1/6 & 1/4\\
+1/6 & 0 & 1/3\\
+1/4 & 1/3 & 1
+\end{array} \right)
+\left(\begin{array}{c}
+P_{v}(\star - b=1)\\
+P_{v}(\star - b=X)\\
+P_{v}(\star - b=2)
+\end{array} \right)
+$$}
 
-Aplicaremos un razonamiento análogo para calcular $P_{s}(a-b=X)$ y $P_{s}(a-b=2)$.
+Estos coeficientes deberían de optimizarse entrenando sobre un histórico de datos de forma que vayamos obteniendo cada vez mayor número de resultados correctos.
 
-\subsection{Combinación}
+\subsection{Combinación de modelos}
 Ahora contaremos con dos probabilidades: las probabilidades basadas en la posición relativa ($P_{r}(a-b=1) \ \ P_{r}(a-b=X) \ \ P_{r}(a-b=2)$) y las basadas en la serie histórica de cada equipo ($P_{s}(a-b=1) \ \ P_{s}(a-b=X) \ \ P_{s}(a-b=2)$).\\
 
 Para conjugarlas usaremos una combinación convexa, tomamos $\lambda \in [0,1]$ y tenemos
@@ -199,4 +217,4 @@ Para conjugarlas usaremos una combinación convexa, tomamos $\lambda \in [0,1]$ 
 	$ P(a-b=X) = \lambda P_{r}(a-b=X) + (1-\lambda) P_{s}(a-b=X)$\\
 	$ P(a-b=2) = \lambda P_{r}(a-b=2) + (1-\lambda) P_{s}(a-b=2)$
 \end{center}
-debiendo optimizar $\lambda$ para obtener el mejor resultado posible entrenándolo sobre el histórico de datos.
+debiendo optimizar $\lambda$ para obtener el mejor resultado posible entrenándolo sobre el histórico de datos (se puede ver como realizar el entrenamiento en \cite[Capítulo 3]{tfgjavi}).
